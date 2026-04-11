@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>أحمد أيمن يحيى | مهندس برمجيات - جامعة السويدي</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="أحمد أيمن يحيى - مهندس برمجيات، طالب في جامعة السويدي، متخصص في التسويق والتصميم. مهارات: بايثون، أوتوكاد، SQL، جافا.">
+<meta name="keywords" content="أحمد أيمن يحيى, مهندس برمجيات, جامعة السويدي, بايثون, أوتوكاد, SQL, جافا, تسويق">
+<meta name="author" content="Ahmed Ayman Yehia">
+
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="icon" type="image/webp"
+        href="https://i.postimg.cc/MHSQTR9z/software-engineer.png" />
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(145deg, #071e26 0%, #0a2a34 100%);
+    color: #f0f9ff;
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* ========== قائمة جانبية محسنة ========== */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100%;
+    background: rgba(7, 30, 38, 0.98);
+    backdrop-filter: blur(16px);
+    z-index: 2000;
+    transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    padding: 80px 20px 30px;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+    border-left: 2px solid rgba(255,152,0,0.5);
+  }
+  body.english .sidebar {
+    right: auto;
+    left: -300px;
+    border-left: none;
+    border-right: 2px solid rgba(255,152,0,0.5);
+  }
+  .sidebar.open {
+    right: 0;
+  }
+  body.english .sidebar.open {
+    right: auto;
+    left: 0;
+  }
+  .sidebar a {
+    display: block;
+    color: #f0f9ff;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin: 6px 0;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .sidebar a:hover {
+    background: #ff9800;
+    color: #0a1f28;
+    transform: translateX(-5px);
+  }
+  body.english .sidebar a:hover {
+    transform: translateX(5px);
+  }
+  .close-sidebar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: #ff9800;
+    transition: 0.2s;
+  }
+  body.english .close-sidebar {
+    left: auto;
+    right: 20px;
+  }
+  .close-sidebar:hover {
+    transform: rotate(90deg);
+  }
+
+  /* زر فتح القائمة */
+  .menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1500;
+    background: #ff9800;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    color: #0a1f28;
+    font-size: 1.6rem;
+  }
+  body.english .menu-btn {
+    right: auto;
+    left: 20px;
+  }
+  .menu-btn:hover {
+    transform: scale(1.05);
+    background: #ffb347;
+  }
+
+  /* زر تبديل اللغة */
+  .language-switch-fixed {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1500;
+    background: #0f2e38;
+    color: #ff9800;
+    padding: 8px 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    border: 1px solid #ff9800;
+  }
+  body.english .language-switch-fixed {
+    left: auto;
+    right: 20px;
+  }
+  .language-switch-fixed:hover {
+    background: #ff9800;
+    color: #0a1f28;
+  }
+  .lang-ar, .lang-en { transition: 0.2s; }
+  .lang-en { display: none; }
+  body.english .lang-ar { display: none; }
+  body.english .lang-en { display: inline; }
+
+  /* ========== تحسين المسافات وحذف الفجوات ========== */
+  .section {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  /* شعار كبير واضح */
+  .logo-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ff9800;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,152,0,0.2);
+    transition: 0.3s;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  @media (max-width: 680px) {
+    .logo-image { width: 130px; height: 130px; }
+  }
+
+  .engineer-name {
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffcc80, #ff9800, #f57c00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 15px 0 5px;
+  }
+  .engineer-name-en {
+    font-size: 2.3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffcc80, #ff9800);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .typing {
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: rgba(255,152,0,0.2);
+    backdrop-filter: blur(4px);
+    padding: 0.4rem 1.6rem;
+    border-radius: 60px;
+    margin: 10px 0;
+    border: 1px solid rgba(255,152,0,0.5);
+  }
+  .badge-university {
+    background: #0f2e38;
+    padding: 6px 20px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    border-right: 3px solid #ff9800;
+  }
+  body.english .badge-university {
+    border-right: none;
+    border-left: 3px solid #ff9800;
+  }
+  .desc {
+    font-size: 1rem;
+    max-width: 550px;
+    margin: 15px 0 20px;
+    opacity: 0.9;
+  }
+  .btn {
+    padding: 10px 32px;
+    background: linear-gradient(120deg, #ff9800, #f57c00);
+    border: none;
+    border-radius: 60px;
+    color: #0a1f28;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #b45f06;
+    transition: 0.1s ease;
+  }
+  .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b45f06; }
+  .btn:hover { background: linear-gradient(120deg, #ffa726, #ff9800); box-shadow: 0 5px 0 #b45f06, 0 0 12px rgba(255,152,0,0.5); }
+
+  .section h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+  }
+  .section h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #ff9800;
+    border-radius: 3px;
+  }
+
+  .about-box, .edu-box {
+    background: rgba(15, 40, 50, 0.65);
+    backdrop-filter: blur(12px);
+    border-radius: 36px;
+    border: 1px solid rgba(255,152,0,0.4);
+    padding: 1.5rem;
+    max-width: 750px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* مهارات */
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .skill {
+    background: linear-gradient(145deg, #0f2e38, #08222b);
+    padding: 18px 8px;
+    border-radius: 28px;
+    transition: 0.3s;
+    border: 1px solid rgba(255,152,0,0.2);
+  }
+  .skill i { font-size: 38px; color: #ff9800; margin-bottom: 8px; display: block; }
+  .skill span { font-weight: 700; font-size: 1rem; }
+  .skill small { font-size: 0.7rem; opacity: 0.7; display: block; margin-top: 4px; }
+  .skill:hover { transform: translateY(-5px); border-color: #ff9800; }
+
+  /* مشاريع */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 25px;
+  }
+  .project {
+    background: #0b262f;
+    border-radius: 28px;
+    overflow: hidden;
+    transition: 0.35s;
+    cursor: pointer;
+    border: 1px solid #1e4a5a;
+  }
+  .project img { width: 100%; height: 160px; object-fit: cover; }
+  .project div { font-size: 1.2rem; font-weight: 700; padding: 12px 14px 4px; color: #ffb347; }
+  .project p { padding: 0 14px 16px; opacity: 0.85; font-size: 0.85rem; }
+  .project:hover { transform: scale(1.02); border-color: #ff9800; }
+
+  .edu-box { max-width: 550px; border-right: 5px solid #ff9800; }
+  body.english .edu-box { border-right: none; border-left: 5px solid #ff9800; }
+
+  /* قسم اللغات - جنب بعض (بجانب بعض) */
+  .languages-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  .lang-card {
+    background: linear-gradient(145deg, #0f2e38, #08222b);
+    padding: 20px 30px;
+    border-radius: 32px;
+    min-width: 180px;
+    text-align: center;
+    border: 1px solid rgba(255,152,0,0.3);
+    transition: 0.3s;
+  }
+  .lang-card i { font-size: 48px; color: #ff9800; margin-bottom: 12px; display: block; }
+  .lang-card span { font-size: 1.3rem; font-weight: 700; display: block; }
+  .lang-card small { font-size: 0.8rem; opacity: 0.8; }
+  .lang-card:hover { transform: translateY(-5px); border-color: #ff9800; }
+
+  /* شهادات */
+  .certificates-grid { display: flex; justify-content: center; gap: 25px; margin-top: 20px; flex-wrap: wrap; }
+  .cert { background: #0b262f; padding: 20px; border-radius: 32px; max-width: 480px; width: 100%; border: 1px solid #1e4a5a; }
+  .cert p { font-size: 1.1rem; font-weight: bold; margin-bottom: 12px; color: #ff9800; }
+  .cert img { width: 100%; border-radius: 20px; max-height: 260px; object-fit: contain; }
+
+  /* تواصل معي - تظبيط النصوص والشكل */
+  .contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .contact-info {
+    background: rgba(15, 40, 50, 0.65);
+    backdrop-filter: blur(12px);
+    border-radius: 56px;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    border: 1px solid rgba(255,152,0,0.4);
+  }
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+  }
+  .contact-info-item i { font-size: 1.3rem; color: #ff9800; }
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  .social i {
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: #132f3a;
+    padding: 12px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    color: #ffb85e;
+  }
+  .social i:hover { background: #ff9800; color: #0a1f28; transform: translateY(-4px); }
+
+  .footer-note { margin-top: 25px; font-size: 0.7rem; opacity: 0.7; }
+
+  /* أنيميشن */
+  .fade { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease, transform 0.5s ease; }
+  .show { opacity: 1; transform: translateY(0); }
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff9800;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s;
+    color: #0a1f28;
+  }
+  body.english .back-to-top { right: auto; left: 20px; }
+
+  @media (max-width: 680px) {
+    .engineer-name { font-size: 2rem; }
+    .engineer-name-en { font-size: 1.6rem; }
+    .section h2 { font-size: 1.6rem; }
+    .contact-info { gap: 12px; padding: 12px 18px; }
+    .contact-info-item { font-size: 0.8rem; }
+    .lang-card { padding: 15px 20px; min-width: 140px; }
+    .lang-card i { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- زر فتح القائمة -->
+<div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+
+<!-- القائمة الجانبية - عربي فقط (في الوضع العربي) وإنجليزي فقط (في الوضع الإنجليزي) -->
+<div class="sidebar" id="sidebar">
+  <div class="close-sidebar" id="closeSidebar"><i class="fas fa-times"></i></div>
+  <a href="#home" class="lang-ar">الرئيسية</a><a href="#home" class="lang-en">Home</a>
+  <a href="#about" class="lang-ar">نبذة عني</a><a href="#about" class="lang-en">About</a>
+  <a href="#skills" class="lang-ar">المهارات</a><a href="#skills" class="lang-en">Skills</a>
+  <a href="#projects" class="lang-ar">المشاريع</a><a href="#projects" class="lang-en">Projects</a>
+  <a href="#education" class="lang-ar">التعليم</a><a href="#education" class="lang-en">Education</a>
+  <a href="#certificates" class="lang-ar">الشهادات</a><a href="#certificates" class="lang-en">Certificates</a>
+  <a href="#languages" class="lang-ar">اللغات</a><a href="#languages" class="lang-en">Languages</a>
+  <a href="#contact" class="lang-ar">تواصل</a><a href="#contact" class="lang-en">Contact</a>
+</div>
+
+<!-- زر تبديل اللغة -->
+<div class="language-switch-fixed" id="langSwitchFixed">
+  <span class="lang-ar">🇬🇧 English</span>
+  <span class="lang-en">🇸🇦 العربية</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home" data-aos="fade-up">
+  <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="Ahmed Ayman" class="logo-image" onerror="this.src='https://placehold.co/160x160/0f2e38/ff9800?text=AA'">
+  <div class="engineer-name lang-ar">أحمد أيمن يحيى</div>
+  <div class="engineer-name-en lang-en">Ahmed Ayman Yehia</div>
+  <div class="typing" id="typing"></div>
+  <div class="badge-university">
+    <i class="fas fa-university"></i>
+    <span class="lang-ar">جامعة السويدي التكنولوجية</span>
+    <span class="lang-en">Suez University of Technology</span>
+  </div>
+  <p class="desc lang-ar">مهندس برمجيات | طالب جامعة السويدي | تسويق وتصميم</p>
+  <p class="desc lang-en">Software Engineer | SUT Student | Marketing & Design</p>
+  <button class="btn" id="downloadCVBtn">
+    <span class="lang-ar">📄 السيرة الذاتية</span>
+    <span class="lang-en">📄 Download CV</span>
+  </button>
+</section>
+
+<!-- نبذة عني -->
+<section class="section fade" id="about" data-aos="fade-right">
+  <h2><span class="lang-ar">نبذة عني</span><span class="lang-en">About Me</span></h2>
+  <div class="about-box">
+    <p class="lang-ar"><strong>أحمد أيمن يحيى</strong>، مهندس برمجيات وطالب في <strong>جامعة السويدي التكنولوجية</strong>. أمتلك مهارات في البرمجة (بايثون، جافا، SQL) والتصميم (أوتوكاد) والتسويق الرقمي. أسعى لتقديم حلول تقنية مبتكرة.</p>
+    <p class="lang-en"><strong>Ahmed Ayman Yehia</strong>, software engineer & student at <strong>Suez University of Technology</strong>. Skilled in Python, Java, SQL, AutoCAD & digital marketing.</p>
+  </div>
+</section>
+
+<!-- المهارات -->
+<section class="section fade" id="skills" data-aos="zoom-in">
+  <h2><span class="lang-ar">المهارات</span><span class="lang-en">Skills</span></h2>
+  <div class="skills">
+    <div class="skill"><i class="fab fa-python"></i><span>Python</span><small>برمجة</small></div>
+    <div class="skill"><i class="fas fa-drafting-compass"></i><span>AutoCAD</span><small>تصميم</small></div>
+    <div class="skill"><i class="fas fa-database"></i><span>SQL</span><small>قواعد بيانات</small></div>
+    <div class="skill"><i class="fab fa-java"></i><span>Java</span><small>برمجة</small></div>
+    <div class="skill"><i class="fas fa-chart-line"></i><span class="lang-ar">تسويق</span><span class="lang-en">Marketing</span><small>رقمي</small></div>
+  </div>
+</section>
+
+<!-- المشاريع -->
+<section class="section fade" id="projects" data-aos="fade-left">
+  <h2><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></h2>
+  <div class="projects">
+    <div class="project" onclick="showProjectMsg()">
+      <img src="https://placehold.co/600x400/1e3a44/ff9800?text=Python+Project" alt="Python">
+      <div class="lang-ar">تطبيق بايثون</div><div class="lang-en">Python App</div>
+      <p class="lang-ar">إدارة بيانات باستخدام Python & SQL</p><p class="lang-en">Data management with Python & SQL</p>
+    </div>
+    <div class="project" onclick="showProjectMsg()">
+      <img src="https://placehold.co/600x400/1e3a44/ff9800?text=AutoCAD" alt="AutoCAD">
+      <div class="lang-ar">تصميم أوتوكاد</div><div class="lang-en">AutoCAD Design</div>
+      <p class="lang-ar">مخططات هندسية احترافية</p><p class="lang-en">Professional engineering drawings</p>
+    </div>
+    <div class="project" onclick="showProjectMsg()">
+      <img src="https://placehold.co/600x400/1e3a44/ff9800?text=Marketing" alt="Marketing">
+      <div class="lang-ar">حملة تسويقية</div><div class="lang-en">Marketing Campaign</div>
+      <p class="lang-ar">إعلانات ممولة على وسائل التواصل</p><p class="lang-en">Paid ads on social media</p>
+    </div>
+  </div>
+</section>
+
+<!-- التعليم -->
+<section class="section fade" id="education" data-aos="fade-up">
+  <h2><span class="lang-ar">التعليم</span><span class="lang-en">Education</span></h2>
+  <div class="edu-box">
+    <i class="fas fa-graduation-cap"></i>
+    <span class="lang-ar"><strong>جامعة السويدي التكنولوجية</strong> – بكالوريوس هندسة البرمجيات | 2023-2027</span>
+    <span class="lang-en"><strong>Suez University of Technology</strong> – B.Sc Software Engineering | 2023-2027</span>
+  </div>
+</section>
+
+<!-- الشهادات -->
+<section class="section fade" id="certificates" data-aos="zoom-in">
+  <h2><span class="lang-ar">الشهادات</span><span class="lang-en">Certificates</span></h2>
+  <div class="certificates-grid">
+    <div class="cert">
+      <p><i class="fas fa-network-wired"></i> Cisco Packet Tracer</p>
+      <img src="https://i.postimg.cc/85nM5hdr/Getting-Started-with-Cisco-Packet-Tracer-certificate-ahmed250100105-sut-edu-eg-fb3ed2b6-9a5d-4ef7-9a.png" alt="Cisco Cert" onerror="this.src='https://placehold.co/500x260/1e3a44/ff9800?text=Cisco+Cert'">
+    </div>
+  </div>
+</section>
+
+<!-- قسم اللغات - جنب بعض (بجانب بعض) -->
+<section class="section fade" id="languages" data-aos="fade-right">
+  <h2><span class="lang-ar">اللغات</span><span class="lang-en">Languages</span></h2>
+  <div class="languages-wrapper">
+    <div class="lang-card">
+      <i class="fas fa-language"></i>
+      <span class="lang-ar">العربية</span><span class="lang-en">Arabic</span>
+      <small class="lang-ar">لغة أم</small><small class="lang-en">Native</small>
+    </div>
+    <div class="lang-card">
+      <i class="fas fa-language"></i>
+      <span class="lang-ar">الإنجليزية</span><span class="lang-en">English</span>
+      <small class="lang-ar">مستوى متقدم</small><small class="lang-en">Advanced</small>
+    </div>
+  </div>
+</section>
+
+<!-- تواصل معي - تظبيط النصوص والشكل -->
+<section class="section fade" id="contact" data-aos="fade-up">
+  <h2><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></h2>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <div class="contact-info-item"><i class="fas fa-phone-alt"></i> <span dir="ltr">01028701351</span></div>
+      <div class="contact-info-item"><i class="fab fa-whatsapp"></i> <span dir="ltr">01028701351</span></div>
+      <div class="contact-info-item"><i class="fas fa-envelope"></i> <span>info@ahmedayman.site</span></div>
+    </div>
+    <div class="social">
+      <i class="fab fa-facebook" id="facebookBtn"></i>
+      <i class="fab fa-instagram" id="instagramBtn"></i>
+      <i class="fab fa-linkedin" id="linkedinBtn"></i>
+    </div>
+    <div class="footer-note">
+      <span class="lang-ar">© 2025 أحمد أيمن يحيى - مهندس برمجيات وتسويق</span>
+      <span class="lang-en">© 2025 Ahmed Ayman Yehia - Software Engineer & Marketing</span>
+    </div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 600, once: true, offset: 50 });
+
+  // Sidebar
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const closeSidebar = document.getElementById('closeSidebar');
+  menuBtn.addEventListener('click', () => sidebar.classList.add('open'));
+  closeSidebar.addEventListener('click', () => sidebar.classList.remove('open'));
+  document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', () => sidebar.classList.remove('open'));
+  });
+
+  // Language switch
+  const langBtn = document.getElementById('langSwitchFixed');
+  let currentLang = 'ar';
+  function setLanguage(lang) {
+    currentLang = lang;
+    if (lang === 'en') {
+      document.body.classList.add('english');
+      document.body.dir = 'ltr';
+      typingTitlesEn = ["Software Engineer", "SUT Student", "Marketing & Design"];
+      titleIndexEn = 0; charIndexEn = 0; isDeletingEn = false;
+      animateTypingEn();
+    } else {
+      document.body.classList.remove('english');
+      document.body.dir = 'rtl';
+      typingTitlesAr = ["مهندس برمجيات", "طالب جامعة السويدي", "تسويق وتصميم"];
+      titleIndexAr = 0; charIndexAr = 0; isDeletingAr = false;
+      animateTypingAr();
+    }
+  }
+  langBtn.addEventListener('click', () => {
+    if (currentLang === 'ar') setLanguage('en');
+    else setLanguage('ar');
+  });
+
+  // Typing animation
+  let typingTitlesAr = ["مهندس برمجيات", "طالب جامعة السويدي", "تسويق وتصميم"];
+  let titleIndexAr = 0, charIndexAr = 0, isDeletingAr = false;
+  let typingTitlesEn = ["Software Engineer", "SUT Student", "Marketing & Design"];
+  let titleIndexEn = 0, charIndexEn = 0, isDeletingEn = false;
+  const typingEl = document.getElementById("typing");
+  function animateTypingAr() {
+    if (currentLang !== 'ar') { setTimeout(animateTypingAr, 150); return; }
+    const current = typingTitlesAr[titleIndexAr];
+    if (!isDeletingAr && charIndexAr <= current.length) {
+      typingEl.innerHTML = current.substring(0, charIndexAr);
+      charIndexAr++;
+      setTimeout(animateTypingAr, 90);
+    } else if (isDeletingAr && charIndexAr >= 0) {
+      typingEl.innerHTML = current.substring(0, charIndexAr);
+      charIndexAr--;
+      setTimeout(animateTypingAr, 50);
+    } else {
+      isDeletingAr = !isDeletingAr;
+      if (!isDeletingAr) titleIndexAr = (titleIndexAr + 1) % typingTitlesAr.length;
+      setTimeout(animateTypingAr, 1200);
+    }
+  }
+  function animateTypingEn() {
+    if (currentLang !== 'en') { setTimeout(animateTypingEn, 150); return; }
+    const current = typingTitlesEn[titleIndexEn];
+    if (!isDeletingEn && charIndexEn <= current.length) {
+      typingEl.innerHTML = current.substring(0, charIndexEn);
+      charIndexEn++;
+      setTimeout(animateTypingEn, 90);
+    } else if (isDeletingEn && charIndexEn >= 0) {
+      typingEl.innerHTML = current.substring(0, charIndexEn);
+      charIndexEn--;
+      setTimeout(animateTypingEn, 50);
+    } else {
+      isDeletingEn = !isDeletingEn;
+      if (!isDeletingEn) titleIndexEn = (titleIndexEn + 1) % typingTitlesEn.length;
+      setTimeout(animateTypingEn, 1200);
+    }
+  }
+  animateTypingAr();
+
+  // Scroll fade
+  const fades = document.querySelectorAll('.fade');
+  function checkFade() {
+    fades.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('show'); });
+  }
+  window.addEventListener('scroll', checkFade);
+  window.addEventListener('load', checkFade);
+
+  // Download CV
+  document.getElementById('downloadCVBtn').addEventListener('click', () => {
+    const cvAr = `السيرة الذاتية - أحمد أيمن يحيى\nالاسم: أحمد أيمن يحيى\nالمهنة: مهندس برمجيات - جامعة السويدي\nالمهارات: بايثون، أوتوكاد، SQL، جافا، تسويق\nاللغات: العربية (أم)، الإنجليزية (متقدم)\nالهاتف: 01028701351\nالبريد: info@ahmedayman.site`;
+    const cvEn = `CV - Ahmed Ayman Yehia\nName: Ahmed Ayman Yehia\nTitle: Software Engineer - SUT\nSkills: Python, AutoCAD, SQL, Java, Marketing\nLanguages: Arabic (Native), English (Advanced)\nPhone: 01028701351\nEmail: info@ahmedayman.site`;
+    const content = currentLang === 'ar' ? cvAr : cvEn;
+    const blob = new Blob([content], { type: 'application/octet-stream' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = currentLang === 'ar' ? 'CV_Ahmed_Ayman.pdf' : 'Ahmed_Ayman_CV.pdf';
+    link.click();
+    URL.revokeObjectURL(link.href);
+    showToast(currentLang === 'ar' ? "✅ تم تحميل السيرة" : "✅ CV downloaded");
+  });
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.innerText = msg;
+    toast.style.cssText = `position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ff9800; color:#0a1f28; padding:8px 20px; border-radius:30px; font-weight:bold; z-index:1000; font-size:0.85rem;`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  }
+  window.showProjectMsg = () => showToast(currentLang === 'ar' ? "🚀 قريباً" : "🚀 Coming soon");
+
+  // Social links
+  document.getElementById('facebookBtn')?.addEventListener('click', () => window.open('https://www.facebook.com/share/1AdfpPUsWX/', '_blank'));
+  document.getElementById('instagramBtn')?.addEventListener('click', () => window.open('https://www.instagram.com/a752007', '_blank'));
+  document.getElementById('linkedinBtn')?.addEventListener('click', () => window.open('https://www.linkedin.com/in/ahmedaymanyahya', '_blank'));
+
+  // Back to top
+  const backBtn = document.createElement('div');
+  backBtn.className = 'back-to-top';
+  backBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  document.body.appendChild(backBtn);
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) { backBtn.style.opacity = '1'; backBtn.style.visibility = 'visible'; }
+    else { backBtn.style.opacity = '0'; backBtn.style.visibility = 'hidden'; }
+  });
+  backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
