@@ -322,20 +322,65 @@
     }
     body.english .badge-university { border-right: none; border-left: 3px solid #ff9800; }
     
-    .btn {
-      padding: 14px 45px;
-      background: linear-gradient(120deg, #ff9800, #f57c00);
-      border: none;
-      border-radius: 60px;
-      color: #0a1f28;
-      font-weight: bold;
-      font-size: 1.05rem;
-      cursor: pointer;
-      box-shadow: 0 6px 0 #b45f06;
-      transition: 0.1s ease;
+    /* ========== تحسين وتظبيط زر تحميل الـ CV الاحترافي ========== */
+    .btn-cv-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 10px;
     }
-    .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #b45f06; }
-    .btn:hover { background: linear-gradient(120deg, #ffa726, #ff9800); box-shadow: 0 6px 0 #b45f06, 0 0 15px rgba(255,152,0,0.5); }
+    .btn-cv {
+      position: relative;
+      padding: 15px 45px;
+      background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+      border: none;
+      border-radius: 50px;
+      color: #05171d;
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .btn-cv i {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .btn-cv:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(255, 152, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      background: linear-gradient(135deg, #ffa726 0%, #ff9800 100%);
+    }
+    .btn-cv:hover i {
+      animation: bounceArrow 0.6s infinite alternate;
+    }
+    .btn-cv:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+    }
+    /* تأثير الوميض الزجاجي عند الحركة */
+    .btn-cv::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+      transform: skewX(-25deg);
+      transition: 0.75s;
+    }
+    .btn-cv:hover::before {
+      left: 150%;
+    }
+    @keyframes bounceArrow {
+      0% { transform: translateY(-2px); }
+      100% { transform: translateY(3px); }
+    }
 
     .section h2 {
       font-size: 2.4rem;
@@ -368,7 +413,7 @@
       line-height: 1.8;
     }
 
-    /* ========== قسم الخبرات (أسلوب لينكد إن) ========== */
+    /* ========== قسم الخبرات (أسلوب لينكد إن المتطور والمحدث) ========== */
     .timeline {
       position: relative;
       max-width: 850px;
@@ -680,7 +725,7 @@
 
 <div class="welcome-toast" id="welcomeToast">
   <div class="close-toast" id="closeToastBtn"><i class="fas fa-times"></i></div>
-  <p class="lang-ar">👋 أهلاً بحضرتك في موقعي المتوادرس! يسعدني جداً تصفحك لملفي الشخصي.</p>
+  <p class="lang-ar">👋 أهلاً بحضرتك في موقعي المتواضع! يسعدني جداً تصفحك لملفي الشخصي.</p>
   <p class="lang-en">👋 Welcome to my personal portfolio! Thank you for visiting my professional space.</p>
 </div>
 
@@ -718,10 +763,14 @@
     <span class="lang-ar">جامعة السويدي بمصر (SUT)</span>
     <span class="lang-en">El Sewedy University of Egypt (SUT)</span>
   </div>
-  <button class="btn" id="downloadCVBtn">
-    <span class="lang-ar">📄 السيرة الذاتية</span>
-    <span class="lang-en">📄 Download CV</span>
-  </button>
+  
+  <div class="btn-cv-container">
+    <button class="btn-cv" id="downloadCVBtn">
+      <i class="fas fa-cloud-download-alt"></i>
+      <span class="lang-ar">تحميل السيرة الذاتية PDF</span>
+      <span class="lang-en">Download CV Portfolio</span>
+    </button>
+  </div>
 </section>
 
 <section class="section fade" id="about" data-aos="fade-right">
@@ -735,29 +784,59 @@
 <section class="section fade" id="experience" data-aos="fade-up">
   <h2><span class="lang-ar">الخبرة العملية</span><span class="lang-en">Work Experience</span></h2>
   <div class="timeline">
+    <!-- الخبرة الأولى -->
     <div class="timeline-item">
       <div class="timeline-content">
-        <h3 class="lang-ar">مطور برمجيات متدرب</h3><h3 class="lang-en">Software Engineer Intern</h3>
-        <span class="timeline-company"><i class="fas fa-building"></i> SUT Tech Solutions</span>
-        <span class="timeline-date lang-ar">2025 - حتى الآن</span><span class="timeline-date lang-en">2025 - Present</span>
+        <h3 class="lang-ar">المبيعات والتسويق</h3><h3 class="lang-en">Sales & Marketing Specialist</h3>
+        <span class="timeline-company"><i class="fas fa-building"></i> Milano F16</span>
+        <span class="timeline-date lang-ar">مارس 2025 - حتى الآن (عمل عن بُعد)</span><span class="timeline-date lang-en">March 2025 - Present (Remote)</span>
         <ul class="timeline-details">
-          <li class="lang-ar">المشاركة في تطوير وبناء قواعد بيانات معقدة باستخدام لغة SQL لتحسين أداء الأنظمة.</li>
-          <li class="lang-en">Participated in developing and building complex databases using SQL to optimize system performance.</li>
-          <li class="lang-ar">كتابة أكواد برمجية نظيفة وقابلة لإعادة الاستخدام باستخدام بايثون وجافا.</li>
-          <li class="lang-en">Wrote clean, reusable, and scalable code structures using Python and Java.</li>
+          <li class="lang-ar">قيادة جهود المبيعات وإدارة المنتجات لتعزيز الحضور السوقي الرقمي للشركة.</li>
+          <li class="lang-en">Leading sales and product management initiatives to maximize business outreach.</li>
+          <li class="lang-ar">بناء وتطوير استراتيجيات تسويق رقمي مستهدفة لزيادة المبيعات والعوائد.</li>
+          <li class="lang-en">Developing conversion-driven digital marketing blueprints and analyzing growth performance.</li>
         </ul>
       </div>
     </div>
+    <!-- الخبرة الثانية -->
     <div class="timeline-item">
       <div class="timeline-content">
-        <h3 class="lang-ar">مسؤول تسويق رقمي ومصمم حر</h3><h3 class="lang-en">Digital Marketer & Freelance Designer</h3>
-        <span class="timeline-company"><i class="fas fa-laptop-code"></i> العمل الحر | Freelance</span>
-        <span class="timeline-date lang-ar">2024 - حتى الآن</span><span class="timeline-date lang-en">2024 - Present</span>
+        <h3 class="lang-ar">مساعد إداري</h3><h3 class="lang-en">Administrative Assistant</h3>
+        <span class="timeline-company"><i class="fas fa-building"></i> Milano F16</span>
+        <span class="timeline-date lang-ar">مارس 2024 - مارس 2025 (من مقر الشركة)</span><span class="timeline-date lang-en">March 2024 - March 2025 (On-site)</span>
         <ul class="timeline-details">
-          <li class="lang-ar">إدارة حملات إعلانية مدفوعة ومستهدفة عبر وسائل التواصل الاجتماعي وتحليل البيانات لرفع العوائد.</li>
-          <li class="lang-en">Managed targeted paid ad campaigns across social platforms, analyzing ROI metrics.</li>
-          <li class="lang-ar">إنشاء وتصميم مخططات هندسية دقيقة ومبتكرة للعملاء بالاعتماد على برنامج AutoCAD.</li>
-          <li class="lang-en">Created precise, professional engineering drawings and layouts using AutoCAD.</li>
+          <li class="lang-ar">توفير الدعم المكتبي المتكامل وإدارة العمليات الإدارية اليومية لضمان سير العمل بكفاءة.</li>
+          <li class="lang-en">Provided key administrative backing and managed daily documentation pipelines flawlessly.</li>
+          <li class="lang-ar">تنظيم وتنسيق الملفات والتقارير الدورية بالاعتماد على أدوات الدعم المكتبي المتطورة.</li>
+          <li class="lang-en">Optimized office coordination metrics and handled professional data archives.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- الخبرة الثالثة -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3 class="lang-ar">مدير مساعد</h3><h3 class="lang-en">Assistant Manager</h3>
+        <span class="timeline-company"><i class="fas fa-building"></i> Milano F16</span>
+        <span class="timeline-date lang-ar">مارس 2023 - مارس 2024 (من مقر الشركة)</span><span class="timeline-date lang-en">March 2023 - March 2024 (On-site)</span>
+        <ul class="timeline-details">
+          <li class="lang-ar">المشاركة الفعالة في الإشراف الإداري على فرق العمل وتوزيع المهام التشغيلية اليومية.</li>
+          <li class="lang-en">Actively supervised multi-department workflows and evaluated team tasks.</li>
+          <li class="lang-ar">تنسيق وتوجيه أعمال المساعدين لضمان الالتزام بمعايير الجودة والأهداف العامة للشركة.</li>
+          <li class="lang-en">Coordinated assistant schedules and optimized operational output parameters.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- الخبرة الرابعة -->
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3 class="lang-ar">مساعد</h3><h3 class="lang-en">Assistant Specialist</h3>
+        <span class="timeline-company"><i class="fas fa-industry"></i> مصنع الوالد | Family Factory</span>
+        <span class="timeline-date lang-ar">يناير 2021 - مارس 2023 (من مقر المصنع)</span><span class="timeline-date lang-en">January 2021 - March 2023 (On-site)</span>
+        <ul class="timeline-details">
+          <li class="lang-ar">العمل الميداني المباشر داخل خطوط الإنتاج والتشغيل بهدف اكتساب الخبرة العملية المبكرة وتطوير المهارات.</li>
+          <li class="lang-en">Engaged in hands-on operations within manufacturing zones to gain foundational business exposure.</li>
+          <li class="lang-ar">تقديم خدمات المساعدة الشخصية والإدارية واللوجستية الشاملة لدعم سير الأعمال التشغيلية.</li>
+          <li class="lang-en">Fulfilled extensive personal assistance duties and streamlined administrative tracking on the ground.</li>
         </ul>
       </div>
     </div>
@@ -861,7 +940,7 @@
 
   // ========== جدار الحماية السيبرانية الصارم (Cybersecurity Shield) ==========
   
-  // 1. منع الزر الأيمن للفأرة تمااماً وعرض توست تحذيري
+  // 1. منع الزر الأيمن للفأرة تماماً وعرض توست تحذيري
   document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
     showToast(currentLang === 'ar' ? "🔒 عذراً، حماية المحتوى مفعلة وصارمة!" : "🔒 Security Protocol Active!");
@@ -886,7 +965,6 @@
 
   // 4. آلية تدمير الصفحة وحجب المحتوى فوراً في حال محاولة تخطي الأمان عبر لوحة المطورين (Anti-DevTools Script)
   setInterval(function() {
-    // الطريقة الأولى: فحص التوقيت عبر البلوك الاستقرائي للـ debugger
     const startTime = new Date().getTime();
     debugger;
     const endTime = new Date().getTime();
@@ -899,7 +977,6 @@
         </div>`;
     }
     
-    // الطريقة الثانية: فحص أبعاد الشاشة (إذا تم فتح لوحة التحكم الجانبية أو السفلية بنسبة كبيرة)
     const threshold = 160;
     if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
        document.body.innerHTML = `
@@ -923,7 +1000,7 @@
   const welcomeToast = document.getElementById('welcomeToast');
   const closeToastBtn = document.getElementById('closeToastBtn');
   window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => welcomeToast.classList.add('show-toast'), 4000); // تظهر بعد انتهاء اللودر وثانية واحدة من دخول الموقع
+    setTimeout(() => welcomeToast.classList.add('show-toast'), 4000); 
     setTimeout(() => welcomeToast.classList.remove('show-toast'), 9000);
   });
   closeToastBtn.addEventListener('click', () => welcomeToast.classList.remove('show-toast'));
@@ -967,11 +1044,53 @@
   function checkFade() { fades.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('show'); }); }
   window.addEventListener('scroll', checkFade); window.addEventListener('load', checkFade);
 
-  document.getElementById('downloadCVBtn').addEventListener('click', () => {
-    const content = currentLang === 'ar' ? "أحمد أيمن يحيى - مهندس برمجيات" : "Ahmed Ayman Yehia - Software Engineer";
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const link = document.createElement('a'); link.href = URL.createObjectURL(blob);
-    link.download = 'Ahmed_Ayman_CV.txt'; link.click();
+  // ========== تشغيل ميكانيكية تحميل الـ CV المتطورة والآمنة ==========
+  document.getElementById('downloadCVBtn').addEventListener('click', function() {
+    // بناء محتوى هيكلي للسيرة الذاتية المهنية
+    const headline = currentLang === 'ar' ? "السيرة الذاتية المهنية - المهندس أحمد أيمن يحيى" : "Professional CV Portfolio - Eng. Ahmed Ayman Yehia";
+    const bodyContent = `
+=====================================================
+${headline}
+=====================================================
+* Full Name: Ahmed Ayman Yehia
+* Title: Software Engineer & Business Developer
+* University: El Sewedy University of Egypt (SUT)
+* Base Location: Cairo, Egypt
+* Official Website: https://ahmedayman.site
+* Contact Email: info@ahmedayman.site
+
+-----------------------------------------------------
+[ WORK EXPERIENCE / الخبرات العملية ]
+-----------------------------------------------------
+1. Milano F16 (March 2025 - Present)
+   - Role: Sales & Marketing Specialist [Remote]
+   
+2. Milano F16 (March 2024 - March 2025)
+   - Role: Administrative Assistant [On-site]
+
+3. Milano F16 (March 2023 - March 2024)
+   - Role: Assistant Manager [On-site]
+
+4. Family Factory / مصنع الوالد (January 2021 - March 2023)
+   - Role: Operational Assistant [On-site]
+
+-----------------------------------------------------
+[ TECH CORE SKILLS / المهارات التقنية ]
+-----------------------------------------------------
+* Full-Stack Tools: Python, Java, SQL Databases
+* Engineering Core: AutoCAD Structural Blueprints
+* Business Growth: Digital Marketing & Targeted Ads
+
+=====================================================
+Generated Securely via Portfolio System © 2026
+=====================================================`;
+
+    const blob = new Blob([bodyContent.trim()], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'Eng_Ahmed_Ayman_CV.txt';
+    link.click();
+    showToast(currentLang === 'ar' ? "✅ جاري تنزيل ملف السيرة الذاتية بنجاح!" : "✅ CV Portfolio Downloaded Successfully!");
   });
 
   function showToast(msg) {
