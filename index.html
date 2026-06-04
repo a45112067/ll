@@ -4,21 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   
-  <!-- ================= SEO Meta Tags (جوجل ومحركات البحث) ================= -->
   <title>أحمد أيمن يحيى | مهندس برمجيات - El Sewedy University of Egypt</title>
-  <meta name="description" content="الموقع الرسمي للمهندس أحمد أيمن يحيى - مهندس برمجيات وطالب في جامعة السويدي بمصر El Sewedy University of Egypt (SUT). متخصص في تطوير البرمجيات، التسويق الرقمي، والتصميم الهندسي.">
+  <meta name="description" content="الموقع الرسمي للمهندس أحمد أيمن يحيى - مهندس برمجيات وطالب في جامعة السويدي بمصر (SUT). متخصص في تطوير البرمجيات، التسويق الرقمي، والتصميم الهندسي.">
   <meta name="keywords" content="احمد ايمن, مهندس احمد ايمن, أحمد أيمن يحيى, Ahmed Ayman, Ahmed Ayman Yehia, مهندس برمجيات, El Sewedy University of Egypt, SUT, جامعة السويدي, بايثون, أوتوكاد, SQL, جافا, تسويق">
   <meta name="author" content="Ahmed Ayman Yehia">
-  <link rel="canonical" href="https://ahmedayman.site"> <!-- استبدله برابط موقعك الفعلي لاحقاً -->
+  <link rel="canonical" href="https://ahmedayman.site">
 
-  <!-- Open Graph / Facebook (للسيو ومشاركة الروابط) -->
   <meta property="og:type" content="profile">
   <meta property="og:title" content="أحمد أيمن يحيى | مهندس برمجيات">
   <meta property="og:description" content="طالب هندسة برمجيات بجامعة السويدي ومطور أعمال متكامل. تصفح ملفي الشخصي وشهاداتي المعتمدة.">
   <meta property="og:image" content="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png">
   <meta property="og:url" content="https://ahmedayman.site">
 
-  <!-- ================= JSON-LD Structured Data (سيو المحترفين والـ AI) ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,22 +43,22 @@
   }
   </script>
 
-  <!-- Security Header Policy Simulation via Meta -->
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
-    /* منع تحديد النصوص لحماية المحتوى */
+    /* منع تحديد النصوص لحماية المحتوى بالكامل */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none;
-      -webkit-user-select: none;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
     }
 
     body {
@@ -73,7 +70,64 @@
       transition: all 0.3s ease;
     }
 
-    input, textarea { user-select: text; -webkit-user-select: text; }
+    input, textarea { user-select: text !important; -webkit-user-select: text !important; }
+
+    /* ========== شاشة التحميل المتطورة (Preloader) ========== */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #05171d;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .loader-container {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .loader-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 4px solid transparent;
+      border-top: 4px solid #ff9800;
+      border-bottom: 4px solid #ff9800;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+    }
+    .loader-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 152, 0, 0.2);
+    }
+    .loader-text {
+      margin-top: 20px;
+      font-weight: 700;
+      color: #ff9800;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
 
     /* ========== قائمة جانبية (Sidebar) ========== */
     .sidebar {
@@ -209,6 +263,14 @@
       100% { transform: translateY(0px); }
     }
     
+    /* اسم المهندس وتنسيق علامة التوثيق الزرقاء لتظهر بجانبه تماماً */
+    .name-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0 8px;
+    }
     .engineer-name {
       font-size: 3rem;
       font-weight: 900;
@@ -216,7 +278,6 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin: 15px 0 8px;
     }
     .engineer-name-en {
       font-size: 2.5rem;
@@ -225,8 +286,18 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin: 15px 0 8px;
     }
+    .verified-badge {
+      color: #1da1f2;
+      font-size: 1.8rem;
+      display: inline-block;
+      animation: pulse-badge 2s infinite alternate;
+    }
+    @keyframes pulse-badge {
+      0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(29,161,242,0.4)); }
+      100% { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(29,161,242,0.8)); }
+    }
+
     .typing {
       font-size: 1.35rem;
       font-weight: 600;
@@ -368,7 +439,7 @@
     .timeline-details li::before { content: '•'; color: #ff9800; font-weight: bold; font-size: 1.3rem; position: absolute; right: 0; top: -4px; }
     body.english .timeline-details li::before { right: auto; left: 0; }
 
-    /* ========== المهارات والمشاريع ========== */
+    /* ========== المهارات ========== */
     .skills {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -387,29 +458,10 @@
     .skill small { font-size: 0.8rem; opacity: 0.7; display: block; margin-top: 5px; }
     .skill:hover { transform: translateY(-6px); border-color: #ff9800; background: #123e4a; }
 
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 30px;
-      margin-top: 35px;
-    }
-    .project {
-      background: #0b262f;
-      border-radius: 28px;
-      overflow: hidden;
-      transition: 0.35s;
-      cursor: pointer;
-      border: 1px solid #1e4a5a;
-    }
-    .project img { width: 100%; height: 180px; object-fit: cover; transition: 0.3s; }
-    .project div { font-size: 1.35rem; font-weight: 700; padding: 16px 18px 6px; color: #ffb347; }
-    .project p { padding: 0 18px 22px; opacity: 0.85; font-size: 0.95rem; }
-    .project:hover { transform: scale(1.02) translateY(-4px); border-color: #ff9800; }
-
     .edu-box { max-width: 600px; border-right: 5px solid #ff9800; }
     body.english .edu-box { border-right: none; border-left: 5px solid #ff9800; }
 
-    /* ========== التعديل الجديد: معرض الصور النظيف للشهادات ========== */
+    /* ========== معرض الصور للشهادات ========== */
     .certificates-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -434,14 +486,13 @@
       padding: 6px;
       transition: transform 0.3s ease;
     }
-    /* تأثير أنيق عند تمرير الماوس */
     .cert-item-img:hover {
       border-color: #ff9800;
       transform: scale(1.03) translateY(-4px);
       box-shadow: 0 12px 25px rgba(255,152,0,0.15);
     }
     .cert-item-img::after {
-      content: '\f00e'; /* أيقونة تكبير البحث */
+      content: '\f00e';
       font-family: 'Font Awesome 5 Free';
       font-weight: 900;
       position: absolute;
@@ -609,9 +660,17 @@
     }
   </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-<!-- نافذة تكبير الصور (Lightbox) -->
+<div id="preloader">
+  <div class="loader-container">
+    <div class="loader-circle"></div>
+    <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="أحمد أيمن يحيى" class="loader-img" onerror="this.src='https://placehold.co/120x120/0f2e38/ff9800?text=AA'">
+  </div>
+  <div class="loader-text lang-ar">جاري تهيئة النظام الآمن...</div>
+  <div class="loader-text lang-en">Loading Secure System...</div>
+</div>
+
 <div class="lightbox-modal" id="lightboxModal">
   <div class="lightbox-content">
     <div class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></div>
@@ -619,41 +678,40 @@
   </div>
 </div>
 
-<!-- إشعار الترحيب -->
 <div class="welcome-toast" id="welcomeToast">
   <div class="close-toast" id="closeToastBtn"><i class="fas fa-times"></i></div>
-  <p class="lang-ar">👋 أهلاً بحضرتك في موقعي المتواضع! يسعدني جداً تصفحك لملفي الشخصي.</p>
+  <p class="lang-ar">👋 أهلاً بحضرتك في موقعي المتوادرس! يسعدني جداً تصفحك لملفي الشخصي.</p>
   <p class="lang-en">👋 Welcome to my personal portfolio! Thank you for visiting my professional space.</p>
 </div>
 
-<!-- زر القائمة الجانبية -->
 <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
 
-<!-- القائمة الجانبية -->
 <div class="sidebar" id="sidebar">
   <div class="close-sidebar" id="closeSidebar"><i class="fas fa-times"></i></div>
   <a href="#home" class="lang-ar">الرئيسية</a><a href="#home" class="lang-en">Home</a>
   <a href="#about" class="lang-ar">نبذة عني</a><a href="#about" class="lang-en">About Me</a>
   <a href="#experience" class="lang-ar">الخبرة العملية</a><a href="#experience" class="lang-en">Experience</a>
   <a href="#skills" class="lang-ar">المهارات التقنية</a><a href="#skills" class="lang-en">Technical Skills</a>
-  <a href="#projects" class="lang-ar">المشاريع الحالية</a><a href="#projects" class="lang-en">My Projects</a>
   <a href="#education" class="lang-ar">التعليم الأكاديمي</a><a href="#education" class="lang-en">Education</a>
   <a href="#certificates" class="lang-ar">الشهادات والاعتمادات</a><a href="#certificates" class="lang-en">Certificates</a>
   <a href="#languages" class="lang-ar">اللغات</a><a href="#languages" class="lang-en">Languages</a>
   <a href="#contact" class="lang-ar">تواصل معي</a><a href="#contact" class="lang-en">Contact Me</a>
 </div>
 
-<!-- زر تبديل اللغة الثابت -->
 <div class="language-switch-fixed" id="langSwitchFixed">
   <span class="lang-ar">🇬🇧 English</span>
   <span class="lang-en">🇸🇦 العربية</span>
 </div>
 
-<!-- HERO SECTION -->
 <section class="hero" id="home" data-aos="fade-up">
   <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="احمد ايمن مهندس برمجيات" class="logo-image" onerror="this.src='https://placehold.co/180x180/0f2e38/ff9800?text=AA'">
-  <h1 class="engineer-name lang-ar">مهندس أحمد أيمن يحيى</h1>
-  <div class="engineer-name-en lang-en">Eng. Ahmed Ayman Yehia</div>
+  
+  <div class="name-wrapper">
+    <h1 class="engineer-name lang-ar">مهندس أحمد أيمن يحيى</h1>
+    <div class="engineer-name-en lang-en">Eng. Ahmed Ayman Yehia</div>
+    <i class="fas fa-check-circle verified-badge" title="Verified Professional Account"></i>
+  </div>
+
   <div class="typing" id="typing"></div>
   <div class="badge-university">
     <i class="fas fa-university"></i>
@@ -666,7 +724,6 @@
   </button>
 </section>
 
-<!-- نبذة عني -->
 <section class="section fade" id="about" data-aos="fade-right">
   <h2><span class="lang-ar">نبذة عني</span><span class="lang-en">About Me</span></h2>
   <div class="about-box">
@@ -675,7 +732,6 @@
   </div>
 </section>
 
-<!-- قسم الخبرات (LinkedIn Style) -->
 <section class="section fade" id="experience" data-aos="fade-up">
   <h2><span class="lang-ar">الخبرة العملية</span><span class="lang-en">Work Experience</span></h2>
   <div class="timeline">
@@ -708,7 +764,6 @@
   </div>
 </section>
 
-<!-- المهارات -->
 <section class="section fade" id="skills" data-aos="zoom-in">
   <h2><span class="lang-ar">المهارات</span><span class="lang-en">Skills</span></h2>
   <div class="skills">
@@ -720,24 +775,6 @@
   </div>
 </section>
 
-<!-- المشاريع -->
-<section class="section fade" id="projects" data-aos="fade-left">
-  <h2><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></h2>
-  <div class="projects">
-    <div class="project" onclick="showProjectMsg()">
-      <img src="https://placehold.co/600x400/1e3a44/ff9800?text=Python+Project" alt="مشروع تحليل بيانات بايثون احمد ايمن">
-      <div class="lang-ar">تطبيق بايثون متطور</div><div class="lang-en">Advanced Python App</div>
-      <p class="lang-ar">نظام إدارة وتحليل البيانات الكبيرة باستخدام Python & SQL</p>
-    </div>
-    <div class="project" onclick="showProjectMsg()">
-      <img src="https://placehold.co/600x400/1e3a44/ff9800?text=AutoCAD" alt="مخططات هندسية اوتوكاد احمد ايمن">
-      <div class="lang-ar">مخططات أوتوكاد</div><div class="lang-en">AutoCAD Blueprint</div>
-      <p class="lang-ar">تصاميم ومخططات هندسية دقيقة واحترافية</p>
-    </div>
-  </div>
-</section>
-
-<!-- التعليم -->
 <section class="section fade" id="education" data-aos="fade-up">
   <h2><span class="lang-ar">التعليم</span><span class="lang-en">Education</span></h2>
   <div class="edu-box">
@@ -747,22 +784,15 @@
   </div>
 </section>
 
-<!-- التحديث الجديد: قسم الشهادات المطور (صورة فقط وتكبر بالضغط) -->
 <section class="section fade" id="certificates" data-aos="zoom-in">
   <h2><span class="lang-ar">الشهادات والاعتمادات</span><span class="lang-en">Certificates</span></h2>
   <div class="certificates-gallery">
-    
-    <!-- الشهادة الأولى -->
     <div class="cert-item-img" onclick="openLightbox(this)">
       <img src="https://i.postimg.cc/85nM5hdr/Getting-Started-with-Cisco-Packet-Tracer-certificate-ahmed250100105-sut-edu-eg-fb3ed2b6-9a5d-4ef7-9a.png" alt="شهادة Cisco Packet Tracer - المهندس أحمد أيمن يحيى" onerror="this.src='https://placehold.co/500x320/1e3a44/ff9800?text=Cisco+Certificate'">
     </div>
-
-    <!-- كرر هذا البلوك لأي شهادة إضافية مستقبلاً بتغيير رابط الصورة فقط -->
-
   </div>
 </section>
 
-<!-- اللغات -->
 <section class="section fade" id="languages" data-aos="fade-right">
   <h2><span class="lang-ar">اللغات</span><span class="lang-en">Languages</span></h2>
   <div class="skills" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr));">
@@ -771,7 +801,6 @@
   </div>
 </section>
 
-<!-- تواصل معي -->
 <section class="section fade" id="contact" data-aos="fade-up">
   <h2><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></h2>
   <div class="contact-info" id="secureContactBox">
@@ -793,6 +822,15 @@
 <script>
   AOS.init({ duration: 700, once: true, offset: 60 });
 
+  // ========== نظام شاشة التحميل (Preloader) لمدة 3 ثوانٍ تماماً ==========
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      preloader.style.visibility = 'hidden';
+    }, 3000); 
+  });
+
   // ========== نظام الـ Lightbox الجديد لتكبير الصور ==========
   const lightboxModal = document.getElementById('lightboxModal');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -809,7 +847,7 @@
     if (e.target === lightboxModal) lightboxModal.classList.remove('active');
   });
 
-  // ========== نظام الأمان والـ Cybersecurity المدمج المتقدم ==========
+  // ========== نظام فك التشفير للأرقام لحمايتها من الـ Scrapers ==========
   window.addEventListener('DOMContentLoaded', () => {
     const pNo = ["0", "1", "0", "2", "8", "7", "0", "1", "3", "5", "1"].join("");
     const eml = ["i", "n", "f", "o", "@", "a", "h", "m", "e", "d", "a", "y", "m", "a", "n", ".", "s", "i", "t", "e"].join("");
@@ -821,28 +859,57 @@
     `;
   });
 
-  // منع اختصارات لوحة المفاتيح وفحص العنصر
+  // ========== جدار الحماية السيبرانية الصارم (Cybersecurity Shield) ==========
+  
+  // 1. منع الزر الأيمن للفأرة تمااماً وعرض توست تحذيري
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    showToast(currentLang === 'ar' ? "🔒 عذراً، حماية المحتوى مفعلة وصارمة!" : "🔒 Security Protocol Active!");
+    return false;
+  });
+
+  // 2. منع جميع اختصارات لوحة التحكم وفحص العنصر وسحب الأكواد
   document.addEventListener('keydown', function(e) {
     if (
       e.key === "F12" ||
       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) ||
-      (e.ctrlKey && (e.key === "U" || e.key === "u" || e.key === "S" || e.key === "s"))
+      (e.ctrlKey && (e.key === "U" || e.key === "u" || e.key === "S" || e.key === "s" || e.key === "P" || e.key === "p" || e.key === "A" || e.key === "a"))
     ) {
       e.preventDefault();
-      showToast(currentLang === 'ar' ? "🔒 حماية الكود المصدري مفعلة!" : "🔒 Cyber Security Active!");
+      showToast(currentLang === 'ar' ? "🔒 تم تسجيل محاولة فحص غير مصرح بها!" : "🔒 Source Shield Active!");
       return false;
     }
   });
 
-  // حماية الكود عبر الـ Debugger المستمر لمنع الفحص الحي للبيانات
+  // 3. منع سحب وإفلات الصور لعدم سرقتها
+  document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+  // 4. آلية تدمير الصفحة وحجب المحتوى فوراً في حال محاولة تخطي الأمان عبر لوحة المطورين (Anti-DevTools Script)
   setInterval(function() {
-    const before = new Date().getTime();
+    // الطريقة الأولى: فحص التوقيت عبر البلوك الاستقرائي للـ debugger
+    const startTime = new Date().getTime();
     debugger;
-    const after = new Date().getTime();
-    if (after - before > 100) {
-      document.body.innerHTML = "<h2 style='color:#ff9800; text-align:center; margin-top:20%; font-family:Cairo;'>Security Exception: Attempt Logged.</h2>";
+    const endTime = new Date().getTime();
+    if (endTime - startTime > 100) {
+      document.body.innerHTML = `
+        <div style="background:#05171d; color:#ff9800; text-align:center; padding-top:20vh; height:100vh; font-family:Cairo; font-weight:bold;">
+          <i class="fas fa-exclamation-triangle" style="font-size:4rem; margin-bottom:20px;"></i>
+          <h2>Security Exception: Attempt Logged & Session Terminated.</h2>
+          <p style="color:#fff; margin-top:10px;">تم اكتشاف محاولة هندسة عكسية أو فحص للأكواد. تم حجب المحتوى تلقائياً.</p>
+        </div>`;
     }
-  }, 1000);
+    
+    // الطريقة الثانية: فحص أبعاد الشاشة (إذا تم فتح لوحة التحكم الجانبية أو السفلية بنسبة كبيرة)
+    const threshold = 160;
+    if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+       document.body.innerHTML = `
+        <div style="background:#05171d; color:#ff9800; text-align:center; padding-top:20vh; height:100vh; font-family:Cairo; font-weight:bold;">
+          <i class="fas fa-shield-alt" style="font-size:4rem; margin-bottom:20px;"></i>
+          <h2>DevTools Detected: Access Denied.</h2>
+          <p style="color:#fff; margin-top:10px;">برجاء إغلاق نافذة فحص المتصفح لرؤية محتوى الموقع.</p>
+        </div>`;
+    }
+  }, 500);
 
   // ========== القائمة الجانبية والإشعارات واللغات ==========
   const menuBtn = document.getElementById('menuBtn');
@@ -856,8 +923,8 @@
   const welcomeToast = document.getElementById('welcomeToast');
   const closeToastBtn = document.getElementById('closeToastBtn');
   window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => welcomeToast.classList.add('show-toast'), 1000);
-    setTimeout(() => welcomeToast.classList.remove('show-toast'), 5500);
+    setTimeout(() => welcomeToast.classList.add('show-toast'), 4000); // تظهر بعد انتهاء اللودر وثانية واحدة من دخول الموقع
+    setTimeout(() => welcomeToast.classList.remove('show-toast'), 9000);
   });
   closeToastBtn.addEventListener('click', () => welcomeToast.classList.remove('show-toast'));
 
@@ -910,10 +977,9 @@
   function showToast(msg) {
     const oldToast = document.getElementById('customStaticToast'); if(oldToast) oldToast.remove();
     const toast = document.createElement('div'); toast.id = 'customStaticToast'; toast.innerText = msg;
-    toast.style.cssText = `position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ff9800; color:#0a1f28; padding:8px 20px; border-radius:30px; font-weight:bold; z-index:4000; font-size:0.9rem; pointer-events:none;`;
+    toast.style.cssText = `position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ff9800; color:#0a1f28; padding:8px 20px; border-radius:30px; font-weight:bold; z-index:999999; font-size:0.9rem; pointer-events:none; box-shadow: 0 4px 15px rgba(0,0,0,0.4);`;
     document.body.appendChild(toast); setTimeout(() => toast.remove(), 2500);
   }
-  window.showProjectMsg = () => showToast(currentLang === 'ar' ? "🚀 تفاصيل المشروع ستتوفر قريباً!" : "🚀 Project details coming soon!");
 
   document.getElementById('facebookBtn')?.addEventListener('click', () => window.open('https://www.facebook.com/share/1AdfpPUsWX/', '_blank'));
   document.getElementById('instagramBtn')?.addEventListener('click', () => window.open('https://www.instagram.com/a752007', '_blank'));
