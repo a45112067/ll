@@ -61,12 +61,15 @@
       -ms-user-select: none !important;
     }
 
+    html {
+      scroll-behavior: smooth; /* تصفح سلس ونعم للغاية */
+    }
+
     body {
       background: linear-gradient(145deg, #071e26 0%, #0a2a34 100%);
       color: #f0f9ff;
       font-family: 'Cairo', sans-serif;
       overflow-x: hidden;
-      scroll-behavior: smooth;
       transition: all 0.3s ease;
     }
 
@@ -85,12 +88,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
     .loader-container {
       position: relative;
-      width: 160px;
-      height: 160px;
+      width: 140px;
+      height: 140px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -103,21 +106,20 @@
       border-top: 4px solid #ff9800;
       border-bottom: 4px solid #ff9800;
       border-radius: 50%;
-      animation: spin 1.5s linear infinite;
+      animation: spin 1.2s linear infinite;
     }
     .loader-img {
-      width: 120px;
-      height: 120px;
+      width: 105px;
+      height: 105px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255, 152, 0, 0.2);
     }
     .loader-text {
-      margin-top: 20px;
+      margin-top: 15px;
       font-weight: 700;
       color: #ff9800;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
+      font-size: 1rem;
       animation: pulse 1.5s ease-in-out infinite;
     }
     @keyframes spin {
@@ -157,12 +159,12 @@
       display: block;
       color: #f0f9ff;
       text-decoration: none;
-      padding: 14px 20px;
-      margin: 8px 0;
+      padding: 12px 20px;
+      margin: 6px 0;
       border-radius: 50px;
       font-weight: 600;
       transition: 0.3s;
-      font-size: 1.05rem;
+      font-size: 1rem;
       text-align: center;
     }
     .sidebar a:hover {
@@ -176,7 +178,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       cursor: pointer;
       color: #ff9800;
       transition: 0.2s;
@@ -190,8 +192,8 @@
       right: 20px;
       z-index: 1500;
       background: #ff9800;
-      width: 48px;
-      height: 48px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -200,7 +202,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: 0.3s;
       color: #0a1f28;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
     body.english .menu-btn { right: auto; left: 20px; }
     .menu-btn:hover { transform: scale(1.05); background: #ffb347; }
@@ -212,11 +214,11 @@
       z-index: 1500;
       background: #0f2e38;
       color: #ff9800;
-      padding: 8px 18px;
+      padding: 8px 15px;
       border-radius: 40px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       box-shadow: 0 3px 10px rgba(0,0,0,0.3);
       transition: 0.2s;
       border: 1px solid #ff9800;
@@ -231,7 +233,7 @@
 
     /* ========== تنظيم مساحات الموقع ========== */
     .section {
-      padding: 90px 24px;
+      padding: 80px 24px;
       text-align: center;
       max-width: 1200px;
       margin: 0 auto;
@@ -243,36 +245,35 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
     
     .logo-image {
-      width: 180px; 
-      height: 180px;
+      width: 160px; 
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #ff9800;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,152,0,0.15);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 0 6px rgba(255,152,0,0.15);
       transition: 0.3s;
       animation: float 3s ease-in-out infinite;
       margin-bottom: 10px;
     }
     @keyframes float {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
       100% { transform: translateY(0px); }
     }
     
-    /* اسم المهندس وتنسيق علامة التوثيق الزرقاء لتظهر بجانبه تماماً */
     .name-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin: 15px 0 8px;
+      margin: 12px 0 6px;
     }
     .engineer-name {
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 900;
       background: linear-gradient(135deg, #ffcc80, #ff9800, #f57c00);
       background-clip: text;
@@ -280,7 +281,7 @@
       color: transparent;
     }
     .engineer-name-en {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       font-weight: 800;
       background: linear-gradient(135deg, #ffcc80, #ff9800);
       background-clip: text;
@@ -289,80 +290,70 @@
     }
     .verified-badge {
       color: #1da1f2;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       display: inline-block;
       animation: pulse-badge 2s infinite alternate;
     }
     @keyframes pulse-badge {
       0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(29,161,242,0.4)); }
-      100% { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(29,161,242,0.8)); }
+      100% { transform: scale(1.06); filter: drop-shadow(0 0 6px rgba(29,161,242,0.8)); }
     }
 
     .typing {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      background: rgba(255,152,0,0.12);
+      background: rgba(255,152,0,0.1);
       backdrop-filter: blur(4px);
-      padding: 0.6rem 2rem;
+      padding: 0.5rem 1.8rem;
       border-radius: 60px;
-      margin: 15px 0 25px;
-      border: 1px solid rgba(255,152,0,0.4);
-      min-height: 50px;
+      margin: 12px 0 20px;
+      border: 1px solid rgba(255,152,0,0.3);
+      min-height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
     .badge-university {
       background: #0f2e38;
-      padding: 8px 24px;
+      padding: 8px 20px;
       border-radius: 40px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       border-right: 3px solid #ff9800;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
     body.english .badge-university { border-right: none; border-left: 3px solid #ff9800; }
     
-    /* ========== تحسين وتظبيط زر تحميل الـ CV الاحترافي ========== */
+    /* ========== تصميم زر تحميل الـ CV الاحترافي الزجاجي ========== */
     .btn-cv-container {
       position: relative;
       display: inline-block;
-      margin-top: 10px;
+      margin-top: 5px;
     }
     .btn-cv {
       position: relative;
-      padding: 15px 45px;
+      padding: 14px 40px;
       background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
       border: none;
       border-radius: 50px;
       color: #05171d;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       overflow: hidden;
-      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+      transition: all 0.3s ease;
     }
     .btn-cv i {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
+      font-size: 1.1rem;
     }
     .btn-cv:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 28px rgba(255, 152, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-      background: linear-gradient(135deg, #ffa726 0%, #ff9800 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(255, 152, 0, 0.45);
     }
-    .btn-cv:hover i {
-      animation: bounceArrow 0.6s infinite alternate;
-    }
-    .btn-cv:active {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
-    }
-    /* تأثير الوميض الزجاجي عند الحركة */
     .btn-cv::before {
       content: '';
       position: absolute;
@@ -370,32 +361,26 @@
       left: -100%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 100%);
       transform: skewX(-25deg);
       transition: 0.75s;
     }
-    .btn-cv:hover::before {
-      left: 150%;
-    }
-    @keyframes bounceArrow {
-      0% { transform: translateY(-2px); }
-      100% { transform: translateY(3px); }
-    }
+    .btn-cv:hover::before { left: 150%; }
 
     .section h2 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      margin-bottom: 45px;
+      margin-bottom: 40px;
       position: relative;
       display: inline-block;
     }
     .section h2:after {
       content: '';
       position: absolute;
-      bottom: -14px;
+      bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 75px;
+      width: 65px;
       height: 4px;
       background: #ff9800;
       border-radius: 4px;
@@ -404,21 +389,21 @@
     .about-box, .edu-box {
       background: rgba(15, 40, 50, 0.65);
       backdrop-filter: blur(12px);
-      border-radius: 40px;
-      border: 1px solid rgba(255,152,0,0.3);
-      padding: 2.2rem;
+      border-radius: 35px;
+      border: 1px solid rgba(255,152,0,0.25);
+      padding: 2rem;
       max-width: 800px;
       margin: 0 auto;
-      font-size: 1.1rem;
-      line-height: 1.8;
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
-    /* ========== قسم الخبرات (أسلوب لينكد إن المتطور والمحدث) ========== */
+    /* ========== قسم الخبرات المحدث ========== */
     .timeline {
       position: relative;
       max-width: 850px;
       margin: 0 auto;
-      padding: 20px 0;
+      padding: 15px 0;
       text-align: right;
     }
     body.english .timeline { text-align: left; }
@@ -427,141 +412,112 @@
       content: '';
       position: absolute;
       width: 3px;
-      background: rgba(255, 152, 0, 0.3);
+      background: rgba(255, 152, 0, 0.25);
       top: 0;
       bottom: 0;
       right: 35px;
-      margin-left: -1.5px;
     }
     body.english .timeline::after { right: auto; left: 35px; }
 
     .timeline-item {
-      padding: 10px 60px 30px 10px;
+      padding: 10px 60px 25px 10px;
       position: relative;
     }
-    body.english .timeline-item { padding: 10px 10px 30px 60px; }
+    body.english .timeline-item { padding: 10px 10px 25px 60px; }
 
     .timeline-item::after {
       content: '\f0b1';
       font-family: 'Font Awesome 5 Free';
       font-weight: 900;
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       background: #071e26;
       border: 2px solid #ff9800;
       top: 12px;
-      right: 20px;
+      right: 21px;
       border-radius: 50%;
       z-index: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ff9800;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
-    body.english .timeline-item::after { right: auto; left: 20px; }
+    body.english .timeline-item::after { right: auto; left: 21px; }
 
     .timeline-content {
-      padding: 25px;
+      padding: 22px;
       background: rgba(15, 46, 56, 0.6);
       backdrop-filter: blur(8px);
-      border-radius: 24px;
+      border-radius: 20px;
       border: 1px solid rgba(255, 152, 0, 0.15);
       transition: 0.3s;
     }
     .timeline-content:hover {
       border-color: #ff9800;
-      background: rgba(15, 46, 56, 0.85);
-      transform: translateY(-2px);
+      background: rgba(15, 46, 56, 0.8);
     }
-    .timeline-content h3 { color: #ff9800; font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
-    .timeline-company { font-weight: 600; color: #ffcc80; font-size: 1.05rem; display: block; margin-bottom: 8px;}
-    .timeline-date { font-size: 0.85rem; background: rgba(255,152,0,0.15); padding: 3px 12px; border-radius: 20px; color: #fff; display: inline-block; margin-bottom: 15px;}
+    .timeline-content h3 { color: #ff9800; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-company { font-weight: 600; color: #ffcc80; font-size: 1rem; display: block; margin-bottom: 6px;}
+    .timeline-date { font-size: 0.8rem; background: rgba(255,152,0,0.15); padding: 3px 10px; border-radius: 20px; color: #fff; display: inline-block; margin-bottom: 12px;}
     .timeline-details { list-style: none; }
-    .timeline-details li { margin-bottom: 8px; position: relative; padding-right: 20px; font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
-    body.english .timeline-details li { padding-right: 0; padding-left: 20px; }
-    .timeline-details li::before { content: '•'; color: #ff9800; font-weight: bold; font-size: 1.3rem; position: absolute; right: 0; top: -4px; }
+    .timeline-details li { margin-bottom: 6px; position: relative; padding-right: 18px; font-size: 0.95rem; opacity: 0.9; line-height: 1.5; }
+    body.english .timeline-details li { padding-right: 0; padding-left: 18px; }
+    .timeline-details li::before { content: '•'; color: #ff9800; font-weight: bold; font-size: 1.2rem; position: absolute; right: 0; top: -3px; }
     body.english .timeline-details li::before { right: auto; left: 0; }
 
-    /* ========== المهارات ========== */
+    /* ========== قسم المهارات التقنية ========== */
     .skills {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 25px;
-      margin-top: 35px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
     }
     .skill {
       background: linear-gradient(145deg, #0f2e38, #08222b);
-      padding: 25px 15px;
-      border-radius: 28px;
+      padding: 22px 15px;
+      border-radius: 24px;
       transition: 0.3s;
-      border: 1px solid rgba(255,152,0,0.15);
+      border: 1px solid rgba(255,152,0,0.12);
     }
-    .skill i { font-size: 46px; color: #ff9800; margin-bottom: 12px; display: block; }
-    .skill span { font-weight: 700; font-size: 1.15rem; }
-    .skill small { font-size: 0.8rem; opacity: 0.7; display: block; margin-top: 5px; }
-    .skill:hover { transform: translateY(-6px); border-color: #ff9800; background: #123e4a; }
+    .skill i { font-size: 40px; color: #ff9800; margin-bottom: 10px; display: block; }
+    .skill span { font-weight: 700; font-size: 1.1rem; }
+    .skill small { font-size: 0.8rem; opacity: 0.7; display: block; margin-top: 4px; }
+    .skill:hover { transform: translateY(-5px); border-color: #ff9800; background: #123e4a; }
 
     .edu-box { max-width: 600px; border-right: 5px solid #ff9800; }
     body.english .edu-box { border-right: none; border-left: 5px solid #ff9800; }
 
-    /* ========== معرض الصور للشهادات ========== */
+    /* ========== معرض صور الشهادات ========== */
     .certificates-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      margin-top: 35px;
+      margin-top: 30px;
     }
     .cert-item-img {
       position: relative;
       background: #061c24;
-      border-radius: 16px;
+      border-radius: 14px;
       overflow: hidden;
-      border: 2px solid rgba(255, 152, 0, 0.2);
+      border: 2px solid rgba(255, 152, 0, 0.15);
       cursor: pointer;
       aspect-ratio: 1.6 / 1;
-      transition: all 0.35s ease;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
     }
     .cert-item-img img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 6px;
-      transition: transform 0.3s ease;
+      padding: 4px;
     }
     .cert-item-img:hover {
       border-color: #ff9800;
-      transform: scale(1.03) translateY(-4px);
-      box-shadow: 0 12px 25px rgba(255,152,0,0.15);
-    }
-    .cert-item-img::after {
-      content: '\f00e';
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      background: rgba(255, 152, 0, 0.9);
-      color: #071e26;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      opacity: 0;
-      transition: 0.3s ease;
-    }
-    .cert-item-img:hover::after {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translateY(-3px);
     }
 
-    /* ========== نافذة تكبير الصور (Lightbox Modal) ========== */
+    /* ========== نافذة تكبير الصور Lightbox ========== */
     .lightbox-modal {
       position: fixed;
       top: 0;
@@ -569,7 +525,7 @@
       width: 100%;
       height: 100%;
       background: rgba(4, 15, 19, 0.95);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
       z-index: 5000;
       display: flex;
       align-items: center;
@@ -578,76 +534,47 @@
       visibility: hidden;
       transition: all 0.3s ease;
     }
-    .lightbox-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .lightbox-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 85vh;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-    .lightbox-modal.active .lightbox-content {
-      transform: scale(1);
-    }
-    .lightbox-content img {
-      width: 100%;
-      height: auto;
-      max-height: 85vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-      border: 1px solid rgba(255,152,0,0.3);
-    }
-    .lightbox-close {
-      position: absolute;
-      top: -45px;
-      right: 0;
-      color: #ff9800;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .lightbox-close:hover { color: #fff; transform: scale(1.1); }
+    .lightbox-modal.active { opacity: 1; visibility: visible; }
+    .lightbox-content { position: relative; max-width: 90%; max-height: 85vh; }
+    .lightbox-content img { width: 100%; height: auto; max-height: 85vh; object-fit: contain; border-radius: 8px; border: 1px solid rgba(255,152,0,0.3); }
+    .lightbox-close { position: absolute; top: -40px; right: 0; color: #ff9800; font-size: 1.8rem; cursor: pointer; }
 
     /* ========== تواصل معي ========== */
     .contact-info {
       background: rgba(15, 40, 50, 0.65);
       backdrop-filter: blur(12px);
-      border-radius: 40px;
-      border: 1px solid rgba(255,152,0,0.3);
-      padding: 2.2rem;
+      border-radius: 35px;
+      border: 1px solid rgba(255,152,0,0.25);
+      padding: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
       max-width: 600px;
-      margin: 0 auto 30px;
+      margin: 0 auto 25px;
     }
-    .contact-info i { font-size: 1.3rem; color: #ff9800; }
-    .secure-data { font-family: monospace; font-size: 1.1rem; }
+    .contact-info i { font-size: 1.2rem; color: #ff9800; }
+    .secure-data { font-family: monospace; font-size: 1.05rem; }
 
     .social i {
-      font-size: 1.6rem;
-      margin: 8px 12px;
+      font-size: 1.5rem;
+      margin: 6px 10px;
       cursor: pointer;
       background: #132f3a;
-      padding: 12px;
+      padding: 10px;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: 45px;
+      height: 45px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: 0.2s;
     }
-    .social i:hover { background: #ff9800; color: #0a1f28; transform: translateY(-4px); }
-    .footer-note { margin-top: 40px; font-size: 0.8rem; opacity: 0.7; }
+    .social i:hover { background: #ff9800; color: #0a1f28; transform: translateY(-3px); }
+    .footer-note { margin-top: 35px; font-size: 0.8rem; opacity: 0.6; }
 
-    .fade { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.6s ease; }
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .show { opacity: 1; transform: translateY(0); }
     
     .back-to-top {
@@ -655,8 +582,8 @@
       bottom: 20px;
       right: 20px;
       background: #ff9800;
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -678,30 +605,80 @@
       border: 1px solid #ff9800;
       border-left: 5px solid #ff9800;
       border-radius: 16px;
-      padding: 16px 45px 16px 20px;
+      padding: 14px 40px 14px 18px;
       color: #f0f9ff;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       z-index: 3000;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      max-width: 380px;
+      transition: all 0.4s ease;
+      max-width: 340px;
     }
-    body.english .welcome-toast { right: auto; left: 30px; border-left: 1px solid #ff9800; border-right: 5px solid #ff9800; padding: 16px 20px 16px 45px; }
+    body.english .welcome-toast { right: auto; left: 30px; border-left: 1px solid #ff9800; border-right: 5px solid #ff9800; padding: 14px 18px 14px 40px; }
     .welcome-toast.show-toast { bottom: 30px; }
-    .welcome-toast p { font-size: 0.95rem; font-weight: 600; }
-    .welcome-toast .close-toast { position: absolute; top: 50%; transform: translateY(-50%); right: 15px; cursor: pointer; color: #ff9800; }
-    body.english .welcome-toast .close-toast { right: auto; left: 15px; }
+    .welcome-toast p { font-size: 0.9rem; font-weight: 600; }
+    .welcome-toast .close-toast { position: absolute; top: 50%; transform: translateY(-50%); right: 12px; cursor: pointer; color: #ff9800; }
+    body.english .welcome-toast .close-toast { right: auto; left: 12px; }
 
-    @media (max-width: 680px) {
-      .section { padding: 60px 16px; }
-      .engineer-name { font-size: 2.2rem; }
-      .engineer-name-en { font-size: 1.8rem; }
-      .logo-image { width: 140px; height: 140px; }
-      .timeline::after { right: 20px; }
-      body.english .timeline::after { left: 20px; }
-      .timeline-item { padding-right: 40px; }
-      body.english .timeline-item { padding-left: 40px; }
-      .timeline-item::after { right: 5px; }
-      body.english .timeline-item::after { left: 5px; }
+    /* ======================================================= */
+    /* ========== التعديلات الصارمة لتوافق الهواتف (MOBILE) ========== */
+    /* ======================================================= */
+    @media (max-width: 768px) {
+      .section { padding: 50px 14px; }
+      .engineer-name { font-size: 1.9rem; }
+      .engineer-name-en { font-size: 1.6rem; }
+      .logo-image { width: 125px; height: 125px; }
+      .typing { font-size: 1.05rem; padding: 0.4rem 1.2rem; min-height: 42px; margin-bottom: 15px; }
+      .badge-university { font-size: 0.8rem; padding: 6px 14px; margin-bottom: 20px; }
+      .btn-cv { padding: 11px 28px; font-size: 0.9rem; }
+      .section h2 { font-size: 1.7rem; margin-bottom: 25px; }
+
+      /* 1. قسم المهارات: عرض أيقونتين بجانب بعضهما تماماً لتوفير المساحة */
+      .skills {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        margin-top: 20px;
+      }
+      .skill { padding: 16px 10px !important; border-radius: 16px; }
+      .skill i { font-size: 32px !important; margin-bottom: 6px; }
+      .skill span { font-size: 0.95rem !important; }
+      .skill small { font-size: 0.75rem; }
+
+      /* 2. قسم اللغات: تظبيطه على الموبايل ليكون مرناً ومتناسقاً */
+      #languages .skills {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+
+      /* 3. تصغير وتكثيف قسم الخبرات والتايم لاين على الموبايل */
+      .timeline { padding: 5px 0; }
+      .timeline::after { right: 18px !important; }
+      body.english .timeline::after { left: 18px !important; }
+      
+      .timeline-item { padding: 5px 35px 20px 5px !important; }
+      body.english .timeline-item { padding: 5px 5px 20px 35px !important; }
+      
+      .timeline-item::after {
+        width: 22px !important;
+        height: 22px !important;
+        right: 8px !important;
+        top: 10px;
+        font-size: 0.7rem !important;
+      }
+      body.english .timeline-item::after { left: 8px !important; right: auto !important; }
+      
+      .timeline-content { padding: 14px !important; border-radius: 14px !important; }
+      .timeline-content h3 { font-size: 1.05rem !important; }
+      .timeline-company { font-size: 0.85rem !important; margin-bottom: 4px; }
+      .timeline-date { font-size: 0.75rem !important; padding: 2px 8px !important; margin-bottom: 8px; }
+      .timeline-details li { font-size: 0.85rem !important; line-height: 1.4 !important; margin-bottom: 4px; padding-right: 14px !important; }
+      body.english .timeline-details li { padding-right: 0 !important; padding-left: 14px !important; }
+      .timeline-details li::before { font-size: 1rem; top: -2px; }
+
+      .about-box, .edu-box { padding: 1.2rem; font-size: 0.95rem; border-radius: 20px; line-height: 1.5; }
+      .contact-info { padding: 1.2rem; gap: 12px; border-radius: 20px; }
+      .secure-data { font-size: 0.9rem; }
+      .welcome-toast { left: 15px; right: 15px; max-width: none; bottom: -200px; }
+      body.english .welcome-toast { left: 15px; right: 15px; }
+      .welcome-toast.show-toast { bottom: 15px; }
     }
   </style>
 </head>
@@ -712,7 +689,7 @@
     <div class="loader-circle"></div>
     <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="أحمد أيمن يحيى" class="loader-img" onerror="this.src='https://placehold.co/120x120/0f2e38/ff9800?text=AA'">
   </div>
-  <div class="loader-text lang-ar">جاري تهيئة النظام الآمن...</div>
+  <div class="loader-text lang-ar">جاري التحميل بسرعة فائقة...</div>
   <div class="loader-text lang-en">Loading Secure System...</div>
 </div>
 
@@ -748,7 +725,7 @@
   <span class="lang-en">🇸🇦 العربية</span>
 </div>
 
-<section class="hero" id="home" data-aos="fade-up">
+<section class="hero" id="home">
   <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="احمد ايمن مهندس برمجيات" class="logo-image" onerror="this.src='https://placehold.co/180x180/0f2e38/ff9800?text=AA'">
   
   <div class="name-wrapper">
@@ -773,7 +750,7 @@
   </div>
 </section>
 
-<section class="section fade" id="about" data-aos="fade-right">
+<section class="section fade" id="about">
   <h2><span class="lang-ar">نبذة عني</span><span class="lang-en">About Me</span></h2>
   <div class="about-box">
     <p class="lang-ar">المهندس <strong>أحمد أيمن يحيى</strong>، مطور ومهندس برمجيات واعد وطالب في <strong>جامعة السويدي بمصر (SUT)</strong>. يجمع بين المهارات البرمجية القوية (مثل بايثون، جافا، وقواعد البيانات SQL) وبين التفكير الإبداعي في التصاميم الهندسية باستخدام أوتوكاد وإدارة الحملات التسويقية الرقمية الناجحة.</p>
@@ -781,70 +758,66 @@
   </div>
 </section>
 
-<section class="section fade" id="experience" data-aos="fade-up">
+<section class="section fade" id="experience">
   <h2><span class="lang-ar">الخبرة العملية</span><span class="lang-en">Work Experience</span></h2>
   <div class="timeline">
-    <!-- الخبرة الأولى -->
     <div class="timeline-item">
       <div class="timeline-content">
         <h3 class="lang-ar">المبيعات والتسويق</h3><h3 class="lang-en">Sales & Marketing Specialist</h3>
         <span class="timeline-company"><i class="fas fa-building"></i> Milano F16</span>
-        <span class="timeline-date lang-ar">مارس 2025 - حتى الآن (عمل عن بُعد)</span><span class="timeline-date lang-en">March 2025 - Present (Remote)</span>
+        <span class="timeline-date lang-ar">مارس 2025 - حتى الآن (عن بُعد)</span><span class="timeline-date lang-en">March 2025 - Present (Remote)</span>
         <ul class="timeline-details">
           <li class="lang-ar">قيادة جهود المبيعات وإدارة المنتجات لتعزيز الحضور السوقي الرقمي للشركة.</li>
           <li class="lang-en">Leading sales and product management initiatives to maximize business outreach.</li>
           <li class="lang-ar">بناء وتطوير استراتيجيات تسويق رقمي مستهدفة لزيادة المبيعات والعوائد.</li>
-          <li class="lang-en">Developing conversion-driven digital marketing blueprints and analyzing growth performance.</li>
+          <li class="lang-en">Developing conversion-driven digital marketing blueprints.</li>
         </ul>
       </div>
     </div>
-    <!-- الخبرة الثانية -->
     <div class="timeline-item">
       <div class="timeline-content">
         <h3 class="lang-ar">مساعد إداري</h3><h3 class="lang-en">Administrative Assistant</h3>
         <span class="timeline-company"><i class="fas fa-building"></i> Milano F16</span>
         <span class="timeline-date lang-ar">مارس 2024 - مارس 2025 (من مقر الشركة)</span><span class="timeline-date lang-en">March 2024 - March 2025 (On-site)</span>
         <ul class="timeline-details">
-          <li class="lang-ar">توفير الدعم المكتبي المتكامل وإدارة العمليات الإدارية اليومية لضمان سير العمل بكفاءة.</li>
-          <li class="lang-en">Provided key administrative backing and managed daily documentation pipelines flawlessly.</li>
+          <li class="lang-ar">توفير الدعم المكتبي المتكامل وإدارة العمليات الإدارية اليومية بكفاءة عالية.</li>
+          <li class="lang-en">Provided key administrative backing and managed daily documentation pipelines.</li>
           <li class="lang-ar">تنظيم وتنسيق الملفات والتقارير الدورية بالاعتماد على أدوات الدعم المكتبي المتطورة.</li>
           <li class="lang-en">Optimized office coordination metrics and handled professional data archives.</li>
         </ul>
       </div>
     </div>
-    <!-- الخبرة الثالثة -->
     <div class="timeline-item">
       <div class="timeline-content">
         <h3 class="lang-ar">مدير مساعد</h3><h3 class="lang-en">Assistant Manager</h3>
         <span class="timeline-company"><i class="fas fa-building"></i> Milano F16</span>
         <span class="timeline-date lang-ar">مارس 2023 - مارس 2024 (من مقر الشركة)</span><span class="timeline-date lang-en">March 2023 - March 2024 (On-site)</span>
         <ul class="timeline-details">
-          <li class="lang-ar">المشاركة الفعالة في الإشراف الإداري على فرق العمل وتوزيع المهام التشغيلية اليومية.</li>
+          <li class="lang-ar">المشاركة الفعالة في الإشراف الإداري على فرق العمل وتوزيع المهام التشغيلية.</li>
           <li class="lang-en">Actively supervised multi-department workflows and evaluated team tasks.</li>
-          <li class="lang-ar">تنسيق وتوجيه أعمال المساعدين لضمان الالتزام بمعايير الجودة والأهداف العامة للشركة.</li>
-          <li class="lang-en">Coordinated assistant schedules and optimized operational output parameters.</li>
+          <li class="lang-ar">تنسيق وتوجيه أعمال المساعدين لضمان الالتزام بمعايير الجودة والأهداف العامة.</li>
+          <li class="lang-en">Coordinated assistant schedules and optimized operational output.</li>
         </ul>
       </div>
     </div>
-    <!-- الخبرة الرابعة -->
     <div class="timeline-item">
       <div class="timeline-content">
         <h3 class="lang-ar">مساعد</h3><h3 class="lang-en">Assistant Specialist</h3>
         <span class="timeline-company"><i class="fas fa-industry"></i> مصنع الوالد | Family Factory</span>
         <span class="timeline-date lang-ar">يناير 2021 - مارس 2023 (من مقر المصنع)</span><span class="timeline-date lang-en">January 2021 - March 2023 (On-site)</span>
         <ul class="timeline-details">
-          <li class="lang-ar">العمل الميداني المباشر داخل خطوط الإنتاج والتشغيل بهدف اكتساب الخبرة العملية المبكرة وتطوير المهارات.</li>
-          <li class="lang-en">Engaged in hands-on operations within manufacturing zones to gain foundational business exposure.</li>
-          <li class="lang-ar">تقديم خدمات المساعدة الشخصية والإدارية واللوجستية الشاملة لدعم سير الأعمال التشغيلية.</li>
-          <li class="lang-en">Fulfilled extensive personal assistance duties and streamlined administrative tracking on the ground.</li>
+          <li class="lang-ar">العمل الميداني المباشر داخل خطوط الإنتاج لاكتساب الخبرة العملية المبكرة وتطوير المهارات.</li>
+          <li class="lang-en">Engaged in hands-on operations within manufacturing zones to gain exposure.</li>
+          <li class="lang-ar">تقديم خدمات المساعدة الشخصية والإدارية واللوجستية لدعم سير الأعمال التشغيلية.</li>
+          <li class="lang-en">Fulfilled extensive personal assistance duties and streamlined administrative tracking.</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section fade" id="skills" data-aos="zoom-in">
-  <h2><span class="lang-ar">المهارات</span><span class="lang-en">Skills</span></h2>
+<section class="section fade" id="skills">
+  <h2><span class="lang-ar">المهارات التقنية</span><span class="lang-en">Technical Skills</span></h2>
   <div class="skills">
     <div class="skill"><i class="fab fa-python"></i><span>Python</span><small>برمجة</small></div>
     <div class="skill"><i class="fas fa-drafting-compass"></i><span>AutoCAD</span><small>تصميم هندسي</small></div>
@@ -854,8 +827,8 @@
   </div>
 </section>
 
-<section class="section fade" id="education" data-aos="fade-up">
-  <h2><span class="lang-ar">التعليم</span><span class="lang-en">Education</span></h2>
+<section class="section fade" id="education">
+  <h2><span class="lang-ar">التعليم الأكاديمي</span><span class="lang-en">Education</span></h2>
   <div class="edu-box">
     <i class="fas fa-graduation-cap"></i>
     <span class="lang-ar"><strong>جامعة السويدي بمصر (SUT)</strong> – بكالوريوس هندسة البرمجيات | 2025 - 2029</span>
@@ -863,7 +836,7 @@
   </div>
 </section>
 
-<section class="section fade" id="certificates" data-aos="zoom-in">
+<section class="section fade" id="certificates">
   <h2><span class="lang-ar">الشهادات والاعتمادات</span><span class="lang-en">Certificates</span></h2>
   <div class="certificates-gallery">
     <div class="cert-item-img" onclick="openLightbox(this)">
@@ -872,15 +845,15 @@
   </div>
 </section>
 
-<section class="section fade" id="languages" data-aos="fade-right">
+<section class="section fade" id="languages">
   <h2><span class="lang-ar">اللغات</span><span class="lang-en">Languages</span></h2>
-  <div class="skills" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr));">
+  <div class="skills">
     <div class="skill"><i class="fas fa-language"></i><span class="lang-ar">العربية</span><span class="lang-en">Arabic</span><small class="lang-ar">اللغة الأم</small></div>
     <div class="skill"><i class="fas fa-language"></i><span class="lang-ar">الإنجليزية</span><span class="lang-en">English</span><small class="lang-ar">مستوى متقدم</small></div>
   </div>
 </section>
 
-<section class="section fade" id="contact" data-aos="fade-up">
+<section class="section fade" id="contact">
   <h2><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></h2>
   <div class="contact-info" id="secureContactBox">
      <i class="fas fa-shield-alt" style="color: #ff9800; display:block; width:100%; margin-bottom:10px;"></i>
@@ -899,112 +872,66 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 700, once: true, offset: 60 });
+  // تفعيل الأنيميشن فقط إذا كانت الشاشة أكبر من الموبايل لزيادة السرعة القصوى للهواتف
+  if (window.innerWidth > 768) {
+    AOS.init({ duration: 500, once: true, offset: 40 });
+  } else {
+    document.querySelectorAll('.fade').forEach(el => el.classList.add('show'));
+  }
 
-  // ========== نظام شاشة التحميل (Preloader) لمدة 3 ثوانٍ تماماً ==========
+  // شاشة التحميل الذكية والسريعة
   window.addEventListener('load', () => {
     setTimeout(() => {
       const preloader = document.getElementById('preloader');
       preloader.style.opacity = '0';
       preloader.style.visibility = 'hidden';
-    }, 3000); 
+    }, 1500); // تقليل وقت الانتظار ليكون سريعاً جداً
   });
 
-  // ========== نظام الـ Lightbox الجديد لتكبير الصور ==========
+  // نظام الـ Lightbox لتكبير الصور
   const lightboxModal = document.getElementById('lightboxModal');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
 
   function openLightbox(element) {
-    const imgSrc = element.querySelector('img').src;
-    lightboxImg.src = imgSrc;
+    lightboxImg.src = element.querySelector('img').src;
     lightboxModal.classList.add('active');
   }
-
   lightboxClose.addEventListener('click', () => lightboxModal.classList.remove('active'));
-  lightboxModal.addEventListener('click', (e) => {
-    if (e.target === lightboxModal) lightboxModal.classList.remove('active');
-  });
+  lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) lightboxModal.classList.remove('active'); });
 
-  // ========== نظام فك التشفير للأرقام لحمايتها من الـ Scrapers ==========
+  // فك تشفير الأرقام والبيانات لحمايتها وسرعة عرضها
   window.addEventListener('DOMContentLoaded', () => {
     const pNo = ["0", "1", "0", "2", "8", "7", "0", "1", "3", "5", "1"].join("");
     const eml = ["i", "n", "f", "o", "@", "a", "h", "m", "e", "d", "a", "y", "m", "a", "n", ".", "s", "i", "t", "e"].join("");
-    const targetBox = document.getElementById('secureContactBox');
-    targetBox.innerHTML = `
+    document.getElementById('secureContactBox').innerHTML = `
       <i class="fas fa-phone-alt"></i> <span class="secure-data" dir="ltr">${pNo}</span>
       <i class="fab fa-whatsapp"></i> <span class="secure-data" dir="ltr">${pNo}</span>
       <i class="fas fa-envelope"></i> <span class="secure-data">${eml}</span>
     `;
   });
 
-  // ========== جدار الحماية السيبرانية الصارم (Cybersecurity Shield) ==========
-  
-  // 1. منع الزر الأيمن للفأرة تماماً وعرض توست تحذيري
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    showToast(currentLang === 'ar' ? "🔒 عذراً، حماية المحتوى مفعلة وصارمة!" : "🔒 Security Protocol Active!");
-    return false;
-  });
-
-  // 2. منع جميع اختصارات لوحة التحكم وفحص العنصر وسحب الأكواد
-  document.addEventListener('keydown', function(e) {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) ||
-      (e.ctrlKey && (e.key === "U" || e.key === "u" || e.key === "S" || e.key === "s" || e.key === "P" || e.key === "p" || e.key === "A" || e.key === "a"))
-    ) {
+  // حماية المحتوى والـ DevTools بشكل خفيف لا يؤثر على الأداء
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.key === "F12" || (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j")) || (e.ctrlKey && (e.key === "U" || e.key === "u"))) {
       e.preventDefault();
-      showToast(currentLang === 'ar' ? "🔒 تم تسجيل محاولة فحص غير مصرح بها!" : "🔒 Source Shield Active!");
-      return false;
     }
   });
 
-  // 3. منع سحب وإفلات الصور لعدم سرقتها
-  document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-
-  // 4. آلية تدمير الصفحة وحجب المحتوى فوراً في حال محاولة تخطي الأمان عبر لوحة المطورين (Anti-DevTools Script)
-  setInterval(function() {
-    const startTime = new Date().getTime();
-    debugger;
-    const endTime = new Date().getTime();
-    if (endTime - startTime > 100) {
-      document.body.innerHTML = `
-        <div style="background:#05171d; color:#ff9800; text-align:center; padding-top:20vh; height:100vh; font-family:Cairo; font-weight:bold;">
-          <i class="fas fa-exclamation-triangle" style="font-size:4rem; margin-bottom:20px;"></i>
-          <h2>Security Exception: Attempt Logged & Session Terminated.</h2>
-          <p style="color:#fff; margin-top:10px;">تم اكتشاف محاولة هندسة عكسية أو فحص للأكواد. تم حجب المحتوى تلقائياً.</p>
-        </div>`;
-    }
-    
-    const threshold = 160;
-    if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-       document.body.innerHTML = `
-        <div style="background:#05171d; color:#ff9800; text-align:center; padding-top:20vh; height:100vh; font-family:Cairo; font-weight:bold;">
-          <i class="fas fa-shield-alt" style="font-size:4rem; margin-bottom:20px;"></i>
-          <h2>DevTools Detected: Access Denied.</h2>
-          <p style="color:#fff; margin-top:10px;">برجاء إغلاق نافذة فحص المتصفح لرؤية محتوى الموقع.</p>
-        </div>`;
-    }
-  }, 500);
-
-  // ========== القائمة الجانبية والإشعارات واللغات ==========
-  const menuBtn = document.getElementById('menuBtn');
+  // القائمة الجانبية
   const sidebar = document.getElementById('sidebar');
-  const closeSidebar = document.getElementById('closeSidebar');
-
-  menuBtn.addEventListener('click', () => sidebar.classList.add('open'));
-  closeSidebar.addEventListener('click', () => sidebar.classList.remove('open'));
+  document.getElementById('menuBtn').addEventListener('click', () => sidebar.classList.add('open'));
+  document.getElementById('closeSidebar').addEventListener('click', () => sidebar.classList.remove('open'));
   document.querySelectorAll('.sidebar a').forEach(link => link.addEventListener('click', () => sidebar.classList.remove('open')));
 
+  // إشعار الترحيب الذكي
   const welcomeToast = document.getElementById('welcomeToast');
-  const closeToastBtn = document.getElementById('closeToastBtn');
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => welcomeToast.classList.add('show-toast'), 4000); 
-    setTimeout(() => welcomeToast.classList.remove('show-toast'), 9000);
-  });
-  closeToastBtn.addEventListener('click', () => welcomeToast.classList.remove('show-toast'));
+  setTimeout(() => welcomeToast.classList.add('show-toast'), 2500);
+  setTimeout(() => welcomeToast.classList.remove('show-toast'), 8000);
+  document.getElementById('closeToastBtn').addEventListener('click', () => welcomeToast.classList.remove('show-toast'));
 
+  // نظام الكتابة التلقائية (Typing) السلس والسريع
   const typingEl = document.getElementById("typing");
   const typingTexts = {
     ar: ["مهندس برمجيات", "طالب بجامعة السويدي SUT", "خبير تسويق وتصميم هندسي"],
@@ -1018,15 +945,15 @@
     if (!isDeleting && charIndex <= currentFullText.length) {
       typingEl.innerHTML = currentFullText.substring(0, charIndex);
       charIndex++;
-      typingTimeout = setTimeout(animateTyping, 95);
+      typingTimeout = setTimeout(animateTyping, 60);
     } else if (isDeleting && charIndex >= 0) {
       typingEl.innerHTML = currentFullText.substring(0, charIndex);
       charIndex--;
-      typingTimeout = setTimeout(animateTyping, 50);
+      typingTimeout = setTimeout(animateTyping, 35);
     } else {
       isDeleting = !isDeleting;
       if (!isDeleting) textIndex = (textIndex + 1) % currentList.length;
-      typingTimeout = setTimeout(animateTyping, 1400);
+      typingTimeout = setTimeout(animateTyping, 1200);
     }
   }
 
@@ -1040,71 +967,24 @@
   });
   animateTyping();
 
+  // تأثير ظهور الأقسام أثناء التمرير السريع للهواتف والكمبيوتر
   const fades = document.querySelectorAll('.fade');
-  function checkFade() { fades.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('show'); }); }
-  window.addEventListener('scroll', checkFade); window.addEventListener('load', checkFade);
+  function checkFade() { fades.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('show'); }); }
+  window.addEventListener('scroll', checkFade);
 
-  // ========== تشغيل ميكانيكية تحميل الـ CV المتطورة والآمنة ==========
+  // تحميل السيرة الذاتية (CV) بنظام سريع ونظيف
   document.getElementById('downloadCVBtn').addEventListener('click', function() {
-    // بناء محتوى هيكلي للسيرة الذاتية المهنية
     const headline = currentLang === 'ar' ? "السيرة الذاتية المهنية - المهندس أحمد أيمن يحيى" : "Professional CV Portfolio - Eng. Ahmed Ayman Yehia";
-    const bodyContent = `
-=====================================================
-${headline}
-=====================================================
-* Full Name: Ahmed Ayman Yehia
-* Title: Software Engineer & Business Developer
-* University: El Sewedy University of Egypt (SUT)
-* Base Location: Cairo, Egypt
-* Official Website: https://ahmedayman.site
-* Contact Email: info@ahmedayman.site
-
------------------------------------------------------
-[ WORK EXPERIENCE / الخبرات العملية ]
------------------------------------------------------
-1. Milano F16 (March 2025 - Present)
-   - Role: Sales & Marketing Specialist [Remote]
-   
-2. Milano F16 (March 2024 - March 2025)
-   - Role: Administrative Assistant [On-site]
-
-3. Milano F16 (March 2023 - March 2024)
-   - Role: Assistant Manager [On-site]
-
-4. Family Factory / مصنع الوالد (January 2021 - March 2023)
-   - Role: Operational Assistant [On-site]
-
------------------------------------------------------
-[ TECH CORE SKILLS / المهارات التقنية ]
------------------------------------------------------
-* Full-Stack Tools: Python, Java, SQL Databases
-* Engineering Core: AutoCAD Structural Blueprints
-* Business Growth: Digital Marketing & Targeted Ads
-
-=====================================================
-Generated Securely via Portfolio System © 2026
-=====================================================`;
-
+    const bodyContent = `=====================================================\n${headline}\n=====================================================\n* Full Name: Ahmed Ayman Yehia\n* Title: Software Engineer & Business Developer\n* University: El Sewedy University of Egypt (SUT)\n* Base Location: Cairo, Egypt\n* Official Website: https://ahmedayman.site\n\n[ WORK EXPERIENCE / الخبرات العملية ]\n1. Milano F16 (March 2025 - Present) - Sales & Marketing Specialist\n2. Milano F16 (March 2024 - March 2025) - Administrative Assistant\n3. Milano F16 (March 2023 - March 2024) - Assistant Manager\n4. Family Factory (January 2021 - March 2023) - Assistant Specialist\n\n[ TECH CORE SKILLS ]\n* Python, Java, SQL Databases, AutoCAD Blueprints, Digital Marketing`;
     const blob = new Blob([bodyContent.trim()], { type: 'text/plain;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'Eng_Ahmed_Ayman_CV.txt';
-    link.click();
-    showToast(currentLang === 'ar' ? "✅ جاري تنزيل ملف السيرة الذاتية بنجاح!" : "✅ CV Portfolio Downloaded Successfully!");
+    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'Eng_Ahmed_Ayman_CV.txt'; link.click();
   });
-
-  function showToast(msg) {
-    const oldToast = document.getElementById('customStaticToast'); if(oldToast) oldToast.remove();
-    const toast = document.createElement('div'); toast.id = 'customStaticToast'; toast.innerText = msg;
-    toast.style.cssText = `position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#ff9800; color:#0a1f28; padding:8px 20px; border-radius:30px; font-weight:bold; z-index:999999; font-size:0.9rem; pointer-events:none; box-shadow: 0 4px 15px rgba(0,0,0,0.4);`;
-    document.body.appendChild(toast); setTimeout(() => toast.remove(), 2500);
-  }
 
   document.getElementById('facebookBtn')?.addEventListener('click', () => window.open('https://www.facebook.com/share/1AdfpPUsWX/', '_blank'));
   document.getElementById('instagramBtn')?.addEventListener('click', () => window.open('https://www.instagram.com/a752007', '_blank'));
   document.getElementById('linkedinBtn')?.addEventListener('click', () => window.open('https://www.linkedin.com/in/ahmedaymanyahya', '_blank'));
 
-  const backBtn = document.createElement('div'); backBtn.className = 'back-to-top'; backBtn.innerHTML = '<i class="fas fa-arrow-up"></i>'; document.body.appendChild(backBtn);
+  const backBtn = document.querySelector('.back-to-top');
   window.addEventListener('scroll', () => { backBtn.style.opacity = window.scrollY > 400 ? '1' : '0'; backBtn.style.visibility = window.scrollY > 400 ? 'visible' : 'hidden'; });
   backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
