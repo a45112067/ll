@@ -571,6 +571,21 @@
     .lang-card h3 { font-size: .98rem; font-weight: 800; margin: 0; }
     .lang-card small { color: var(--muted); font-weight: 700; font-size: .78rem; display: block; }
 
+    /* ================= Home Blog ================= */
+    .homepost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .homepost-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: .25s cubic-bezier(.2,.8,.3,1);
+    }
+    .homepost-card:hover { transform: translateY(-5px); border-color: var(--brand); box-shadow: var(--shadow-md); }
+    .homepost-card .tag { align-self: flex-start; background: rgba(37,99,235,0.09); color: var(--brand); padding: 4px 12px; border-radius: 999px; font-size: .72rem; font-weight: 800; }
+    .homepost-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--ink); line-height: 1.5; }
+    .homepost-card .meta { font-size: .76rem; color: var(--muted); font-weight: 700; display: flex; gap: 12px; }
+    .homepost-card p { font-size: .9rem; color: var(--ink-soft); line-height: 1.7; flex: 1; }
+
     /* ================= Contact ================= */
     .contact-wrap { max-width: 720px; margin: 0 auto; }
     .contact-box {
@@ -1099,6 +1114,23 @@
   </div>
 </section>
 
+<section class="section" id="blog" data-aos="fade-up">
+  <div class="container">
+    <div class="section-head">
+      <span class="pill"><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></span>
+      <h2><span class="lang-ar">أحدث المقالات</span><span class="lang-en">Latest Articles</span></h2>
+      <p><span class="lang-ar">رؤى ومقالات احترافية في البرمجة والتسويق الرقمي وتطوير الأعمال.</span><span class="lang-en">Insights and professional articles on programming, digital marketing and business growth.</span></p>
+    </div>
+    <div class="homepost-grid" id="homePosts"><!-- filled by JS --></div>
+    <div class="view-all">
+      <a class="btn btn-primary" href="blog.html">
+        <i class="fas fa-arrow-right"></i>
+        <span class="lang-ar">تصفح كل المقالات</span><span class="lang-en">Browse All Articles</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="languages" data-aos="fade-up" style="background: var(--surface-2);">
   <div class="container">
     <div class="section-head">
@@ -1125,9 +1157,37 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 650, once: true, offset: 80, easing: 'ease-out-cubic' });
+  // ===== Latest posts on homepage =====
+  let currentLang = 'ar';
+  try { currentLang = localStorage.getItem('lang') || 'ar'; } catch (e) {}
+  const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const loadHomePosts = async () => {
+    const container = document.getElementById('homePosts');
+    if (!container) return;
+    try {
+      const res = await fetch('data/blog.json');
+      if (!res.ok) throw new Error('fetch failed');
+      const posts = (await res.json()).filter(p => p.status === 'published').slice(0, 3);
+      if (!posts.length) { container.innerHTML = ''; return; }
+      container.innerHTML = posts.map(p => {
+        const tag = (p.tags && p.tags[0]) || '';
+        const title = currentLang === 'en' ? (p.title_en || p.title_ar) : (p.title_ar || p.title_en);
+        const excerpt = currentLang === 'en' ? (p.excerpt_en || p.excerpt_ar) : (p.excerpt_ar || p.excerpt_en);
+        return `
+        <article class="homepost-card">
+          ${tag ? '<span class="tag">' + esc(tag) + '</span>' : ''}
+          <h3>${esc(title)}</h3>
+          <div class="meta"><span><i class="far fa-calendar"></i> ${esc(p.date||'')}</span></div>
+          <p>${esc(excerpt)}</p>
+        </article>`;
+      }).join('');
+    } catch (e) {
+      container.innerHTML = '';
+    }
+  };
+  loadHomePosts();
 
-  // ===== Preloader (سريع: يختفي فور جاهزية DOM دون انتظار الصور) =====
+  AOS.init({ duration: 650, once: true, offset: 80, easing: 'ease-out-cubic' });
   const hidePreloader = () => {
     const preloader = document.getElementById('preloader');
     if (!preloader) return;
@@ -1144,7 +1204,6 @@
   setTimeout(hidePreloader, 2500);
 
   // ===== Language toggle =====
-  let currentLang = localStorage.getItem('lang') || 'ar';
   const typingTexts = {
     ar: ['مهندس برمجيات', 'مطور مواقع وتطبيقات', 'خبير تسويق رقمي', 'مصمم هندسي (AutoCAD)'],
     en: ['Software Engineer', 'Web Developer', 'Digital Marketing Specialist', 'CAD Engineering Designer']
@@ -1165,6 +1224,7 @@
     clearTimeout(typingTimeout);
     textIndex = 0; charIndex = 0; isDeleting = false;
     applyLang();
+    loadHomePosts();
     animateTyping();
   }
   document.getElementById('langSwitchFixed').addEventListener('click', switchLang);
