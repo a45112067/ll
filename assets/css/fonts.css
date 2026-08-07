@@ -1,0 +1,13 @@
+/* خط 29LT Riwaya - مضمّن محلياً */
+@font-face {
+  font-family: '29LT Riwaya';
+  src: url('../fonts/29LTRiwaya-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* عند تفعيل الخط على قسم معين عبر الكلاس */
+.riwaya, h1.riwaya, .hero h1.riwaya {
+  font-family: '29LT Riwaya', 'Cairo', 'Tajawal', sans-serif;
+}
