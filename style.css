@@ -154,6 +154,53 @@ body.english { direction: ltr; }
 }
 .back-to-top:hover { transform: translateY(-4px); }
 
+/* ===== Scroll progress bar (مشترك في كل الصفحات) ===== */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 6000;
+  height: 4px; width: 0%;
+  background: linear-gradient(90deg, #2563eb, #ff9800);
+  box-shadow: 0 2px 8px rgba(37,99,235,0.4);
+  transition: width .08s linear;
+}
+
+/* ===== زر ثانوي شفاف ===== */
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: #f0f4fa; border: 1px solid #e2e8f0; color: #475569;
+  font-weight: 800; font-size: .9rem; cursor: pointer;
+  transition: .25s; font-family: inherit;
+}
+.btn-ghost:hover { border-color: #2563eb; color: #2563eb; transform: translateY(-3px); box-shadow: 0 10px 22px rgba(37,99,235,.15); }
+
+/* ===== نافذة تفاصيل منبثقة (المشاريع/الشهادات) ===== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(15,23,42,0.55);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; visibility: hidden; transition: .25s;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal-box {
+  background: #fff; border-radius: 22px; max-width: 640px; width: 100%;
+  max-height: 88vh; overflow-y: auto; padding: 26px 28px;
+  box-shadow: 0 30px 70px rgba(15,23,42,0.28);
+  transform: translateY(16px) scale(.98); transition: transform .28s cubic-bezier(.2,.9,.3,1);
+}
+.modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
+.modal-box img { width: 100%; border-radius: 14px; margin-bottom: 16px; max-height: 260px; object-fit: cover; }
+.modal-box h3 { font-size: 1.35rem; margin: 0 0 8px; color: #0f172a; }
+.modal-box .modal-tag { display: inline-block; padding: 5px 14px; border-radius: 999px; background: #f0f4fa; color: #2563eb; font-weight: 800; font-size: .8rem; margin-bottom: 12px; }
+.modal-box p { color: #475569; line-height: 1.9; font-size: .98rem; }
+.modal-close {
+  position: sticky; top: 0; float: left; z-index: 2;
+  width: 40px; height: 40px; margin-bottom: 12px; border: 0; border-radius: 12px;
+  background: #f0f4fa; cursor: pointer; font-size: 1.1rem; color: #0f172a;
+}
+.modal-close:hover { background: #fee2e2; color: #dc2626; }
+.modal-foot { margin-top: 20px; text-align: center; }
+
 /* ===== نسخة الهاتف الاحترافية (مشترك) ===== */
 html {
   -webkit-text-size-adjust: 100%;

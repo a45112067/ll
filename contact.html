@@ -97,7 +97,9 @@
   </style>
 </head>
 <body>
-  <nav class="site-navbar" aria-label="Main navigation">
+  
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div><nav class="site-navbar" aria-label="Main navigation">
     <a class="logo" href="index.html">
       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" width="42" height="42" alt="شعار أحمد أيمن">
       <strong><span class="lang-ar">أحمد أيمن</span><span class="lang-en">Ahmed Ayman</span></strong>
@@ -210,7 +212,7 @@
 
     <footer class="footer">
   <div class="footer-links"><a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a><a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></div>
-  <div><span class="lang-ar">© 2026 أحمد أيمن يحيى. جميع الحقوق محفوظة.</span><span class="lang-en">© 2026 Ahmed Ayman Yahya. All Rights Reserved.</span></div>
+  <div><span class="lang-ar">© <span class="year-slot">2026</span> أحمد أيمن يحيى. جميع الحقوق محفوظة.</span><span class="lang-en">© <span class="year-slot">2026</span> Ahmed Ayman Yahya. All Rights Reserved.</span></div>
 </footer>
   </div>
 
@@ -311,6 +313,16 @@
         contactForm.reset();
       });
     }
-  </script>
+  
+    // ===== شريط تقدم التمرير =====
+    var _sp = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', function(){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      _sp.style.width = (max > 0 ? (window.scrollY/max)*100 : 0) + '%';
+    }, { passive: true });
+
+  // ===== سنة حقوق الطبع تلقائية =====
+  document.querySelectorAll('.year-slot').forEach(function(el){ el.textContent = new Date().getFullYear(); });
+</script>
 </body>
 </html>
