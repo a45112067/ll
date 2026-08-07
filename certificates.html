@@ -94,6 +94,7 @@
       <a href="experience.html"><span class="lang-ar">الخبرة</span><span class="lang-en">Experience</span></a>
       <a href="skills.html"><span class="lang-ar">المهارات</span><span class="lang-en">Skills</span></a>
       <a href="projects.html"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
+      <a href="blog.html"><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></a>
       <a href="contact.html"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a>
     </div>
     <div class="nav-actions">
@@ -218,6 +219,10 @@
     document.getElementById('closeSidebar').addEventListener('click', () => sidebar.classList.remove('open'));
     sidebar.addEventListener('click', (e) => { if (e.target === sidebar) sidebar.classList.remove('open'); });
     document.querySelectorAll('.sidebar-inner a').forEach(l => l.addEventListener('click', () => sidebar.classList.remove('open')));
+    // قفل تمرير الخلفية عند فتح القائمة
+    const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
+    new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
+    syncBodyLock();
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');

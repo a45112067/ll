@@ -145,6 +145,7 @@
     <a href="index.html" class="lang-ar">الرئيسية</a><a href="index.html" class="lang-en">Home</a>
     <a href="projects.html" class="active lang-ar">المشاريع</a><a href="projects.html" class="active lang-en">Projects</a>
     <a href="about.html" class="lang-ar">نبذة</a><a href="about.html" class="lang-en">About</a>
+    <a href="blog.html" class="lang-ar">المدونة</a><a href="blog.html" class="lang-en">Blog</a>
     <a href="contact.html" class="lang-ar">تواصل</a><a href="contact.html" class="lang-en">Contact</a>
   </div>
   <div class="nav-actions">
@@ -274,6 +275,10 @@
   document.getElementById('closeSidebar').addEventListener('click', () => sidebar.classList.remove('open'));
   sidebar.addEventListener('click', (e) => { if (e.target === sidebar) sidebar.classList.remove('open'); });
   document.querySelectorAll('.sidebar-inner a').forEach(l => l.addEventListener('click', () => sidebar.classList.remove('open')));
+    // قفل تمرير الخلفية عند فتح القائمة
+    const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
+    new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
+    syncBodyLock();
 
   function switchLang() {
     const en = document.body.classList.toggle('english');

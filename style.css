@@ -98,19 +98,30 @@ body.english { direction: ltr; }
 .back-to-top:hover { transform: translateY(-4px); }
 
 /* ===== نسخة الهاتف الاحترافية (مشترك) ===== */
-html { -webkit-text-size-adjust: 100%; }
-body { overflow-x: hidden; }
+html { -webkit-text-size-adjust: 100%; overscroll-behavior-y: none; }
+body { overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+
+/* تثبيت الهيدر ومنع التزحزح العمودي أثناء فتح الشريط الجانبي */
+.site-navbar { will-change: transform; }
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .menu-btn { display: flex; }
 
-  /* الهيدر على الشاشات الصغيرة */
-  .site-navbar { top: 6px; margin: 6px 10px 0; padding: 8px 14px; border-radius: 16px; }
+  /* الهيدر الثابت على الشاشات الصغيرة: يمتد بعرض كامل ويلتصق بالأعلى */
+  .site-navbar {
+    position: sticky; top: 0; margin: 0;
+    max-width: 100%; border-radius: 0;
+    padding: 10px 16px; border-left: 0; border-right: 0; border-top: 0;
+    background: rgba(255,255,255,0.94);
+  }
   .site-navbar .logo { font-size: .95rem; gap: 9px; }
   .site-navbar .logo img { width: 36px; height: 36px; }
   .site-navbar .lang-switch { display: none; }
   .menu-btn { width: 42px; height: 42px; }
+
+  /* قفل تمرير الخلفية عند فتح الشريط الجانبي */
+  body.side-open { overflow: hidden; }
 
   /* صفوف النماذج والأزرار تصبح بعرض كامل */
   .section-actions { width: 100%; }
@@ -128,9 +139,6 @@ body { overflow-x: hidden; }
   .cert-large h2 { padding: 18px 16px 0; font-size: 1.2rem; }
   .cert-large .cert-item-img { margin: 12px 16px 0; }
 
-  /* أشرطة التقدم */
-  .progress i, .bar i { height: 7px; }
-
   /* أهداف لمس أكبر */
   .sidebar-inner a { padding: 15px 18px; min-height: 48px; display: flex; align-items: center; }
   .mobile-lang { min-height: 50px; display: flex; align-items: center; justify-content: center; }
@@ -141,7 +149,7 @@ body { overflow-x: hidden; }
 
 @media (max-width: 480px) {
   /* حشوة آمنة لشاشات النوتش */
-  .site-navbar { margin: 6px 8px 0; padding: 8px 12px; }
+  .site-navbar { padding: 10px 12px; }
   .site-navbar .logo span, .site-navbar .logo strong { font-size: .8rem; }
   .sidebar-inner { width: 84vw; max-width: 300px; }
   .back-to-top { bottom: 16px; left: 16px; width: 42px; height: 42px; }
