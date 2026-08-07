@@ -1223,14 +1223,21 @@
 <script>
   AOS.init({ duration: 650, once: true, offset: 80, easing: 'ease-out-cubic' });
 
-  // ===== Preloader =====
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const preloader = document.getElementById('preloader');
-      preloader.style.opacity = '0';
-      preloader.style.visibility = 'hidden';
-    }, 500);
-  });
+  // ===== Preloader (سريع: يختفي فور جاهزية DOM دون انتظار الصور) =====
+  const hidePreloader = () => {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+    preloader.style.opacity = '0';
+    preloader.style.visibility = 'hidden';
+    setTimeout(() => preloader.remove(), 500);
+  };
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    hidePreloader();
+  } else {
+    document.addEventListener('DOMContentLoaded', hidePreloader);
+  }
+  // احتياط: في حال تأخر DOMContentLoaded لسبب ما
+  setTimeout(hidePreloader, 2500);
 
   // ===== Language toggle =====
   let currentLang = localStorage.getItem('lang') || 'ar';
