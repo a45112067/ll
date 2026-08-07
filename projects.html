@@ -221,6 +221,9 @@
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
 <script>
   AOS.init({ duration:600, once:true, offset:60 });
 
@@ -243,6 +246,37 @@
   if (saved === 'en') { document.body.classList.add('english'); document.body.dir = 'ltr'; }
   document.getElementById('langSwitch').addEventListener('click', switchLang);
   document.getElementById('mobileLang').addEventListener('click', () => { switchLang(); sidebar.classList.remove('open'); });
+
+  // ===== تحميل المشاريع من Firestore (اللوحة) مع الاحتفاظ بالثابت كـ fallback =====
+  try {
+    const pApp = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicProjects');
+    const pDb = firebase.firestore(pApp);
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    pDb.collection('projects').get().then(snap => {
+      if (snap.empty) return;
+      const grid = document.querySelector('.projects-grid');
+      if (!grid) return;
+      const cards = snap.docs.map(d => {
+        const p = d.data();
+        const img = p.image ? `<img loading="lazy" src="${esc(p.image)}" alt="${esc(p.name||'مشروع')}">` : '';
+        return `
+        <article class="project-card" data-aos="fade-up">
+          <div class="project-media">
+            <span class="project-tag"><span class="lang-ar">${esc(p.tag_ar||'')}</span><span class="lang-en">${esc(p.tag_en||'')}</span></span>
+            ${img}
+          </div>
+          <div class="project-body">
+            <h2>${esc(p.name||'')}</h2>
+            <p>${p.desc_ar ? `<span class="lang-ar">${esc(p.desc_ar)}</span>` : ''}${p.desc_en ? `<span class="lang-en">${esc(p.desc_en)}</span>` : ''}</p>
+            <div class="project-links">
+              <a class="btn btn-primary" href="${esc(p.link||'#')}" target="_blank" rel="noopener noreferrer"><i class="fas fa-rocket"></i><span class="lang-ar">مشاهدة المشروع</span><span class="lang-en">View Project</span></a>
+            </div>
+          </div>
+        </article>`;
+      }).join('');
+      grid.innerHTML = cards;
+    }).catch(() => {});
+  } catch (e) {}
 </script>
 </body>
 </html>

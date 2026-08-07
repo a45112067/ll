@@ -7,112 +7,173 @@
   <title>لوحة الإدارة | أحمد أيمن</title>
   <style>
     :root {
-      --bg:#f1f5f9; --surface:#ffffff; --ink:#0f172a; --ink-soft:#475569;
+      --bg:#eef2f8; --surface:#ffffff; --ink:#0f172a; --ink-soft:#475569;
       --brand:#2563eb; --brand-dark:#1d4ed8; --accent:#ff9800;
       --border:#e2e8f0; --danger:#ef4444; --ok:#22c55e;
+      --shadow:0 8px 26px rgba(15,23,42,.07); --shadow-lg:0 24px 60px rgba(15,23,42,.16);
     }
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',Tahoma,sans-serif; }
     body { background:var(--bg); color:var(--ink); min-height:100vh; }
     a { color:inherit; text-decoration:none; }
 
-    #loginScreen {
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      background:linear-gradient(135deg,#1e3a8a 0%, #2563eb 60%, #1d4ed8 100%);
-      padding:20px;
-    }
-    .login-card {
-      background:var(--surface); border-radius:22px; padding:40px 36px;
-      width:100%; max-width:400px; box-shadow:0 30px 70px rgba(15,23,42,.35);
-      text-align:center;
-    }
-    .login-card .logo { width:64px; height:64px; border-radius:18px; margin:0 auto 18px; background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; font-size:1.7rem; font-weight:900; display:flex; align-items:center; justify-content:center; }
-    .login-card h1 { font-size:1.5rem; margin-bottom:6px; }
-    .login-card p { color:var(--ink-soft); font-size:.9rem; margin-bottom:26px; }
-    .login-card input { width:100%; padding:14px 16px; border:1.5px solid var(--border); border-radius:14px; margin-bottom:14px; font-family:inherit; font-size:.95rem; transition:.2s; outline:none; }
-    .login-card input:focus { border-color:var(--brand); box-shadow:0 0 0 4px rgba(37,99,235,.12); }
-    .login-card button { width:100%; padding:14px; border:none; border-radius:14px; cursor:pointer; background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; font-weight:800; font-size:1rem; font-family:inherit; transition:.25s; }
-    .login-card button:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.35); }
-    .login-err { color:var(--danger); font-size:.88rem; font-weight:700; margin-top:10px; min-height:20px; }
-    .login-alt { margin-top:18px; font-size:.82rem; color:#64748b; cursor:pointer; }
+    /* ===== Login ===== */
+    #loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#0f2a6b 0%,#2563eb 55%,#1d4ed8 100%); padding:20px;
+      position:relative; overflow:hidden; }
+    #loginScreen::before { content:''; position:absolute; width:340px; height:340px; border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.12), transparent 60%); top:-90px; left:-90px; }
+    #loginScreen::after { content:''; position:absolute; width:220px; height:220px; border-radius:50%;
+      background:radial-gradient(circle, rgba(255,152,0,.18), transparent 60%); bottom:-60px; right:-60px; }
+    .login-card { position:relative; z-index:2; background:rgba(255,255,255,.97); backdrop-filter:blur(8px);
+      border-radius:24px; padding:42px 38px; width:100%; max-width:410px; box-shadow:0 40px 90px rgba(15,23,42,.45);
+      text-align:center; animation:pop .4s ease; }
+    @keyframes pop { from { opacity:0; transform:translateY(18px) scale(.97); } to { opacity:1; transform:none; } }
+    .login-card .logo { width:70px; height:70px; border-radius:20px; margin:0 auto 20px;
+      background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; font-size:1.9rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center; box-shadow:0 12px 30px rgba(37,99,235,.4); }
+    .login-card h1 { font-size:1.55rem; margin-bottom:6px; }
+    .login-card p { color:var(--ink-soft); font-size:.9rem; margin-bottom:28px; }
+    .login-card input { width:100%; padding:15px 18px; border:1.5px solid var(--border); border-radius:14px;
+      margin-bottom:14px; font-family:inherit; font-size:.95rem; transition:.2s; outline:none; background:#f8fafc; }
+    .login-card input:focus { border-color:var(--brand); background:#fff; box-shadow:0 0 0 4px rgba(37,99,235,.12); }
+    .login-card button { width:100%; padding:14px; border:none; border-radius:14px; cursor:pointer;
+      background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; font-weight:800;
+      font-size:1rem; font-family:inherit; transition:.25s; }
+    .login-card button:hover { transform:translateY(-2px); box-shadow:0 14px 34px rgba(37,99,235,.4); }
+    .login-err { color:var(--danger); font-size:.88rem; font-weight:700; margin-top:12px; min-height:20px; }
+    .login-alt { margin-top:18px; font-size:.83rem; color:#64748b; cursor:pointer; transition:.2s; }
     .login-alt:hover { color:var(--brand); }
 
+    /* ===== App ===== */
     #appScreen { display:none; }
-    .topbar {
-      position:sticky; top:0; z-index:100; background:rgba(255,255,255,.92); backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:12px 24px; gap:12px;
-    }
+    .topbar { position:sticky; top:0; z-index:100; background:rgba(255,255,255,.9); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between;
+      padding:12px 26px; gap:12px; }
     .topbar .brand { display:flex; align-items:center; gap:12px; font-weight:900; font-size:1.05rem; }
-    .topbar .brand span { width:38px; height:38px; border-radius:11px; background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; }
+    .topbar .brand span { width:38px; height:38px; border-radius:11px;
+      background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; display:flex;
+      align-items:center; justify-content:center; font-weight:900; box-shadow:0 8px 20px rgba(37,99,235,.3); }
     .topbar .actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
     .user-badge { font-size:.82rem; color:var(--ink-soft); font-weight:700; padding:0 6px; }
-    .chip { padding:9px 14px; border-radius:12px; border:1px solid var(--border); background:var(--surface); color:var(--ink-soft); font-weight:700; font-size:.85rem; cursor:pointer; transition:.2s; display:inline-flex; align-items:center; gap:8px; }
-    .chip:hover { border-color:var(--brand); color:var(--brand); }
+    .chip { padding:9px 14px; border-radius:12px; border:1px solid var(--border); background:var(--surface);
+      color:var(--ink-soft); font-weight:800; font-size:.85rem; cursor:pointer; transition:.2s;
+      display:inline-flex; align-items:center; gap:8px; }
+    .chip:hover { border-color:var(--brand); color:var(--brand); transform:translateY(-1px); }
     .chip.danger:hover { border-color:var(--danger); color:var(--danger); }
     .chip.primary { background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; border:none; }
-    .chip.primary:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(37,99,235,.3); color:#fff; }
+    .chip.primary:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(37,99,235,.35); color:#fff; }
 
     .layout { display:flex; min-height:calc(100vh - 62px); }
-    .sidebar-admin { width:230px; background:var(--surface); border-left:1px solid var(--border); padding:18px 14px; display:flex; flex-direction:column; gap:6px; }
-    .sidebar-admin a { padding:12px 16px; border-radius:13px; font-weight:800; color:var(--ink-soft); display:flex; align-items:center; gap:12px; font-size:.92rem; transition:.2s; }
+    .sidebar-admin { width:240px; background:var(--surface); border-left:1px solid var(--border);
+      padding:20px 14px; display:flex; flex-direction:column; gap:4px; position:sticky; top:62px; height:calc(100vh - 62px); }
+    .sidebar-admin .nav-title { font-size:.72rem; color:#94a3b8; font-weight:800; padding:10px 14px 6px; letter-spacing:.5px; }
+    .sidebar-admin a { padding:12px 16px; border-radius:13px; font-weight:800; color:var(--ink-soft);
+      display:flex; align-items:center; gap:12px; font-size:.92rem; transition:.2s; }
     .sidebar-admin a i { width:20px; text-align:center; }
-    .sidebar-admin a:hover, .sidebar-admin a.active { background:#eff6ff; color:var(--brand); }
-    .main { flex:1; padding:26px; overflow-x:hidden; }
+    .sidebar-admin a:hover { background:#f1f5f9; color:var(--brand); }
+    .sidebar-admin a.active { background:linear-gradient(120deg,#eff6ff,#dbeafe); color:var(--brand);
+      box-shadow:inset 3px 0 0 var(--brand); }
+    .main { flex:1; padding:28px 30px 40px; overflow-x:hidden; }
 
     .view { display:none; }
     .view.active { display:block; animation:fadeUp .3s ease; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:none;} }
 
-    .section-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:22px; }
-    .section-head h2 { font-size:1.4rem; }
-    .section-head p { color:var(--ink-soft); font-size:.9rem; }
+    .section-head { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap;
+      gap:12px; margin-bottom:24px; }
+    .section-head h2 { font-size:1.45rem; display:flex; align-items:center; gap:10px; }
+    .section-head p { color:var(--ink-soft); font-size:.9rem; margin-top:4px; }
 
-    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:26px; }
-    .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:20px; display:flex; align-items:center; gap:14px; box-shadow:0 6px 18px rgba(15,23,42,.05); }
-    .stat-card i { font-size:1.5rem; width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; background:rgba(37,99,235,.10); color:var(--brand); }
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:28px; }
+    .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:20px;
+      display:flex; align-items:center; gap:14px; box-shadow:var(--shadow); transition:.2s; }
+    .stat-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+    .stat-card i { font-size:1.5rem; width:52px; height:52px; border-radius:14px; display:flex;
+      align-items:center; justify-content:center; background:rgba(37,99,235,.10); color:var(--brand); }
     .stat-card .num { font-size:1.5rem; font-weight:900; }
     .stat-card .lbl { color:var(--ink-soft); font-size:.82rem; }
 
-    .post-row { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px 18px; display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:12px; transition:.2s; }
-    .post-row:hover { border-color:var(--brand); box-shadow:0 10px 26px rgba(37,99,235,.08); }
+    .post-row { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px 18px;
+      display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:12px;
+      transition:.2s; box-shadow:var(--shadow); }
+    .post-row:hover { border-color:var(--brand); box-shadow:var(--shadow-lg); }
     .post-row .info h3 { font-size:1rem; margin-bottom:4px; }
     .post-row .info p { color:var(--ink-soft); font-size:.83rem; }
     .badge { display:inline-block; padding:3px 10px; border-radius:999px; font-size:.7rem; font-weight:800; margin-left:6px; }
     .badge.published { background:rgba(34,197,94,.12); color:#16a34a; }
     .badge.draft { background:rgba(148,163,184,.18); color:#64748b; }
     .post-row .ops { display:flex; gap:8px; }
-    .icon-btn { width:38px; height:38px; border-radius:11px; border:1px solid var(--border); background:var(--surface); color:var(--ink-soft); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; }
+    .icon-btn { width:38px; height:38px; border-radius:11px; border:1px solid var(--border); background:var(--surface);
+      color:var(--ink-soft); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; }
     .icon-btn:hover { border-color:var(--brand); color:var(--brand); }
-    .icon-btn.danger:hover { border-color:var(--danger); color:var(--danger); }
+    .icon-btn.danger:hover { border-color:var(--danger); color:var(--danger); background:rgba(239,68,68,.06); }
     .empty { text-align:center; color:var(--ink-soft); padding:40px 0; }
 
     .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
     .field { display:flex; flex-direction:column; gap:6px; }
     .field label { font-size:.83rem; font-weight:800; color:var(--ink-soft); }
-    .field input, .field select, .field textarea { padding:12px 14px; border:1.5px solid var(--border); border-radius:13px; font-family:inherit; font-size:.93rem; outline:none; transition:.2s; background:var(--surface); color:var(--ink); }
-    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--brand); box-shadow:0 0 0 4px rgba(37,99,235,.1); }
+    .field input, .field select, .field textarea { padding:12px 14px; border:1.5px solid var(--border);
+      border-radius:13px; font-family:inherit; font-size:.93rem; outline:none; transition:.2s;
+      background:var(--surface); color:var(--ink); }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--brand);
+      box-shadow:0 0 0 4px rgba(37,99,235,.1); }
     .field textarea { resize:vertical; min-height:110px; line-height:1.7; }
     .field.full { grid-column:1 / -1; }
-    .form-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 6px 18px rgba(15,23,42,.05); margin-bottom:20px; }
-    .form-card h3 { font-size:1.05rem; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
-    .form-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+    .form-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:24px;
+      box-shadow:var(--shadow); margin-bottom:20px; }
+    .form-card h3 { font-size:1.05rem; margin-bottom:18px; display:flex; align-items:center; gap:10px; }
+    .form-card h3 i { color:var(--brand); }
+    .form-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
-    .toast { position:fixed; bottom:24px; right:24px; z-index:2000; background:var(--ink); color:#fff; padding:14px 22px; border-radius:14px; font-weight:700; font-size:.92rem; box-shadow:0 16px 40px rgba(15,23,42,.3); opacity:0; transform:translateY(20px); transition:.3s; pointer-events:none; }
+    /* ===== بطاقات المشاريع والشهادات ===== */
+    .media-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:8px; }
+    .media-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+      box-shadow:var(--shadow); transition:.2s; position:relative; }
+    .media-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+    .media-card .thumb { width:100%; height:150px; object-fit:cover; background:#f1f5f9; display:block; border-bottom:1px solid var(--border); }
+    .media-card .body { padding:14px; }
+    .media-card .body h4 { font-size:.92rem; margin-bottom:4px; }
+    .media-card .body p { color:var(--ink-soft); font-size:.8rem; }
+    .media-card .ops { position:absolute; top:10px; left:10px; display:flex; gap:6px; opacity:0; transition:.2s; }
+    .media-card:hover .ops { opacity:1; }
+    .media-card .ops .icon-btn { background:rgba(255,255,255,.95); }
+    .thumb-placeholder { width:100%; height:150px; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(120deg,#eff6ff,#dbeafe); color:var(--brand); font-size:1.3rem; font-weight:900;
+      border-bottom:1px solid var(--border); }
+    .preview-img { width:100%; min-height:180px; max-height:360px; object-fit:contain; background:#fff;
+      border:1px solid var(--border); border-radius:14px; padding:8px; margin-top:10px; }
+
+    /* ===== تفاصيل المشروع ===== */
+    .project-preview { display:flex; gap:16px; background:#f8fafc; border:1px solid var(--border);
+      border-radius:14px; padding:16px; margin-top:16px; align-items:center; }
+    .project-preview img { width:130px; height:92px; object-fit:cover; border-radius:10px; }
+    .project-preview .t { font-size:1.05rem; font-weight:900; }
+    .project-preview .s { color:var(--ink-soft); font-size:.82rem; margin-top:4px; }
+
+    .toast { position:fixed; bottom:24px; right:24px; z-index:2000; background:var(--ink); color:#fff;
+      padding:14px 22px; border-radius:14px; font-weight:700; font-size:.92rem;
+      box-shadow:0 16px 40px rgba(15,23,42,.3); opacity:0; transform:translateY(20px); transition:.3s; pointer-events:none; }
     .toast.show { opacity:1; transform:none; }
     .toast.ok { background:#16a34a; }
     .toast.err { background:#dc2626; }
-    .modal-overlay { position:fixed; inset:0; background:rgba(15,23,42,.5); z-index:1500; display:none; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay { position:fixed; inset:0; background:rgba(15,23,42,.5); z-index:1500; display:none;
+      align-items:center; justify-content:center; padding:20px; }
     .modal-overlay.active { display:flex; }
-    .modal { background:var(--surface); border-radius:20px; width:100%; max-width:420px; padding:26px; box-shadow:0 30px 70px rgba(15,23,42,.4); }
-    .modal h3 { margin-bottom:14px; }
+    .modal { background:var(--surface); border-radius:22px; width:100%; max-width:440px; padding:28px;
+      box-shadow:var(--shadow-lg); animation:pop .25s ease; }
+    .modal h3 { margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .modal h3 i { color:var(--danger); }
 
+    .divider { border:none; border-top:1px solid var(--border); margin:22px 0; }
+
+    @media (max-width:900px) { .sidebar-admin { width:100%; flex-direction:row; overflow-x:auto; padding:10px; position:static; height:auto; } .layout { flex-direction:column; } }
     @media (max-width:768px) {
-      .layout { flex-direction:column; }
-      .sidebar-admin { width:100%; flex-direction:row; overflow-x:auto; border-left:none; border-bottom:1px solid var(--border); padding:10px; }
-      .sidebar-admin a { white-space:nowrap; font-size:.85rem; padding:10px 14px; }
-      .main { padding:18px 14px; }
+      .main { padding:18px 14px 40px; }
       .form-grid { grid-template-columns:1fr; }
       .topbar { padding:10px 14px; }
       .toast { right:16px; left:16px; }
+      .sidebar-admin a { white-space:nowrap; font-size:.85rem; padding:10px 14px; }
+      .project-preview { flex-direction:column; text-align:center; }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -151,22 +212,30 @@
   </div>
 
   <div class="layout">
-    <nav class="sidebar-admin">
+    <aside class="sidebar-admin">
+      <div class="nav-title">عام</div>
       <a class="active" data-view="dashboard" href="#"><i class="fas fa-tachometer-alt"></i> نظرة عامة</a>
+      <a data-view="settings" href="#"><i class="fas fa-cog"></i> إعدادات الموقع</a>
+      <div class="nav-title">المحتوى</div>
       <a data-view="posts" href="#"><i class="fas fa-pen-nib"></i> المنشورات</a>
       <a data-view="editor" href="#" id="navNewPost"><i class="fas fa-plus-circle"></i> منشور جديد</a>
-      <a data-view="settings" href="#"><i class="fas fa-cog"></i> إعدادات الموقع</a>
+      <a data-view="projects" href="#"><i class="fas fa-rocket"></i> المشاريع</a>
+      <a data-view="certificates" href="#"><i class="fas fa-award"></i> الشهادات</a>
+      <div class="nav-title">الأمان</div>
       <a data-view="password" href="#"><i class="fas fa-key"></i> تغيير كلمة المرور</a>
-    </nav>
+    </aside>
 
     <main class="main">
 
+      <!-- Dashboard -->
       <section class="view active" id="view-dashboard">
-        <div class="section-head"><div><h2>نظرة عامة</h2><p>حالة موقعك ومحتواه في لمحة</p></div></div>
+        <div class="section-head"><div><h2><i class="fas fa-tachometer-alt"></i> نظرة عامة</h2><p>حالة موقعك ومحتواه في لمحة</p></div></div>
         <div class="stats-grid">
           <div class="stat-card"><i class="fas fa-pen-nib"></i><div><div class="num" id="statPosts">0</div><div class="lbl">منشور</div></div></div>
           <div class="stat-card"><i class="fas fa-check-circle"></i><div><div class="num" id="statPublished">0</div><div class="lbl">منشور منشور</div></div></div>
           <div class="stat-card"><i class="fas fa-file-medical"></i><div><div class="num" id="statDraft">0</div><div class="lbl">مسودة</div></div></div>
+          <div class="stat-card"><i class="fas fa-rocket"></i><div><div class="num" id="statProjects">0</div><div class="lbl">مشروع</div></div></div>
+          <div class="stat-card"><i class="fas fa-award"></i><div><div class="num" id="statCerts">0</div><div class="lbl">شهادة</div></div></div>
           <div class="stat-card"><i class="fas fa-cloud-upload-alt"></i><div><div class="num">✓</div><div class="lbl">Firebase متصل</div></div></div>
         </div>
         <div class="form-card">
@@ -174,22 +243,25 @@
           <div class="form-actions">
             <button class="chip primary" onclick="openNewPost()"><i class="fas fa-plus"></i> كتابة منشور جديد</button>
             <button class="chip" onclick="switchView('settings')"><i class="fas fa-cog"></i> تحديث بيانات الموقع</button>
-            <a class="chip" href="blog.html" target="_blank"><i class="fas fa-blog"></i> فتح المدونة</a>
+            <button class="chip" onclick="switchView('projects')"><i class="fas fa-rocket"></i> إدارة المشاريع</button>
+            <button class="chip" onclick="switchView('certificates')"><i class="fas fa-award"></i> إدارة الشهادات</button>
           </div>
         </div>
       </section>
 
+      <!-- Posts -->
       <section class="view" id="view-posts">
         <div class="section-head">
-          <div><h2>المنشورات</h2><p>إدارة وتحرير جميع منشورات المدونة</p></div>
+          <div><h2><i class="fas fa-pen-nib"></i> المنشورات</h2><p>إدارة وتحرير جميع منشورات المدونة</p></div>
           <button class="chip primary" onclick="openNewPost()"><i class="fas fa-plus"></i> منشور جديد</button>
         </div>
         <div id="postsList"></div>
       </section>
 
+      <!-- Editor -->
       <section class="view" id="view-editor">
         <div class="section-head">
-          <div><h2 id="editorTitle">منشور جديد</h2><p id="editorSub"></p></div>
+          <div><h2 id="editorTitle"><i class="fas fa-edit"></i> منشور جديد</h2><p id="editorSub"></p></div>
           <button class="chip" onclick="switchView('posts')"><i class="fas fa-arrow-right"></i> رجوع</button>
         </div>
         <div class="form-card">
@@ -212,8 +284,61 @@
         </div>
       </section>
 
+      <!-- Projects -->
+      <section class="view" id="view-projects">
+        <div class="section-head">
+          <div><h2><i class="fas fa-rocket"></i> إدارة المشاريع</h2><p>تحرير المشاريع المعروضة في صفحة "المشاريع" والرئيسية</p></div>
+          <button class="chip primary" id="addProjectBtn"><i class="fas fa-plus"></i> مشروع جديد</button>
+        </div>
+
+        <div class="form-card" id="projectEditCard" style="display:none;">
+          <h3 id="projectEditTitle"><i class="fas fa-edit"></i> تحرير المشروع</h3>
+          <div class="form-grid">
+            <div class="field"><label>اسم المشروع</label><input id="prName" placeholder="Bitely"></div>
+            <div class="field"><label>التصنيف (عربي)</label><input id="prTagAr" placeholder="تسويق رقمي"></div>
+            <div class="field"><label>Tag (English)</label><input id="prTagEn" placeholder="Marketing"></div>
+            <div class="field"><label>رابط المشروع</label><input id="prLink" dir="ltr" placeholder="https://..."></div>
+            <div class="field"><label>رابط الصورة</label><input id="prImage" dir="ltr" placeholder="https://..."></div>
+            <div class="field full"><label>الوصف (عربي)</label><textarea id="prDescAr" rows="4"></textarea></div>
+            <div class="field full"><label>Description (English)</label><textarea id="prDescEn" rows="4"></textarea></div>
+          </div>
+          <div id="prPreview"></div>
+          <div class="form-actions">
+            <button class="chip primary" id="saveProjectBtn"><i class="fas fa-save"></i> حفظ المشروع</button>
+            <button class="chip" id="cancelProjectBtn"><i class="fas fa-times"></i> إلغاء</button>
+          </div>
+        </div>
+
+        <div class="media-grid" id="projectsGrid"></div>
+      </section>
+
+      <!-- Certificates -->
+      <section class="view" id="view-certificates">
+        <div class="section-head">
+          <div><h2><i class="fas fa-award"></i> إدارة الشهادات</h2><p>تحديث الشهادات والصور المرتبطة بها</p></div>
+          <button class="chip primary" id="addCertBtn"><i class="fas fa-plus"></i> شهادة جديدة</button>
+        </div>
+
+        <div class="form-card" id="certEditCard" style="display:none;">
+          <h4 id="certEditTitle"><i class="fas fa-edit"></i> تحرير الشهادة</h4>
+          <div class="form-grid">
+            <div class="field full"><label>عنوان الشهادة (عربي)</label><input id="ceTitleAr"></div>
+            <div class="field full"><label>Title (English)</label><input id="ceTitleEn"></div>
+            <div class="field full"><label>رابط صورة الشهادة</label><input id="ceImage" dir="ltr" placeholder="https://..."></div>
+          </div>
+          <img class="preview-img" id="cePreview" style="display:none;" alt="معاينة الشهادة">
+          <div class="form-actions">
+            <button class="chip primary" id="saveCertBtn"><i class="fas fa-save"></i> حفظ الشهادة</button>
+            <button class="chip" id="cancelCertBtn"><i class="fas fa-times"></i> إلغاء</button>
+          </div>
+        </div>
+
+        <div class="media-grid" id="certsGrid"></div>
+      </section>
+
+      <!-- Settings -->
       <section class="view" id="view-settings">
-        <div class="section-head"><div><h2>إعدادات الموقع</h2><p>التعديل المباشر على نصوص الموقع (يُحفظ في Firestore ويظهر أمام الزائرين)</p></div></div>
+        <div class="section-head"><div><h2><i class="fas fa-cog"></i> إعدادات الموقع</h2><p>التعديل المباشر على نصوص الموقع (يُحفظ في Firestore ويظهر أمام الزائرين)</p></div></div>
         <div class="form-card">
           <div class="form-grid">
             <div class="field"><label>الاسم (عربي)</label><input id="setTitleAr"></div>
@@ -233,8 +358,9 @@
         <div class="form-actions"><button class="chip primary" id="saveSettingsBtn"><i class="fas fa-save"></i> حفظ الإعدادات</button></div>
       </section>
 
+      <!-- Password -->
       <section class="view" id="view-password">
-        <div class="section-head"><div><h2>تغيير كلمة المرور</h2><p>حدّث كلمة مرور حساب Firebase</p></div></div>
+        <div class="section-head"><div><h2><i class="fas fa-key"></i> تغيير كلمة المرور</h2><p>حدّث كلمة مرور حساب Firebase</p></div></div>
         <div class="form-card" style="max-width:420px;">
           <div class="form-grid">
             <div class="field full"><label>كلمة المرور الجديدة</label><input type="password" id="pwNew"></div>
@@ -250,8 +376,8 @@
 
 <div class="modal-overlay" id="confirmModal">
   <div class="modal">
-    <h3>تأكيد الحذف</h3>
-    <p style="color:#475569;line-height:1.7;margin-bottom:18px;">هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع.</p>
+    <h3><i class="fas fa-trash"></i> تأكيد الحذف</h3>
+    <p style="color:#475569;line-height:1.7;margin-bottom:18px;">هل أنت متأكد من الحذف؟ لا يمكن التراجع.</p>
     <div class="form-actions">
       <button class="chip danger" id="confirmDelBtn">نعم، احذف</button>
       <button class="chip" id="cancelDelBtn">إلغاء</button>
@@ -270,6 +396,7 @@
   // ===== Helpers =====
   const $ = (id) => document.getElementById(id);
   let editingId = null;
+  let editingType = 'post'; // post | project | cert
   let pendingDelete = null;
   let toastTimer;
   function toast(msg, type) {
@@ -279,33 +406,26 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
   }
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  // ===== Auth state =====
-  auth.onAuthStateChanged(user => {
-    if (user) { showApp(user); } else { showLogin(); }
-  });
-  function showLogin() {
-    $('loginScreen').style.display = 'flex';
-    $('appScreen').style.display = 'none';
-  }
+  // ===== Auth =====
+  auth.onAuthStateChanged(user => { if (user) { showApp(user); } else { showLogin(); } });
+  function showLogin() { $('loginScreen').style.display = 'flex'; $('appScreen').style.display = 'none'; }
   function showApp(user) {
     $('loginScreen').style.display = 'none';
     $('appScreen').style.display = 'block';
     $('userBadge').textContent = (user.email || '');
     loadDashboard();
+    seedIfEmpty();
   }
-
   $('loginBtn').addEventListener('click', doLogin);
   document.addEventListener('keydown', e => { if (e.key === 'Enter' && $('loginScreen').style.display !== 'none') doLogin(); });
   async function doLogin() {
     const email = $('loginEmail').value.trim();
     const pass = $('loginPass').value;
     $('loginErr').textContent = '';
-    try {
-      await auth.signInWithEmailAndPassword(email, pass);
-    } catch (e) {
-      $('loginErr').textContent = 'بيانات الدخول غير صحيحة';
-    }
+    try { await auth.signInWithEmailAndPassword(email, pass); }
+    catch (e) { $('loginErr').textContent = 'بيانات الدخول غير صحيحة'; }
   }
   $('createAccBtn').addEventListener('click', async () => {
     const email = $('loginEmail').value.trim();
@@ -314,9 +434,7 @@
     try {
       await auth.createUserWithEmailAndPassword(email, pass);
       toast('تم إنشاء الحساب وتسجيل الدخول', 'ok');
-    } catch (e) {
-      $('loginErr').textContent = e.message || 'تعذّر الإنشاء';
-    }
+    } catch (e) { $('loginErr').textContent = e.message || 'تعذّر الإنشاء'; }
   });
   $('logoutBtn').addEventListener('click', () => auth.signOut());
 
@@ -324,17 +442,38 @@
   function switchView(name) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.querySelectorAll('.sidebar-admin a').forEach(a => a.classList.toggle('active', a.dataset.view === name));
-    $('view-' + name).classList.add('active');
+    const target = $('view-' + name);
+    if (target) target.classList.add('active');
     if (name === 'dashboard') loadDashboard();
     if (name === 'posts') loadPosts();
     if (name === 'settings') loadSettings();
+    if (name === 'projects') loadProjects();
+    if (name === 'certificates') loadCerts();
   }
   document.querySelectorAll('.sidebar-admin a').forEach(a => a.addEventListener('click', e => {
-    if (a.id === 'navNewPost') { openNewPost(); return; }
+    if (a.dataset.view === 'editor') { openNewPost(); return; }
     e.preventDefault(); switchView(a.dataset.view);
   }));
 
   // ===== Dashboard =====
+  function seedIfEmpty() {
+    // مشروع Bitely الافتراضي
+    db.collection('projects').get().then(async snap => {
+      if (snap.empty) {
+        await db.collection('projects').add({
+          name: 'Bitely',
+          tag_ar: 'تسويق رقمي',
+          tag_en: 'Marketing',
+          link: 'https://drive.google.com/drive/folders/1I7cmnYvF2cOAHUOCoGI0vRjJ3OIanC_R',
+          image: 'https://i.postimg.cc/Fz8Q0KC9/1784794731070.jpg',
+          desc_ar: 'استراتيجية تسويق رقمي شاملة لموقع Bitely (توصيل طعام صحي): أبحاث سوق وتحليل منافسين، شخصيات مشتري، تحليل SWOT، استراتيجية علامة تجارية، وخطط SEO وتسويق محتوى وبريد إلكتروني مع مؤشرات أداء KPI.',
+          desc_en: 'A comprehensive digital marketing strategy for Bitely (healthy food delivery): market research, competitor analysis, buyer personas, SWOT, branding, and SEO, content & email marketing plans with KPIs.',
+          status: 'featured',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+    }).catch(() => {});
+  }
   async function loadDashboard() {
     try {
       const snap = await db.collection('posts').get();
@@ -342,10 +481,18 @@
       $('statPosts').textContent = posts.length;
       $('statPublished').textContent = posts.filter(p => p.status === 'published').length;
       $('statDraft').textContent = posts.filter(p => p.status === 'draft').length;
-    } catch (e) { /* متجاهل */ }
+    } catch (e) {}
+    try {
+      const ps = await db.collection('projects').get();
+      $('statProjects').textContent = ps.size;
+    } catch (e) {}
+    try {
+      const cs = await db.collection('certificates').get();
+      $('statCerts').textContent = cs.size;
+    } catch (e) {}
   }
 
-  // ===== Posts list =====
+  // ===== Posts =====
   async function loadPosts() {
     const list = $('postsList');
     try {
@@ -360,7 +507,7 @@
           </div>
           <div class="ops">
             <button class="icon-btn" onclick="openEditor('${d.id}')" title="تعديل"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn danger" onclick="askDelete('${d.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            <button class="icon-btn danger" onclick="askDelete('post','${d.id}')" title="حذف"><i class="fas fa-trash"></i></button>
           </div>
         </div>`;
       }).join('');
@@ -368,11 +515,10 @@
       list.innerHTML = '<div class="empty">تعذّر التحميل: تحقق من قواعد Firestore.</div>';
     }
   }
-  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   // ===== Editor =====
   function openNewPost() {
-    editingId = null;
+    editingId = null; editingType = 'post';
     ['edTitleAr','edTitleEn','edExcerptAr','edExcerptEn','edContentAr','edContentEn','edTags','edImage'].forEach(id => $(id).value = '');
     $('edDate').value = new Date().toISOString().slice(0,10);
     $('edStatus').value = 'published';
@@ -380,61 +526,177 @@
     $('editorSub').textContent = '';
     switchView('editor');
   }
+  $('navNewPost').addEventListener('click', e => { e.preventDefault(); openNewPost(); });
   async function openEditor(id) {
     try {
       const doc = await db.collection('posts').doc(id).get();
       if (!doc.exists) { toast('المنشور غير موجود', 'err'); return; }
       const p = doc.data();
-      editingId = id;
-      $('edTitleAr').value = p.title_ar || '';
-      $('edTitleEn').value = p.title_en || '';
-      $('edExcerptAr').value = p.excerpt_ar || '';
-      $('edExcerptEn').value = p.excerpt_en || '';
-      $('edContentAr').value = p.content_ar || '';
-      $('edContentEn').value = p.content_en || '';
-      $('edTags').value = (p.tags || []).join(', ');
-      $('edImage').value = p.image || '';
-      $('edDate').value = p.date || '';
-      $('edStatus').value = p.status || 'published';
-      $('editorTitle').textContent = 'تعديل المنشور';
-      $('editorSub').textContent = p.title_ar || p.title_en || '';
+      editingId = id; editingType = 'post';
+      $('edTitleAr').value = p.title_ar || ''; $('edTitleEn').value = p.title_en || '';
+      $('edExcerptAr').value = p.excerpt_ar || ''; $('edExcerptEn').value = p.excerpt_en || '';
+      $('edContentAr').value = p.content_ar || ''; $('edContentEn').value = p.content_en || '';
+      $('edTags').value = (p.tags || []).join(', '); $('edImage').value = p.image || '';
+      $('edDate').value = p.date || ''; $('edStatus').value = p.status || 'published';
+      $('editorTitle').textContent = 'تعديل المنشور'; $('editorSub').textContent = p.title_ar || p.title_en || '';
       switchView('editor');
     } catch (e) { toast('تعذّر فتح المنشور', 'err'); }
   }
   $('edSaveBtn').addEventListener('click', async () => {
     const data = {
-      title_ar: $('edTitleAr').value.trim(),
-      title_en: $('edTitleEn').value.trim(),
-      excerpt_ar: $('edExcerptAr').value.trim(),
-      excerpt_en: $('edExcerptEn').value.trim(),
-      content_ar: $('edContentAr').value,
-      content_en: $('edContentEn').value,
+      title_ar: $('edTitleAr').value.trim(), title_en: $('edTitleEn').value.trim(),
+      excerpt_ar: $('edExcerptAr').value.trim(), excerpt_en: $('edExcerptEn').value.trim(),
+      content_ar: $('edContentAr').value, content_en: $('edContentEn').value,
       tags: $('edTags').value.split(',').map(t => t.trim()).filter(Boolean),
-      image: $('edImage').value.trim(),
-      date: $('edDate').value,
-      status: $('edStatus').value,
+      image: $('edImage').value.trim(), date: $('edDate').value, status: $('edStatus').value,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
     if (!data.title_ar && !data.title_en) { toast('أدخل عنواناً', 'err'); return; }
     try {
-      if (editingId) {
-        await db.collection('posts').doc(editingId).set(data, { merge: true });
-      } else {
-        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-        await db.collection('posts').add(data);
-      }
-      toast('تم حفظ المنشور بنجاح', 'ok');
-      switchView('posts');
+      if (editingId) { await db.collection('posts').doc(editingId).set(data, { merge: true }); }
+      else { data.createdAt = firebase.firestore.FieldValue.serverTimestamp(); await db.collection('posts').add(data); }
+      toast('تم حفظ المنشور بنجاح', 'ok'); switchView('posts');
     } catch (e) { toast('فشل الحفظ: تأكد من صلاحيات Firestore', 'err'); }
   });
 
-  // ===== Delete =====
-  function askDelete(id) { pendingDelete = id; $('confirmModal').classList.add('active'); }
+  // ===== Projects =====
+  function showProjectEdit(proj) {
+    $('projectEditCard').style.display = 'block';
+    $('projectEditTitle').innerHTML = '<i class="fas fa-edit"></i> ' + (proj ? 'تحرير المشروع' : 'مشروع جديد');
+    $('prName').value = proj ? (proj.name || '') : '';
+    $('prTagAr').value = proj ? (proj.tag_ar || '') : '';
+    $('prTagEn').value = proj ? (proj.tag_en || '') : '';
+    $('prLink').value = proj ? (proj.link || '') : '';
+    $('prImage').value = proj ? (proj.image || '') : '';
+    $('prDescAr').value = proj ? (proj.desc_ar || '') : '';
+    $('prDescEn').value = proj ? (proj.desc_en || '') : '';
+    doPrPreview();
+    $('projectEditCard').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function doPrPreview() {
+    const img = $('prImage').value.trim();
+    const name = $('prName').value.trim();
+    $('prPreview').innerHTML = img ? `<div class="project-preview"><img src="${esc(img)}" alt=""><div><div class="t">${esc(name||'(بدون اسم)')}</div><div class="s">${esc($('prTagAr').value||'')}</div></div></div>` : '';
+  }
+  ['prImage','prName','prTagAr'].forEach(id => { const el = $(id); if (el) el.addEventListener('input', doPrPreview); });
+  async function loadProjects() {
+    const grid = $('projectsGrid');
+    try {
+      const snap = await db.collection('projects').get();
+      if (snap.empty) { grid.innerHTML = '<div class="empty">لا توجد مشاريع. أضف أول مشروع الآن.</div>'; return; }
+      grid.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        const img = p.image
+          ? `<img class="thumb" src="${esc(p.image)}" alt="">`
+          : `<div class="thumb-placeholder"><i class="fas fa-rocket"></i></div>`;
+        return `<div class="media-card">
+          <div class="ops">
+            <button class="icon-btn" onclick="editProject('${d.id}')" title="تعديل"><i class="fas fa-edit"></i></button>
+            <button class="icon-btn danger" onclick="askDelete('project','${d.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+          </div>
+          ${img}
+          <div class="body"><h4>${esc(p.name||'')}</h4><p>${esc(p.tag_ar||'')}</p></div>
+        </div>`;
+      }).join('');
+    } catch (e) { grid.innerHTML = '<div class="empty">تعذّر التحميل: تحقق من قواعد Firestore.</div>'; }
+  }
+  async function editProject(id) {
+    try {
+      const doc = await db.collection('projects').doc(id).get();
+      if (doc.exists) { editingId = id; editingType = 'project'; showProjectEdit(doc.data()); }
+    } catch (e) { toast('تعذّر الفتح', 'err'); }
+  }
+  $('addProjectBtn').addEventListener('click', () => { editingId = null; editingType = 'project'; showProjectEdit(null); });
+  $('saveProjectBtn').addEventListener('click', async () => {
+    const data = {
+      name: $('prName').value.trim(), tag_ar: $('prTagAr').value.trim(), tag_en: $('prTagEn').value.trim(),
+      link: $('prLink').value.trim(), image: $('prImage').value.trim(),
+      desc_ar: $('prDescAr').value.trim(), desc_en: $('prDescEn').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    if (!data.name) { toast('أدخل اسم المشروع', 'err'); return; }
+    try {
+      if (editingId) { await db.collection('projects').doc(editingId).set(data, { merge: true }); }
+      else { await db.collection('projects').add(data); }
+      toast('تم حفظ المشروع', 'ok'); $('projectEditCard').style.display = 'none'; loadProjects();
+    } catch (e) { toast('فشل الحفظ: تحقق من القواعد', 'err'); }
+  });
+  $('cancelProjectBtn').addEventListener('click', () => { $('projectEditCard').style.display = 'none'; });
+
+  // ===== Certificates =====
+  function showCert(cert) {
+    $('certEditCard').style.display = 'block';
+    $('certEditTitle').innerHTML = '<i class="fas fa-edit"></i> ' + (cert ? 'تحرير الشهادة' : 'شهادة جديدة');
+    $('ceTitleAr').value = cert ? (cert.title_ar || '') : '';
+    $('ceTitleEn').value = cert ? (cert.title_en || '') : '';
+    $('ceImage').value = cert ? (cert.image || '') : '';
+    doCePreview();
+    $('certEditCard').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function doCePreview() {
+    const img = $('ceImage').value.trim();
+    const el = $('cePreview');
+    if (img) { el.src = img; el.style.display = 'block'; }
+    else { el.style.display = 'none'; }
+  }
+  $('ceImage').addEventListener('input', doCePreview);
+  async function loadCerts() {
+    const grid = $('certsGrid');
+    try {
+      const snap = await db.collection('certificates').get();
+      if (snap.empty) { grid.innerHTML = '<div class="empty">لا توجد شهادات. أضف أول شهادة الآن.</div>'; return; }
+      grid.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        const img = p.image
+          ? `<img class="thumb" src="${esc(p.image)}" alt="">`
+          : `<div class="thumb-placeholder"><i class="fas fa-award"></i></div>`;
+        return `<div class="media-card">
+          <div class="ops">
+            <button class="icon-btn" onclick="editCert('${d.id}')" title="تعديل"><i class="fas fa-edit"></i></button>
+            <button class="icon-btn danger" onclick="askDelete('cert','${d.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+          </div>
+          ${img}
+          <div class="body"><h4>${esc(p.title_ar||'')}</h4><p>${esc(p.title_en||'')}</p></div>
+        </div>`;
+      }).join('');
+    } catch (e) { grid.innerHTML = '<div class="empty">تعذّر التحميل: تحقق من قواعد Firestore.</div>'; }
+  }
+  async function editCert(id) {
+    try {
+      const doc = await db.collection('certificates').doc(id).get();
+      if (doc.exists) { editingId = id; editingType = 'cert'; showCert(doc.data()); }
+    } catch (e) { toast('تعذر الفتح', 'err'); }
+  }
+  $('addCertBtn').addEventListener('click', () => { editingId = null; editingType = 'cert'; showCert(null); });
+  $('saveCertBtn').addEventListener('click', async () => {
+    const data = {
+      title_ar: $('ceTitleAr').value.trim(), title_en: $('ceTitleEn').value.trim(),
+      image: $('ceImage').value.trim(), updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    if (!data.title_ar && !data.title_en) { toast('أدخل عنواناً', 'err'); return; }
+    try {
+      if (editingId) { await db.collection('certificates').doc(editingId).set(data, { merge: true }); }
+      else { await db.collection('certificates').add(data); }
+      toast('تم حفظ الشهادة', 'ok'); $('certEditCard').style.display = 'none'; loadCerts();
+    } catch (e) { toast('فشل الحفظ: تحقق من القواعد', 'err'); }
+  });
+  $('cancelCertBtn').addEventListener('click', () => { $('certEditCard').style.display = 'none'; });
+
+  // ===== Delete (upd. for projects & certs) =====
+  function askDelete(type, id) { pendingDelete = { type, id }; $('confirmModal').classList.add('active'); }
   $('confirmDelBtn').addEventListener('click', async () => {
     $('confirmModal').classList.remove('active');
     if (!pendingDelete) return;
-    try { await db.collection('posts').doc(pendingDelete).delete(); toast('تم الحذف', 'ok'); loadPosts(); }
-    catch (e) { toast('فشل الحذف', 'err'); }
+    const { type, id } = pendingDelete;
+    const col = type === 'project' ? 'projects' : (type === 'cert' ? 'certificates' : 'posts');
+    try {
+      await db.collection(col).doc(id).delete();
+      toast('تم الحذف', 'ok');
+      if (col === 'posts') loadPosts();
+      if (col === 'projects') loadProjects();
+      if (col === 'certificates') loadCerts();
+      loadDashboard();
+    } catch (e) { toast('فشل الحذف', 'err'); }
     pendingDelete = null;
   });
   $('cancelDelBtn').addEventListener('click', () => { pendingDelete = null; $('confirmModal').classList.remove('active'); });

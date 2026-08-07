@@ -199,6 +199,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -243,6 +246,27 @@
     }
     lightboxClose.addEventListener('click', () => lightboxModal.classList.remove('active'));
     lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) lightboxModal.classList.remove('active'); });
+
+    // ===== تحميل الشهادات من Firestore (اللوحة) مع الاحتفاظ بالثابت كـ fallback =====
+    try {
+      const cApp = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicCerts');
+      const cDb = firebase.firestore(cApp);
+      const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      cDb.collection('certificates').get().then(snap => {
+        if (snap.empty) return;
+        const list = document.querySelector('.certificates-list');
+        if (!list) return;
+        list.innerHTML = snap.docs.map((d, i) => {
+          const p = d.data();
+          const img = p.image ? `<img loading="lazy" src="${esc(p.image)}" alt="${esc(p.title_ar||p.title_en||'شهادة')}">` : '';
+          return `
+        <article class="cert-large" data-aos="zoom-in" data-aos-delay="${i*50}">
+          <h2>${p.title_ar ? `<span class="lang-ar">${esc(p.title_ar)}</span>` : ''}${p.title_en ? `<span class="lang-en">${esc(p.title_en)}</span>` : ''}</h2>
+          <div class="cert-item-img" onclick="openLightbox(this)">${img}</div>
+        </article>`;
+        }).join('');
+      }).catch(() => {});
+    } catch (e) {}
 
     </script>
 </body>
