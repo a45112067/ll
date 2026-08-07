@@ -58,22 +58,19 @@
     .btn-primary { background:linear-gradient(120deg,#2563eb,#1d4ed8); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
     .btn-primary:active { transform:translateY(-1px) scale(.99); }
     .btn-primary:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 18px 40px rgba(37,99,235,.40); }
-    .edu-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:28px; padding:34px; box-shadow:0 12px 34px rgba(15,23,42,.07); transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s; }
+    .edu-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:28px; padding:34px; box-shadow:0 12px 34px rgba(15,23,42,.07); transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s; text-align:center; }
     .edu-card:hover { transform:translateY(-6px); box-shadow:0 26px 50px rgba(15,23,42,.12); }
     .edu-card h2 { margin-bottom:16px; color:#2563eb; font-size:1.6rem; }
     .edu-card p { line-height:1.85; color:#475569; margin-bottom:18px; }
-    .edu-head { display:flex; align-items:center; gap:18px; margin-bottom:18px; }
-    .edu-logo { width:92px; height:92px; object-fit:contain; border-radius:16px; border:1px solid #e2e8f0; background:#fff; padding:8px; box-shadow:0 8px 20px rgba(15,23,42,.08); }
-    .edu-head h2 { margin-bottom:0; }
-    .edu-degree { display:inline-block; background:rgba(37,99,235,.08); color:#1d4ed8; font-weight:800; padding:10px 18px; border-radius:12px; margin-bottom:20px; }
-    .edu-list { display:grid; gap:16px; margin-top:24px; }
-    .edu-item { background:#f5f7fb; border:1px solid #e2e8f0; border-radius:18px; padding:20px; transition:transform .3s, border-color .3s, box-shadow .3s; }
-    .edu-item:hover { transform:translateY(-4px); border-color:#ff9800; box-shadow:0 14px 30px rgba(15,23,42,.08); }
-    .edu-item h3 { font-size:1.1rem; color:#ff9800; margin-bottom:10px; }
-    .edu-item span { display:block; color:#475569; line-height:1.7; }
+    .edu-head { display:flex; flex-direction:column; align-items:center; gap:22px; margin-bottom:20px; }
+    .edu-logo { width:170px; height:170px; object-fit:contain; border-radius:24px; border:1px solid #e2e8f0; background:#fff; padding:16px; box-shadow:0 16px 40px rgba(15,23,42,.12); transition:transform .3s; }
+    .edu-logo:hover { transform:scale(1.04); }
+    .edu-head h2 { margin-bottom:0; font-size:1.7rem; font-weight:900; }
+    .edu-degree { display:inline-block; background:rgba(37,99,235,.08); color:#1d4ed8; font-weight:800; padding:12px 26px; border-radius:14px; margin-bottom:0; font-size:1.05rem; }
+    .edu-years { display:inline-flex; align-items:center; gap:8px; margin-top:22px; background:#f5f7fb; border:1px solid #e2e8f0; color:#ff9800; font-weight:800; padding:10px 22px; border-radius:999px; font-size:.95rem; }
     .footer { margin-top:36px; text-align:center; color:#94a3b8; font-size:.9rem; }
-    @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .edu-card { padding:20px; border-radius:20px; } .edu-list { grid-template-columns:1fr; gap:14px; } .edu-item { padding:18px; } .section-actions { width:100%; } .section-actions .btn-secondary, .section-actions a { flex:1 1 100%; width:100%; justify-content:center; } }
-    @media (max-width:480px) { .edu-card { padding:16px; } .edu-card h2 { font-size:1.4rem; } .edu-item { padding:16px; } }
+    @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .edu-card { padding:20px; border-radius:20px; } .edu-logo { width:130px; height:130px; padding:12px; } .edu-degree { font-size:.95rem; padding:10px 18px; } .section-actions { width:100%; } .section-actions .btn-secondary, .section-actions a { flex:1 1 100%; width:100%; justify-content:center; } }
+    @media (max-width:480px) { .edu-card { padding:16px; } .edu-card h2 { font-size:1.25rem; } .edu-logo { width:110px; height:110px; } .edu-years { margin-top:18px; } }
   </style>
 </head>
 <body>
@@ -129,26 +126,10 @@
     <section class="edu-card" data-aos="fade-up">
       <div class="edu-head">
         <img class="edu-logo" src="https://i.postimg.cc/qMjxpZDQ/elsewedy-university-of-technology-polytechnic-of-egypt-logo.jpg" alt="SUTech Elsewedy University logo">
-        <h2><span class="lang-ar">جامعة السويدي للتكنولوجيا - SUTech</span><span class="lang-en">SUTech Elsewedy University</span></h2>
+        <h2><span class="lang-ar">جامعة السويدي للتكنولوجيا</span><span class="lang-en">SUTech Elsewedy University</span></h2>
       </div>
-      <p class="edu-degree"><span class="lang-ar">الدرجة العلمية: بكالوريوس في تكنولوجيا علوم الحاسب (Computer Science Technology)</span><span class="lang-en">Degree: Bachelor's Degree in Computer Science Technology</span></p>
-      <p>طالب حالياً في جامعة السويدي للتكنولوجيا (SUTech Elsewedy University)، تخصص علوم الحاسب وتكنولوجيا المعلومات، مع تركيز على بناء تطبيقات برمجية متكاملة، تحليل البيانات، وتصميم حلول تقنية مناسبة لسوق العمل.</p>
-      <p>البرنامج الدراسي يشمل البرمجة، هياكل البيانات، قواعد البيانات، الشبكات، وتكنولوجيا علوم الحاسب، وهو ما يدعم مسار بناء حلول تقنية متقدمة.</p>
-      <div class="edu-list">
-        <div class="edu-item">
-          <h3><span class="lang-ar">الفصل الدراسي الحالي</span><span class="lang-en">Current Academic Term</span></h3>
-          <span>2025 - 2029</span>
-          <span class="lang-ar">دورات متقدمة في البرمجة، علوم الحاسب، ونظم البيانات.</span><span class="lang-en">Advanced courses in programming, computer science, and data systems.</span>
-        </div>
-        <div class="edu-item">
-          <h3><span class="lang-ar">الإنجازات الأكاديمية</span><span class="lang-en">Academic Achievements</span></h3>
-          <span class="lang-ar">مشاركة في مشاريع تطبيقية داخل الجامعة ومواصلة التعلم خارج المنهج.</span><span class="lang-en">Involvement in applied projects at university and continuous self-learning.</span>
-        </div>
-        <div class="edu-item">
-          <h3><span class="lang-ar">خطط التطوير</span><span class="lang-en">Development Plans</span></h3>
-          <span class="lang-ar">التقدم نحو خبرات أعمق في الأمن السيبراني وتطوير التطبيقات المدعومة بالذكاء الاصطناعي.</span><span class="lang-en">Progressing toward deeper expertise in cybersecurity and AI-powered applications.</span>
-        </div>
-      </div>
+      <p class="edu-degree"><span class="lang-ar">بكالوريوس في تكنولوجيا علوم الحاسب</span><span class="lang-en">Bachelor's Degree in Computer Science Technology</span></p>
+      <div class="edu-years"><i class="fas fa-graduation-cap"></i><span class="lang-ar">2025 - 2029</span><span class="lang-en">2025 - 2029</span></div>
     </section>
 
 <footer class="footer">
