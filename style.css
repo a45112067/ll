@@ -98,11 +98,25 @@ body.english { direction: ltr; }
 .back-to-top:hover { transform: translateY(-4px); }
 
 /* ===== نسخة الهاتف الاحترافية (مشترك) ===== */
-html { -webkit-text-size-adjust: 100%; overscroll-behavior-y: none; }
-body { overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+html {
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+html, body { margin: 0; padding: 0; }
 
 /* تثبيت الهيدر ومنع التزحزح العمودي أثناء فتح الشريط الجانبي */
 .site-navbar { will-change: transform; }
+
+/* احتواء الشريط الجانبي المخفي حتى لا يسبب تمريراً جانبياً */
+.sidebar { overflow: hidden; }
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
@@ -123,7 +137,6 @@ body { overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
   /* قفل تمرير الخلفية عند فتح الشريط الجانبي */
   body.side-open { overflow: hidden; }
 
-  /* صفوف النماذج والأزرار تصبح بعرض كامل */
   .section-actions { width: 100%; }
   .section-actions .btn, .section-actions a { flex: 1 1 100%; }
 
