@@ -61,7 +61,7 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -236,10 +236,11 @@
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 8px 16px; border-radius: 999px;
-      font-size: .82rem; font-weight: 700; color: var(--brand);
+      padding: 9px 18px; border-radius: 999px;
+      font-size: .83rem; font-weight: 700; color: var(--brand);
       box-shadow: var(--shadow-sm);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
+      letter-spacing: .2px;
     }
     .hero-badge .dot {
       width: 9px; height: 9px; border-radius: 50%;
@@ -247,29 +248,33 @@
       box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 4.6vw, 3.5rem);
-      font-weight: 900; line-height: 1.15; color: var(--ink);
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.6rem);
+      font-weight: 900; line-height: 1.18; color: var(--ink);
       margin-bottom: 14px;
+      letter-spacing: -.5px;
     }
     .hero h1 .grad {
-      background: linear-gradient(120deg, var(--brand), #4f46e5, var(--accent-2));
+      background: linear-gradient(120deg, var(--brand), #4f46e5 55%, var(--accent-2));
       -webkit-background-clip: text; background-clip: text;
       color: transparent;
     }
     .hero-subtitle {
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
-      color: var(--ink-soft); font-weight: 600; margin-bottom: 6px;
+      font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+      color: var(--ink-soft); font-weight: 600; margin-bottom: 10px;
+      line-height: 1.6;
     }
     .typing {
       display: inline-flex; align-items: center;
-      min-height: 42px; margin-bottom: 22px;
-      font-size: 1.05rem; font-weight: 700; color: var(--brand);
+      min-height: 46px; margin-bottom: 24px;
+      font-size: 1.1rem; font-weight: 700; color: var(--brand);
       background: rgba(37,99,235,0.08);
-      padding: 6px 20px; border-radius: 999px;
+      padding: 8px 22px; border-radius: 999px;
+      letter-spacing: .3px;
     }
     .typing::after {
       content: '|';
-      color: var(--accent); margin-right: 4px;
+      color: var(--accent); margin-right: 5px; margin-left: 2px;
       animation: blink .8s steps(1) infinite;
     }
     @keyframes blink { 0%,49% {opacity:1} 50%,100% {opacity:0} }
@@ -823,7 +828,7 @@
           <span class="lang-en">Hi, I'm <span class="grad">Ahmed Ayman Yehia</span></span>
         </h1>
         <p class="hero-subtitle">
-          <span class="lang-ar">مهندس برمجيات وطالب في جامعة السويدي بمصر (SUT)</span>
+          <span class="lang-ar">مهندس برمجيات وطالب بجامعة السويدي بمصر (SUT)</span>
           <span class="lang-en">Software Engineer & Student at El Sewedy University (SUT)</span>
         </p>
         <div class="typing" id="typing"></div>
@@ -1123,8 +1128,8 @@
   // ===== Language toggle =====
   let currentLang = localStorage.getItem('lang') || 'ar';
   const typingTexts = {
-    ar: ['مهندس برمجيات', 'طالب بجامعة السويدي SUT', 'خبير تسويق وتصميم هندسي'],
-    en: ['Software Engineer', 'SUT Student', 'Marketing & Tech Design Focus']
+    ar: ['مهندس برمجيات', 'مطور مواقع وتطبيقات', 'خبير تسويق رقمي', 'مصمم هندسي (AutoCAD)'],
+    en: ['Software Engineer', 'Web Developer', 'Digital Marketing Specialist', 'CAD Engineering Designer']
   };
   const typingEl = document.getElementById('typing');
   let textIndex = 0, charIndex = 0, isDeleting = false, typingTimeout;
