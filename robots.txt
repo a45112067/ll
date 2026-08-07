@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# منع فهرسة صفحات الإدارة والملفات الحساسة
+Disallow: /admin.html
+Disallow: /Ahmed_Ayman_CV.html
+Disallow: /server.py
+Disallow: /firebase-init.js
+Disallow: /firestore.rules
+
+# خريطة الموقع
+Sitemap: https://ahmedayman.website/sitemap.xml
