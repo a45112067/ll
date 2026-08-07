@@ -46,6 +46,12 @@
     .article .cover { width:100%; max-height:320px; object-fit:cover; border-radius:14px; margin:14px 0; }
     .article .body, .article .body-en { line-height:2; color:#334155; font-size:1rem; }
     .article .body { margin-top:14px; }
+    .article .body h2 { font-size:1.3rem; color:var(--ink); margin:1.8rem 0 .8rem; padding-top:.4rem; }
+    .article .body h3 { font-size:1.1rem; color:var(--brand-dark); margin:1.4rem 0 .6rem; }
+    .article .body p { margin:0 0 .9rem; }
+    .article .body ul { margin:0 0 1rem 1.4rem; padding:0; }
+    .article .body ul li { margin-bottom:.4rem; position:relative; }
+    .article .body ul li::marker { color:var(--accent); }
 
     footer { text-align:center; color:var(--ink-soft); font-size:.85rem; padding:2rem 1rem; }
     @media (max-width:560px) {
@@ -92,6 +98,17 @@
   let searchTerm = '';
 
   async function loadPosts() {
+    // المصدر الأساسي: ملف البيانات المحلي (يعمل فوراً بدون أي إعداد)
+    try {
+      const res = await fetch('data/blog.json');
+      if (res.ok) {
+        const data = await res.json();
+        allPosts = data.filter(p => p.status === 'published');
+        render();
+        return;
+      }
+    } catch (e) { /* ننتقل للاحتياطي */ }
+    // الاحتياطي: Firebase في حال توفر قواعد Firestore
     try {
       const snap = await db.collection('posts').where('status', '==', 'published').orderBy('date', 'desc').get();
       allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -124,15 +141,34 @@
       </div>`).join('');
   }
   function esc(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-  function nl2br(s){ return esc(s).replace(/\n/g,'<br>'); }
+  function renderMarkdown(md){
+    if(!md) return '';
+    const lines = md.split('\n');
+    let html = '', inList = false;
+    const closeList = () => { if(inList){ html += '</ul>'; inList=false; } };
+    for(const raw of lines){
+      const line = raw.trim();
+      if(!line){ closeList(); continue; }
+      let m;
+      if((m = line.match(/^###\s+(.+)$/))){ closeList(); html += '<h3>'+esc(m[1])+'</h3>'; }
+      else if((m = line.match(/^##\s+(.+)$/))){ closeList(); html += '<h2>'+esc(m[1])+'</h2>'; }
+      else if(/^[-•]\s+/.test(line)){ if(!inList){ html += '<ul>'; inList=true; } html += '<li>'+esc(line.replace(/^[-•]\s+/,''))+'</li>'; }
+      else if(/^\d+\.\s+/.test(line)){ closeList(); html += '<p>'+esc(line.replace(/^\d+\.\s+/,''))+'</p>'; }
+      else { closeList(); html += '<p>'+esc(line)+'</p>'; }
+    }
+    closeList();
+    return html;
+  }
 
   function openPost(id){
     const p = allPosts.find(x=>x.id===id); if(!p) return;
+    const content = p.content_ar || p.content_en || '';
     document.getElementById('articleContent').innerHTML = `
-      ${p.image ? `<img class="cover" src="${esc(p.image)}" alt="">` : ''}
+      ${p.image ? `<img class="cover" src="${esc(p.image)}" alt="${esc(p.title_ar || p.title_en)}">` : ''}
       <h1>${esc(p.title_ar || p.title_en)}</h1>
       <div class="meta"><span><i class="far fa-calendar"></i>${esc(p.date||'')}</span></div>
-      <div class="body">${nl2br(p.content_ar || p.content_en || '')}</div>`;
+      <div class="body">${renderMarkdown(content)}</div>`;
+    document.title = (p.title_ar || p.title_en) + ' | أحمد أيمن';
     document.getElementById('listView').style.display='none';
     document.getElementById('readView').style.display='block';
     window.scrollTo(0,0);
