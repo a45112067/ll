@@ -71,10 +71,6 @@
     .skill-box p { line-height:1.75; color:var(--ink-soft); font-size:.93rem; }
     .tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
     .tags span { font-size:.75rem; font-weight:700; color:var(--brand); background:rgba(37,99,235,.08); padding:5px 11px; border-radius:999px; }
-    .bar-label { display:flex; justify-content:space-between; align-items:center; font-size:.78rem; font-weight:800; color:var(--muted); margin-top:18px; margin-bottom:7px; }
-    .bar-label .pct { color:var(--brand); }
-    .bar { height:8px; border-radius:999px; background:var(--surface-2); margin-top:0; overflow:hidden; }
-    .bar i { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--brand),#60a5fa); transition:width 1.1s cubic-bezier(.2,.8,.3,1); }
 
     .footer { margin-top:40px; text-align:center; color:var(--muted); font-size:.9rem; }
 
@@ -158,7 +154,7 @@
       <button class="cat-tab" data-cat="marketing"><i class="fas fa-chart-line"></i> التسويق <span class="count">2</span></button>
     </div>
 
-    <div class="results-line"><span><b id="resCount">9</b> <span id="resLabel">مهارات معروضة</span></span><span id="resAvgLabel">متوسط الإتقان</span> <b id="resAvg">85%</b></div>
+    <div class="results-line"><span><b id="resCount">9</b> <span id="resLabel">مهارات معروضة</span></span></div>
 
     <div class="cat-panel active" data-panel="all">
       <div class="skill-grid">
@@ -172,7 +168,7 @@
           </div>
           <p>تطوير التطبيقات الخلفية، أتمتة العمليات، وتحليل البيانات بلغة بايثون.</p>
           <div class="tags"><span>Django</span><span>REST API</span><span>Automation</span></div>
-          <div class="bar"><i data-level="90"></i></div>
+
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
@@ -184,7 +180,7 @@
           </div>
           <p>بناء أنظمة برمجية متكاملة تلبي متطلبات المشاريع الهندسية والتجارية.</p>
           <div class="tags"><span>OOP</span><span>Spring</span><span>SDK</span></div>
-          <div class="bar"><i data-level="85"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="120">
           <div class="skill-head">
@@ -196,7 +192,7 @@
           </div>
           <p>بناء واجهات حديثة متجاوبة بتخطيطات احترافية وتجربة مستخدم ممتازة.</p>
           <div class="tags"><span>Flexbox</span><span>Grid</span><span>Responsive</span></div>
-          <div class="bar"><i data-level="90"></i></div>
+
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="160">
           <div class="skill-head">
@@ -208,7 +204,7 @@
           </div>
           <p>برمجة تفاعلية للواجهات ومعالجة البيانات في المتصفح وأتمتة الصفحات.</p>
           <div class="tags"><span>ES6+</span><span>DOM</span><span>Fetch</span></div>
-          <div class="bar"><i data-level="85"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="200">
           <div class="skill-head">
@@ -220,7 +216,7 @@
           </div>
           <p>تصميم قواعد البيانات وتحسين الاستعلامات لمشروعات كثيفة البيانات.</p>
           <div class="tags"><span>MySQL</span><span>Normalization</span><span>Optimization</span></div>
-          <div class="bar"><i data-level="88"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="240">
           <div class="skill-head">
@@ -232,7 +228,7 @@
           </div>
           <p>استخراج الرؤى من البيانات وبناء التقارير لاتخاذ قرارات مدروسة.</p>
           <div class="tags"><span>Pandas</span><span>Excel</span><span>Visualization</span></div>
-          <div class="bar"><i data-level="80"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="280">
           <div class="skill-head">
@@ -244,7 +240,7 @@
           </div>
           <p>رسم وتنفيذ تصاميم هندسية دقيقة وخرائط تنفيذية بأدوات AutoCAD.</p>
           <div class="tags"><span>2D Drafting</span><span>Layers</span><span>Dimensions</span></div>
-          <div class="bar"><i data-level="92"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="320">
           <div class="skill-head">
@@ -256,7 +252,7 @@
           </div>
           <p>تخطيط الحملات الرقمية وإدارة الإعلانات وتحليل الأداء لرفع التحويلات.</p>
           <div class="tags"><span>Meta Ads</span><span>SEO</span><span>Analytics</span></div>
-          <div class="bar"><i data-level="87"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="360">
           <div class="skill-head">
@@ -268,7 +264,7 @@
           </div>
           <p>إنتاج محتوى مقنع ومنسق يخدم الأهداف التسويقية والمحتوى الرقمي.</p>
           <div class="tags"><span>Copywriting</span><span>Design</span><span>Branding</span></div>
-          <div class="bar"><i data-level="78"></i></div>
+          
         </article>
       </div>
     </div>
@@ -282,7 +278,7 @@
           </div>
           <p>تطوير التطبيقات الخلفية، أتمتة العمليات، وتحليل البيانات بلغة بايثون.</p>
           <div class="tags"><span>Django</span><span>REST API</span><span>Automation</span></div>
-          <div class="bar"><i data-level="90"></i></div>
+
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
@@ -291,7 +287,7 @@
           </div>
           <p>بناء أنظمة برمجية متكاملة تلبي متطلبات المشاريع الهندسية والتجارية.</p>
           <div class="tags"><span>OOP</span><span>Spring</span><span>SDK</span></div>
-          <div class="bar"><i data-level="85"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="120">
           <div class="skill-head">
@@ -300,7 +296,7 @@
           </div>
           <p>إدارة الشيفرة والتفرعات باستخدام أنظمة التحكم بالإصدارات للعمل الجماعي.</p>
           <div class="tags"><span>Git</span><span>GitHub</span><span>Branches</span></div>
-          <div class="bar"><i data-level="80"></i></div>
+          
         </article>
       </div>
     </div>
@@ -314,7 +310,7 @@
           </div>
           <p>بناء واجهات حديثة متجاوبة بتخطيطات احترافية وتجربة مستخدم ممتازة.</p>
           <div class="tags"><span>Flexbox</span><span>Grid</span><span>Responsive</span></div>
-          <div class="bar"><i data-level="90"></i></div>
+
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
@@ -323,7 +319,7 @@
           </div>
           <p>برمجة تفاعلية للواجهات ومعالجة البيانات في المتصفح وأتمتة الصفحات.</p>
           <div class="tags"><span>ES6+</span><span>DOM</span><span>Fetch</span></div>
-          <div class="bar"><i data-level="85"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="120">
           <div class="skill-head">
@@ -332,7 +328,7 @@
           </div>
           <p>ضبط التجربة على كل المقاسات والأجهزة لضمان تجربة مثالية للمستخدم.</p>
           <div class="tags"><span>Media Queries</span><span>Mobile-first</span><span>Accessibility</span></div>
-          <div class="bar"><i data-level="88"></i></div>
+          
         </article>
       </div>
     </div>
@@ -346,7 +342,7 @@
           </div>
           <p>تصميم قواعد البيانات وتحسين الاستعلامات لمشروعات كثيفة البيانات.</p>
           <div class="tags"><span>MySQL</span><span>Normalization</span><span>Optimization</span></div>
-          <div class="bar"><i data-level="88"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
@@ -355,7 +351,7 @@
           </div>
           <p>استخراج الرؤى من البيانات وبناء التقارير لاتخاذ قرارات مدروسة.</p>
           <div class="tags"><span>Pandas</span><span>Excel</span><span>Visualization</span></div>
-          <div class="bar"><i data-level="80"></i></div>
+          
         </article>
       </div>
     </div>
@@ -369,7 +365,7 @@
           </div>
           <p>رسم وتنفيذ تصاميم هندسية دقيقة وخرائط تنفيذية بأدوات AutoCAD.</p>
           <div class="tags"><span>2D Drafting</span><span>Layers</span><span>Dimensions</span></div>
-          <div class="bar"><i data-level="92"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
@@ -378,7 +374,7 @@
           </div>
           <p>تصميم واجهات بسيطة وواضحة تركز على تجربة المستخدم وسهولة الاستخدام.</p>
           <div class="tags"><span>Typography</span><span>Color Theory</span><span>Wireframes</span></div>
-          <div class="bar"><i data-level="75"></i></div>
+          
         </article>
       </div>
     </div>
@@ -392,7 +388,7 @@
           </div>
           <p>تخطيط الحملات الرقمية وإدارة الإعلانات وتحليل الأداء لرفع التحويلات.</p>
           <div class="tags"><span>Meta Ads</span><span>SEO</span><span>Analytics</span></div>
-          <div class="bar"><i data-level="87"></i></div>
+          
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
@@ -401,7 +397,7 @@
           </div>
           <p>إنتاج محتوى مقنع ومنسق يخدم الأهداف التسويقية والمحتوى الرقمي.</p>
           <div class="tags"><span>Copywriting</span><span>Design</span><span>Branding</span></div>
-          <div class="bar"><i data-level="78"></i></div>
+          
         </article>
       </div>
     </div>
@@ -422,12 +418,9 @@
       document.body.dir = currentLang === 'en' ? 'ltr' : 'rtl';
       if (currentLang === 'en') {
         document.getElementById('resLabel').textContent = 'skills shown';
-        document.getElementById('resAvgLabel').textContent = 'Average proficiency';
       } else {
         document.getElementById('resLabel').textContent = 'مهارات معروضة';
-        document.getElementById('resAvgLabel').textContent = 'متوسط الإتقان';
       }
-      injectLabels();
     }
     applyLang();
     localStorage.setItem('lang', currentLang);
@@ -456,45 +449,18 @@
     const tabs = document.querySelectorAll('.cat-tab');
     const panels = document.querySelectorAll('.cat-panel');
 
-    // إدراج مسمّى النسبة قبل كل شريط، وحساب المتوسط
-    function injectLabels() {
-      document.querySelectorAll('.skill-box .bar').forEach(bar => {
-        const i = bar.querySelector('i');
-        if (!bar.querySelector('.bar-label')) {
-          const label = document.createElement('div');
-          label.className = 'bar-label';
-          label.innerHTML = '<span class="label-txt">مستوى الإتقان</span><span class="pct">' + i.dataset.level + '%</span>';
-          bar.parentNode.insertBefore(label, bar);
-        }
-      });
-      document.querySelectorAll('.bar-label .label-txt').forEach(t => {
-        t.textContent = currentLang === 'en' ? 'Proficiency' : 'مستوى الإتقان';
-      });
-    }
     function updateResults() {
       const box = document.querySelector('.cat-panel.active'),
-            boxes = box ? box.querySelectorAll('.bar i') : [];
+            boxes = box ? box.querySelectorAll('.skill-box') : [];
       document.getElementById('resCount').textContent = boxes.length;
-      if (boxes.length) {
-        const avg = Math.round(Array.from(boxes).reduce((s,b) => s + parseInt(b.dataset.level), 0) / boxes.length);
-        document.getElementById('resAvg').textContent = avg + '%';
-      }
     }
     function showTab(cat) {
       tabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
       panels.forEach(p => p.classList.toggle('active', p.dataset.panel === cat));
-      injectLabels();
       updateResults();
-      animateBars();
     }
     tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.cat)));
-
-    // ===== أشرطة المستوى =====
-    const bars = document.querySelectorAll('.skill-box .bar i');
-    function animateBars() { bars.forEach(b => { if (b.style.width === '') b.style.width = b.dataset.level + '%'; }); }
-    injectLabels();
     updateResults();
-    window.addEventListener('load', () => setTimeout(animateBars, 500));
   </script>
 </body>
 </html>
