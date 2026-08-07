@@ -45,8 +45,9 @@
     a { color:inherit; text-decoration:none; }
     .page-wrapper { max-width:1040px; margin:0 auto; padding:28px 24px 40px; }
     .topbar { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:18px; margin-bottom:28px; }
-    .topbar h1 { font-size:2rem; font-weight:900; color:#0f172a; }
-    .topbar p { max-width:720px; margin-top:14px; color:#475569; line-height:1.85; }
+    .topbar h1 { font-size:2rem; font-weight:900; color:#0f172a; position:relative; display:inline-block; }
+    .topbar h1::after { content:''; position:absolute; bottom:-10px; right:0; left:0; height:4px; border-radius:4px; margin:0 auto; background:linear-gradient(90deg,#2563eb,#ff9800); width:70px; }
+    .topbar p { max-width:720px; margin-top:24px; color:#475569; line-height:1.85; }
     .section-actions { display:flex; gap:12px; flex-wrap:wrap; }
 .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:14px; padding:13px 28px; font-weight:800; font-size:.96rem; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; border:none; cursor:pointer; box-shadow:0 6px 16px rgba(37,99,235,.10); }
     .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
@@ -62,14 +63,18 @@
     .contact-card:hover { transform:translateY(-6px); box-shadow:0 26px 50px rgba(15,23,42,.12); }
     .contact-card h2 { margin-bottom:18px; color:#2563eb; font-size:1.6rem; }
     .contact-list { display:grid; gap:16px; margin-top:24px; }
-    .contact-item { display:flex; align-items:flex-start; gap:16px; background:#f5f7fb; border:1px solid #e2e8f0; border-radius:18px; padding:20px; transition:transform .3s, border-color .3s, box-shadow .3s; }
+.contact-item { display:flex; align-items:flex-start; gap:16px; background:#f5f7fb; border:1px solid #e2e8f0; border-radius:18px; padding:20px; transition:transform .3s, border-color .3s, box-shadow .3s; }
     .contact-item:hover { transform:translateY(-4px); border-color:#2563eb; box-shadow:0 14px 30px rgba(15,23,42,.08); }
-    .contact-item i { font-size:1.6rem; color:#2563eb; margin-top:2px; }
+    .contact-item > .ico { font-size:1.3rem; color:#fff; width:54px; height:54px; display:flex; align-items:center; justify-content:center; border-radius:16px; background:linear-gradient(135deg,#2563eb,#4f46e5); box-shadow:0 10px 22px rgba(37,99,235,.28); flex-shrink:0; margin-top:0; }
+    .contact-item > .ico.wa { background:linear-gradient(135deg,#25d366,#128c7e); box-shadow:0 10px 22px rgba(37,211,102,.30); }
     .contact-meta h3 { font-size:1.05rem; margin-bottom:6px; color:#0f172a; }
     .contact-meta p { line-height:1.7; color:#475569; }
     .social-links { margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
     .social-links a { width:52px; height:52px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:#f5f7fb; border:1px solid #e2e8f0; color:#475569; font-size:1.25rem; transition:.25s cubic-bezier(.2,.8,.3,1); }
     .social-links a:hover { background:#2563eb; border-color:#2563eb; color:#fff; transform:translateY(-5px); box-shadow:0 14px 28px rgba(37,99,235,.25); }
+    .availability { display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:rgba(34,197,94,.10); color:#16a34a; font-weight:700; font-size:.86rem; padding:8px 16px; border-radius:999px; }
+    .availability .dot { width:9px; height:9px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 0 rgba(34,197,94,.5); animation:pulse 1.6s infinite; }
+    @keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(34,197,94,.5);} 70%{ box-shadow:0 0 0 9px rgba(34,197,94,0);} 100%{ box-shadow:0 0 0 0 rgba(34,197,94,0);} }
     .footer { margin-top:36px; text-align:center; color:#94a3b8; font-size:.9rem; }
     @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .contact-card { padding:20px; border-radius:20px; } .contact-item { flex-direction:column; } .social-links { justify-content:center; gap:10px; } .section-actions { width:100%; } .section-actions .btn-secondary, .section-actions a { flex:1 1 100%; width:100%; justify-content:center; } }
     @media (max-width:480px) { .contact-card { padding:16px; } .contact-item { padding:16px; } .contact-item i { font-size:1.4rem; } .social-links a { width:46px; height:46px; } }
@@ -117,6 +122,7 @@
       <div>
         <h1><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></h1>
         <p>قنوات الاتصال الرسمية الآمنة لتواصل احترافي وسريع مع المهندس أحمد أيمن.</p>
+        <div class="availability"><span class="dot"></span><span class="lang-ar">متاح للرد خلال 24 ساعة</span><span class="lang-en">Available to reply within 24h</span></div>
       </div>
       <div class="section-actions">
         <a class="btn-secondary" href="index.html"><i class="fas fa-home"></i><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
@@ -129,7 +135,7 @@
       <h2><span class="lang-ar">قنوات الاتصال الرسمية</span><span class="lang-en">Official Contact Channels</span></h2>
       <div class="contact-list">
         <div class="contact-item">
-          <i class="fas fa-phone-alt"></i>
+          <i class="fas fa-phone-alt ico wa"></i>
           <div class="contact-meta">
             <h3><span class="lang-ar">هاتف واتساب</span><span class="lang-en">WhatsApp</span></h3>
             <p dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">01028701351</p>
@@ -138,7 +144,7 @@
           </div>
         </div>
         <div class="contact-item">
-          <i class="fas fa-envelope"></i>
+          <i class="fas fa-envelope ico"></i>
           <div class="contact-meta">
             <h3><span class="lang-ar">البريد الإلكتروني</span><span class="lang-en">Email</span></h3>
             <p dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">info@ahmedayman.website</p>
@@ -147,7 +153,7 @@
           </div>
         </div>
         <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
+          <i class="fas fa-map-marker-alt ico"></i>
           <div class="contact-meta">
             <h3><span class="lang-ar">موقع جغرافي</span><span class="lang-en">Location</span></h3>
             <p class="lang-ar">القاهرة، جمهورية مصر العربية. متاح للعمل عن بُعد والمحلي.</p><p class="lang-en">Cairo, Egypt. Available for remote and on-site work.</p>

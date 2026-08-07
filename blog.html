@@ -59,7 +59,10 @@
       background:linear-gradient(90deg,#2563eb,#ff9800);
       width:70px;
     }
-    .topbar p { max-width:680px; margin:20px auto 0; line-height:1.85; color:#475569; }
+    .topbar p { max-width:680px; margin:24px auto 0; line-height:1.85; color:#475569; }
+    .topbar .blog-stats { display:flex; justify-content:center; gap:26px; flex-wrap:wrap; margin-top:20px; }
+    .topbar .blog-stats .bs { display:flex; align-items:center; gap:8px; font-weight:800; font-size:.9rem; color:#475569; }
+    .topbar .blog-stats .bs b { color:#2563eb; font-size:1.2rem; }
 
     /* ===== شريط البحث والأزرار ===== */
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; padding:18px; background:#ffffff; border:1px solid #e2e8f0; border-radius:20px; box-shadow:0 8px 24px rgba(15,23,42,.06); }
@@ -69,9 +72,14 @@
     .filter-btn.active, .filter-btn:hover { border-color:#2563eb; color:#2563eb; background:#eef6ff; }
 
     /* ===== بطاقة المقال ===== */
-    .post { background:#ffffff; border:1px solid #e2e8f0; border-radius:22px; padding:24px; margin-bottom:16px; display:flex; gap:20px; align-items:flex-start; transition:.25s; box-shadow:0 6px 18px rgba(15,23,42,.05); }
+    .post { background:#ffffff; border:1px solid #e2e8f0; border-radius:22px; padding:24px; margin-bottom:16px; display:flex; gap:20px; align-items:flex-start; transition:.25s; box-shadow:0 6px 18px rgba(15,23,42,.05); position:relative; overflow:hidden; }
+    .post::before { content:''; position:absolute; top:0; right:0; width:5px; height:100%; background:linear-gradient(180deg,#2563eb,#4f46e5 55%,#ff9800); opacity:0; transition:.3s; }
+    .post:hover::before { opacity:1; }
     .post:hover { transform:translateY(-4px); border-color:#2563eb; box-shadow:0 18px 40px rgba(37,99,235,.14); }
     .post-icon { flex-shrink:0; width:56px; height:56px; border-radius:16px; background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.35rem; box-shadow:0 10px 22px rgba(37,99,235,.3); }
+    .post-icon.marketing { background:linear-gradient(135deg,#ff9800,#f59e0b); box-shadow:0 10px 22px rgba(255,152,0,.3); }
+    .post-icon.seo { background:linear-gradient(135deg,#10b981,#059669); box-shadow:0 10px 22px rgba(16,185,129,.3); }
+    .post-icon.code { background:linear-gradient(135deg,#4f46e5,#7c3aed); box-shadow:0 10px 22px rgba(124,58,237,.3); }
     .post-body h2 { font-size:1.2rem; margin-bottom:8px; color:#0f172a; font-weight:800; }
     .meta { font-size:.78rem; color:#475569; display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
     .meta .tag { display:inline-block; padding:3px 12px; border-radius:999px; background:rgba(37,99,235,.1); color:#2563eb; font-weight:800; font-size:.72rem; }
@@ -162,6 +170,11 @@
     <span class="pill"><i class="fas fa-blog"></i><span class="lang-ar">مقالاتي</span><span class="lang-en">My Articles</span></span>
     <h1><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></h1>
     <p><span class="lang-ar">أفكار ومقالات احترافية في البرمجة والتسويق الرقمي وتطوير الأعمال.</span><span class="lang-en">Professional ideas and articles on programming, digital marketing and business growth.</span></p>
+    <div class="blog-stats">
+      <div class="bs"><i class="far fa-file-alt"></i><b id="statPosts">0</b><span class="lang-ar">مقال</span><span class="lang-en">Articles</span></div>
+      <div class="bs"><i class="fas fa-tags"></i><b id="statTags">0</b><span class="lang-ar">تصنيف</span><span class="lang-en">Categories</span></div>
+      <div class="bs"><i class="far fa-clock"></i><b id="statMins">0</b><span class="lang-ar">دقيقة قراءة</span><span class="lang-en">min reading</span></div>
+    </div>
   </header>
 
   <main id="listView">
@@ -264,19 +277,38 @@
     }
     const el = document.getElementById('postsContainer');
     if (!list.length) { el.innerHTML = '<div class="posts-empty">لا توجد مقالات مطابقة.</div>'; return; }
-    el.innerHTML = list.map(p => `
+    el.innerHTML = list.map(p => {
+      const tags = p.tags || [];
+      let iconCls = 'code', icon = 'fa-scroll';
+      const tl = tags.map(t=>t.trim().toLowerCase()).join(' ');
+      if (/(تسويق|marketing|سوشيال|اعلان)/.test(tl)) { iconCls='marketing'; icon='fa-bullhorn'; }
+      else if (/(seo|تحسين)/.test(tl)) { iconCls='seo'; icon='fa-search'; }
+      else if (/(برمجة|code|برمجة)/.test(tl)) { iconCls='code'; icon='fa-code'; }
+      const wc = (p.content_ar||'').split(/\s+/).length;
+      const mins = Math.max(1, Math.round(wc/200));
+      return `
       <a class="post" href="#" onclick="openPost('${p.id}');return false;">
-        <div class="post-icon"><i class="fas fa-scroll"></i></div>
+        <div class="post-icon ${iconCls}"><i class="fas ${icon}"></i></div>
         <div class="post-body">
           <h2>${esc(p.title_ar || p.title_en)}</h2>
           <div class="meta">
             <span><i class="far fa-calendar"></i> ${esc(p.date || '')}</span>
+            <span><i class="far fa-clock"></i> ${mins} <span class="lang-ar">دقائق</span><span class="lang-en">min</span></span>
             <span><i class="fas fa-user"></i> <span class="lang-ar">أحمد أيمن</span><span class="lang-en">Ahmed Ayman</span></span>
           </div>
           <p class="excerpt">${esc(p.excerpt_ar || p.excerpt_en || '')}</p>
-          <div class="meta">${(p.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+          <div class="meta">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
         </div>
-      </a>`).join('');
+      </a>`}).join('');
+    updateStats();
+  }
+  function updateStats(){
+    document.getElementById('statPosts').textContent = allPosts.length;
+    const tagSet = new Set();
+    allPosts.forEach(p=>(p.tags||[]).forEach(t=>tagSet.add(t.trim().toLowerCase())));
+    document.getElementById('statTags').textContent = tagSet.size;
+    const totalWords = allPosts.reduce((s,p)=>s+(p.content_ar||'').split(/\s+/).length,0);
+    document.getElementById('statMins').textContent = Math.max(1, Math.round(totalWords/200));
   }
   function esc(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function renderMarkdown(md){
