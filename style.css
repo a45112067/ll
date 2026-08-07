@@ -86,9 +86,66 @@ body.english .lang-ar { display: none !important; }
 body.english .lang-en { display: block !important; }
 body.english { direction: ltr; }
 
+/* ===== Footer موحّد ===== */
+.footer-links {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 14px; padding: 0 16px;
+}
+.footer-links a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 14px;
+  background: #f0f4fa; border: 1px solid #e2e8f0; color: #475569;
+  font-size: 1.1rem; transition: .22s cubic-bezier(.2,.8,.3,1);
+}
+.footer-links a:hover {
+  background: #2563eb; border-color: #2563eb; color: #fff;
+  transform: translateY(-4px); box-shadow: 0 12px 24px rgba(37,99,235,.25);
+}
+.footer { text-align: center; color: #94a3b8; font-size: .9rem; line-height: 1.8; }
+.footer > div:last-child { padding-bottom: 4px; }
+
+/* ===== شريط مستوى المهارات/اللغات ===== */
+.level-bar {
+  height: 10px; border-radius: 999px; overflow: hidden;
+  background: #e9edf6; border: 1px solid #e2e8f0; margin: 14px 0 8px;
+}
+.level-bar span {
+  display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+}
+.language-card small { display: block; color: #64748b; font-size: .85rem; }
+.skill-box .level-bar { margin: 12px 0 0; }
+.skill-box .level-bar span.adv { background: linear-gradient(90deg, #2563eb, #1d4ed8); }
+.skill-box .level-bar span.int { background: linear-gradient(90deg, #ff9800, #f59e0b); }
+
+/* ===== أزرار التواصل ===== */
+.contact-strip {
+  margin-top: 36px; padding: 18px 0 8px; border-top: 1px solid #e2e8f0;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; flex-wrap: wrap; text-align: center;
+}
+.contact-strip a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 12px;
+  background: #f0f4fa; border: 1px solid #e2e8f0; color: #475569;
+  font-weight: 700; font-size: .9rem; transition: .22s;
+}
+.contact-strip a:hover { border-color: #2563eb; color: #2563eb; transform: translateY(-3px); box-shadow: 0 10px 22px rgba(37,99,235,.15); }
+.contact-strip .copy { width: 100%; color: #94a3b8; font-size: .88rem; margin-top: 6px; }
+
+.contact-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 12px; padding: 10px 20px; border-radius: 12px;
+  background: #2563eb; border: 1px solid #2563eb; color: #fff;
+  font-weight: 800; font-size: .9rem; cursor: pointer;
+  transition: .25s cubic-bezier(.2,.8,.3,1); box-shadow: 0 10px 22px rgba(37,99,235,.28);
+}
+.contact-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(37,99,235,.38); }
+.contact-btn.wa { background: linear-gradient(120deg,#25d366,#128c7e); border-color: #25d366; box-shadow: 0 10px 22px rgba(37,211,102,.30); }
+.contact-btn.wa:hover { box-shadow: 0 16px 32px rgba(37,211,102,.42); }
+
 /* ===== Back to top ===== */
-.back-to-top {
-  position: fixed; bottom: 24px; left: 24px; z-index: 1500;
+.back-to-top {  position: fixed; bottom: 24px; left: 24px; z-index: 1500;
   width: 46px; height: 46px; border-radius: 14px;
   background: #2563eb; color: #fff;
   display: flex; align-items: center; justify-content: center;
