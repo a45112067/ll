@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>المشاريع | أحمد أيمن يحيى - برمجة وتسويق</title>
+  <meta name="description" content="مشاريع المهندس أحمد أيمن يحيى في تطوير البرمجيات وتطوير الويب والتسويق الرقمي، مشاريع متكاملة تحقق قيمة حقيقية.">
+  <meta name="keywords" content="مشاريع, مشاريع احمد ايمن, Projects Ahmed Ayman, تطوير برمجيات, تطوير مواقع, Full Stack Developer, مبرمج فريلانسر, تسويق رقمي, مشروع برمجة, Software Projects, Web Development Projects">
+  <meta name="author" content="Ahmed Ayman Yahya">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ahmedayman.website/projects.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',sans-serif; }
+    body { min-height:100vh; background:#f5f7fb; color:#0f172a; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    .container { max-width:1160px; margin:0 auto; padding:28px 24px 40px; }
+
+    /* Navbar */
+    .site-navbar {
+      position: sticky; top:14px; z-index:1500;
+      max-width:1160px; margin:14px auto 0;
+      padding:10px 22px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(255,255,255,0.82);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      border:1px solid #e2e8f0; border-radius:18px;
+      box-shadow:0 2px 10px rgba(15,23,42,0.06);
+    }
+    .logo { display:flex; align-items:center; gap:12px; font-weight:800; color:#0f172a; }
+    .logo img { border-radius:12px; }
+    .nav-links { display:flex; gap:6px; }
+    .nav-links a { padding:8px 14px; border-radius:12px; font-weight:700; font-size:.9rem; color:#475569; transition:.2s; }
+    .nav-links a:hover, .nav-links a.active { background:#f0f4fa; color:#2563eb; }
+    .nav-actions { display:flex; align-items:center; gap:10px; }
+    .lang-switch { background:#f0f4fa; border:1px solid #e2e8f0; color:#0f172a; padding:8px 14px; border-radius:12px; font-weight:800; font-size:.82rem; cursor:pointer; transition:.2s; }
+    .lang-switch:hover { border-color:#2563eb; color:#2563eb; }
+    .menu-btn { display:none; width:44px; height:44px; border-radius:12px; background:#f0f4fa; border:1px solid #e2e8f0; color:#0f172a; font-size:1.15rem; cursor:pointer; align-items:center; justify-content:center; }
+    .lang-ar, .lang-en { transition:.15s; }
+    .lang-en { display:none !important; }
+    body.english .lang-ar { display:none !important; }
+    body.english .lang-en { display:block !important; }
+    body.english { direction:ltr; }
+
+    /* Sidebar */
+    .sidebar { position:fixed; inset:0; z-index:3000; background:rgba(15,23,42,0.45); backdrop-filter:blur(6px); opacity:0; visibility:hidden; transition:.3s; }
+    .sidebar.open { opacity:1; visibility:visible; }
+    .sidebar-inner { position:absolute; top:0; right:0; height:100%; width:290px; background:#fff; box-shadow:-16px 0 44px rgba(15,23,42,0.16); padding:26px 20px; display:flex; flex-direction:column; gap:6px; transform:translateX(110%); transition:transform .35s cubic-bezier(.2,.9,.3,1); }
+    body.english .sidebar-inner { right:auto; left:0; transform:translateX(-110%); }
+    .sidebar.open .sidebar-inner { transform:translateX(0); }
+    .close-sidebar { align-self:flex-start; width:40px; height:40px; border-radius:12px; border:1px solid #e2e8f0; background:#f0f4fa; color:#0f172a; font-size:1.05rem; cursor:pointer; margin-bottom:12px; display:flex; align-items:center; justify-content:center; }
+    .sidebar-inner a { padding:14px 18px; border-radius:14px; font-weight:700; color:#475569; transition:.2s; }
+    .sidebar-inner a:hover, .sidebar-inner a.active { background:#f0f4fa; color:#2563eb; }
+    .mobile-lang { margin-top:14px; text-align:center; background:#f0f4fa; border:1px solid #e2e8f0; padding:12px; border-radius:14px; cursor:pointer; font-weight:800; color:#0f172a; font-size:.9rem; }
+
+    /* Header */
+    .page-head { text-align:center; margin:44px 0 44px; }
+    .page-head .pill { display:inline-block; background:rgba(37,99,235,0.09); color:#2563eb; padding:6px 18px; border-radius:999px; font-weight:800; font-size:.8rem; margin-bottom:14px; }
+    .page-head h1 { font-size:clamp(2rem,4vw,2.6rem); font-weight:900; color:#0f172a; }
+    .page-head p { color:#475569; max-width:620px; margin:14px auto 0; font-size:1.02rem; }
+
+    /* Buttons */
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.96rem; cursor:pointer; border:none; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; box-shadow:0 6px 16px rgba(37,99,235,.10); }
+    .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
+    .btn:hover::before { left:100%; }
+    .btn i { transition:transform .25s; }
+    .btn:hover i { transform:translateY(2px) scale(1.15); }
+    .btn-secondary { background:#fff; border:1.5px solid #e2e8f0; color:#475569; box-shadow:none; }
+    .btn-secondary:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-4px); box-shadow:0 14px 30px rgba(37,99,235,.15); }
+    .btn-primary { background:linear-gradient(120deg,#2563eb,#1d4ed8); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
+    .btn-primary:active { transform:translateY(-1px) scale(.99); }
+    .btn-primary:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 18px 40px rgba(37,99,235,.40); }
+
+    /* Projects Grid */
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px,1fr)); gap:26px; }
+    .project-card {
+      background:#fff; border:1px solid #e2e8f0; border-radius:22px; overflow:hidden;
+      box-shadow:0 12px 30px rgba(15,23,42,0.07);
+      display:flex; flex-direction:column;
+      transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s, border-color .3s;
+    }
+    .project-card:hover { transform:translateY(-8px); box-shadow:0 28px 55px rgba(15,23,42,0.14); border-color:#2563eb; }
+    .project-media { position:relative; overflow:hidden; aspect-ratio:16/9; background:#f0f4fa; }
+    .project-media img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+    .project-card:hover .project-media img { transform:scale(1.08); }
+    .project-tag {
+      position:absolute; top:14px; right:14px;
+      background:rgba(37,99,235,0.92); color:#fff;
+      padding:5px 14px; border-radius:999px;
+      font-size:.72rem; font-weight:800;
+      backdrop-filter:blur(4px);
+    }
+    .project-body { padding:24px; display:flex; flex-direction:column; flex:1; }
+    .project-body h2 { font-size:1.25rem; font-weight:800; color:#0f172a; margin-bottom:10px; }
+    .project-body p { color:#475569; font-size:.96rem; line-height:1.75; flex:1; margin-bottom:20px; }
+    .project-links { display:flex; gap:12px; flex-wrap:wrap; }
+
+    .footer { text-align:center; margin-top:60px; color:#94a3b8; font-size:.9rem; }
+
+    /* Responsive */
+    @media (max-width:820px) {
+      .nav-links { display:none; }
+      .menu-btn { display:flex; }
+      .nav-actions .lang-switch { display:none; }
+      .projects-grid { grid-template-columns:1fr; }
+      .page-head { margin: 28px 16px 34px; }
+    }
+    @media (max-width:640px) {
+      .container { padding: 12px 16px 40px; }
+      .page-head h1 { font-size: 1.7rem; }
+      .page-head p { font-size: .95rem; }
+      .project-body { padding: 18px 16px; }
+      .project-links { flex-direction: column; }
+      .project-links .btn { width: 100%; justify-content: center; }
+      .back-to-top { width: 42px; height: 42px; bottom: 16px; left: 16px; }
+    }
+    @media (max-width:768px) {
+      .site-navbar { top: 6px; margin: 6px 10px 0; padding: 8px 14px; border-radius:16px; }
+      .site-navbar .logo img { width:36px; height:36px; }
+    }
+    @media (max-width:480px) {
+      .site-navbar { margin: 6px 8px 0; padding: 8px 12px; }
+      .site-navbar .logo span, .site-navbar .logo strong { font-size:.8rem; }
+      .sidebar-inner { width:84vw; max-width:300px; }
+      .sidebar-inner a { padding:15px 18px; min-height:48px; display:flex; align-items:center; }
+      .project-card { border-radius:18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-navbar" aria-label="Main navigation">
+  <div class="logo">
+    <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="شعار أحمد أيمن" width="42" height="42">
+    <strong><span class="lang-ar">أحمد أيمن</span><span class="lang-en">Ahmed Ayman</span></strong>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="lang-ar">الرئيسية</a><a href="index.html" class="lang-en">Home</a>
+    <a href="projects.html" class="active lang-ar">المشاريع</a><a href="projects.html" class="active lang-en">Projects</a>
+    <a href="about.html" class="lang-ar">نبذة</a><a href="about.html" class="lang-en">About</a>
+    <a href="contact.html" class="lang-ar">تواصل</a><a href="contact.html" class="lang-en">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="lang-switch" id="langSwitch" aria-label="تغيير اللغة"><span class="lang-ar">English</span><span class="lang-en">العربية</span></button>
+    <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner">
+    <button class="close-sidebar" id="closeSidebar" aria-label="إغلاق القائمة"><i class="fas fa-times"></i></button>
+    <a href="index.html"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
+    <a href="about.html"><span class="lang-ar">نبذة عني</span><span class="lang-en">About Me</span></a>
+    <a href="experience.html"><span class="lang-ar">الخبرة العملية</span><span class="lang-en">Experience</span></a>
+    <a href="projects.html"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
+    <a href="skills.html"><span class="lang-ar">المهارات التقنية</span><span class="lang-en">Technical Skills</span></a>
+    <a href="education.html"><span class="lang-ar">التعليم الأكاديمي</span><span class="lang-en">Education</span></a>
+    <a href="certificates.html"><span class="lang-ar">الشهادات والاعتمادات</span><span class="lang-en">Certificates</span></a>
+    <a href="languages.html"><span class="lang-ar">اللغات</span><span class="lang-en">Languages</span></a>
+    <a href="contact.html"><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></a>
+    <div class="mobile-lang" id="mobileLang"><span class="lang-ar">English</span><span class="lang-en">العربية</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="page-head" data-aos="fade-up">
+    <span class="pill"><span class="lang-ar">أعمالي</span><span class="lang-en">My Work</span></span>
+    <h1><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></h1>
+    <p><span class="lang-ar">مجموعة من المشاريع البرمجية والهندسية والتسويقية التي عملت عليها لتحقيق قيمة حقيقية</span><span class="lang-en">A collection of software, engineering and marketing projects I've worked on to deliver real value</span></p>
+  </div>
+
+  <div class="projects-grid">
+    <article class="project-card" data-aos="fade-up">
+      <div class="project-media">
+        <span class="project-tag"><span class="lang-ar">تطوير برمجيات</span><span class="lang-en">Software</span></span>
+        <img loading="lazy" src="https://placehold.co/640x360/dbeafe/2563eb?text=Project+1" alt="مشروع برمجي 1">
+      </div>
+      <div class="project-body">
+        <h2>اسم المشروع الأول</h2>
+        <p>وصف مختصر واحترافي للمشروع يوضح ما يقدمه المشروع وكيف يساهم في حل المشكلة أو تحسين العمل، مكتوب بشكل جذاب وواضح للقارئ.</p>
+        <div class="project-links">
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span class="lang-ar">زيارة المشروع</span><span class="lang-en">Visit Project</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="project-media">
+        <span class="project-tag"><span class="lang-ar">تصميم هندسي</span><span class="lang-en">Engineering</span></span>
+        <img loading="lazy" src="https://placehold.co/700x360/dcc7f5/7c3aed?text=Project+2" alt="مشروع هندسي 2">
+      </div>
+      <div class="project-body">
+        <h2>اسم المشروع الثاني</h2>
+        <p><span class="lang-ar">وصف مختصر واحترافي للمشروع يبرز المخرجات الهندسية والدقة في التنفيذ باستخدام أحدث الأدوات.</span><span class="lang-en">A brief professional description highlighting the engineering outputs and execution precision.</span></p>
+        <div class="project-links">
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span class="lang-ar">زيارة المشروع</span><span class="lang-en">Visit Project</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="project-media">
+        <span class="project-tag"><span class="lang-ar">تسويق رقمي</span><span class="lang-en">Marketing</span></span>
+        <img loading="lazy" src="https://placehold.co/700x360/fde1d9/f97316?text=Project+3" alt="مشروع تسويق 3">
+      </div>
+      <div class="project-body">
+        <h2>اسم المشروع الثالث</h2>
+        <p><span class="lang-ar">وصف مختصر احترافي لحملة تسويقية رقمية حققت نتائج ملموسة في زيادة الوعي والتحويل.</span><span class="lang-en">A professional description of a digital marketing campaign that delivered tangible results.</span></p>
+        <div class="project-links">
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span class="lang-ar">زيارة المشروع</span><span class="lang-en">Visit Project</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-aos="fade-up">
+      <div class="project-media">
+        <span class="project-tag"><span class="lang-ar">تطوير برمجيات</span><span class="lang-en">Software</span></span>
+        <img loading="lazy" src="https://placehold.co/700x360/d1fae5/10b981?text=Project+4" alt="مشروع برمجي 4">
+      </div>
+      <div class="project-body">
+        <h2>اسم المشروع الرابع</h2>
+        <p><span class="lang-ar">وصف مختصر واحترافي يعرض الهدف من المشروع والأدوات التقنية المستخدمة والنتائج المحققة.</span><span class="lang-en">A brief description showing the project goal, tech stack used, and achieved results.</span></p>
+        <div class="project-links">
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span class="lang-ar">زيارة المشروع</span><span class="lang-en">Visit Project</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="project-media">
+        <span class="project-tag"><span class="lang-ar">قواعد بيانات</span><span class="lang-en">Database</span></span>
+        <img loading="lazy" src="https://placehold.co/700x360/fef3c7/f59e0b?text=Project+5" alt="مشروع قواعد بيانات 5">
+      </div>
+      <div class="project-body">
+        <h2>اسم المشروع الخامس</h2>
+        <p><span class="lang-ar">مشروع يوضح تصميم قواعد البيانات وتحليل البيانات لدعم اتخاذ القرار ورفع الكفاءة.</span><span class="lang-en">A project showcasing database design and data analysis to support decision-making.</span></p>
+        <div class="project-links">
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span class="lang-ar">زيارة المشروع</span><span class="lang-en">Visit Project</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="project-media">
+        <span class="project-tag"><span class="lang-ar">تطوير ويب</span><span class="lang-en">Web Dev</span></span>
+        <img loading="lazy" src="https://placehold.co/700x360/e9d5ff/7c3aed?text=Project+6" alt="مشروع ويب 6">
+      </div>
+      <div class="project-body">
+        <h2>اسم المشروع السادس</h2>
+        <p><span class="lang-ar">بوابة أو تطبيق ويب متكامل يعرض تجربة مستخدم احترافية وأداء قوي واستجابة سريعة.</span><span class="lang-en">A web portal or app offering a professional UX with strong performance and fast responsiveness.</span></p>
+        <div class="project-links">
+          <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span class="lang-ar">زيارة المشروع</span><span class="lang-en">Visit Project</span></a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <footer class="footer">© 2026 Vexonet. كل الحقوق محفوظة.</footer>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration:600, once:true, offset:60 });
+
+  const sidebar = document.getElementById('sidebar');
+  document.getElementById('menuBtn').addEventListener('click', () => sidebar.classList.add('open'));
+  document.getElementById('closeSidebar').addEventListener('click', () => sidebar.classList.remove('open'));
+  sidebar.addEventListener('click', (e) => { if (e.target === sidebar) sidebar.classList.remove('open'); });
+  document.querySelectorAll('.sidebar-inner a').forEach(l => l.addEventListener('click', () => sidebar.classList.remove('open')));
+
+  function switchLang() {
+    const en = document.body.classList.toggle('english');
+    document.body.dir = en ? 'ltr' : 'rtl';
+    localStorage.setItem('lang', en ? 'en' : 'ar');
+  }
+  let saved = localStorage.getItem('lang');
+  if (saved === 'en') { document.body.classList.add('english'); document.body.dir = 'ltr'; }
+  document.getElementById('langSwitch').addEventListener('click', switchLang);
+  document.getElementById('mobileLang').addEventListener('click', () => { switchLang(); sidebar.classList.remove('open'); });
+</script>
+</body>
+</html>

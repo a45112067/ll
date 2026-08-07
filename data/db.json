@@ -1,0 +1,31 @@
+{
+  "site": {
+    "title_ar": "أحمد أيمن يحيى",
+    "title_en": "Ahmed Ayman Yahya",
+    "tagline_ar": "مهندس برمجيات وطالب في جامعة السويدي بمصر (SUT)",
+    "tagline_en": "Software Engineer & Student at El Sewedy University (SUT)",
+    "phone": "01028701351",
+    "email": "info@ahmedayman.website",
+    "location_ar": "القاهرة، مصر",
+    "location_en": "Cairo, Egypt",
+    "hero_text_ar": "جاهز للتعاون في مشاريع برمجية أو هندسية أو تسويقية",
+    "hero_text_en": "Ready to collaborate on software, engineering or marketing projects",
+    "footer_ar": "© 2026 Vexonet. كل الحقوق محفوظة.",
+    "footer_en": "© 2026 Vexonet. All Rights Reserved."
+  },
+  "posts": [
+    {
+      "id": "p1",
+      "title_ar": "أهلاً بكم في مدونتي!",
+      "title_en": "Welcome to my blog!",
+      "excerpt_ar": "مقال تعريفي حول الموقع وما سأقدمه هنا من محتوى تقني وتسويقي وهندسي.",
+      "excerpt_en": "An intro article about this site and the tech, marketing and engineering content I'll share here.",
+      "content_ar": "مرحباً بك في مدونتي. هنا سأنشر مقالات حول البرمجة، التطوير، التسويق الرقمي، التصميم الهندسي، وأحدث ما أتعلمه في رحلتي الجامعية والمهنية.\n\nأتمنى أن تجد في هذه الصفحات قيمة حقيقية.",
+      "content_en": "Welcome to my blog. Here I'll publish articles about programming, development, digital marketing, engineering design, and the latest I learn through my academic and professional journey.\n\nI hope you find real value in these pages.",
+      "tags": ["تعريف", "عام"],
+      "date": "2026-08-01",
+      "status": "published",
+      "image": ""
+    }
+  ]
+}
