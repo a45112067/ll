@@ -6,8 +6,40 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    // إعدادات الموقع: قراءة عامة، كتابة للأدمن فقط
+    // المجموعات الثابتة: قراءة عامة، كتابة للأدمن فقط
     match /site/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /projects/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /certificates/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /about/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /contact/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /skills/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /experience/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /education/{doc} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+    match /languages/{doc} {
       allow read: if true;
       allow write: if signedIn();
     }
@@ -16,18 +48,6 @@ service cloud.firestore {
     match /posts/{post} {
       allow read: if resource == null || resource.data.status == 'published' || signedIn();
       allow create, update, delete: if signedIn();
-    }
-
-    // المشاريع: قراءة عامة، كتابة للأدمن
-    match /projects/{doc} {
-      allow read: if true;
-      allow write: if signedIn();
-    }
-
-    // الشهادات: قراءة عامة، كتابة للأدمن
-    match /certificates/{doc} {
-      allow read: if true;
-      allow write: if signedIn();
     }
   }
 }

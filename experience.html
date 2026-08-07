@@ -172,7 +172,7 @@
       </div>
     </header>
 
-    <section class="experience-list" data-aos="fade-up">
+    <section class="experience-list" id="experienceList" data-aos="fade-up">
       <article class="exp-card" data-aos="zoom-in" data-aos-delay="50">
         <div class="exp-title">
           <h2>Sales & Marketing Specialist</h2>
@@ -232,6 +232,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -267,6 +270,32 @@
     const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
     new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
     syncBodyLock();
+
+    // ===== تحميل الخبرات من Firestore (تُدار من اللوحة) =====
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    (async () => {
+      let app, db;
+      try {
+        app = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicExp');
+        db = firebase.firestore(app);
+        const snap = await db.collection('experience').get();
+        if (snap.empty) return;
+        const list = snap.docs.map(d => d.data());
+        const box = document.getElementById('experienceList');
+        if (!box) return;
+        box.innerHTML = list.map((p, i) => {
+          const role = (currentLang === 'en' ? (p.role_en || p.role_ar) : (p.role_ar || p.role_en)) || '';
+          const co = (currentLang === 'en' ? (p.co_en || p.co_ar) : (p.co_ar || p.co_en)) || '';
+          const date = (currentLang === 'en' ? (p.date_en || p.date_ar) : (p.date_ar || p.date_en)) || '';
+          const bullets = (currentLang === 'en' ? (p.bullets_en || p.bullets_ar) : (p.bullets_ar || p.bullets_en)) || [];
+          return `<article class="exp-card" data-aos="zoom-in" data-aos-delay="${40 + i*50}">
+            <div class="exp-title"><h2>${esc(role)}</h2><span class="exp-company">${esc(co)}</span></div>
+            <div class="exp-date"><i class="fas fa-calendar-alt"></i> ${esc(date)}</div>
+            <ul class="exp-list">${(bullets||[]).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+          </article>`;
+        }).join('');
+      } catch (e) { /* يبقى المحتوى الثابت كخيار احتياطي */ }
+    })();
   </script>
 </body>
 </html>

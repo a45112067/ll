@@ -128,8 +128,8 @@
   </div>
 
   <div class="page-wrapper">
-    <header class="topbar" data-aos="fade-down">
-      <div>
+<header class="topbar" data-aos="fade-down">
+      <div id="aboutIntro">
         <h1><span class="lang-ar">نبذة عني</span><span class="lang-en">About Me</span></h1>
         <p><span class="lang-ar">طالب هندسة برمجيات في <strong>جامعة السويدي للتكنولوجيا (SUT)</strong>، شغوف بتطوير البرمجيات والبرمجة وتحليل البيانات. أمتلك مهارات في Java وPython وSQL وICDL، مع اهتمام قوي بحل المشكلات والتعلم المستمر وبناء مشاريع برمجية مؤثرة.</span><span class="lang-en">Software Engineering student at <strong>El Sewedy University of Technology (SUT)</strong>, passionate about software development, programming, and Data Analysis. Skilled in Java, Python, SQL, and ICDL, with a strong focus on problem-solving, continuous learning, and building impactful software projects.</span></p>
       </div>
@@ -178,6 +178,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -216,6 +219,24 @@
     const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
     new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
     syncBodyLock();
+
+    // ===== تحميل النبذة من Firestore (تُدار من اللوحة) =====
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    (async () => {
+      try {
+        const app = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicAbout');
+        const db = firebase.firestore(app);
+        const doc = await db.collection('about').doc('main').get();
+        if (!doc.exists) return;
+        const p = doc.data();
+        if (!p.text_ar && !p.text_en) return;
+        const box = document.getElementById('aboutIntro');
+        if (!box) return;
+        box.innerHTML = `
+          <h1 class="lang-ar">نبذة عني</h1><h1 class="lang-en">About Me</h1>
+          <p>${currentLang === 'en' ? esc(p.text_en || p.text_ar) : esc(p.text_ar || p.text_en)}</p>`;
+      } catch (e) { /* يبقى المحتوى الثابت */ }
+    })();
   </script>
 </body>
 </html>

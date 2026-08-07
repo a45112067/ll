@@ -123,7 +123,7 @@
       </div>
     </header>
 
-    <section class="language-grid" data-aos="fade-up">
+    <section class="language-grid" id="languageGrid" data-aos="fade-up">
       <article class="language-card" data-aos="zoom-in" data-aos-delay="50">
         <div class="language-icon"><i class="fas fa-language"></i></div>
         <h2><span class="lang-ar">العربية</span><span class="lang-en">Arabic</span></h2>
@@ -149,6 +149,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -184,6 +187,33 @@
     const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
     new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
     syncBodyLock();
+
+    // ===== تحميل اللغات من Firestore (تُدار من اللوحة) =====
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    (async () => {
+      let app, db;
+      try {
+        app = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicLang');
+        db = firebase.firestore(app);
+        const snap = await db.collection('languages').get();
+        if (snap.empty) return;
+        const list = snap.docs.map(d => d.data());
+        const grid = document.getElementById('languageGrid');
+        if (!grid) return;
+        const icons = ['fa-language','fa-globe','fa-comments','fa-flag'];
+        grid.innerHTML = list.map((p, i) => {
+          const name = (currentLang === 'en' ? (p.name_en || p.name_ar) : (p.name_ar || p.name_en)) || '';
+          const level = (currentLang === 'en' ? (p.level_en || p.level_ar) : (p.level_ar || p.level_en)) || '';
+          const lvl = p.level || 100;
+          return `<article class="language-card" data-aos="zoom-in" data-aos-delay="${40 + i*50}">
+            <div class="language-icon"><i class="fas ${icons[i % icons.length]}"></i></div>
+            <h2>${esc(name)}</h2>
+            <p>${esc(level)}</p>
+            <div class="level-bar"><span style="width:${Math.max(0, Math.min(100, lvl))}%"></span></div>
+          </article>`;
+        }).join('');
+      } catch (e) { /* يبقى المحتوى الثابت كخيار احتياطي */ }
+    })();
   </script>
 </body>
 </html>

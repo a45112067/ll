@@ -266,17 +266,17 @@
   let allPosts = [], currentFilter = 'all', searchTerm = '';
 
   async function loadPosts() {
+    // الأساس: Firestore (حيث تُدار المنشورات من اللوحة). الملف المحلي fallback فقط.
+    try {
+      const snap = await db.collection('posts').where('status', '==', 'published').get();
+      allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      render(); return;
+    } catch (e) {}
     try {
       const res = await fetch('data/blog.json');
       if (res.ok) { allPosts = (await res.json()).filter(p => p.status === 'published'); render(); return; }
     } catch (e) {}
-    try {
-      const snap = await db.collection('posts').where('status', '==', 'published').get();
-      allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      render();
-    } catch (e) {
-      document.getElementById('postsContainer').innerHTML = '<div class="posts-empty">تعذّر تحميل المقالات.</div>';
-    }
+    document.getElementById('postsContainer').innerHTML = '<div class="posts-empty">تعذّر تحميل المقالات.</div>';
   }
 
   function render() {

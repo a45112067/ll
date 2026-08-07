@@ -136,35 +136,35 @@
 
     <section class="contact-card" data-aos="fade-up">
       <h2><span class="lang-ar">قنوات الاتصال الرسمية</span><span class="lang-en">Official Contact Channels</span></h2>
-      <div class="contact-list">
+      <div class="contact-list" id="contactList">
         <div class="contact-item">
           <i class="fas fa-phone-alt ico wa"></i>
           <div class="contact-meta">
             <h3><span class="lang-ar">هاتف واتساب</span><span class="lang-en">WhatsApp</span></h3>
-            <p dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">01028701351</p>
+            <p id="cntPhone" dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">01028701351</p>
             <p class="lang-ar">رقم مباشر للتواصل السريع والدعم الفني.</p><p class="lang-en">Direct line for fast contact and support.</p>
-            <a class="contact-btn wa" href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span class="lang-ar">بدء محادثة</span><span class="lang-en">Start Chat</span></a>
+            <a class="contact-btn wa" id="cntWa" href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span class="lang-ar">بدء محادثة</span><span class="lang-en">Start Chat</span></a>
           </div>
         </div>
         <div class="contact-item">
           <i class="fas fa-envelope ico"></i>
           <div class="contact-meta">
             <h3><span class="lang-ar">البريد الإلكتروني</span><span class="lang-en">Email</span></h3>
-            <p dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">info@ahmedayman.website</p>
+            <p id="cntEmail" dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">info@ahmedayman.website</p>
             <p class="lang-ar">يمكنك إرسال الرسائل الرسمية أو الطلبات المهنية عبر البريد الإلكتروني.</p><p class="lang-en">Send official messages or professional inquiries by email.</p>
-            <a class="contact-btn" href="mailto:info@ahmedayman.website?subject=Request"><i class="fas fa-paper-plane"></i><span class="lang-ar">إرسال بريد</span><span class="lang-en">Send Email</span></a>
+            <a class="contact-btn" id="cntMailto" href="mailto:info@ahmedayman.website?subject=Request"><i class="fas fa-paper-plane"></i><span class="lang-ar">إرسال بريد</span><span class="lang-en">Send Email</span></a>
           </div>
         </div>
         <div class="contact-item">
           <i class="fas fa-map-marker-alt ico"></i>
           <div class="contact-meta">
             <h3><span class="lang-ar">موقع جغرافي</span><span class="lang-en">Location</span></h3>
-            <p class="lang-ar">القاهرة، جمهورية مصر العربية. متاح للعمل عن بُعد والمحلي.</p><p class="lang-en">Cairo, Egypt. Available for remote and on-site work.</p>
+            <p id="cntLoc"><span class="lang-ar">القاهرة، جمهورية مصر العربية. متاح للعمل عن بُعد والمحلي.</span><span class="lang-en">Cairo, Egypt. Available for remote and on-site work.</span></p>
           </div>
         </div>
       </div>
 
-      <div class="social-links">
+      <div class="social-links" id="socialLinks">
         <a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
@@ -180,6 +180,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -215,6 +218,32 @@
     const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
     new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
     syncBodyLock();
+
+    // ===== تحميل بيانات التواصل من Firestore (تُدار من اللوحة) =====
+    const escS = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    (async () => {
+      try {
+        const app = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicContact');
+        const db = firebase.firestore(app);
+        const doc = await db.collection('contact').doc('main').get();
+        if (!doc.exists) return;
+        const p = doc.data();
+        const phone = p.phone || '', email = p.email || '', locEn = p.loc_en || '', locAr = p.loc_ar || '';
+        if (phone) {
+          $x('cntPhone').textContent = phone;
+          $x('cntWa').href = 'https://wa.me/' + phone.replace(/\D/g, '');
+        }
+        if (email) { $x('cntEmail').textContent = email; $x('cntMailto').href = 'mailto:' + email + '?subject=Request'; }
+        if (locAr || locEn) {
+          $x('cntLoc').innerHTML = `<span class="lang-ar">${escS(locAr || locEn)}</span><span class="lang-en">${escS(locEn || locAr)}</span>`;
+        }
+        $x('socialLinks').innerHTML = `
+          ${p.facebook ? `<a href="${escS(p.facebook)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>` : ''}
+          ${p.instagram ? `<a href="${escS(p.instagram)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>` : ''}
+          ${p.linkedin ? `<a href="${escS(p.linkedin)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>` : ''}`;
+      } catch (e) { /* يبقى المحتوى الثابت */ }
+    })();
+    function $x(id) { return document.getElementById(id); }
   </script>
 </body>
 </html>

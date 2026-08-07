@@ -332,6 +332,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -387,6 +390,41 @@
     }
     tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.cat)));
     updateResults();
+
+    // ===== تحميل المهارات من Firestore (تُدار من اللوحة) =====
+    function skillCard(p) {
+      const name = (currentLang === 'en' ? (p.name_en || p.name_ar) : (p.name_ar || p.name_en)) || '';
+      const sub = (currentLang === 'en' ? (p.sub_en || p.sub_ar) : (p.sub_ar || p.sub_en)) || '';
+      const icon = p.icon ? `<i class="${esc(p.icon)}"></i>` : '<i class="fas fa-star"></i>';
+      const tags = (p.tags || []).map(t => `<span>${esc(t)}</span>`).join('');
+      return `<article class="skill-box" data-aos="zoom-in">
+        <div class="skill-head">
+          <div class="skill-icon">${icon}</div>
+          <div><h2>${esc(name)}</h2></div>
+        </div>
+        <p>${esc(sub)}</p>
+        ${tags ? `<div class="tags">${tags}</div>` : ''}
+      </article>`;
+    }
+    (async () => {
+      let app, db;
+      try {
+        app = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicSkills');
+        db = firebase.firestore(app);
+        const snap = await db.collection('skills').get();
+        if (snap.empty) return;
+        const list = snap.docs.map(d => d.data());
+        const byCat = (cat) => list.filter(s => !cat || (s.category || 'programming') === cat);
+        ['all','programming','data','marketing'].forEach(cat => {
+          const grid = document.querySelector('.cat-panel[data-panel="'+cat+'"] .skill-grid');
+          if (!grid) return;
+          grid.innerHTML = byCat(cat === 'all' ? null : cat).map(skillCard).join('');
+          const count = document.querySelector('.cat-tab[data-cat="'+cat+'"] .count');
+          if (count) count.textContent = byCat(cat === 'all' ? null : cat).length;
+        });
+        updateResults();
+      } catch (e) { /* يبقى المحتوى الثابت كخيار احتياطي */ }
+    })();
   </script>
 </body>
 </html>

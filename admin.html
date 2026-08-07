@@ -242,6 +242,10 @@
           <div class="stat-card"><i class="fas fa-file-medical"></i><div><div class="num" id="statDraft">0</div><div class="lbl">مسودة</div></div></div>
           <div class="stat-card"><i class="fas fa-rocket"></i><div><div class="num" id="statProjects">0</div><div class="lbl">مشروع</div></div></div>
           <div class="stat-card"><i class="fas fa-award"></i><div><div class="num" id="statCerts">0</div><div class="lbl">شهادة</div></div></div>
+          <div class="stat-card"><i class="fas fa-layer-group"></i><div><div class="num" id="statSkills">0</div><div class="lbl">مهارة</div></div></div>
+          <div class="stat-card"><i class="fas fa-briefcase"></i><div><div class="num" id="statExperiences">0</div><div class="lbl">خبرة</div></div></div>
+          <div class="stat-card"><i class="fas fa-graduation-cap"></i><div><div class="num" id="statEducation">0</div><div class="lbl">مؤهل</div></div></div>
+          <div class="stat-card"><i class="fas fa-language"></i><div><div class="num" id="statLanguages">0</div><div class="lbl">لغة</div></div></div>
           <div class="stat-card"><i class="fas fa-cloud-upload-alt"></i><div><div class="num">✓</div><div class="lbl">Firebase متصل</div></div></div>
         </div>
         <div class="form-card">
@@ -317,7 +321,13 @@
             <div class="field full"><label>Name (English)</label><input id="skNameEn"></div>
             <div class="field full"><label>الوصف (عربي)</label><input id="skSubAr"></div>
             <div class="field full"><label>Description (English)</label><input id="skSubEn"></div>
-            <div class="field full"><label>أيقونة FontAwesome</label><input id="skIcon" dir="ltr" placeholder="fab fa-python"></div>
+            <div class="field"><label>التصنيف</label><select id="skCategory">
+              <option value="programming">البرمجة / Programming</option>
+              <option value="data">البيانات / Data</option>
+              <option value="marketing">التسويق / Marketing</option>
+            </select></div>
+            <div class="field"><label>أيقونة FontAwesome</label><input id="skIcon" dir="ltr" placeholder="fab fa-python"></div>
+            <div class="field full"><label>الوسوم (مفصولة بفاصلة)</label><input id="skTags" dir="ltr" placeholder="Automation, Backend"></div>
           </div>
           <div class="form-actions">
             <button class="chip primary" id="saveSkillBtn"><i class="fas fa-save"></i> حفظ</button>
@@ -620,15 +630,14 @@
       $('statPublished').textContent = posts.filter(p => p.status === 'published').length;
       $('statDraft').textContent = posts.filter(p => p.status === 'draft').length;
     } catch (e) {}
-    try {
-      const ps = await db.collection('projects').get();
-      $('statProjects').textContent = ps.size;
-    } catch (e) {}
-    try {
-      const cs = await db.collection('certificates').get();
-      $('statCerts').textContent = cs.size;
-    } catch (e) {}
+    if ($('statProjects')) $('statProjects').textContent = await safeCount('projects');
+    if ($('statCerts')) $('statCerts').textContent = await safeCount('certificates');
+    if ($('statSkills')) $('statSkills').textContent = await safeCount('skills');
+    if ($('statExperiences')) $('statExperiences').textContent = await safeCount('experience');
+    if ($('statEducation')) $('statEducation').textContent = await safeCount('education');
+    if ($('statLanguages')) $('statLanguages').textContent = await safeCount('languages');
   }
+  async function safeCount(col){ try { const s = await db.collection(col).get(); return s.size; } catch(e){ return 0; } }
 
   // ===== Posts =====
   async function loadPosts() {
@@ -848,7 +857,9 @@
     $('skNameEn').value = sk ? (sk.name_en || '') : '';
     $('skSubAr').value = sk ? (sk.sub_ar || '') : '';
     $('skSubEn').value = sk ? (sk.sub_en || '') : '';
+    $('skCategory').value = sk ? (sk.category || 'programming') : 'programming';
     $('skIcon').value = sk ? (sk.icon || '') : '';
+    $('skTags').value = sk ? ((sk.tags || []).join(', ')) : '';
     $('skillEditCard').scrollIntoView({behavior:'smooth', block:'start'});
   }
   async function loadSkills() {
@@ -872,12 +883,14 @@
   $('addSkillBtn').addEventListener('click', () => { editingId = null; editingType = 'skill'; showSkill(null); });
   $('saveSkillBtn').addEventListener('click', async () => {
     const data = { name_ar: $('skNameAr').value.trim(), name_en: $('skNameEn').value.trim(),
-      sub_ar: $('skSubAr').value.trim(), sub_en: $('skSubEn').value.trim(), icon: $('skIcon').value.trim(),
+      sub_ar: $('skSubAr').value.trim(), sub_en: $('skSubEn').value.trim(),
+      category: $('skCategory').value, icon: $('skIcon').value.trim(),
+      tags: $('skTags').value.split(',').map(t => t.trim()).filter(Boolean),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
     if (!data.name_ar && !data.name_en) { toast('أدخل اسم المهارة', 'err'); return; }
     try {
       if (editingId) { await db.collection('skills').doc(editingId).set(data, { merge: true }); }
-      else { await db.collection('skills').add(data); }
+      else { data.order = firebase.firestore.FieldValue.serverTimestamp(); await db.collection('skills').add(data); }
       toast('تم الحفظ', 'ok'); $('skillEditCard').style.display = 'none'; loadSkills();
     } catch (e) { toast('فشل الحفظ', 'err'); }
   });
@@ -925,7 +938,7 @@
     if (!data.role_ar && !data.role_en) { toast('أدخل المنصب', 'err'); return; }
     try {
       if (editingId) { await db.collection('experience').doc(editingId).set(data, { merge: true }); }
-      else { await db.collection('experience').add(data); }
+      else { data.order = firebase.firestore.FieldValue.serverTimestamp(); await db.collection('experience').add(data); }
       toast('تم الحفظ', 'ok'); $('expEditCard').style.display = 'none'; loadExperience();
     } catch (e) { toast('فشل الحفظ', 'err'); }
   });
@@ -969,7 +982,7 @@
     if (!data.school_ar && !data.school_en) { toast('أدخل اسم المؤسسة', 'err'); return; }
     try {
       if (editingId) { await db.collection('education').doc(editingId).set(data, { merge: true }); }
-      else { await db.collection('education').add(data); }
+      else { data.order = firebase.firestore.FieldValue.serverTimestamp(); await db.collection('education').add(data); }
       toast('تم الحفظ', 'ok'); $('eduEditCard').style.display = 'none'; loadEducation();
     } catch (e) { toast('فشل الحفظ', 'err'); }
   });
@@ -1010,7 +1023,7 @@
     if (!data.name_ar && !data.name_en) { toast('أدخل اسم اللغة', 'err'); return; }
     try {
       if (editingId) { await db.collection('languages').doc(editingId).set(data, { merge: true }); }
-      else { await db.collection('languages').add(data); }
+      else { data.order = firebase.firestore.FieldValue.serverTimestamp(); await db.collection('languages').add(data); }
       toast('تم الحفظ', 'ok'); $('langEditCard').style.display = 'none'; loadLanguages();
     } catch (e) { toast('فشل الحفظ', 'err'); }
   });
@@ -1040,21 +1053,30 @@
     catch (e) { toast('فشل الحفظ', 'err'); }
   });
 
-  // ===== Delete (upd. for projects & certs) =====
+  // ===== Delete =====
+  const COLLECTION_MAP = {
+    post: 'posts', project: 'projects', cert: 'certificates', skill: 'skills',
+    exp: 'experience', edu: 'education', lang: 'languages'
+  };
+  const RELOAD_MAP = {
+    posts: 'loadPosts', projects: 'loadProjects', certificates: 'loadCerts',
+    skills: 'loadSkills', experience: 'loadExperience', education: 'loadEducation',
+    languages: 'loadLanguages'
+  };
   function askDelete(type, id) { pendingDelete = { type, id }; $('confirmModal').classList.add('active'); }
   $('confirmDelBtn').addEventListener('click', async () => {
     $('confirmModal').classList.remove('active');
     if (!pendingDelete) return;
     const { type, id } = pendingDelete;
-    const col = type === 'project' ? 'projects' : (type === 'cert' ? 'certificates' : 'posts');
+    const col = COLLECTION_MAP[type];
+    if (!col) { toast('نوع غير معروف', 'err'); pendingDelete = null; return; }
     try {
       await db.collection(col).doc(id).delete();
       toast('تم الحذف', 'ok');
-      if (col === 'posts') loadPosts();
-      if (col === 'projects') loadProjects();
-      if (col === 'certificates') loadCerts();
+      const reloadFn = RELOAD_MAP[col];
+      if (reloadFn) window[reloadFn]();
       loadDashboard();
-    } catch (e) { toast('فشل الحذف', 'err'); }
+    } catch (e) { toast('فشل الحذف: تحقق من قواعد Firestore', 'err'); }
     pendingDelete = null;
   });
   $('cancelDelBtn').addEventListener('click', () => { pendingDelete = null; $('confirmModal').classList.remove('active'); });

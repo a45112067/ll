@@ -122,7 +122,7 @@
       <h1><span class="lang-ar">التعليم الأكاديمي</span><span class="lang-en">Education</span></h1>
     </header>
 
-    <section class="edu-card" data-aos="fade-up">
+    <section class="edu-card" id="eduCard" data-aos="fade-up">
       <div class="edu-head">
         <img class="edu-logo" loading="lazy" decoding="async" src="https://i.postimg.cc/qMjxpZDQ/elsewedy-university-of-technology-polytechnic-of-egypt-logo.jpg" alt="SUTech Elsewedy University logo">
         <h2><span class="lang-ar">جامعة السويدي للتكنولوجيا</span><span class="lang-en">SUTech Elsewedy University</span></h2>
@@ -140,6 +140,9 @@
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
   <script>
     AOS.init({ duration:700, once:true, offset:60 });
 
@@ -175,6 +178,30 @@
     const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
     new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
     syncBodyLock();
+
+    // ===== تحميل التعليم من Firestore (يُدار من اللوحة) =====
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    (async () => {
+      let app, db;
+      try {
+        app = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicEdu');
+        db = firebase.firestore(app);
+        const snap = await db.collection('education').get();
+        if (snap.empty) return;
+        const card = document.getElementById('eduCard');
+        if (!card) return;
+        const p = snap.docs[0].data();
+        const school = (currentLang === 'en' ? (p.school_en || p.school_ar) : (p.school_ar || p.school_en)) || '';
+        const degree = (currentLang === 'en' ? (p.degree_en || p.degree_ar) : (p.degree_ar || p.degree_en)) || '';
+        const years = (p.years || p.desc_ar || '');
+        card.innerHTML = `
+          <div class="edu-head">
+            <h2>${esc(school)}</h2>
+          </div>
+          <p class="edu-degree">${esc(degree)}</p>
+          <div class="edu-years"><i class="fas fa-graduation-cap"></i>${esc(years)}</div>`;
+      } catch (e) { /* يبقى المحتوى الثابت كخيار احتياطي */ }
+    })();
   </script>
 </body>
 </html>

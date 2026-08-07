@@ -1156,34 +1156,45 @@
 </section>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-init.js"></script>
 <script>
   // ===== Latest posts on homepage =====
   let currentLang = 'ar';
   try { currentLang = localStorage.getItem('lang') || 'ar'; } catch (e) {}
   const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const homeDb = (() => { try { const app = firebase.initializeApp(window.FIREBASE_CONFIG, 'homeApp'); return firebase.firestore(app); } catch(e){ return null; } })();
   const loadHomePosts = async () => {
     const container = document.getElementById('homePosts');
     if (!container) return;
-    try {
-      const res = await fetch('data/blog.json');
-      if (!res.ok) throw new Error('fetch failed');
-      const posts = (await res.json()).filter(p => p.status === 'published').slice(0, 3);
-      if (!posts.length) { container.innerHTML = ''; return; }
-      container.innerHTML = posts.map(p => {
-        const tag = (p.tags && p.tags[0]) || '';
-        const title = currentLang === 'en' ? (p.title_en || p.title_ar) : (p.title_ar || p.title_en);
-        const excerpt = currentLang === 'en' ? (p.excerpt_en || p.excerpt_ar) : (p.excerpt_ar || p.excerpt_en);
-        return `
-        <article class="homepost-card">
-          ${tag ? '<span class="tag">' + esc(tag) + '</span>' : ''}
-          <h3>${esc(title)}</h3>
-          <div class="meta"><span><i class="far fa-calendar"></i> ${esc(p.date||'')}</span></div>
-          <p>${esc(excerpt)}</p>
-        </article>`;
-      }).join('');
-    } catch (e) {
-      container.innerHTML = '';
+    let posts = null;
+    // الأساس: Firestore (يُدار من اللوحة). الملف المحلي fallback فقط.
+    if (homeDb) {
+      try {
+        const snap = await homeDb.collection('posts').where('status', '==', 'published').limit(3).get();
+        posts = snap.docs.map(d => d.data());
+      } catch (e) { posts = null; }
     }
+    if (!posts || !posts.length) {
+      try {
+        const res = await fetch('data/blog.json');
+        if (res.ok) posts = (await res.json()).filter(p => p.status === 'published').slice(0, 3);
+      } catch (e) { posts = []; }
+    }
+    if (!posts.length) { container.innerHTML = ''; return; }
+    container.innerHTML = posts.map(p => {
+      const tag = (p.tags && p.tags[0]) || '';
+      const title = currentLang === 'en' ? (p.title_en || p.title_ar) : (p.title_ar || p.title_en);
+      const excerpt = currentLang === 'en' ? (p.excerpt_en || p.excerpt_ar) : (p.excerpt_ar || p.excerpt_en);
+      return `
+      <article class="homepost-card">
+        ${tag ? '<span class="tag">' + esc(tag) + '</span>' : ''}
+        <h3>${esc(title)}</h3>
+        <div class="meta"><span><i class="far fa-calendar"></i> ${esc(p.date||'')}</span></div>
+        <p>${esc(excerpt)}</p>
+      </article>`;
+    }).join('');
   };
   loadHomePosts();
 
