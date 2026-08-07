@@ -219,6 +219,12 @@
       <div class="nav-title">المحتوى</div>
       <a data-view="posts" href="#"><i class="fas fa-pen-nib"></i> المنشورات</a>
       <a data-view="editor" href="#" id="navNewPost"><i class="fas fa-plus-circle"></i> منشور جديد</a>
+      <a data-view="about" href="#"><i class="fas fa-user"></i> نبذة عني</a>
+      <a data-view="skills" href="#"><i class="fas fa-layer-group"></i> المهارات</a>
+      <a data-view="experience" href="#"><i class="fas fa-briefcase"></i> الخبرات</a>
+      <a data-view="education" href="#"><i class="fas fa-graduation-cap"></i> التعليم</a>
+      <a data-view="languages" href="#"><i class="fas fa-language"></i> اللغات</a>
+      <a data-view="contact" href="#"><i class="fas fa-address-book"></i> التواصل</a>
       <a data-view="projects" href="#"><i class="fas fa-rocket"></i> المشاريع</a>
       <a data-view="certificates" href="#"><i class="fas fa-award"></i> الشهادات</a>
       <div class="nav-title">الأمان</div>
@@ -281,6 +287,132 @@
         <div class="form-actions">
           <button class="chip primary" id="edSaveBtn"><i class="fas fa-save"></i> حفظ المنشور</button>
           <button class="chip" onclick="switchView('posts')"><i class="fas fa-times"></i> إلغاء</button>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="view" id="view-about">
+        <div class="section-head"><div><h2><i class="fas fa-user"></i> نبذة عني</h2><p>النص الترحيبي وعناوين القسم عنك</p></div></div>
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="field"><label>مسمى القسم (عربي)</label><input id="abLabelAr" placeholder="من أنا"></div>
+            <div class="field"><label>Section Label (English)</label><input id="abLabelEn" placeholder="Who I Am"></div>
+            <div class="field full"><label>النبذة (عربي)</label><textarea id="abTextAr" rows="5"></textarea></div>
+            <div class="field full"><label>About (English)</label><textarea id="abTextEn" rows="5"></textarea></div>
+          </div>
+          <div class="form-actions"><button class="chip primary" id="saveAboutBtn"><i class="fas fa-save"></i> حفظ النبذة</button></div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="view" id="view-skills">
+        <div class="section-head">
+          <div><h2><i class="fas fa-layer-group"></i> المهارات</h2><p>المهارات المعروضة في قسم المهارات</p></div>
+          <button class="chip primary" id="addSkillBtn"><i class="fas fa-plus"></i> مهارة جديدة</button>
+        </div>
+        <div class="form-card" id="skillEditCard" style="display:none;">
+          <h4><i class="fas fa-edit"></i> المهارة</h4>
+          <div class="form-grid">
+            <div class="field full"><label>اسم المهارة (يظهر بلغة القارئ)</label><input id="skNameAr"></div>
+            <div class="field full"><label>Name (English)</label><input id="skNameEn"></div>
+            <div class="field full"><label>الوصف (عربي)</label><input id="skSubAr"></div>
+            <div class="field full"><label>Description (English)</label><input id="skSubEn"></div>
+            <div class="field full"><label>أيقونة FontAwesome</label><input id="skIcon" dir="ltr" placeholder="fab fa-python"></div>
+          </div>
+          <div class="form-actions">
+            <button class="chip primary" id="saveSkillBtn"><i class="fas fa-save"></i> حفظ</button>
+            <button class="chip" id="cancelSkillBtn"><i class="fas fa-times"></i> إلغاء</button>
+          </div>
+        </div>
+        <div id="skillsList"></div>
+      </section>
+
+      <!-- Experience -->
+      <section class="view" id="view-experience">
+        <div class="section-head">
+          <div><h2><i class="fas fa-briefcase"></i> الخبرات</h2><p>الخبرات في قسم "مسيرتي"</p></div>
+          <button class="chip primary" id="addExpBtn"><i class="fas fa-plus"></i> خبرة جديدة</button>
+        </div>
+        <div class="form-card" id="expEditCard" style="display:none;">
+          <h4><i class="fas fa-edit"></i> الخبرة</h4>
+          <div class="form-grid">
+            <div class="field"><label>المنصب (عربي)</label><input id="exRoleAr"></div>
+            <div class="field"><label>Role (English)</label><input id="exRoleEn"></div>
+            <div class="field"><label>الشركة (عربي)</label><input id="exCoAr"></div>
+            <div class="field"><label>Company (English)</label><input id="exCoEn"></div>
+            <div class="field"><label>الفترة (عربي)</label><input id="exDateAr"></div>
+            <div class="field"><label>Period (English)</label><input id="exDateEn"></div>
+            <div class="field full"><label>النقاط (عربي، كل نقطة بسطر)</label><textarea id="exBulAr" rows="4"></textarea></div>
+            <div class="field full"><label>Bullets (English, each on new line)</label><textarea id="exBulEn" rows="4"></textarea></div>
+          </div>
+          <div class="form-actions">
+            <button class="chip primary" id="saveExpBtn"><i class="fas fa-save"></i> حفظ</button>
+            <button class="chip" id="cancelExpBtn"><i class="fas fa-times"></i> إلغاء</button>
+          </div>
+        </div>
+        <div id="expList"></div>
+      </section>
+
+      <!-- Education -->
+      <section class="view" id="view-education">
+        <div class="section-head">
+          <div><h2><i class="fas fa-graduation-cap"></i> التعليم</h2><p>البيانات الأكاديمية</p></div>
+          <button class="chip primary" id="addEduBtn"><i class="fas fa-plus"></i> إضافة</button>
+        </div>
+        <div class="form-card" id="eduEditCard" style="display:none;">
+          <h4><i class="fas fa-edit"></i> المؤهل</h4>
+          <div class="form-grid">
+            <div class="field full"><label>المؤسسة (عربي)</label><input id="edSchoolAr"></div>
+            <div class="field full"><label>Institution (English)</label><input id="edSchoolEn"></div>
+            <div class="field full"><label>الشهادة (عربي)</label><input id="edDegreeAr"></div>
+            <div class="field full"><label>Degree (English)</label><input id="edDegreeEn"></div>
+            <div class="field full"><label>الوصف (عربي)</label><textarea id="edDescAr" rows="3"></textarea></div>
+            <div class="field full"><label>Description (English)</label><textarea id="edDescEn" rows="3"></textarea></div>
+          </div>
+          <div class="form-actions">
+            <button class="chip primary" id="saveEduBtn"><i class="fas fa-save"></i> حفظ</button>
+            <button class="chip" id="cancelEduBtn"><i class="fas fa-times"></i> إلغاء</button>
+          </div>
+        </div>
+        <div id="eduList"></div>
+      </section>
+
+      <!-- Languages -->
+      <section class="view" id="view-languages">
+        <div class="section-head">
+          <div><h2><i class="fas fa-language"></i> اللغات</h2><p>اللغات المتاحة</p></div>
+          <button class="chip primary" id="addLangBtn"><i class="fas fa-plus"></i> لغة جديدة</button>
+        </div>
+        <div class="form-card" id="langEditCard" style="display:none;">
+          <h4><i class="fas fa-edit"></i> اللغة</h4>
+          <div class="form-grid">
+            <div class="field"><label>الاسم (عربي)</label><input id="lnNameAr"></div>
+            <div class="field"><label>Name (English)</label><input id="lnNameEn"></div>
+            <div class="field"><label>المستوى (عربي)</label><input id="lnLevelAr"></div>
+            <div class="field"><label>Level (English)</label><input id="lnLevelEn"></div>
+          </div>
+          <div class="form-actions">
+            <button class="chip primary" id="saveLangBtn"><i class="fas fa-save"></i> حفظ</button>
+            <button class="chip" id="cancelLangBtn"><i class="fas fa-times"></i> إلغاء</button>
+          </div>
+        </div>
+        <div id="langList"></div>
+      </section>
+
+      <!-- Contact -->
+      <section class="view" id="view-contact">
+        <div class="section-head"><div><h2><i class="fas fa-address-book"></i> التواصل</h2><p>بيانات التواصل وروابط السوشيال</p></div></div>
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="field"><label>رقم الهاتف / WhatsApp</label><input id="cnPhone" dir="ltr"></div>
+            <div class="field"><label>البريد الإلكتروني</label><input id="cnEmail" dir="ltr"></div>
+            <div class="field"><label>الموقع (عربي)</label><input id="cnLocAr"></div>
+            <div class="field"><label>Location (English)</label><input id="cnLocEn"></div>
+            <div class="field full"><label>LinkedIn</label><input id="cnLinkedin" dir="ltr"></div>
+            <div class="field full"><label>Facebook</label><input id="cnFacebook" dir="ltr"></div>
+            <div class="field full"><label>Instagram</label><input id="cnInstagram" dir="ltr"></div>
+          </div>
+          <div class="form-actions"><button class="chip primary" id="saveContactBtn"><i class="fas fa-save"></i> حفظ بيانات التواصل</button></div>
         </div>
       </section>
 
@@ -449,6 +581,12 @@
     if (name === 'settings') loadSettings();
     if (name === 'projects') loadProjects();
     if (name === 'certificates') loadCerts();
+    if (name === 'about') loadAbout();
+    if (name === 'skills') loadSkills();
+    if (name === 'experience') loadExperience();
+    if (name === 'education') loadEducation();
+    if (name === 'languages') loadLanguages();
+    if (name === 'contact') loadContact();
   }
   document.querySelectorAll('.sidebar-admin a').forEach(a => a.addEventListener('click', e => {
     if (a.dataset.view === 'editor') { openNewPost(); return; }
@@ -681,6 +819,226 @@
     } catch (e) { toast('فشل الحفظ: تحقق من القواعد', 'err'); }
   });
   $('cancelCertBtn').addEventListener('click', () => { $('certEditCard').style.display = 'none'; });
+
+  // ===== About =====
+  async function loadAbout() {
+    try {
+      const d = await db.collection('about').doc('main').get();
+      const s = d.exists ? d.data() : {};
+      $('abLabelAr').value = s.label_ar || 'من أنا';
+      $('abLabelEn').value = s.label_en || 'Who I Am';
+      $('abTextAr').value = s.text_ar || '';
+      $('abTextEn').value = s.text_en || '';
+    } catch (e) {}
+  }
+  $('saveAboutBtn').addEventListener('click', async () => {
+    const data = {
+      label_ar: $('abLabelAr').value.trim(), label_en: $('abLabelEn').value.trim(),
+      text_ar: $('abTextAr').value.trim(), text_en: $('abTextEn').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    try { await db.collection('about').doc('main').set(data, { merge: true }); toast('تم حفظ النبذة', 'ok'); }
+    catch (e) { toast('فشل الحفظ', 'err'); }
+  });
+
+  // ===== Skills =====
+  function showSkill(sk) {
+    $('skillEditCard').style.display = 'block';
+    $('skNameAr').value = sk ? (sk.name_ar || '') : '';
+    $('skNameEn').value = sk ? (sk.name_en || '') : '';
+    $('skSubAr').value = sk ? (sk.sub_ar || '') : '';
+    $('skSubEn').value = sk ? (sk.sub_en || '') : '';
+    $('skIcon').value = sk ? (sk.icon || '') : '';
+    $('skillEditCard').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  async function loadSkills() {
+    const list = $('skillsList');
+    try {
+      const snap = await db.collection('skills').orderBy('order').get();
+      if (snap.empty) { list.innerHTML = '<div class="empty">لا توجد مهارات.</div>'; return; }
+      list.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        return `<div class="post-row"><div class="info"><h3>${esc(p.name_ar||p.name_en||'')}</h3><p><i class="${esc(p.icon||'fas fa-star')}"></i> ${esc(p.sub_ar||'')}</p></div>
+        <div class="ops"><button class="icon-btn" onclick="editSkill('${d.id}')"><i class="fas fa-edit"></i></button>
+        <button class="icon-btn danger" onclick="askDelete('skill','${d.id}')"><i class="fas fa-trash"></i></button></div></div>`;
+      }).join('');
+    } catch (e) { list.innerHTML = '<div class="empty">تعذّر التحميل: تحقق من القواعد.</div>'; }
+  }
+  async function editSkill(id) {
+    try { const doc = await db.collection('skills').doc(id).get();
+      if (doc.exists) { editingId = id; editingType = 'skill'; showSkill(doc.data()); } }
+    catch (e) { toast('تعذّر الفتح', 'err'); }
+  }
+  $('addSkillBtn').addEventListener('click', () => { editingId = null; editingType = 'skill'; showSkill(null); });
+  $('saveSkillBtn').addEventListener('click', async () => {
+    const data = { name_ar: $('skNameAr').value.trim(), name_en: $('skNameEn').value.trim(),
+      sub_ar: $('skSubAr').value.trim(), sub_en: $('skSubEn').value.trim(), icon: $('skIcon').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    if (!data.name_ar && !data.name_en) { toast('أدخل اسم المهارة', 'err'); return; }
+    try {
+      if (editingId) { await db.collection('skills').doc(editingId).set(data, { merge: true }); }
+      else { await db.collection('skills').add(data); }
+      toast('تم الحفظ', 'ok'); $('skillEditCard').style.display = 'none'; loadSkills();
+    } catch (e) { toast('فشل الحفظ', 'err'); }
+  });
+  $('cancelSkillBtn').addEventListener('click', () => { $('skillEditCard').style.display = 'none'; });
+
+  // ===== Experience =====
+  function showExp(x) {
+    $('expEditCard').style.display = 'block';
+    $('exRoleAr').value = x ? (x.role_ar || '') : '';
+    $('exRoleEn').value = x ? (x.role_en || '') : '';
+    $('exCoAr').value = x ? (x.co_ar || '') : '';
+    $('exCoEn').value = x ? (x.co_en || '') : '';
+    $('exDateAr').value = x ? (x.date_ar || '') : '';
+    $('exDateEn').value = x ? (x.date_en || '') : '';
+    $('exBulAr').value = x ? (x.bullets_ar || []).join('\n') : '';
+    $('exBulEn').value = x ? (x.bullets_en || []).join('\n') : '';
+    $('expEditCard').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  async function loadExperience() {
+    const list = $('expList');
+    try {
+      const snap = await db.collection('experience').orderBy('order').get();
+      if (snap.empty) { list.innerHTML = '<div class="empty">لا توجد خبرات.</div>'; return; }
+      list.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        return `<div class="post-row"><div class="info"><h3>${esc(p.role_ar||p.role_en||'')}</h3><p>${esc(p.co_ar||'')} — ${esc(p.date_ar||'')}</p></div>
+        <div class="ops"><button class="icon-btn" onclick="editExp('${d.id}')"><i class="fas fa-edit"></i></button>
+        <button class="icon-btn danger" onclick="askDelete('exp','${d.id}')"><i class="fas fa-trash"></i></button></div></div>`;
+      }).join('');
+    } catch (e) { list.innerHTML = '<div class="empty">تعذّر التحميل.</div>'; }
+  }
+  async function editExp(id) {
+    try { const doc = await db.collection('experience').doc(id).get();
+      if (doc.exists) { editingId = id; editingType = 'exp'; showExp(doc.data()); } }
+    catch (e) { toast('تعذّر الفتح', 'err'); }
+  }
+  $('addExpBtn').addEventListener('click', () => { editingId = null; editingType = 'exp'; showExp(null); });
+  $('saveExpBtn').addEventListener('click', async () => {
+    const data = { role_ar: $('exRoleAr').value.trim(), role_en: $('exRoleEn').value.trim(),
+      co_ar: $('exCoAr').value.trim(), co_en: $('exCoEn').value.trim(),
+      date_ar: $('exDateAr').value.trim(), date_en: $('exDateEn').value.trim(),
+      bullets_ar: $('exBulAr').value.split('\n').map(s => s.trim()).filter(Boolean),
+      bullets_en: $('exBulEn').value.split('\n').map(s => s.trim()).filter(Boolean),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    if (!data.role_ar && !data.role_en) { toast('أدخل المنصب', 'err'); return; }
+    try {
+      if (editingId) { await db.collection('experience').doc(editingId).set(data, { merge: true }); }
+      else { await db.collection('experience').add(data); }
+      toast('تم الحفظ', 'ok'); $('expEditCard').style.display = 'none'; loadExperience();
+    } catch (e) { toast('فشل الحفظ', 'err'); }
+  });
+  $('cancelExpBtn').addEventListener('click', () => { $('expEditCard').style.display = 'none'; });
+
+  // ===== Education =====
+  function showEdu(e) {
+    $('eduEditCard').style.display = 'block';
+    $('edSchoolAr').value = e ? (e.school_ar || '') : '';
+    $('edSchoolEn').value = e ? (e.school_en || '') : '';
+    $('edDegreeAr').value = e ? (e.degree_ar || '') : '';
+    $('edDegreeEn').value = e ? (e.degree_en || '') : '';
+    $('edDescAr').value = e ? (e.desc_ar || '') : '';
+    $('edDescEn').value = e ? (e.desc_en || '') : '';
+    $('eduEditCard').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  async function loadEducation() {
+    const list = $('eduList');
+    try {
+      const snap = await db.collection('education').orderBy('order').get();
+      if (snap.empty) { list.innerHTML = '<div class="empty">لا توجد بيانات تعليم.</div>'; return; }
+      list.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        return `<div class="post-row"><div class="info"><h3>${esc(p.school_ar||p.school_en||'')}</h3><p>${esc(p.degree_ar||'')}</p></div>
+        <div class="ops"><button class="icon-btn" onclick="editEdu('${d.id}')"><i class="fas fa-edit"></i></button>
+        <button class="icon-btn danger" onclick="askDelete('edu','${d.id}')"><i class="fas fa-trash"></i></button></div></div>`;
+      }).join('');
+    } catch (e) { list.innerHTML = '<div class="empty">تعذّر التحميل.</div>'; }
+  }
+  async function editEdu(id) {
+    try { const doc = await db.collection('education').doc(id).get();
+      if (doc.exists) { editingId = id; editingType = 'edu'; showEdu(doc.data()); } }
+    catch (e) { toast('تعذّر الفتح', 'err'); }
+  }
+  $('addEduBtn').addEventListener('click', () => { editingId = null; editingType = 'edu'; showEdu(null); });
+  $('saveEduBtn').addEventListener('click', async () => {
+    const data = { school_ar: $('edSchoolAr').value.trim(), school_en: $('edSchoolEn').value.trim(),
+      degree_ar: $('edDegreeAr').value.trim(), degree_en: $('edDegreeEn').value.trim(),
+      desc_ar: $('edDescAr').value.trim(), desc_en: $('edDescEn').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    if (!data.school_ar && !data.school_en) { toast('أدخل اسم المؤسسة', 'err'); return; }
+    try {
+      if (editingId) { await db.collection('education').doc(editingId).set(data, { merge: true }); }
+      else { await db.collection('education').add(data); }
+      toast('تم الحفظ', 'ok'); $('eduEditCard').style.display = 'none'; loadEducation();
+    } catch (e) { toast('فشل الحفظ', 'err'); }
+  });
+  $('cancelEduBtn').addEventListener('click', () => { $('eduEditCard').style.display = 'none'; });
+
+  // ===== Languages =====
+  function showLang(l) {
+    $('langEditCard').style.display = 'block';
+    $('lnNameAr').value = l ? (l.name_ar || '') : '';
+    $('lnNameEn').value = l ? (l.name_en || '') : '';
+    $('lnLevelAr').value = l ? (l.level_ar || '') : '';
+    $('lnLevelEn').value = l ? (l.level_en || '') : '';
+    $('langEditCard').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  async function loadLanguages() {
+    const list = $('langList');
+    try {
+      const snap = await db.collection('languages').orderBy('order').get();
+      if (snap.empty) { list.innerHTML = '<div class="empty">لا توجد لغات.</div>'; return; }
+      list.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        return `<div class="post-row"><div class="info"><h3>${esc(p.name_ar||p.name_en||'')}</h3><p>${esc(p.level_ar||'')}</p></div>
+        <div class="ops"><button class="icon-btn" onclick="editLang('${d.id}')"><i class="fas fa-edit"></i></button>
+        <button class="icon-btn danger" onclick="askDelete('lang','${d.id}')"><i class="fas fa-trash"></i></button></div></div>`;
+      }).join('');
+    } catch (e) { list.innerHTML = '<div class="empty">تعذّر التحميل.</div>'; }
+  }
+  async function editLang(id) {
+    try { const doc = await db.collection('languages').doc(id).get();
+      if (doc.exists) { editingId = id; editingType = 'lang'; showLang(doc.data()); } }
+    catch (e) { toast('تعذّر الفتح', 'err'); }
+  }
+  $('addLangBtn').addEventListener('click', () => { editingId = null; editingType = 'lang'; showLang(null); });
+  $('saveLangBtn').addEventListener('click', async () => {
+    const data = { name_ar: $('lnNameAr').value.trim(), name_en: $('lnNameEn').value.trim(),
+      level_ar: $('lnLevelAr').value.trim(), level_en: $('lnLevelEn').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    if (!data.name_ar && !data.name_en) { toast('أدخل اسم اللغة', 'err'); return; }
+    try {
+      if (editingId) { await db.collection('languages').doc(editingId).set(data, { merge: true }); }
+      else { await db.collection('languages').add(data); }
+      toast('تم الحفظ', 'ok'); $('langEditCard').style.display = 'none'; loadLanguages();
+    } catch (e) { toast('فشل الحفظ', 'err'); }
+  });
+  $('cancelLangBtn').addEventListener('click', () => { $('langEditCard').style.display = 'none'; });
+
+  // ===== Contact =====
+  async function loadContact() {
+    try {
+      const d = await db.collection('contact').doc('main').get();
+      const s = d.exists ? d.data() : {};
+      $('cnPhone').value = s.phone || '';
+      $('cnEmail').value = s.email || '';
+      $('cnLocAr').value = s.loc_ar || '';
+      $('cnLocEn').value = s.loc_en || '';
+      $('cnLinkedin').value = s.linkedin || '';
+      $('cnFacebook').value = s.facebook || '';
+      $('cnInstagram').value = s.instagram || '';
+    } catch (e) {}
+  }
+  $('saveContactBtn').addEventListener('click', async () => {
+    const data = { phone: $('cnPhone').value.trim(), email: $('cnEmail').value.trim(),
+      loc_ar: $('cnLocAr').value.trim(), loc_en: $('cnLocEn').value.trim(),
+      linkedin: $('cnLinkedin').value.trim(), facebook: $('cnFacebook').value.trim(),
+      instagram: $('cnInstagram').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    try { await db.collection('contact').doc('main').set(data, { merge: true }); toast('تم حفظ بيانات التواصل', 'ok'); }
+    catch (e) { toast('فشل الحفظ', 'err'); }
+  });
 
   // ===== Delete (upd. for projects & certs) =====
   function askDelete(type, id) { pendingDelete = { type, id }; $('confirmModal').classList.add('active'); }
