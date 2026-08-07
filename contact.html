@@ -78,6 +78,19 @@
     .availability { display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:rgba(34,197,94,.10); color:#16a34a; font-weight:700; font-size:.86rem; padding:8px 16px; border-radius:999px; }
     .availability .dot { width:9px; height:9px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 0 rgba(34,197,94,.5); animation:pulse 1.6s infinite; }
     @keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(34,197,94,.5);} 70%{ box-shadow:0 0 0 9px rgba(34,197,94,0);} 100%{ box-shadow:0 0 0 0 rgba(34,197,94,0);} }
+    .contact-form { margin-top:28px; border-top:1px solid #e2e8f0; padding-top:26px; display:grid; gap:14px; }
+    .contact-form h3 { color:#2563eb; font-size:1.3rem; margin-bottom:2px; display:flex; align-items:center; gap:10px; }
+    .contact-form .row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .contact-form label { font-size:.85rem; font-weight:800; color:#475569; display:block; margin-bottom:6px; }
+    .contact-form input, .contact-form textarea { width:100%; padding:13px 15px; border:1.5px solid #e2e8f0; border-radius:14px; font-family:inherit; font-size:.93rem; outline:none; background:#f8fafc; transition:.2s; color:#0f172a; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color:#2563eb; background:#fff; box-shadow:0 0 0 4px rgba(37,99,235,.12); }
+    .contact-form textarea { min-height:130px; resize:vertical; line-height:1.7; }
+    .contact-form .send-btn { justify-self:end; padding:14px 34px; border:none; border-radius:14px; cursor:pointer; background:linear-gradient(120deg,#2563eb,#1d4ed8); color:#fff; font-weight:800; font-size:1rem; font-family:inherit; transition:.25s; box-shadow:0 12px 28px rgba(37,99,235,.28); display:inline-flex; align-items:center; gap:10px; }
+    .contact-form .send-btn:hover { transform:translateY(-3px); box-shadow:0 18px 40px rgba(37,99,235,.4); }
+    .contact-form .send-btn:active { transform:translateY(-1px) scale(.99); }
+    .form-status { text-align:center; font-weight:800; font-size:.9rem; min-height:22px; }
+    .form-status.ok { color:#16a34a; } .form-status.err { color:#dc2626; }
+    @media (max-width:640px){ .contact-form .row { grid-template-columns:1fr; } .contact-form .send-btn { width:100%; justify-content:center; } }
     .footer { margin-top:36px; text-align:center; color:#94a3b8; font-size:.9rem; }
     @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .contact-card { padding:20px; border-radius:20px; } .contact-item { flex-direction:column; } .social-links { justify-content:center; gap:10px; } .section-actions { width:100%; } .section-actions .btn-secondary, .section-actions a { flex:1 1 100%; width:100%; justify-content:center; } }
     @media (max-width:480px) { .contact-card { padding:16px; } .contact-item { padding:16px; } .contact-item i { font-size:1.4rem; } .social-links a { width:46px; height:46px; } }
@@ -169,6 +182,30 @@
         <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
       </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <h3><i class="fas fa-paper-plane"></i><span class="lang-ar">أرسل رسالة</span><span class="lang-en">Send a Message</span></h3>
+        <div class="row">
+          <div>
+            <label><span class="lang-ar">الاسم</span><span class="lang-en">Name</span></label>
+            <input type="text" id="cfName" required placeholder="اسمك">
+          </div>
+          <div>
+            <label><span class="lang-ar">البريد الإلكتروني</span><span class="lang-en">Email</span></label>
+            <input type="email" id="cfEmail" required dir="ltr" placeholder="you@example.com">
+          </div>
+        </div>
+        <div>
+          <label><span class="lang-ar">الموضوع</span><span class="lang-en">Subject</span></label>
+          <input type="text" id="cfSubject" required placeholder="ما هو موضوعك؟">
+        </div>
+        <div>
+          <label><span class="lang-ar">الرسالة</span><span class="lang-en">Message</span></label>
+          <textarea id="cfMsg" required placeholder="اكتب رسالتك هنا..."></textarea>
+        </div>
+        <div class="form-status" id="cfStatus"></div>
+        <button type="submit" class="send-btn"><i class="fas fa-paper-plane"></i><span class="lang-ar">إرسال الرسالة</span><span class="lang-en">Send Message</span></button>
+      </form>
     </section>
 
     <footer class="footer">
@@ -244,6 +281,36 @@
       } catch (e) { /* يبقى المحتوى الثابت */ }
     })();
     function $x(id) { return document.getElementById(id); }
+
+    // ===== نموذج التواصل (mailto compose — يعمل على الاستضافة الثابتة بدون خادم) =====
+    const contactForm = $x('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const status = $x('cfStatus');
+        const name = $x('cfName').value.trim();
+        const email = $x('cfEmail').value.trim();
+        const subject = $x('cfSubject').value.trim();
+        const msg = $x('cfMsg').value.trim();
+        if (!name || !email || !subject || !msg) {
+          status.textContent = currentLang === 'en' ? 'Please fill in all fields.' : 'يرجى تعبئة جميع الحقول.';
+          status.className = 'form-status err';
+          return;
+        }
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+          status.textContent = currentLang === 'en' ? 'Please enter a valid email.' : 'يرجى إدخال بريد إلكتروني صحيح.';
+          status.className = 'form-status err';
+          return;
+        }
+        const to = ($x('cntEmail') && $x('cntEmail').textContent) || 'info@ahmedayman.website';
+        const body = `Name: ${name}\nEmail: ${email}\n\n${msg}`;
+        const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = url;
+        status.textContent = currentLang === 'en' ? 'Opening your email app...' : 'يتم فتح تطبيق البريد...';
+        status.className = 'form-status ok';
+        contactForm.reset();
+      });
+    }
   </script>
 </body>
 </html>
