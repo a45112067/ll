@@ -9,4 +9,4 @@ Disallow: /firebase-init.js
 Disallow: /firestore.rules
 
 # خريطة الموقع
-Sitemap: https://ahmedayman.website/sitemap.xml
+Sitemap: https://ahmedayman.website/wp-sitemap.xml
