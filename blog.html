@@ -266,16 +266,18 @@
   let allPosts = [], currentFilter = 'all', searchTerm = '';
 
   async function loadPosts() {
-    // الأساس: Firestore (حيث تُدار المنشورات من اللوحة). الملف المحلي fallback فقط.
+    // الأساس: Firestore (يُدار من اللوحة). إذا كان فارغاً أو فشل → نرجع للمقالات المحلية.
+    let fbPosts = null;
     try {
       const snap = await db.collection('posts').where('status', '==', 'published').get();
-      allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      render(); return;
-    } catch (e) {}
+      fbPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch (e) { fbPosts = null; }
+    if (fbPosts && fbPosts.length) { allPosts = fbPosts; render(); return; }
     try {
       const res = await fetch('data/blog.json');
       if (res.ok) { allPosts = (await res.json()).filter(p => p.status === 'published'); render(); return; }
     } catch (e) {}
+    if (fbPosts) { allPosts = fbPosts; render(); return; }
     document.getElementById('postsContainer').innerHTML = '<div class="posts-empty">تعذّر تحميل المقالات.</div>';
   }
 
