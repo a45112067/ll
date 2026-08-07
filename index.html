@@ -406,12 +406,6 @@
     .skill:nth-child(3) .skill-icon { background: rgba(79,70,229,0.10); color: #4f46e5; }
     .skill h3 { font-size: .95rem; font-weight: 800; margin-bottom: 3px; }
     .skill small { color: var(--muted); font-weight: 600; font-size: .78rem; }
-    .progress { height: 6px; background: var(--surface-2); border-radius: 999px; margin-top: 11px; overflow: hidden; }
-    .progress i {
-      display: block; height: 100%; width: 0;
-      background: linear-gradient(90deg, var(--brand), #4f46e5);
-      border-radius: 999px; transition: width 1.1s cubic-bezier(.2,.8,.3,1);
-    }
 
     /* ================= Experience Timeline ================= */
     .timeline { position: relative; max-width: 840px; margin: 0 auto; padding-right: 34px; }
@@ -507,22 +501,22 @@
     .view-all { text-align: center; margin-top: 34px; }
 
     /* ================= Featured projects (cases) ================= */
-    .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .case-grid { display: grid; grid-template-columns: 1fr; gap: 22px; max-width: 520px; margin: 0 auto; }
     .case {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 30px 24px; text-align: center;
+      border-radius: var(--radius-lg); padding: 38px 30px; text-align: center;
       box-shadow: var(--shadow-sm);
       transition: transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s, border-color .3s;
     }
-    .case:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--brand); }
+    .case:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--brand); }
     .case-icon {
-      width: 64px; height: 64px; border-radius: 18px;
-      margin: 0 auto 18px;
+      width: 76px; height: 76px; border-radius: 22px;
+      margin: 0 auto 20px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
-    .case h3 { font-size: 1.1rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
-    .case p { font-size: .95rem; color: var(--ink-soft); line-height: 1.75; }
+    .case h3 { font-size: 1.25rem; font-weight: 900; color: var(--ink); margin-bottom: 12px; }
+    .case p { font-size: 1rem; color: var(--ink-soft); line-height: 1.8; }
 
     /* ================= Languages ================= */
     .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
@@ -565,28 +559,33 @@
       background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%);
     }
     .contact-box > div, .contact-box > form { position: relative; z-index: 1; }
-    .contact-box h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 8px; }
-    .contact-box p { color: rgba(255,255,255,0.85); font-size: .96rem; }
-    .contact-item { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+    .contact-box > div, .contact-box > form { position: relative; z-index: 1; }
+    .contact-box h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .contact-box h3 i { color: var(--accent); }
+    .contact-box p { color: rgba(255,255,255,0.85); font-size: .96rem; line-height: 1.7; }
+    .contact-item { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
     .contact-item i {
-      width: 46px; height: 46px; border-radius: 14px;
+      width: 50px; height: 50px; border-radius: 16px;
       background: rgba(255,255,255,0.14);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: var(--accent);
+      font-size: 1.15rem; color: var(--accent);
       flex-shrink: 0;
       box-shadow: 0 6px 16px rgba(0,0,0,0.10);
-    }
-    .contact-item b { display: block; font-size: .8rem; font-weight: 700; color: rgba(255,255,255,0.7); }
-    .contact-item span { font-weight: 700; font-size: 1.02rem; direction: ltr; text-align: left; color: #fff; }
-    .contact-social { display: flex; gap: 12px; margin-top: 28px; }
-    .contact-social a {
-      width: 48px; height: 48px; border-radius: 14px;
-      background: rgba(255,255,255,0.14);
-      color: #fff; font-size: 1.15rem;
-      display: flex; align-items: center; justify-content: center;
       transition: .22s;
     }
-    .contact-social a:hover { background: var(--accent); color: var(--ink); transform: translateY(-4px); }
+    .contact-item:hover i { background: var(--accent); color: var(--ink); transform: scale(1.06); }
+    .contact-item b { display: block; font-size: .8rem; font-weight: 700; color: rgba(255,255,255,0.7); }
+    .contact-item span { font-weight: 800; font-size: 1.05rem; direction: ltr; text-align: left; color: #fff; }
+    .contact-social { display: flex; gap: 12px; margin-top: 28px; }
+    .contact-social a {
+      width: 52px; height: 52px; border-radius: 16px;
+      background: rgba(255,255,255,0.14);
+      color: #fff; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: .22s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+    .contact-social a:hover { background: var(--accent); color: var(--ink); transform: translateY(-5px) scale(1.05); box-shadow: 0 14px 26px rgba(0,0,0,0.2); }
 
     .contact-form { display: grid; gap: 14px; margin-top: 26px; }
     .contact-form .field { display: flex; flex-direction: column; gap: 6px; }
@@ -611,6 +610,7 @@
       width: 100%; justify-content: center; margin-top: 4px;
       background: var(--accent);
       box-shadow: 0 12px 26px rgba(255,152,0,0.35);
+      border-radius: 14px; padding: 14px 28px;
     }
     .contact-form .btn-primary:hover { background: #ffb02e; box-shadow: 0 16px 34px rgba(255,152,0,0.45); }
     .contact-form .btn-primary i { transition: transform .25s; }
@@ -665,28 +665,6 @@
       cursor: pointer; transition: .2s;
     }
     .lightbox-close:hover { background: var(--accent); color: var(--ink); }
-
-    /* ================= Toast ================= */
-    .welcome-toast {
-      position: fixed; bottom: 26px; right: 26px; z-index: 4000;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-right: 5px solid var(--brand);
-      border-radius: 16px;
-      padding: 16px 20px;
-      box-shadow: var(--shadow-lg);
-      max-width: 360px;
-      transform: translateY(140%);
-      transition: .5s cubic-bezier(.18,.9,.3,1.2);
-    }
-    body.english .welcome-toast { right: auto; left: 26px; border-right: 1px solid var(--border); border-left: 5px solid var(--brand); }
-    .welcome-toast.show-toast { transform: translateY(0); }
-    .welcome-toast p { font-size: .93rem; font-weight: 700; color: var(--ink); }
-    .close-toast {
-      position: absolute; top: 10px; left: 12px;
-      color: var(--muted); cursor: pointer; font-size: .9rem;
-    }
-    body.english .close-toast { left: auto; right: 12px; }
 
     /* ================= Back to top ================= */
     .back-to-top {
@@ -750,7 +728,6 @@
       .edu-card { flex-direction: column; text-align: center; }
       .edu-icon { margin-bottom: 8px; }
       .cert-grid { grid-template-columns: 1fr; }
-      .welcome-toast { right: 16px; left: 16px; max-width: none; padding: 14px 18px; }
       .section { padding: 48px 0; }
       .section-head h2 { font-size: 1.6rem; }
     }
@@ -901,37 +878,31 @@
         <div class="skill-icon"><i class="fab fa-python"></i></div>
         <h3>Python</h3>
         <small><span class="lang-ar">برمجة وتطوير</span><span class="lang-en">Development</span></small>
-        <div class="progress"><i data-level="90"></i></div>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="90">
         <div class="skill-icon"><i class="fas fa-drafting-compass"></i></div>
         <h3>AutoCAD</h3>
         <small><span class="lang-ar">تصميم هندسي</span><span class="lang-en">Engineering Design</span></small>
-        <div class="progress"><i data-level="70"></i></div>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="140">
         <div class="skill-icon"><i class="fas fa-database"></i></div>
         <h3>SQL</h3>
         <small><span class="lang-ar">قواعد بيانات</span><span class="lang-en">Databases</span></small>
-        <div class="progress"><i data-level="75"></i></div>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="190">
         <div class="skill-icon"><i class="fab fa-java"></i></div>
         <h3>Java</h3>
         <small><span class="lang-ar">برمجة ونظم</span><span class="lang-en">Systems</span></small>
-        <div class="progress"><i data-level="65"></i></div>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="240">
         <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
         <h3><span class="lang-ar">التسويق الرقمي</span><span class="lang-en">Marketing</span></h3>
         <small><span class="lang-ar">إعلانات وتحليل أداء</span><span class="lang-en">Ads & Analytics</span></small>
-        <div class="progress"><i data-level="85"></i></div>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="290">
         <div class="skill-icon"><i class="fas fa-code"></i></div>
         <h3><span class="lang-ar">تطوير الويب</span><span class="lang-en">Web Dev</span></h3>
         <small><span class="lang-ar">HTML / CSS / JavaScript</span><span class="lang-en">HTML / CSS / JavaScript</span></small>
-        <div class="progress"><i data-level="80"></i></div>
       </div>
     </div>
     <div class="view-all">
@@ -1077,23 +1048,13 @@
     <div class="section-head">
       <span class="pill"><span class="lang-ar">أعمالي</span><span class="lang-en">My Work</span></span>
       <h2><span class="lang-ar">مشاريع مميزة</span><span class="lang-en">Featured Projects</span></h2>
-      <p><span class="lang-ar">لمحة سريعة عن مجالات المشاريع التي أعمل عليها باحترافية</span><span class="lang-en">A quick look at the project areas I work on professionally</span></p>
+      <p><span class="lang-ar">لمحة عن مجال العمل الأساسي الذي أركز عليه باحتراف</span><span class="lang-en">A look at my main professional focus area</span></p>
     </div>
     <div class="case-grid">
       <div class="case" data-aos="zoom-in" data-aos-delay="40">
         <div class="case-icon" style="background: rgba(37,99,235,0.10); color:#2563eb;"><i class="fab fa-python"></i></div>
         <h3><span class="lang-ar">أنظمة برمجية</span><span class="lang-en">Software Systems</span></h3>
         <p><span class="lang-ar">بناء تطبيقات وخدمات برمجية عملية تدعم الأعمال وتحسن الأداء.</span><span class="lang-en">Building practical software applications and services that support business and boost performance.</span></p>
-      </div>
-      <div class="case" data-aos="zoom-in" data-aos-delay="90">
-        <div class="case-icon" style="background: rgba(255,152,0,0.12); color:#f97316;"><i class="fas fa-chart-line"></i></div>
-        <h3><span class="lang-ar">حملات تسويقية</span><span class="lang-en">Marketing Campaigns</span></h3>
-        <p><span class="lang-ar">حملات رقمية مدروسة تحقق نتائج قابلة للقياس وتزيد العوائد.</span><span class="lang-en">Data-driven campaigns that deliver measurable results and growth.</span></p>
-      </div>
-      <div class="case" data-aos="zoom-in" data-aos-delay="140">
-        <div class="case-icon" style="background: rgba(16,185,129,0.12); color:#10b981;"><i class="fas fa-drafting-compass"></i></div>
-        <h3><span class="lang-ar">تصميم هندسي</span><span class="lang-en">Engineering Design</span></h3>
-        <p><span class="lang-ar">مخططات وخرائط تنفيذية دقيقة بأعلى معايير الاحترافية.</span><span class="lang-en">Accurate engineering designs and drawings to professional standards.</span></p>
       </div>
     </div>
     <div class="view-all">
@@ -1140,7 +1101,7 @@
     <div class="contact-wrap">
       <div class="contact-box">
         <div>
-          <h3 class="lang-ar">لنتحدث معاً</h3><h3 class="lang-en">Let's Talk</h3>
+          <h3 class="lang-ar"><i class="fas fa-comments"></i> لنتحدث معاً</h3><h3 class="lang-en"><i class="fas fa-comments"></i> Let's Talk</h3>
           <p class="lang-ar">أرسل طلب الخدمة وسأرد عليك خلال 24 ساعة</p>
           <p class="lang-en">Send your service request and I'll reply within 24 hours</p>
           <div class="contact-item">
@@ -1212,12 +1173,6 @@
     </div>
   </div>
 </section>
-
-<div class="welcome-toast" id="welcomeToast">
-  <div class="close-toast" id="closeToastBtn"><i class="fas fa-times"></i></div>
-  <p class="lang-ar">أهلاً بك في موقعي! يسعدني تصفحك لملفي الشخصي.</p>
-  <p class="lang-en">Welcome to my portfolio! Thanks for visiting.</p>
-</div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -1300,22 +1255,6 @@
   sidebar.addEventListener('click', (e) => { if (e.target === sidebar) closeSidebarPanel(); });
   document.querySelectorAll('.sidebar-inner a').forEach(link => link.addEventListener('click', closeSidebarPanel));
 
-  // ===== Skill progress bars =====
-  const bars = document.querySelectorAll('.progress i');
-  function animateBars() {
-    bars.forEach(bar => {
-      const level = bar.getAttribute('data-level');
-      if (level && bar.style.width === '') {
-        bar.style.width = level + '%';
-      }
-    });
-  }
-  const skillSection = document.getElementById('skills');
-  window.addEventListener('load', () => setTimeout(animateBars, 600));
-  document.addEventListener('scroll', () => {
-    if (skillSection.getBoundingClientRect().top < window.innerHeight - 100) animateBars();
-  }, { passive: true });
-
   // ===== Lightbox =====
   const lightboxModal = document.getElementById('lightboxModal');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -1327,13 +1266,6 @@
   lightboxClose.addEventListener('click', () => lightboxModal.classList.remove('active'));
   lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) lightboxModal.classList.remove('active'); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightboxModal.classList.remove('active'); });
-
-  // ===== Welcome toast =====
-  const welcomeToast = document.getElementById('welcomeToast');
-  const closeToastBtn = document.getElementById('closeToastBtn');
-  setTimeout(() => welcomeToast.classList.add('show-toast'), 3500);
-  setTimeout(() => welcomeToast.classList.remove('show-toast'), 9000);
-  closeToastBtn.addEventListener('click', () => welcomeToast.classList.remove('show-toast'));
 
   // ===== CV Download =====
   document.getElementById('downloadCVBtn').addEventListener('click', () => {
