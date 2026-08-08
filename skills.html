@@ -96,13 +96,21 @@
     .skill-box::before { content:''; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--brand),#4f46e5 55%,var(--accent)); opacity:0; transition:.3s; }
     .skill-box:hover::before { opacity:1; }
     .skill-box:hover { transform:translateY(-6px); border-color:var(--brand); box-shadow:0 22px 44px rgba(15,23,42,.12); }
-    .skill-head { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
-    .skill-icon { font-size:1.4rem; color:#fff; width:54px; height:54px; line-height:54px; text-align:center; border-radius:15px; background:linear-gradient(135deg,var(--brand),#4f46e5); box-shadow:0 8px 18px rgba(37,99,235,.28); flex-shrink:0; transition:transform .25s; overflow:hidden; }
-    .skill-icon img.brand-logo { width:32px; height:32px; object-fit:contain; margin-top:11px; }
+    .skill-head { display:flex; align-items:center; gap:14px; margin-bottom:12px; }
+    .skill-icon { font-size:1.6rem; width:58px; height:58px; display:flex; align-items:center; justify-content:center; border-radius:15px; background:rgba(37,99,235,0.10); color:var(--brand); flex-shrink:0; transition:transform .25s; overflow:hidden; box-shadow:none; border:none; }
+    .skill-icon img.brand-logo { width:30px; height:30px; object-fit:contain; }
+    .skill-icon.ic-orange { background:rgba(255,152,0,0.12); color:#ff9800; }
+    .skill-icon.ic-indigo { background:rgba(79,70,229,0.10); color:#4f46e5; }
+    .skill-icon.ic-teal { background:rgba(16,185,129,0.12); color:#0d9488; }
+    .skill-icon.ic-purple { background:rgba(168,85,247,0.12); color:#a855f7; }
+    .skill-icon.ic-rose { background:rgba(244,63,94,0.12); color:#e11d48; }
     .skill-head h2 { font-size:1.15rem; color:var(--ink); }
     .skill-box:hover .skill-icon { transform:rotate(-6deg) scale(1.08); }
     .skill-head .level { font-size:.72rem; color:var(--accent); font-weight:800; display:block; }
     .skill-box p { line-height:1.75; color:var(--ink-soft); font-size:.93rem; }
+    .usage { list-style:none; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); display:flex; flex-direction:column; gap:9px; }
+    .usage li { position:relative; padding-inline-start:24px; line-height:1.65; color:var(--ink-soft); font-size:.9rem; }
+    .usage li::before { content:'\f00c'; font-family:'Font Awesome 6 Free'; font-weight:900; position:absolute; inset-inline-start:0; top:3px; color:#22c55e; font-size:.72rem; }
     .tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
     .tags span { font-size:.75rem; font-weight:700; color:var(--brand); background:rgba(37,99,235,.08); padding:5px 11px; border-radius:999px; }
 
@@ -197,69 +205,92 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/python/ffffff" alt="Python" class="brand-logo"></div>
+            <div class="skill-icon"><i class="fab fa-python"></i></div>
             <div>
               <h2>Python</h2>
               <span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span>
             </div>
           </div>
-          <p><span class="lang-ar">تطوير التطبيقات، أتمتة العمليات، وتحليل البيانات بلغة بايثون.</span><span class="lang-en">Application development, process automation, and data analysis with Python.</span></p>
-          <div class="tags"><span>Automation</span><span>Backend</span><span>Data</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">أتمتة المهام والعمليات المتكررة</span><span class="lang-en">Automating repetitive tasks</span></li>
+            <li><span class="lang-ar">تحليل ومعالجة البيانات</span><span class="lang-en">Analyzing & processing data</span></li>
+            <li><span class="lang-ar">تطوير الواجهات البرمجية الخلفية</span><span class="lang-en">Backend development</span></li>
+            <li><span class="lang-ar">التعامل مع الـ APIs والسكربتات</span><span class="lang-en">Working with APIs & scripts</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="90">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/openjdk/ffffff" alt="Java" class="brand-logo"></div>
+            <div class="skill-icon ic-orange"><i class="fab fa-java"></i></div>
             <div>
               <h2>Java</h2>
               <span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span>
             </div>
           </div>
-          <p><span class="lang-ar">بناء أنظمة برمجية متكاملة تلبي متطلبات المشاريع الهندسية والتجارية.</span><span class="lang-en">Building complete software systems that meet engineering and business requirements.</span></p>
-          <div class="tags"><span>OOP</span><span>SDK</span><span>Spring</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">بناء أنظمة مؤسسية متكاملة</span><span class="lang-en">Building enterprise systems</span></li>
+            <li><span class="lang-ar">البرمجة كائنية التوجه (OOP)</span><span class="lang-en">Object-Oriented Programming</span></li>
+            <li><span class="lang-ar">تطوير تطبيقات سطح المكتب</span><span class="lang-en">Desktop application development</span></li>
+            <li><span class="lang-ar">التعامل مع إطارات العمل Spring</span><span class="lang-en">Working with Spring frameworks</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="140">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/cplusplus/ffffff" alt="C++" class="brand-logo"></div>
+            <div class="skill-icon ic-indigo"><i class="fab fa-cuttlefish"></i></div>
             <div>
               <h2>C++</h2>
               <span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span>
             </div>
           </div>
-          <p><span class="lang-ar">برمجة أنظمة عالية الأداء وبناء الخوارزميات وإدارة الذاكرة.</span><span class="lang-en">High-performance systems programming, algorithms, and memory management.</span></p>
-          <div class="tags"><span>OOP</span><span>STL</span><span>Algorithms</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">برمجة أنظمة عالية الأداء</span><span class="lang-en">High-performance systems</span></li>
+            <li><span class="lang-ar">تصميم وتبني الخوارزميات</span><span class="lang-en">Algorithm design</span></li>
+            <li><span class="lang-ar">إدارة الذاكرة ومكتبات STL</span><span class="lang-en">Memory management & STL</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="190">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/mysql/fff" alt="SQL Databases" class="brand-logo"></div>
+            <div class="skill-icon ic-teal"><i class="fas fa-database"></i></div>
             <div>
               <h2><span class="lang-ar">SQL & قواعد البيانات</span><span class="lang-en">SQL & Databases</span></h2>
               <span class="level lang-ar">قواعد بيانات</span><span class="level lang-en">Databases</span>
             </div>
           </div>
-          <p><span class="lang-ar">تصميم قواعد البيانات وإدارة الاستعلامات باحترافية.</span><span class="lang-en">Professional database design and query management.</span></p>
-          <div class="tags"><span>MySQL</span><span>Design</span><span>Queries</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">تصميم نماذج قواعد البيانات</span><span class="lang-en">Database schema design</span></li>
+            <li><span class="lang-ar">كتابة استعلامات متقدمة</span><span class="lang-en">Writing advanced queries</span></li>
+            <li><span class="lang-ar">إدارة العلاقات والجداول</span><span class="lang-en">Managing relations & tables</span></li>
+            <li><span class="lang-ar">تحسين أداء الاستعلامات</span><span class="lang-en">Optimizing query performance</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="240">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/powerbi/ffffff" alt="Data Analysis" class="brand-logo"></div>
+            <div class="skill-icon ic-rose"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/powerbi/ffffff" width="28" height="28" alt="Data Analysis"></div>
             <div>
               <h2><span class="lang-ar">تحليل البيانات</span><span class="lang-en">Data Analysis</span></h2>
               <span class="level lang-ar">تحليل البيانات</span><span class="level lang-en">Data Analysis</span>
             </div>
           </div>
-          <p><span class="lang-ar">استخراج الرؤى من البيانات وبناء التقارير لاتخاذ قرارات مدروسة.</span><span class="lang-en">Extracting insights and building reports to make informed decisions.</span></p>
-          <div class="tags"><span>Excel</span><span>Reports</span><span>Visualization</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">تنظيف البيانات ومعالجتها</span><span class="lang-en">Data cleaning & processing</span></li>
+            <li><span class="lang-ar">التحليل الاحترافي بـ Excel</span><span class="lang-en">Advanced Excel analysis</span></li>
+            <li><span class="lang-ar">بناء التقارير والمخططات</span><span class="lang-en">Building reports & charts</span></li>
+            <li><span class="lang-ar">استخراج الرؤى واتخاذ القرار</span><span class="lang-en">Extracting insights</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="290">
           <div class="skill-head">
-            <div class="skill-icon"><i class="fas fa-bullhorn"></i></div>
+            <div class="skill-icon ic-purple"><i class="fas fa-chart-line"></i></div>
             <div>
               <h2><span class="lang-ar">التسويق الرقمي</span><span class="lang-en">Digital Marketing</span></h2>
               <span class="level lang-ar">تسويق</span><span class="level lang-en">Marketing</span>
             </div>
           </div>
-          <p><span class="lang-ar">تخطيط الحملات الرقمية وإدارة الإعلانات وتحليل الأداء لرفع التحويلات.</span><span class="lang-en">Planning digital campaigns, managing ads, and analyzing performance to boost conversions.</span></p>
-          <div class="tags"><span>Meta Ads</span><span>SEO</span><span>Analytics</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">إدارة حملات الإعلانات المدفوعة</span><span class="lang-en">Managing paid ad campaigns</span></li>
+            <li><span class="lang-ar">تحسين محركات البحث (SEO)</span><span class="lang-en">Search Engine Optimization</span></li>
+            <li><span class="lang-ar">تحليل الأداء ورفع التحويلات</span><span class="lang-en">Performance analysis & conversions</span></li>
+            <li><span class="lang-ar">استهداف الجمهور المناسب</span><span class="lang-en">Audience targeting</span></li>
+          </ul>
         </article>
       </div>
     </div>
@@ -268,27 +299,38 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/python/ffffff" alt="Python" class="brand-logo"></div>
+            <div class="skill-icon"><i class="fab fa-python"></i></div>
             <div><h2>Python</h2><span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span></div>
           </div>
-          <p><span class="lang-ar">تطوير التطبيقات، أتمتة العمليات، وتحليل البيانات بلغة بايثون.</span><span class="lang-en">Application development, process automation, and data analysis with Python.</span></p>
-          <div class="tags"><span>Automation</span><span>Backend</span><span>Data</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">أتمتة المهام والعمليات المتكررة</span><span class="lang-en">Automating repetitive tasks</span></li>
+            <li><span class="lang-ar">تحليل ومعالجة البيانات</span><span class="lang-en">Analyzing & processing data</span></li>
+            <li><span class="lang-ar">تطوير الواجهات البرمجية الخلفية</span><span class="lang-en">Backend development</span></li>
+            <li><span class="lang-ar">التعامل مع الـ APIs والسكربتات</span><span class="lang-en">Working with APIs & scripts</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/openjdk/ffffff" alt="Java" class="brand-logo"></div>
+            <div class="skill-icon ic-orange"><i class="fab fa-java"></i></div>
             <div><h2>Java</h2><span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span></div>
           </div>
-          <p><span class="lang-ar">بناء أنظمة برمجية متكاملة تلبي متطلبات المشاريع الهندسية والتجارية.</span><span class="lang-en">Building complete software systems that meet engineering and business requirements.</span></p>
-          <div class="tags"><span>OOP</span><span>SDK</span><span>Spring</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">بناء أنظمة مؤسسية متكاملة</span><span class="lang-en">Building enterprise systems</span></li>
+            <li><span class="lang-ar">البرمجة كائنية التوجه (OOP)</span><span class="lang-en">Object-Oriented Programming</span></li>
+            <li><span class="lang-ar">تطوير تطبيقات سطح المكتب</span><span class="lang-en">Desktop application development</span></li>
+            <li><span class="lang-ar">التعامل مع إطارات العمل Spring</span><span class="lang-en">Working with Spring frameworks</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="120">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/cplusplus/ffffff" alt="C++" class="brand-logo"></div>
+            <div class="skill-icon ic-indigo"><i class="fab fa-cuttlefish"></i></div>
             <div><h2>C++</h2><span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span></div>
           </div>
-          <p><span class="lang-ar">برمجة أنظمة عالية الأداء وبناء الخوارزميات وإدارة الذاكرة.</span><span class="lang-en">High-performance systems programming, algorithms, and memory management.</span></p>
-          <div class="tags"><span>OOP</span><span>STL</span><span>Algorithms</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">برمجة أنظمة عالية الأداء</span><span class="lang-en">High-performance systems</span></li>
+            <li><span class="lang-ar">تصميم وتبني الخوارزميات</span><span class="lang-en">Algorithm design</span></li>
+            <li><span class="lang-ar">إدارة الذاكرة ومكتبات STL</span><span class="lang-en">Memory management & STL</span></li>
+          </ul>
         </article>
       </div>
     </div>
@@ -297,19 +339,27 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/mysql/white" alt="SQL & Databases" class="brand-logo"></div>
+            <div class="skill-icon ic-teal"><i class="fas fa-database"></i></div>
             <div><h2><span class="lang-ar">SQL & قواعد البيانات</span><span class="lang-en">SQL & Databases</span></h2><span class="level lang-ar">قواعد بيانات</span><span class="level lang-en">Databases</span></div>
           </div>
-          <p><span class="lang-ar">تصميم قواعد البيانات وإدارة الاستعلامات باحترافية.</span><span class="lang-en">Professional database design and query management.</span></p>
-          <div class="tags"><span>MySQL</span><span>Design</span><span>Queries</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">تصميم نماذج قواعد البيانات</span><span class="lang-en">Database schema design</span></li>
+            <li><span class="lang-ar">كتابة استعلامات متقدمة</span><span class="lang-en">Writing advanced queries</span></li>
+            <li><span class="lang-ar">إدارة العلاقات والجداول</span><span class="lang-en">Managing relations & tables</span></li>
+            <li><span class="lang-ar">تحسين أداء الاستعلامات</span><span class="lang-en">Optimizing query performance</span></li>
+          </ul>
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
-            <div class="skill-icon"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/powerbi/ffffff" alt="Data Analysis" class="brand-logo"></div>
+            <div class="skill-icon ic-rose"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/powerbi/ffffff" width="28" height="28" alt="Data Analysis"></div>
             <div><h2><span class="lang-ar">تحليل البيانات</span><span class="lang-en">Data Analysis</span></h2><span class="level lang-ar">تحليل البيانات</span><span class="level lang-en">Data Analysis</span></div>
           </div>
-          <p><span class="lang-ar">استخراج الرؤى من البيانات وبناء التقارير لاتخاذ قرارات مدروسة.</span><span class="lang-en">Extracting insights and building reports to make informed decisions.</span></p>
-          <div class="tags"><span>Excel</span><span>Reports</span><span>Visualization</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">تنظيف البيانات ومعالجتها</span><span class="lang-en">Data cleaning & processing</span></li>
+            <li><span class="lang-ar">التحليل الاحترافي بـ Excel</span><span class="lang-en">Advanced Excel analysis</span></li>
+            <li><span class="lang-ar">بناء التقارير والمخططات</span><span class="lang-en">Building reports & charts</span></li>
+            <li><span class="lang-ar">استخراج الرؤى واتخاذ القرار</span><span class="lang-en">Extracting insights</span></li>
+          </ul>
         </article>
       </div>
     </div>
@@ -318,11 +368,15 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon"><i class="fas fa-bullhorn"></i></div>
+            <div class="skill-icon ic-purple"><i class="fas fa-chart-line"></i></div>
             <div><h2><span class="lang-ar">التسويق الرقمي</span><span class="lang-en">Digital Marketing</span></h2><span class="level lang-ar">تسويق</span><span class="level lang-en">Marketing</span></div>
           </div>
-          <p><span class="lang-ar">تخطيط الحملات الرقمية وإدارة الإعلانات وتحليل الأداء لرفع التحويلات.</span><span class="lang-en">Planning digital campaigns, managing ads, and analyzing performance to boost conversions.</span></p>
-          <div class="tags"><span>Meta Ads</span><span>SEO</span><span>Analytics</span></div>
+          <ul class="usage">
+            <li><span class="lang-ar">إدارة حملات الإعلانات المدفوعة</span><span class="lang-en">Managing paid ad campaigns</span></li>
+            <li><span class="lang-ar">تحسين محركات البحث (SEO)</span><span class="lang-en">Search Engine Optimization</span></li>
+            <li><span class="lang-ar">تحليل الأداء ورفع التحويلات</span><span class="lang-en">Performance analysis & conversions</span></li>
+            <li><span class="lang-ar">استهداف الجمهور المناسب</span><span class="lang-en">Audience targeting</span></li>
+          </ul>
         </article>
       </div>
     </div></div>
@@ -392,16 +446,14 @@
     // ===== تحميل المهارات من Firestore (تُدار من اللوحة) =====
     function skillCard(p) {
       const name = (currentLang === 'en' ? (p.name_en || p.name_ar) : (p.name_ar || p.name_en)) || '';
-      const sub = (currentLang === 'en' ? (p.sub_en || p.sub_ar) : (p.sub_ar || p.sub_en)) || '';
       const icon = p.icon ? `<i class="${esc(p.icon)}"></i>` : '<i class="fas fa-star"></i>';
-      const tags = (p.tags || []).map(t => `<span>${esc(t)}</span>`).join('');
+      const usage = (p.usage || []).map(u => `<li><span class="lang-ar">${esc(u.ar || u)}</span><span class="lang-en">${esc(u.en || u)}</span></li>`).join('');
       return `<article class="skill-box" data-aos="zoom-in">
         <div class="skill-head">
           <div class="skill-icon">${icon}</div>
           <div><h2>${esc(name)}</h2></div>
         </div>
-        <p>${esc(sub)}</p>
-        ${tags ? `<div class="tags">${tags}</div>` : ''}
+        ${usage ? `<ul class="usage">${usage}</ul>` : ''}
       </article>`;
     }
     (async () => {
