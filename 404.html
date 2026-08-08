@@ -2,68 +2,196 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <title>404 - الصفحة غير موجودة | أحمد أيمن يحيى</title>
-  <meta name="description" content="عذراً، الصفحة التي تبحث عنها غير موجودة.">
+  <meta name="description" content="عذراً، الصفحة التي تبحث عنها غير موجودة أو أن الرابط غير صحيح. تصفح الرئيسية، المشاريع، المهارات أو المدونة.">
   <meta name="theme-color" content="#2563eb">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',sans-serif; }
-    body { min-height:100vh; display:flex; align-items:center; justify-content:center; background:#f5f7fb; color:#0f172a; padding:24px; overflow:hidden; position:relative; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',Tajawal,sans-serif; }
+
+    body { min-height:100vh; background:#f5f7fb; color:#0f172a; overflow-x:hidden; position:relative; }
     body::before { content:''; position:fixed; inset:0; z-index:-1; background:
-      radial-gradient(600px 380px at 10% -5%, rgba(37,99,235,0.10), transparent 60%),
-      radial-gradient(520px 360px at 95% 15%, rgba(255,152,0,0.10), transparent 60%); }
-    .wrap { text-align:center; max-width:560px; }
-    .code { font-size:clamp(6rem, 24vw, 11rem); font-weight:900; line-height:1;
+      radial-gradient(640px 420px at 8% -6%, rgba(37,99,235,0.10), transparent 60%),
+      radial-gradient(540px 380px at 96% 12%, rgba(255,152,0,0.10), transparent 60%),
+      radial-gradient(480px 360px at 70% 110%, rgba(79,70,229,0.08), transparent 60%); }
+
+    .err-shell { display:flex; flex-direction:column; min-height:100vh; }
+    .err-main { flex:1; display:flex; align-items:center; justify-content:center; padding:48px 24px 60px; }
+
+    .wrap { text-align:center; max-width:640px; width:100%; }
+    .code { font-size:clamp(5.5rem, 22vw, 10rem); font-weight:900; line-height:1;
       background:linear-gradient(120deg,#2563eb,#4f46e5 55%,#ff9800);
       -webkit-background-clip:text; background-clip:text; color:transparent;
-      animation:bob 3.2s ease-in-out infinite; }
+      animation:bob 3.2s ease-in-out infinite; position:relative; display:inline-block; }
     @keyframes bob { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
-    .title { font-size:1.5rem; font-weight:900; margin:8px 0 10px; }
-    .desc { color:#475569; line-height:1.8; margin-bottom:28px; }
+    .code::after { content:'404'; position:absolute; left:50%; top:24%; transform:translateX(-50%);
+      -webkit-text-stroke:2px rgba(37,99,235,.18); color:transparent; font-size:.5em; z-index:-1; }
+
+    .title { font-size:clamp(1.4rem, 4vw, 2rem); font-weight:900; margin:10px 0 8px; }
+    .desc { color:#475569; line-height:1.9; margin-bottom:26px; }
+
     .actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    .btn { display:inline-flex; align-items:center; gap:9px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.95rem; text-decoration:none; transition:.25s; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.95rem; text-decoration:none; transition:.25s cubic-bezier(.2,.8,.3,1); }
     .btn-primary { background:linear-gradient(120deg,#2563eb,#1d4ed8); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
     .btn-primary:hover { transform:translateY(-3px); box-shadow:0 18px 40px rgba(37,99,235,.4); }
     .btn-outline { background:#fff; border:1.5px solid #e2e8f0; color:#475569; }
     .btn-outline:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-3px); }
-    .search { margin-top:26px; display:flex; gap:8px; max-width:420px; margin-left:auto; margin-right:auto; }
+
+    .search { margin-top:26px; display:flex; gap:8px; max-width:440px; margin-left:auto; margin-right:auto; }
     .search input { flex:1; padding:13px 16px; border:1.5px solid #e2e8f0; border-radius:13px; font-family:inherit; font-size:.93rem; outline:none; background:#fff; transition:.2s; }
     .search input:focus { border-color:#2563eb; box-shadow:0 0 0 4px rgba(37,99,235,.12); }
     .search button { padding:13px 18px; border:none; border-radius:13px; background:#2563eb; color:#fff; cursor:pointer; font-size:1rem; transition:.2s; }
     .search button:hover { background:#1d4ed8; }
-    .back-home { margin-top:22px; color:#94a3b8; font-size:.85rem; text-decoration:none; }
-    .back-home:hover { color:#2563eb; }
-    @media (max-width:480px){ .actions{ flex-direction:column; } .btn{ width:100%; justify-content:center; } }
+
+    .quick { margin-top:34px; padding-top:26px; border-top:1px solid #e2e8f0; }
+    .quick-links { display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; margin-top:16px; }
+    .quick-links a { display:flex; align-items:center; gap:10px; padding:13px 15px; border-radius:14px;
+      background:#fff; border:1px solid #e2e8f0; color:#475569; text-decoration:none; font-weight:800; font-size:.9rem;
+      transition:.22s; }
+    .quick-links a i { width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+      border-radius:9px; background:#f0f4fa; color:#2563eb; font-size:.95rem; }
+    .quick-links a:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-3px); box-shadow:0 10px 22px rgba(37,99,235,.12); }
+
+    .err-footer { margin-top:22px; color:#94a3b8; font-size:.85rem; text-decoration:none; display:inline-block; }
+    .err-footer:hover { color:#2563eb; }
+
+    @media (max-width:480px){ .actions{ flex-direction:column; } .btn{ width:100%; } .quick-links{ grid-template-columns:1fr 1fr; } }
   </style>
   <link rel="stylesheet" href="dark.css">
+  <script>
+    // لغة النظام أولاً
+    try {
+      var saved = localStorage.getItem('lang');
+      if (saved === 'en') { document.documentElement.dir = 'ltr'; document.documentElement.classList.add('english'); document.body ? document.body.classList.add('english') : null; }
+    } catch (e) {}
+  </script>
 </head>
 <body>
-  <button class="lang-switch theme-btn" id="themeBtn" aria-label="الوضع الليلي" style="position:fixed;top:18px;inset-inline-end:18px;"><i class="fas fa-moon" id="themeIcon"></i></button>
-  <div class="wrap">
-    <div class="code">404</div>
-    <h1 class="title"><span class="lang-ar">عذراً، الصفحة غير موجودة</span><span class="lang-en">Oops, Page Not Found</span></h1>
-    <p class="desc"><span class="lang-ar">يبدو أن الصفحة التي تبحث عنها قد أُزيلت أو أن الرابط غير صحيح. يمكنك العودة للرئيسية أو البحث عن محتوى آخر.</span><span class="lang-en">The page you're looking for may have been moved or the link is incorrect. Go back home or search for something else.</span></p>
-    <div class="actions">
-      <a class="btn btn-primary" href="index.html"><i class="fas fa-home"></i><span class="lang-ar">العودة للرئيسية</span><span class="lang-en">Back to Home</span></a>
-      <a class="btn btn-outline" href="contact.html"><i class="fas fa-envelope"></i><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></a>
-    </div>
-    <div class="search">
-      <input type="text" id="searchInput" placeholder="ما الذي تبحث عنه؟">
-      <button onclick="goSearch()" aria-label="بحث"><i class="fas fa-search"></i></button>
-    </div>
-    <a class="back-home" href="https://ahmedayman.website">&copy; 2026 Ahmed Ayman Yahya</a>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="site-navbar" aria-label="Main navigation">
+  <a class="logo" href="index.html">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" width="42" height="42" alt="شعار أحمد أيمن">
+    <strong><span class="lang-ar">أحمد أيمن</span><span class="lang-en">Ahmed Ayman</span></strong>
+  </a>
+  <div class="nav-links">
+    <a href="index.html"><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
+    <a href="about.html"><span class="lang-ar">نبذة</span><span class="lang-en">About</span></a>
+    <a href="experience.html"><span class="lang-ar">الخبرة</span><span class="lang-en">Experience</span></a>
+    <a href="skills.html"><span class="lang-ar">المهارات</span><span class="lang-en">Skills</span></a>
+    <a href="projects.html"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
+    <a href="blog.html"><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></a>
+    <a href="contact.html"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a>
   </div>
-  <script>
-    function goSearch() {
-      const q = document.getElementById('searchInput').value.trim();
-      if (q) { window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:ahmedayman.website'); }
-    }
-    document.getElementById('searchInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') goSearch(); });
-  
+  <div class="nav-actions">
+    <button class="lang-switch" id="langSwitchFixed" aria-label="تغيير اللغة"><span class="lang-ar">English</span><span class="lang-en">العربية</span></button>
+    <button class="lang-switch theme-btn" id="themeBtn" aria-label="الوضع الليلي"><i class="fas fa-moon" id="themeIcon"></i></button>
+    <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner">
+    <button class="close-sidebar" id="closeSidebar" aria-label="إغلاق القائمة"><i class="fas fa-times"></i></button>
+    <a href="index.html" class="lang-ar">الرئيسية</a><a href="index.html" class="lang-en">Home</a>
+    <a href="about.html" class="lang-ar">نبذة عني</a><a href="about.html" class="lang-en">About Me</a>
+    <a href="experience.html" class="lang-ar">الخبرة العملية</a><a href="experience.html" class="lang-en">Experience</a>
+    <a href="skills.html" class="lang-ar">المهارات التقنية</a><a href="skills.html" class="lang-en">Technical Skills</a>
+    <a href="projects.html" class="lang-ar">المشاريع</a><a href="projects.html" class="lang-en">Projects</a>
+    <a href="blog.html" class="lang-ar">المدونة</a><a href="blog.html" class="lang-en">Blog</a>
+    <a href="contact.html" class="lang-ar">تواصل معي</a><a href="contact.html" class="lang-en">Contact Me</a>
+  </div>
+</div>
+
+<div class="err-shell">
+  <div class="err-main">
+    <div class="wrap">
+      <div class="code" aria-hidden="true">404</div>
+      <h1 class="title"><span class="lang-ar">عذراً، الصفحة غير موجودة</span><span class="lang-en">Oops, Page Not Found</span></h1>
+      <p class="desc"><span class="lang-ar">يبدو أن الصفحة التي تبحث عنها قد أُزيلت أو أن الرابط غير صحيح. لا تقلق، يمكنك العودة للرئيسية أو البحث عن محتوى آخر.</span><span class="lang-en">The page you're looking for may have been moved or the link is incorrect. Don't worry, you can go back home or search for something else.</span></p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="index.html"><i class="fas fa-home"></i><span class="lang-ar">العودة للرئيسية</span><span class="lang-en">Back to Home</span></a>
+        <a class="btn btn-outline" href="javascript:history.back()"><i class="fas fa-arrow-left"></i><span class="lang-ar">الصفحة السابقة</span><span class="lang-en">Go Back</span></a>
+        <a class="btn btn-outline" href="contact.html"><i class="fas fa-envelope"></i><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></a>
+      </div>
+
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="ما الذي تبحث عنه؟">
+        <button onclick="goSearch()" aria-label="بحث"><i class="fas fa-search"></i></button>
+      </div>
+
+      <div class="quick">
+        <div class="footer-note" style="font-weight:800;font-size:.9rem;color:#64748b;"><span class="lang-ar">روابط سريعة</span><span class="lang-en">Quick Links</span></div>
+        <div class="quick-links">
+          <a href="projects.html"><i class="fas fa-rocket"></i><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
+          <a href="skills.html"><i class="fas fa-layer-group"></i><span class="lang-ar">المهارات</span><span class="lang-en">Skills</span></a>
+          <a href="certificates.html"><i class="fas fa-award"></i><span class="lang-ar">الشهادات</span><span class="lang-en">Certificates</span></a>
+          <a href="blog.html"><i class="fas fa-scroll"></i><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></a>
+        </div>
+      </div>
+
+      <a class="err-footer" href="index.html">© <span class="year-slot">2026</span> Ahmed Ayman Yahya</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links"><a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a><a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></div>
+  </footer>
+</div>
+
+<script>
+  // ===== اللغة =====
+  let curLang = 'ar';
+  try { curLang = localStorage.getItem('lang') || 'ar'; } catch (e) {}
+  function applyLang() {
+    document.body.classList.toggle('english', curLang === 'en');
+    document.body.dir = curLang === 'en' ? 'ltr' : 'rtl';
+    document.documentElement.dir = curLang === 'en' ? 'ltr' : 'rtl';
+  }
+  applyLang();
+  function switchLang() {
+    curLang = curLang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('lang', curLang);
+    applyLang();
+  }
+  document.getElementById('langSwitchFixed').addEventListener('click', switchLang);
+
+  // ===== القائمة الجانبية =====
+  const sidebar = document.getElementById('sidebar');
+  document.getElementById('menuBtn').addEventListener('click', () => sidebar.classList.add('open'));
+  document.getElementById('closeSidebar').addEventListener('click', () => sidebar.classList.remove('open'));
+  sidebar.addEventListener('click', (e) => { if (e.target === sidebar) sidebar.classList.remove('open'); });
+  document.querySelectorAll('.sidebar-inner a').forEach(l => l.addEventListener('click', () => sidebar.classList.remove('open')));
+  const syncBodyLock = () => document.body.classList.toggle('side-open', sidebar.classList.contains('open'));
+  new MutationObserver(syncBodyLock).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
+  syncBodyLock();
+
+  // ===== البحث =====
+  function goSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) { window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:ahmedayman.website'); }
+  }
+  document.getElementById('searchInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') goSearch(); });
+
+  // ===== شريط تقدم التمرير =====
+  var _sp = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', function(){
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    _sp.style.width = (max > 0 ? (window.scrollY/max)*100 : 0) + '%';
+  }, { passive: true });
+
+  // ===== سنة حقوق الطبع تلقائية =====
+  document.querySelectorAll('.year-slot').forEach(function(el){ el.textContent = new Date().getFullYear(); });
+
   // ===== الوضع الليلي/النهاري =====
   (function(){
     var KEY='site-theme';
@@ -80,7 +208,6 @@
       if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
     }); }
   })();
-
 </script>
 </body>
 </html>

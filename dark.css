@@ -208,6 +208,16 @@ body.dark .modal-tag { background: var(--surface-2); color: var(--brand); }
 /* ===== صفحة 404 ===== */
 body.dark .btn-outline { background: var(--surface) !important; border-color: var(--border) !important; color: var(--ink-soft) !important; }
 body.dark .search input { background: var(--surface) !important; border-color: var(--border) !important; color: var(--ink) !important; }
+body.dark .desc,
+body.dark .err-footer { color: var(--ink-soft) !important; }
+body.dark .quick-links a {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--ink-soft) !important;
+}
+body.dark .quick-links a i { background: var(--surface-2) !important; color: var(--brand) !important; }
+body.dark .quick-links a:hover { border-color: var(--brand) !important; color: var(--brand) !important; }
+body.dark .quick { border-top-color: var(--border) !important; }
 
 /* ===== شريط التمرير ===== */
 body.dark ::-webkit-scrollbar-track { background: var(--bg); }
