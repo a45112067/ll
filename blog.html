@@ -84,7 +84,7 @@
     .filter-btn.active, .filter-btn:hover { border-color:#2563eb; color:#2563eb; background:#eef6ff; }
 
     /* ===== بطاقة المقال ===== */
-    .post { background:#ffffff; border:1px solid #e2e8f0; border-radius:22px; padding:24px; margin-bottom:16px; display:flex; gap:20px; align-items:flex-start; transition:.25s; box-shadow:0 6px 18px rgba(15,23,42,.05); position:relative; overflow:hidden; }
+    .post { background:#ffffff; border:1px solid #e2e8f0; border-radius:20px; padding:22px 24px; margin-bottom:16px; display:flex; gap:20px; align-items:flex-start; transition:.25s; box-shadow:0 6px 18px rgba(15,23,42,.05); position:relative; overflow:hidden; }
     .post::before { content:''; position:absolute; top:0; right:0; width:5px; height:100%; background:linear-gradient(180deg,#2563eb,#4f46e5 55%,#ff9800); opacity:0; transition:.3s; }
     .post:hover::before { opacity:1; }
     .post:hover { transform:translateY(-4px); border-color:#2563eb; box-shadow:0 18px 40px rgba(37,99,235,.14); }
@@ -92,10 +92,17 @@
     .post-icon.marketing { background:linear-gradient(135deg,#ff9800,#f59e0b); box-shadow:0 10px 22px rgba(255,152,0,.3); }
     .post-icon.seo { background:linear-gradient(135deg,#10b981,#059669); box-shadow:0 10px 22px rgba(16,185,129,.3); }
     .post-icon.code { background:linear-gradient(135deg,#4f46e5,#7c3aed); box-shadow:0 10px 22px rgba(124,58,237,.3); }
-    .post-body h2 { font-size:1.2rem; margin-bottom:8px; color:#0f172a; font-weight:800; }
+    .post-cover { flex-shrink:0; width:200px; border-radius:14px; overflow:hidden; background:linear-gradient(135deg,#2563eb,#4f46e5); }
+    .post-cover img { width:100%; height:120px; object-fit:cover; display:block; }
+    .post-body { flex:1; min-width:0; }
+    .post-body h2 { font-size:1.2rem; margin-bottom:8px; color:#0f172a; font-weight:800; line-height:1.5; }
+    .post-body h2:hover { color:#2563eb; }
     .meta { font-size:.78rem; color:#475569; display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
     .meta .tag { display:inline-block; padding:3px 12px; border-radius:999px; background:rgba(37,99,235,.1); color:#2563eb; font-weight:800; font-size:.72rem; }
+    .meta .tag:hover { background:#2563eb; color:#fff; }
     .post-body .excerpt { color:#475569; line-height:1.8; font-size:.93rem; }
+    .read-more { display:inline-flex; align-items:center; gap:8px; margin-top:12px; color:#2563eb; font-weight:800; font-size:.86rem; }
+    .post:hover .read-more { gap:13px; }
 
     /* ===== قراءة المقال ===== */
     #readView { display:none; }
@@ -132,8 +139,9 @@
       .toolbar { padding:14px; }
     }
     @media (max-width:480px) {
-      .post { flex-direction:column; }
-      .post-icon { margin-bottom:4px; }
+      .post { flex-direction:column; padding:18px; }
+      .post-cover, .post-icon { width:100%; margin-bottom:4px; }
+      .post-cover img { width:100%; height:170px; }
       .toolbar .filter-btn { flex:1 1 auto; text-align:center; }
     }
   </style>
@@ -300,7 +308,7 @@
       const mins = Math.max(1, Math.round(wc/200));
       return `
       <a class="post" href="#" onclick="openPost('${p.id}');return false;">
-        <div class="post-icon ${iconCls}"><i class="fas ${icon}"></i></div>
+        ${p.image ? `<div class="post-cover"><img loading="lazy" decoding="async" src="${esc(p.image)}" alt="${esc(p.title_ar || p.title_en)}"></div>` : `<div class="post-icon ${iconCls}"><i class="fas ${icon}"></i></div>`}
         <div class="post-body">
           <h2>${esc(p.title_ar || p.title_en)}</h2>
           <div class="meta">
@@ -310,6 +318,7 @@
           </div>
           <p class="excerpt">${esc(p.excerpt_ar || p.excerpt_en || '')}</p>
           <div class="meta">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+          <span class="read-more"><span class="lang-ar">اقرأ المقال</span><span class="lang-en">Read article</span> <i class="fas fa-arrow-left"></i></span>
         </div>
       </a>`}).join('');
     updateStats();
