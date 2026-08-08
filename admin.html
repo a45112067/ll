@@ -182,7 +182,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-init.js"></script>
+  <script src="firebase-init.js"></script>`n<script src="security.js"></script>
 </head>
 <body>
 
@@ -196,7 +196,7 @@
     <input type="password" id="loginPass" placeholder="كلمة المرور" autocomplete="current-password">
     <button id="loginBtn">دخول</button>
     <div class="login-err" id="loginErr"></div>
-    <div class="login-alt" id="createAccBtn">+ إنشاء حساب أدمن جديد</div>
+    <div class="login-hint" id="loginHint">التسجيل مقيّد: حساب الأدمن يُنشأ مرة واحدة من لوحة Firebase Console فقط.</div>
   </div>
 </div>
 
@@ -620,15 +620,6 @@
     try { await auth.signInWithEmailAndPassword(email, pass); }
     catch (e) { $('loginErr').textContent = 'بيانات الدخول غير صحيحة'; }
   }
-  $('createAccBtn').addEventListener('click', async () => {
-    const email = $('loginEmail').value.trim();
-    const pass = $('loginPass').value;
-    if (!email || pass.length < 6) { $('loginErr').textContent = 'أدخل بريداً صحيحاً وكلمة مرور (6+ أحرف)'; return; }
-    try {
-      await auth.createUserWithEmailAndPassword(email, pass);
-      toast('تم إنشاء الحساب وتسجيل الدخول', 'ok');
-    } catch (e) { $('loginErr').textContent = e.message || 'تعذّر الإنشاء'; }
-  });
   $('logoutBtn').addEventListener('click', () => auth.signOut());
 
   // ===== Views =====

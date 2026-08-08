@@ -230,7 +230,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="firebase-init.js"></script>
+<script src="firebase-init.js"></script>`n<script src="security.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({ duration:700, once:true, offset:60 });
@@ -241,8 +241,6 @@
   function applyLang() {
     document.body.classList.toggle('english', currentLang === 'en');
     document.body.dir = currentLang === 'en' ? 'ltr' : 'rtl';
-    document.getElementById('searchInput').placeholder = currentLang === 'en'
-      ? 'Search articles...' : 'ابحث في المقالات...';
   }
   applyLang();
   function switchLang() {
@@ -272,24 +270,29 @@
   syncBodyLock();
 
   // ===== البيانات والعرض =====
-  const app = firebase.initializeApp(window.FIREBASE_CONFIG);
-  const db = firebase.firestore();
+  let app = null, db = null;
+  try {
+    app = firebase.initializeApp(window.FIREBASE_CONFIG, 'blogApp');
+    db = firebase.firestore(app);
+  } catch (e) { app = null; db = null; }
   let allPosts = [], currentFilter = 'all', searchTerm = '';
 
   async function loadPosts() {
-    // الأساس: Firestore (يُدار من اللوحة). إذا كان فارغاً أو فشل → نرجع للمقالات المحلية.
-    let fbPosts = null;
+    // نعرض المحلي فوراً (لا انتظار للشبكة)، ثم في الخلفية نجلب Firestore ونستبدل إن وُجد.
+    const fetchLocal = async () => {
+      try {
+        const res = await fetch('data/blog.json');
+        if (res.ok) return (await res.json()).filter(p => p.status === 'published');
+      } catch (e) {}
+      return [];
+    };
+    allPosts = await fetchLocal();
+    render();
     try {
       const snap = await db.collection('posts').where('status', '==', 'published').get();
-      fbPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    } catch (e) { fbPosts = null; }
-    if (fbPosts && fbPosts.length) { allPosts = fbPosts; render(); return; }
-    try {
-      const res = await fetch('data/blog.json');
-      if (res.ok) { allPosts = (await res.json()).filter(p => p.status === 'published'); render(); return; }
+      const fb = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if (fb.length) { allPosts = fb; render(); }
     } catch (e) {}
-    if (fbPosts) { allPosts = fbPosts; render(); return; }
-    document.getElementById('postsContainer').innerHTML = '<div class="posts-empty">تعذّر تحميل المقالات.</div>';
   }
 
   function render() {
@@ -304,24 +307,27 @@
     if (!list.length) { el.innerHTML = '<div class="posts-empty">لا توجد مقالات مطابقة.</div>'; return; }
     el.innerHTML = list.map(p => {
       const tags = p.tags || [];
+      const isEn = currentLang === 'en';
+      const title = isEn ? (p.title_en || p.title_ar) : (p.title_ar || p.title_en);
+      const excerpt = isEn ? (p.excerpt_en || p.excerpt_ar) : (p.excerpt_ar || p.excerpt_en);
       let iconCls = 'code', icon = 'fa-scroll';
       const tl = tags.map(t=>t.trim().toLowerCase()).join(' ');
       if (/(تسويق|marketing|سوشيال|اعلان)/.test(tl)) { iconCls='marketing'; icon='fa-bullhorn'; }
-      else if (/(seo|تحسين)/.test(tl)) { iconCls='seo'; icon='fa-search'; }
-      else if (/(برمجة|code|برمجة)/.test(tl)) { iconCls='code'; icon='fa-code'; }
-      const wc = (p.content_ar||'').split(/\s+/).length;
+      else if (/(seo|تحسين محركات)/.test(tl)) { iconCls='seo'; icon='fa-search'; }
+      else if (/(برمجة|code|بايثون|django|php|جافاسكربت)/.test(tl)) { iconCls='code'; icon='fa-code'; }
+      const wc = (isEn ? (p.content_en||'') : (p.content_ar||'')).split(/\s+/).length;
       const mins = Math.max(1, Math.round(wc/200));
       return `
-      <a class="post" href="#" onclick="openPost('${p.id}');return false;">
-        ${p.image ? `<div class="post-cover"><img loading="lazy" decoding="async" src="${esc(p.image)}" alt="${esc(p.title_ar || p.title_en)}"></div>` : `<div class="post-icon ${iconCls}"><i class="fas ${icon}"></i></div>`}
+      <a class="post" href="#" onclick="openPost('${esc(p.id)}');return false;">
+        ${p.image ? `<div class="post-cover"><img loading="lazy" decoding="async" src="${esc(p.image)}" alt="${esc(title)}"></div>` : `<div class="post-icon ${iconCls}"><i class="fas ${icon}"></i></div>`}
         <div class="post-body">
-          <h2>${esc(p.title_ar || p.title_en)}</h2>
+          <h2>${esc(title)}</h2>
           <div class="meta">
             <span><i class="far fa-calendar"></i> ${esc(p.date || '')}</span>
             <span><i class="far fa-clock"></i> ${mins} <span class="lang-ar">دقائق</span><span class="lang-en">min</span></span>
             <span><i class="fas fa-user"></i> <span class="lang-ar">أحمد أيمن</span><span class="lang-en">Ahmed Ayman</span></span>
           </div>
-          <p class="excerpt">${esc(p.excerpt_ar || p.excerpt_en || '')}</p>
+          <p class="excerpt">${esc(excerpt)}</p>
           <div class="meta">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
           <span class="read-more"><span class="lang-ar">اقرأ المقال</span><span class="lang-en">Read article</span> <i class="fas fa-arrow-left"></i></span>
         </div>
@@ -377,7 +383,7 @@
     document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
     b.classList.add('active'); currentFilter=b.dataset.filter; render();
   }));
-  document.getElementById('searchInput').addEventListener('input', e=>{ searchTerm=e.target.value; render(); });
+  document.querySelectorAll('#searchInput, #searchInputEn').forEach(i=>i.addEventListener('input', e=>{ searchTerm=e.target.value; render(); }));
 
   loadPosts();
 

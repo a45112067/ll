@@ -1,1 +1,4 @@
-*.lnk
+__pycache__/
+*.pyc
+data/audit.log
+data/config.json

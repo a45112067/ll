@@ -2,52 +2,59 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function signedIn() {
-      return request.auth != null;
+    // ===== Broken Access Control: الكتابة حصرية للأدمن الموثَّق =====
+    // أضِف بريد المدير الحقيقي هنا بدلاً من القيمة النمطية:
+    //   example  ->  "admin@ahmedayman.website"
+    // فقط هذا البريد (المُوثَّق) يستطيع إنشاء/تعديل/حذف أي مستند.
+    // أي مستخدم آخر مسجّل أو مجهول: قراءة فقط (أو لا شيء).
+    function adminEmail() {
+      return request.auth
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ["admin@ahmedayman.website"];
     }
 
-    // المجموعات الثابتة: قراءة عامة، كتابة للأدمن فقط
+    // Collections الثابتة: قراءة عامة آمنة، كتابة للأدمن فقط
     match /site/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /projects/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /certificates/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /about/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /contact/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /skills/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /experience/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /education/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
     match /languages/{doc} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if adminEmail();
     }
 
     // المنشورات: المنشور فقط متاح للعموم، والباقي للأدمن
     match /posts/{post} {
-      allow read: if resource == null || resource.data.status == 'published' || signedIn();
-      allow create, update, delete: if signedIn();
+      allow read: if resource == null || resource.data.status == 'published' || adminEmail();
+      allow create, update, delete: if adminEmail();
     }
   }
 }
