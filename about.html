@@ -242,7 +242,18 @@
       } catch (e) { /* يبقى المحتوى الثابت */ }
     })();
   
-    // ===== شريط تقدم التمرير =====
+    // ===== إبراز رابط التنقل للصفحة الحالية =====
+  (function(){
+    var fileName = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a, .sidebar-inner a').forEach(function(a){
+      var href = a.getAttribute('href') || '';
+      if (href === fileName || (fileName === 'index.html' && (href === '' || href === 'index.html'))) {
+        a.classList.add('active');
+      }
+    });
+  })();
+
+  // ===== شريط تقدم التمرير =====
     var _sp = document.getElementById('scrollProgress');
     window.addEventListener('scroll', function(){
       var max = document.documentElement.scrollHeight - window.innerHeight;

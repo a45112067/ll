@@ -804,6 +804,21 @@
       .site-navbar { padding: 8px 8px; }
       .logo strong { font-size: .85rem; }
     }
+
+    /* ===== إتاحة الوصول ===== */
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+    :focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; border-radius: 8px; }
+    body.dark :focus-visible { outline-color: #60a5fa; }
+    .nav-links a.active { background: var(--surface-2); color: var(--brand); }
+    .sidebar-inner a.active { background: var(--surface-2); color: var(--brand); }
   </style>
   <link rel="stylesheet" href="dark.css">
 </head>
@@ -1372,6 +1387,18 @@ applyLang();
       var ic=document.getElementById('themeIcon');
       if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
     }); }
+  })();
+
+
+  // ===== إبراز رابط التنقل للصفحة الحالية =====
+  (function(){
+    var fileName = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a, .sidebar-inner a').forEach(function(a){
+      var href = a.getAttribute('href') || '';
+      if (href === fileName || (fileName === 'index.html' && (href === '' || href === 'index.html'))) {
+        a.classList.add('active');
+      }
+    });
   })();
 
 </script>
