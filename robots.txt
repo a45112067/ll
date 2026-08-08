@@ -10,5 +10,4 @@ Disallow: /firestore.rules
 Disallow: /404.html
 
 # خريطة الموقع
-Sitemap: https://ahmedayman.website/wp-sitemap.xml
 Sitemap: https://ahmedayman.website/sitemap.xml
