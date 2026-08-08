@@ -285,13 +285,14 @@
         if (!list) return;
         list.innerHTML = snap.docs.map((d, i) => {
           const p = d.data();
-          const img = p.image ? `<img loading="lazy" src="${esc(p.image)}" alt="${esc(p.title_ar||p.title_en||'شهادة')}">` : '';
+          const safeUrl = u => { const s = (u||'').trim().toLowerCase(); return /^(https?:|mailto:|tel:|#|\.\.|\/)/.test(s) ? u : '#'; };
+            const img = p.image ? `<img loading="lazy" src="${esc(p.image)}" alt="${esc(p.title_ar||p.title_en||'شهادة')}">` : '';
           return `
         <article class="cert-large" data-aos="zoom-in" data-aos-delay="${i*50}">
           <h2>${p.title_ar ? `<span class="lang-ar">${esc(p.title_ar)}</span>` : ''}${p.title_en ? `<span class="lang-en">${esc(p.title_en)}</span>` : ''}</h2>
           <div class="cert-item-img" onclick="openLightbox(this)">${img}</div>
           <div class="cert-actions">
-            ${p.verify ? `<a class="btn btn-ghost" href="${esc(p.verify)}" target="_blank" rel="noopener noreferrer"><i class="fas fa-shield-alt"></i><span class="lang-ar">تحقق</span><span class="lang-en">Verify</span></a>` : ''}
+            ${p.verify ? `<a class="btn btn-ghost" href="${esc(safeUrl(p.verify))}" target="_blank" rel="noopener noreferrer"><i class="fas fa-shield-alt"></i><span class="lang-ar">تحقق</span><span class="lang-en">Verify</span></a>` : ''}
             <button type="button" class="btn btn-ghost" onclick="shareCert('${esc(p.image||'')}', '${esc(p.title_ar||p.title_en||'شهادة')}')"><i class="fas fa-share-alt"></i><span class="lang-ar">مشاركة</span><span class="lang-en">Share</span></button>
           </div>
         </article>`;

@@ -273,10 +273,11 @@
         if (locAr || locEn) {
           $x('cntLoc').innerHTML = `<span class="lang-ar">${escS(locAr || locEn)}</span><span class="lang-en">${escS(locEn || locAr)}</span>`;
         }
+        const safeUrl = u => { const s = (u||'').trim().toLowerCase(); return /^(https?:|mailto:|tel:|#|\.\.|\/)/.test(s) ? u : '#'; };
         $x('socialLinks').innerHTML = `
-          ${p.facebook ? `<a href="${escS(p.facebook)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>` : ''}
-          ${p.instagram ? `<a href="${escS(p.instagram)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>` : ''}
-          ${p.linkedin ? `<a href="${escS(p.linkedin)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>` : ''}`;
+          ${p.facebook ? `<a href="${escS(safeUrl(p.facebook))}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>` : ''}
+          ${p.instagram ? `<a href="${escS(safeUrl(p.instagram))}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>` : ''}
+          ${p.linkedin ? `<a href="${escS(safeUrl(p.linkedin))}" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>` : ''}`;
       } catch (e) { /* يبقى المحتوى الثابت */ }
     })();
     function $x(id) { return document.getElementById(id); }

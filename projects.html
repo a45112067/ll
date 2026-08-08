@@ -281,6 +281,7 @@
     const pApp = firebase.initializeApp(window.FIREBASE_CONFIG, 'publicProjects');
     const pDb = firebase.firestore(pApp);
     const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const safeUrl = u => { const s = (u||'').trim().toLowerCase(); return /^(https?:|mailto:|tel:|#|\.\.|\/)/.test(s) ? u : '#'; };
     pDb.collection('projects').get().then(snap => {
       if (snap.empty) return;
       const grid = document.querySelector('.projects-grid');
@@ -298,7 +299,7 @@
             <h2>${esc(p.name||'')}</h2>
             <p>${p.desc_ar ? `<span class="lang-ar">${esc(p.desc_ar)}</span>` : ''}${p.desc_en ? `<span class="lang-en">${esc(p.desc_en)}</span>` : ''}</p>
             <div class="project-links">
-              <a class="btn btn-primary" href="${esc(p.link||'#')}" target="_blank" rel="noopener noreferrer"><i class="fas fa-rocket"></i><span class="lang-ar">مشاهدة المشروع</span><span class="lang-en">View Project</span></a>
+              <a class="btn btn-primary" href="${esc(safeUrl(p.link))}" target="_blank" rel="noopener noreferrer"><i class="fas fa-rocket"></i><span class="lang-ar">مشاهدة المشروع</span><span class="lang-en">View Project</span></a>
               <button type="button" class="btn btn-ghost modal-trigger" data-title="${esc(p.name||'')}" data-tag-ar="${esc(p.tag_ar||'')}" data-tag-en="${esc(p.tag_en||'')}" data-img="${esc(p.image||'')}" data-desc="${esc((p.desc_ar||'')+'\n\n'+(p.desc_en||''))}" data-link="${esc(p.link||'')}"><i class="fas fa-expand"></i><span class="lang-ar">التفاصيل</span><span class="lang-en">Details</span></button>
             </div>
           </div>
@@ -341,7 +342,7 @@
     if (img) { imgEl.src = img; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
     document.getElementById('projectModalDesc').innerHTML = desc ? modalEsc(desc).replace(/\n/g, '<br>') : '';
     const linkEl = document.getElementById('projectModalLink');
-    if (link && link !== '#') { linkEl.href = link; linkEl.style.display = 'inline-flex'; } else { linkEl.style.display = 'none'; }
+    if (link && link !== '#') { linkEl.href = safeUrl(link); linkEl.style.display = 'inline-flex'; } else { linkEl.style.display = 'none'; }
     projectModal.classList.add('open');
     projectModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('side-open');
