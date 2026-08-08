@@ -1181,14 +1181,7 @@
       </div>
     </div>
   </div>
-</section>
-
-<footer class="footer">
-  <div class="footer-links"><a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a><a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></div>
-  <div><span class="lang-ar">© <span class="year-slot">2026</span> أحمد أيمن يحيى. جميع الحقوق محفوظة.</span><span class="lang-en">© <span class="year-slot">2026</span> Ahmed Ayman Yahya. All Rights Reserved.</span></div>
-</footer>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</section><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="firebase-init.js"></script>
@@ -1230,10 +1223,6 @@
     }).join('');
   };
   loadHomePosts();
-
-  // ===== سنة حقوق الطبع تلقائية =====
-  document.querySelectorAll('.year-slot').forEach(el => { el.textContent = new Date().getFullYear(); });
-
   AOS.init({ duration: 650, once: true, offset: 80, easing: 'ease-out-cubic' });
   const hidePreloader = () => {
     const preloader = document.getElementById('preloader');

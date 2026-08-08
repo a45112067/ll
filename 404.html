@@ -59,9 +59,6 @@
       border-radius:9px; background:#f0f4fa; color:#2563eb; font-size:.95rem; }
     .quick-links a:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-3px); box-shadow:0 10px 22px rgba(37,99,235,.12); }
 
-    .err-footer { margin-top:22px; color:#94a3b8; font-size:.85rem; text-decoration:none; display:inline-block; }
-    .err-footer:hover { color:#2563eb; }
-
     @media (max-width:480px){ .actions{ flex-direction:column; } .btn{ width:100%; } .quick-links{ grid-template-columns:1fr 1fr; } }
   </style>
   <link rel="stylesheet" href="dark.css">
@@ -137,16 +134,8 @@
           <a href="certificates.html"><i class="fas fa-award"></i><span class="lang-ar">الشهادات</span><span class="lang-en">Certificates</span></a>
           <a href="blog.html"><i class="fas fa-scroll"></i><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></a>
         </div>
-      </div>
-
-      <a class="err-footer" href="index.html">© <span class="year-slot">2026</span> Ahmed Ayman Yahya</a>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="footer-links"><a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a><a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></div>
-  </footer>
-</div>
+      </div></div>
+  </div></div>
 
 <script>
   // ===== اللغة =====
@@ -199,10 +188,6 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     _sp.style.width = (max > 0 ? (window.scrollY/max)*100 : 0) + '%';
   }, { passive: true });
-
-  // ===== سنة حقوق الطبع تلقائية =====
-  document.querySelectorAll('.year-slot').forEach(function(el){ el.textContent = new Date().getFullYear(); });
-
   // ===== الوضع الليلي/النهاري =====
   (function(){
     var KEY='site-theme';
