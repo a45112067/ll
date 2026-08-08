@@ -1,0 +1,240 @@
+/* ===== الوضع الليلي الموحّد (يُفعَّل بإضافة class=dark على <body>) ===== */
+body.dark {
+  --bg: #0f1523;
+  --surface: #151c2e;
+  --surface-2: #1b2340;
+  --ink: #e8edf7;
+  --ink-soft: #b6c0d6;
+  --muted: #7c88a3;
+  --brand: #3b82f6;
+  --brand-dark: #2563eb;
+  --accent: #ff9800;
+  --border: #2a3550;
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.4);
+  --shadow-md: 0 12px 34px rgba(0,0,0,.4);
+  --shadow-lg: 0 28px 60px rgba(0,0,0,.5);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ===== الأسس ===== */
+body.dark,
+body.dark body { background: var(--bg) !important; color: var(--ink) !important; }
+
+/* ===== شريط التنقل / الشريط الجانبي ===== */
+body.dark .site-navbar {
+  background: rgba(21,28,46,0.86);
+  border-color: var(--border);
+  color: var(--ink);
+}
+body.dark .logo,
+body.dark .logo strong { color: var(--ink); }
+body.dark .nav-links a { color: var(--ink-soft); }
+body.dark .nav-links a:hover,
+body.dark .nav-links a.active { background: #1f2a4a; color: var(--brand); }
+body.dark .lang-switch,
+body.dark .menu-btn,
+body.dark .close-sidebar,
+body.dark .mobile-lang {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--ink);
+}
+body.dark .lang-switch:hover { border-color: var(--brand); color: var(--brand); }
+body.dark .sidebar-inner { background: var(--surface); }
+body.dark .sidebar-inner a { color: var(--ink-soft); }
+body.dark .sidebar-inner a:hover { background: var(--surface-2); color: var(--brand); }
+
+/* ===== العنوان والعناصر العامة ===== */
+body.dark .topbar h1,
+body.dark .page-head h1,
+body.dark h1, body.dark h2, body.dark h3, body.dark h4,
+body.dark .section-title, body.dark .section-head h2 { color: var(--ink); }
+body.dark .topbar p,
+body.dark .page-head p,
+body.dark p, body.dark li { color: var(--ink-soft); }
+body.dark .pill,
+body.dark .badge {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--ink-soft);
+}
+body.dark .meta,
+body.dark .muted,
+body.dark .small,
+body.dark .footer { color: var(--muted) !important; }
+
+/* ===== البطاقات العامة ===== */
+body.dark .content-card,
+body.dark .contact-card,
+body.dark .exp-card,
+body.dark .edu-card,
+body.dark .language-card,
+body.dark .skill-box,
+body.dark .cat-panel,
+body.dark .about-card,
+body.dark .stat,
+body.dark .list-item,
+body.dark .contact-item,
+body.dark .post,
+body.dark .article,
+body.dark .cert-large,
+body.dark .project-card,
+body.dark .toolbar,
+body.dark .timeline-item,
+body.dark .timeline-content,
+body.dark .post-row,
+body.dark .form-card,
+body.dark .media-card,
+body.dark .stat-card,
+body.dark .modal-box {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow-md);
+}
+body.dark .content-card:hover,
+body.dark .contact-card:hover,
+body.dark .exp-card:hover,
+body.dark .edu-card:hover,
+body.dark .language-card:hover,
+body.dark .skill-box:hover,
+body.dark .project-card:hover { box-shadow: var(--shadow-lg); border-color: #33405e !important; }
+
+/* ===== الأزرار ===== */
+body.dark .btn-secondary,
+body.dark .btn-outline,
+body.dark .btn-ghost,
+body.dark .filter-btn {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--ink-soft) !important;
+}
+body.dark .btn-secondary:hover,
+body.dark .btn-outline:hover,
+body.dark .btn-ghost:hover,
+body.dark .filter-btn:hover {
+  border-color: var(--brand) !important;
+  color: var(--brand) !important;
+  box-shadow: 0 10px 22px rgba(37,99,235,.25);
+}
+
+/* ===== الحقول ===== */
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}
+body.dark input:focus,
+body.dark textarea:focus,
+body.dark select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(37,99,235,.18); }
+body.dark input::placeholder,
+body.dark textarea::placeholder { color: var(--muted); }
+
+/* ===== عناصر المهارات واللغات ===== */
+body.dark .level-bar { background: var(--surface-2); border-color: var(--border); }
+body.dark .cat-tab {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--ink-soft);
+}
+body.dark .cat-tab:hover { border-color: var(--brand); color: var(--brand); }
+body.dark .skill-icon,
+body.dark .ic,
+body.dark .language-icon { background: var(--surface-2) !important; border-color: var(--border) !important; }
+
+/* ===== التعليم والشهادات ===== */
+body.dark .edu-logo { background: var(--surface); border-color: var(--border); }
+body.dark .edu-years { background: var(--surface-2); border-color: var(--border); color: var(--accent); }
+body.dark .cert-item-img,
+body.dark .thumb,
+body.dark .project-media { background: var(--surface-2) !important; border-color: var(--border) !important; }
+body.dark .cert-large .cert-item-img img,
+body.dark .cert-card img,
+body.dark .thumb img { background: var(--surface) !important; }
+
+/* ===== تجارب الشريط الزمني ===== */
+body.dark .timeline-date,
+body.dark .exp-date { color: var(--accent); }
+body.dark .timeline-company,
+body.dark .exp-company { color: var(--brand); }
+
+/* ===== المدونة ===== */
+body.dark .post-icon { background: var(--surface-2) !important; color: var(--brand) !important; }
+body.dark .tag {
+  background: var(--surface-2) !important;
+  color: var(--brand) !important;
+  border-color: var(--border) !important;
+}
+body.dark .posts-empty { color: var(--muted); }
+body.dark .blog-stats .stat { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .blog-stats .stat b { color: var(--ink); }
+
+/* ===== الرئيسية ===== */
+body.dark .hero,
+body.dark .hero-visual,
+body.dark .about-grid { background: transparent; }
+body.dark .grad { background: linear-gradient(90deg,#60a5fa,#ff9800); -webkit-background-clip: text; background-clip: text; }
+body.dark .hero-avatar { box-shadow: 0 24px 60px rgba(0,0,0,.55); }
+body.dark .featured-project,
+body.dark .homepost-card,
+body.dark .stat-card {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+
+/* ===== سرقة كرة الخلفية / الروابط التواصل ===== */
+body.dark .contact-strip a,
+body.dark .social-links a {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--ink-soft);
+}
+body.dark .contact-strip a:hover,
+body.dark .social-links a:hover { border-color: var(--brand); color: var(--brand); }
+
+/* ===== الفوتر ===== */
+body.dark .footer-links a { background: var(--surface-2); border-color: var(--border); color: var(--ink-soft); }
+body.dark .footer-links a:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+/* ===== النوافذ المنبثقة ===== */
+body.dark .modal-box { background: var(--surface) !important; }
+body.dark .modal-box h3 { color: var(--ink); }
+body.dark .modal-box p { color: var(--ink-soft); }
+body.dark .modal-close { background: var(--surface-2); color: var(--ink); }
+body.dark .modal-tag { background: var(--surface-2); color: var(--brand); }
+
+/* ===== صفحة 404 ===== */
+body.dark .btn-outline { background: var(--surface) !important; border-color: var(--border) !important; color: var(--ink-soft) !important; }
+body.dark .search input { background: var(--surface) !important; border-color: var(--border) !important; color: var(--ink) !important; }
+
+/* ===== شريط التمرير ===== */
+body.dark ::-webkit-scrollbar-track { background: var(--bg); }
+
+/* ===== لوحة الإدارة (admin) ===== */
+body.dark .topbar { background: rgba(21,28,46,0.9) !important; border-bottom-color: var(--border) !important; }
+body.dark .login-card { background: rgba(21,28,46,0.97) !important; }
+body.dark .sidebar-admin,
+body.dark .panel {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+body.dark .sidebar-admin a { color: var(--ink-soft); }
+body.dark .sidebar-admin a:hover,
+body.dark .sidebar-admin a.active { background: var(--surface-2); color: var(--brand); }
+body.dark .form-field input,
+body.dark .form-field textarea,
+body.dark .form-field select,
+body.dark .login-card input,
+body.dark .toolbar input {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}
+body.dark .login-card input:focus,
+body.dark .form-field input:focus,
+body.dark .form-field textarea:focus { border-color: var(--brand); background: var(--surface) !important; }
+body.dark .login-card h1, body.dark .login-card p { color: var(--ink); }
+body.dark .login-card p, body.dark .user-badge { color: var(--ink-soft); }
+body.dark .nav-title { color: var(--muted); }

@@ -39,8 +39,10 @@
     .back-home:hover { color:#2563eb; }
     @media (max-width:480px){ .actions{ flex-direction:column; } .btn{ width:100%; justify-content:center; } }
   </style>
+  <link rel="stylesheet" href="dark.css">
 </head>
 <body>
+  <button class="lang-switch theme-btn" id="themeBtn" aria-label="الوضع الليلي" style="position:fixed;top:18px;inset-inline-end:18px;"><i class="fas fa-moon" id="themeIcon"></i></button>
   <div class="wrap">
     <div class="code">404</div>
     <h1 class="title"><span class="lang-ar">عذراً، الصفحة غير موجودة</span><span class="lang-en">Oops, Page Not Found</span></h1>
@@ -61,6 +63,24 @@
       if (q) { window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:ahmedayman.website'); }
     }
     document.getElementById('searchInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') goSearch(); });
-  </script>
+  
+  // ===== الوضع الليلي/النهاري =====
+  (function(){
+    var KEY='site-theme';
+    var stored=null; try{ stored=localStorage.getItem(KEY); }catch(e){}
+    var prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if(stored==='dark' || (stored===null && prefersDark)){ document.body.classList.add('dark'); }
+    var icon=document.getElementById('themeIcon');
+    if(icon){ icon.className = document.body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon'; }
+    var btn=document.getElementById('themeBtn');
+    if(btn){ btn.addEventListener('click', function(){
+      var isDark=document.body.classList.toggle('dark');
+      try{ localStorage.setItem(KEY, isDark?'dark':'light'); }catch(e){}
+      var ic=document.getElementById('themeIcon');
+      if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+    }); }
+  })();
+
+</script>
 </body>
 </html>

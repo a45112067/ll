@@ -177,6 +177,7 @@
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="dark.css">
   <!-- Firebase 10 (compat) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -207,6 +208,7 @@
       <span class="user-badge" id="userBadge"></span>
       <a class="chip" href="index.html" target="_blank"><i class="fas fa-eye"></i> معاينة</a>
       <a class="chip" href="blog.html" target="_blank"><i class="fas fa-blog"></i> المدونة</a>
+      <button class="chip" id="themeBtn"><i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">ليلي</span></button>
       <button class="chip danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> خروج</button>
     </div>
   </div>
@@ -216,6 +218,7 @@
       <div class="nav-title">عام</div>
       <a class="active" data-view="dashboard" href="#"><i class="fas fa-tachometer-alt"></i> نظرة عامة</a>
       <a data-view="settings" href="#"><i class="fas fa-cog"></i> إعدادات الموقع</a>
+      <a data-view="backup" href="#"><i class="fas fa-database"></i> النسخ الاحتياطي</a>
       <div class="nav-title">المحتوى</div>
       <a data-view="posts" href="#"><i class="fas fa-pen-nib"></i> المنشورات</a>
       <a data-view="editor" href="#" id="navNewPost"><i class="fas fa-plus-circle"></i> منشور جديد</a>
@@ -283,7 +286,8 @@
             <div class="field full"><label>المحتوى (عربي)</label><textarea id="edContentAr" rows="8"></textarea></div>
             <div class="field full"><label>Content (English)</label><textarea id="edContentEn" rows="8"></textarea></div>
             <div class="field"><label>الوسوم (مفصولة بفاصلة)</label><input id="edTags" placeholder="برمجة, تسويق"></div>
-            <div class="field"><label>رابط صورة الغلاف (اختياري)</label><input id="edImage" placeholder="https://..."></div>
+            <div class="field"><label>رابط صورة الغلاف (اختياري)</label><input id="edImage" placeholder="https://...">
+              <button class="chip" type="button" onclick="pickImage('edImage', doEdPreview)"><i class="fas fa-cloud-upload-alt"></i> رفع صورة من الجهاز</button></div>
             <div class="field"><label>التاريخ</label><input type="date" id="edDate"></div>
             <div class="field"><label>الحالة</label><select id="edStatus"><option value="published">منشور</option><option value="draft">مسودة</option></select></div>
           </div>
@@ -440,7 +444,8 @@
             <div class="field"><label>التصنيف (عربي)</label><input id="prTagAr" placeholder="تسويق رقمي"></div>
             <div class="field"><label>Tag (English)</label><input id="prTagEn" placeholder="Marketing"></div>
             <div class="field"><label>رابط المشروع</label><input id="prLink" dir="ltr" placeholder="https://..."></div>
-            <div class="field"><label>رابط الصورة</label><input id="prImage" dir="ltr" placeholder="https://..."></div>
+            <div class="field"><label>رابط الصورة</label><input id="prImage" dir="ltr" placeholder="https://...">
+              <button class="chip" type="button" onclick="pickImage('prImage', doPrPreview)"><i class="fas fa-cloud-upload-alt"></i> رفع صورة من الجهاز</button></div>
             <div class="field full"><label>الوصف (عربي)</label><textarea id="prDescAr" rows="4"></textarea></div>
             <div class="field full"><label>Description (English)</label><textarea id="prDescEn" rows="4"></textarea></div>
           </div>
@@ -466,7 +471,9 @@
           <div class="form-grid">
             <div class="field full"><label>عنوان الشهادة (عربي)</label><input id="ceTitleAr"></div>
             <div class="field full"><label>Title (English)</label><input id="ceTitleEn"></div>
-            <div class="field full"><label>رابط صورة الشهادة</label><input id="ceImage" dir="ltr" placeholder="https://..."></div>
+            <div class="field full"><label>رابط صورة الشهادة</label><input id="ceImage" dir="ltr" placeholder="https://...">
+              <button class="chip" type="button" onclick="pickImage('ceImage', doCePreview)"><i class="fas fa-cloud-upload-alt"></i> رفع صورة من الجهاز</button></div>
+            <div class="field full"><label>رابط التحقق (اختياري)</label><input id="ceVerify" dir="ltr" placeholder="https://verify... أو رقم الشهادة"></div>
           </div>
           <img class="preview-img" id="cePreview" style="display:none;" alt="معاينة الشهادة">
           <div class="form-actions">
@@ -498,6 +505,27 @@
           </div>
         </div>
         <div class="form-actions"><button class="chip primary" id="saveSettingsBtn"><i class="fas fa-save"></i> حفظ الإعدادات</button></div>
+      </section>
+
+      <!-- Backup -->
+      <section class="view" id="view-backup">
+        <div class="section-head"><div><h2><i class="fas fa-database"></i> النسخ الاحتياطي والاستعادة</h2><p>صدّر كل محتوى الموقع إلى ملف JSON، أو استورده لاستعادة نسخة كاملة</p></div></div>
+        <div class="form-card">
+          <h3><i class="fas fa-file-export"></i> تصدير النسخة الاحتياطية</h3>
+          <p>يُنشئ ملف JSON يحتوي على كل المجموعات: المنشورات، المشاريع، الشهادات، المهارات، الخبرات، التعليم، اللغات، التواصل، نبذة، والإعدادات.</p>
+          <div class="form-actions" style="margin-top:16px;">
+            <button class="chip primary" id="exportBtn"><i class="fas fa-download"></i> تصدير كل المحتوى</button>
+          </div>
+        </div>
+        <div class="form-card">
+          <h3><i class="fas fa-file-import"></i> استيراد نسخة احتياطية</h3>
+          <p>اختر ملف JSON مُصدَّر لاستعادة المحتوى (سيُلغي كل مجموعة موجودة أولاً ثم يُدخل البيانات الجديدة).</p>
+          <input type="file" id="importFile" accept=".json,application/json">
+          <div class="form-actions" style="margin-top:16px;">
+            <button class="chip primary" id="importBtn"><i class="fas fa-upload"></i> استيراد الملف</button>
+            <span id="importStatus" style="font-size:.85rem; color:#64748b;"></span>
+          </div>
+        </div>
       </section>
 
       <!-- Password -->
@@ -549,6 +577,29 @@
     toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
   }
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function pickImage(inputId, onDone) {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files && fileInput.files[0];
+      if (!f) { document.body.removeChild(fileInput); return; }
+      if (f.size > 700 * 1024) { toast('الصورة كبيرة (الحد 700KB لتخزينها في Firestore). اضغط الصورة أو ارفعها على صورة خارجية.', 'err'); document.body.removeChild(fileInput); return; }
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const input = $(inputId);
+        if (input) input.value = ev.target.result;
+        if (onDone) onDone();
+        toast('تم تحميل الصورة', 'ok');
+        document.body.removeChild(fileInput);
+      };
+      reader.readAsDataURL(f);
+    });
+    fileInput.click();
+  }
+  function doEdPreview() { /* معاينة الغلاف: لا يوجد حاليًا */ }
 
   // ===== Auth =====
   auth.onAuthStateChanged(user => { if (user) { showApp(user); } else { showLogin(); } });
@@ -777,6 +828,7 @@
     $('ceTitleAr').value = cert ? (cert.title_ar || '') : '';
     $('ceTitleEn').value = cert ? (cert.title_en || '') : '';
     $('ceImage').value = cert ? (cert.image || '') : '';
+    $('ceVerify').value = cert ? (cert.verify || '') : '';
     doCePreview();
     $('certEditCard').scrollIntoView({behavior:'smooth', block:'start'});
   }
@@ -818,7 +870,8 @@
   $('saveCertBtn').addEventListener('click', async () => {
     const data = {
       title_ar: $('ceTitleAr').value.trim(), title_en: $('ceTitleEn').value.trim(),
-      image: $('ceImage').value.trim(), updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      image: $('ceImage').value.trim(), verify: $('ceVerify').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
     if (!data.title_ar && !data.title_en) { toast('أدخل عنواناً', 'err'); return; }
     try {
@@ -1118,6 +1171,94 @@
     try { await auth.currentUser.updatePassword(nw); toast('تم تحديث كلمة المرور', 'ok'); $('pwNew').value=''; $('pwConfirm').value=''; }
     catch (e) { toast('فشل التحديث (أعد تسجيل الدخول)', 'err'); }
   });
+
+// ===== Backup (تصدير/استيراد JSON) =====
+  const BACKUP_COLLECTIONS = ['posts','projects','certificates','skills','experience','education','languages','contact','about','site'];
+  function exportValueImpl(v, d){
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'number' || typeof v === 'boolean' || typeof v === 'string') return v;
+    if (typeof v.toDate === 'function') return v.toDate().toISOString();
+    if (typeof v === 'object' && v.constructor === Object) {
+      const out = {};
+      for (const k of Object.keys(v)) { const c = exportValueImpl(v[k], d); if (c !== null) out[k] = c; }
+      return out;
+    }
+    if (Array.isArray(v)) return v.map(x => exportValueImpl(x, d));
+    return null;
+  }
+  $('exportBtn').addEventListener('click', async () => {
+    try {
+      const bundle = {};
+      for (const name of BACKUP_COLLECTIONS) {
+        const snap = await db.collection(name).get();
+        bundle[name] = [];
+        snap.forEach(doc => bundle[name].push({ __id: doc.id, data: exportValueImpl(doc.data(), 0) }));
+      }
+      const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), collections: bundle }, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ahmed-site-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      toast('تم تصدير النسخة الاحتياطية', 'ok');
+    } catch (e) { toast('فشل التصدير: ' + e.message, 'err'); }
+  });
+  let importedData = null;
+  $('importFile').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try { importedData = JSON.parse(await file.text()); $('importStatus').textContent = 'الملف جاهز: ' + (importedData.collections ? Object.keys(importedData.collections).length + ' مجموعات' : 'صيغة غير صحيحة'); }
+    catch (er) { importedData = null; $('importStatus').textContent = 'ملف غير صالح.'; }
+  });
+  $('importBtn').addEventListener('click', async () => {
+    if (!importedData || !importedData.collections) { toast('اختر ملف نسخة صالحاً أولاً', 'err'); return; }
+    if (!confirm('سيتم استبدال كل المحتوى الحالي بالنسخة المختارة. هل أنت متأكد؟')) return;
+    try {
+      const colls = importedData.collections;
+      for (const name of BACKUP_COLLECTIONS) {
+        if (!colls[name]) continue;
+        const colRef = db.collection(name);
+        const existing = await colRef.get();
+        if (name === 'site' || name === 'about') {
+          for (const doc of existing.docs) await colRef.doc(doc.id).delete().catch(()=>{});
+        } else {
+          const batch = db.batch();
+          existing.docs.forEach(doc => batch.delete(colRef.doc(doc.id)));
+          await batch.commit();
+        }
+        for (const rec of colls[name]) {
+          const payload = Object.assign({}, rec.data);
+          delete payload.__id;
+          if (rec.__id) await colRef.doc(rec.__id).set(payload);
+          else await colRef.add(payload);
+        }
+      }
+      toast('تمت الاستعادة بنجاح', 'ok');
+      loadDashboard();
+    } catch (e) { toast('فشل الاستيراد: ' + e.message, 'err'); }
+  });
+
+// ===== الوضع الليلي/النهاري (لوحة الإدارة) =====
+  (function(){
+    var KEY='site-theme';
+    var stored=null; try{ stored=localStorage.getItem(KEY); }catch(e){}
+    var prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if(stored==='dark' || (stored===null && prefersDark)){ document.body.classList.add('dark'); }
+    var sync=function(){
+      var isDark=document.body.classList.contains('dark');
+      var ic=document.getElementById('themeIcon');
+      if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+      var lab=document.getElementById('themeLabel');
+      if(lab){ lab.textContent = isDark ? 'نهاري' : 'ليلي'; }
+    };
+    sync();
+    var btn=document.getElementById('themeBtn');
+    if(btn){ btn.addEventListener('click', function(){
+      document.body.classList.toggle('dark');
+      try{ localStorage.setItem(KEY, document.body.classList.contains('dark')?'dark':'light'); }catch(e){}
+      sync();
+    }); }
+  })();
 </script>
 </body>
 </html>

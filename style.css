@@ -32,6 +32,9 @@
 }
 .lang-switch:hover { border-color: #2563eb; color: #2563eb; }
 
+.theme-btn { width: 42px; padding: 8px 0; justify-content: center; }
+.theme-btn i { font-size: .95rem; }
+
 .menu-btn {
   display: none;
   width: 44px; height: 44px; border-radius: 12px;

@@ -129,6 +129,7 @@
       .tags span { font-size:.72rem; }
     }
   </style>
+  <link rel="stylesheet" href="dark.css">
 </head>
 <body>
   
@@ -149,6 +150,7 @@
     </div>
     <div class="nav-actions">
       <button class="lang-switch" id="langSwitchFixed" aria-label="تغيير اللغة"><span class="lang-ar">English</span><span class="lang-en">العربية</span></button>
+      <button class="lang-switch theme-btn" id="themeBtn" aria-label="الوضع الليلي"><i class="fas fa-moon" id="themeIcon"></i></button>
       <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة"><i class="fas fa-bars"></i></button>
     </div>
   </nav>
@@ -437,6 +439,24 @@
 
   // ===== سنة حقوق الطبع تلقائية =====
   document.querySelectorAll('.year-slot').forEach(function(el){ el.textContent = new Date().getFullYear(); });
+
+  // ===== الوضع الليلي/النهاري =====
+  (function(){
+    var KEY='site-theme';
+    var stored=null; try{ stored=localStorage.getItem(KEY); }catch(e){}
+    var prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if(stored==='dark' || (stored===null && prefersDark)){ document.body.classList.add('dark'); }
+    var icon=document.getElementById('themeIcon');
+    if(icon){ icon.className = document.body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon'; }
+    var btn=document.getElementById('themeBtn');
+    if(btn){ btn.addEventListener('click', function(){
+      var isDark=document.body.classList.toggle('dark');
+      try{ localStorage.setItem(KEY, isDark?'dark':'light'); }catch(e){}
+      var ic=document.getElementById('themeIcon');
+      if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+    }); }
+  })();
+
 </script>
 </body>
 </html>
