@@ -48,6 +48,7 @@
     a { color: inherit; text-decoration:none; }
     .page-wrapper { max-width:1200px; margin:0 auto; padding:24px; }
     .topbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:30px; }
+    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:17px; background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; font-size:1.35rem; margin-bottom:12px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
     .topbar h1 { font-size:2rem; font-weight:900; letter-spacing:.5px; color:#0f172a; }
     .topbar .btn { background:#ffffff; border:1.5px solid #e2e8f0; color:#475569; padding:13px 26px; border-radius:14px; transition:.25s cubic-bezier(.2,.8,.3,1); display:inline-flex; align-items:center; gap:10px; font-weight:800; font-size:.96rem; position:relative; overflow:hidden; box-shadow:0 6px 16px rgba(37,99,235,.10); }
     .topbar .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
@@ -67,8 +68,7 @@
     .section-title { position:relative; display:inline-block; margin-bottom:18px; font-size:2rem; font-weight:800; color:#0f172a; }
     .section-title::after { content:''; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); width:80px; height:4px; background:#2563eb; border-radius:4px; }
     .bottom-note { margin:40px 0 20px; text-align:center; color:#94a3b8; font-size:.95rem; }
-    .section-actions { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:20px; }
-    .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(120deg,#2563eb,#1d4ed8); border:none; border-radius:16px; color:#fff; padding:14px 30px; font-weight:800; cursor:pointer; transition:.25s cubic-bezier(.2,.8,.3,1); box-shadow:0 14px 32px rgba(37,99,235,.30); position:relative; overflow:hidden; }
+        .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(120deg,#2563eb,#1d4ed8); border:none; border-radius:16px; color:#fff; padding:14px 30px; font-weight:800; cursor:pointer; transition:.25s cubic-bezier(.2,.8,.3,1); box-shadow:0 14px 32px rgba(37,99,235,.30); position:relative; overflow:hidden; }
     .btn-primary::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
     .btn-primary:hover::before { left:100%; }
     .btn-primary:active { transform:translateY(-1px) scale(.99); }
@@ -156,12 +156,8 @@
   <div class="page-wrapper">
     <header class="topbar" data-aos="fade-down">
       <div>
+        <span class="page-pill"><i class="fas fa-award"></i></span>
         <h1><span class="lang-ar">الشهادات والاعتمادات</span><span class="lang-en">Certificates</span></h1>
-      </div>
-      <div class="section-actions">
-        <a class="btn" href="index.html"><i class="fas fa-arrow-left"></i><span class="lang-ar">العودة للرئيسية</span><span class="lang-en">Back to Home</span></a>
-        <a class="btn" href="projects.html"><i class="fas fa-rocket"></i><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
-        <a class="btn" href="#certificates"><i class="fas fa-graduation-cap"></i><span class="lang-ar">انتقل للشهادة</span><span class="lang-en">Go to Certificates</span></a>
       </div>
     </header>
 

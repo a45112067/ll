@@ -48,10 +48,10 @@
     a { color:inherit; text-decoration:none; }
     .page-wrapper { max-width:1040px; margin:0 auto; padding:28px 24px 40px; }
     .topbar { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:18px; margin-bottom:28px; }
+    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; font-size:1.3rem; margin-bottom:16px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
     .topbar h1 { font-size:2rem; font-weight:900; color:#0f172a; }
     .topbar p { max-width:720px; color:#475569; line-height:1.85; margin-top:14px; }
-    .section-actions { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.96rem; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; border:none; cursor:pointer; box-shadow:0 6px 16px rgba(37,99,235,.10); }
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.96rem; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; border:none; cursor:pointer; box-shadow:0 6px 16px rgba(37,99,235,.10); }
     .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
     .btn:hover::before { left:100%; }
     .btn i { transition:transform .25s; }
@@ -69,7 +69,7 @@
     .language-card p { line-height:1.75; color:#475569; }
     .language-card small { display:block; margin-top:14px; color:#ff9800; font-weight:700; font-size:.9rem; }
     .footer { margin-top:36px; text-align:center; color:#94a3b8; font-size:.9rem; }
-    @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .language-grid { grid-template-columns:1fr; gap:14px; } .language-card { padding:20px; border-radius:20px; } .section-actions { width:100%; } .section-actions .btn-secondary, .section-actions a { flex:1 1 100%; width:100%; justify-content:center; } }
+    @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .language-grid { grid-template-columns:1fr; gap:14px; } .language-card { padding:20px; border-radius:20px; }  }
     @media (max-width:480px) { .language-card { padding:18px; } .language-card p { font-size:.92rem; } .language-icon { width:52px; height:52px; font-size:1.7rem; line-height:52px; } }
   </style>
   <link rel="stylesheet" href="dark.css">
@@ -117,15 +117,11 @@
   <div class="page-wrapper">
     <header class="topbar" data-aos="fade-down">
       <div>
+        <span class="page-pill"><i class="fas fa-language"></i></span>
         <h1><span class="lang-ar">اللغات</span><span class="lang-en">Languages</span></h1>
         <p><span class="lang-ar">عرض مستوى اللغة العربية والإنجليزية بطريقة واضحة واحترافية مع إبراز المهارات الشفهية والكتابية.</span><span class="lang-en">Display Arabic and English language levels in a clear, professional way highlighting written and spoken skills.</span></p>
       </div>
-      <div class="section-actions">
-        <a class="btn-secondary" href="index.html"><i class="fas fa-home"></i><span class="lang-ar">الرئيسية</span><span class="lang-en">Home</span></a>
-        <a class="btn-secondary" href="projects.html"><i class="fas fa-rocket"></i><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
-        <a class="btn-secondary" href="contact.html"><i class="fas fa-phone"></i><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact</span></a>
-      </div>
-    </header>
+      </header>
 
     <section class="language-grid" id="languageGrid" data-aos="fade-up">
       <article class="language-card" data-aos="zoom-in" data-aos-delay="50">
