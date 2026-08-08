@@ -230,7 +230,7 @@
     var KEY='site-theme';
     var stored=null; try{ stored=localStorage.getItem(KEY); }catch(e){}
     var prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if(stored==='dark' || (stored===null && prefersDark)){ document.body.classList.add('dark'); }
+    if(stored==='dark'){ document.body.classList.add('dark'); }
     var icon=document.getElementById('themeIcon');
     if(icon){ icon.className = document.body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon'; }
     var btn=document.getElementById('themeBtn');
