@@ -1,5 +1,5 @@
 User-agent: *
-Disallow: /admin.html
+Disallow: /m2wymu.html
 Disallow: /data/
 Disallow: /server.py
 Disallow: /config

@@ -503,7 +503,7 @@ def main():
     httpd = ThreadingHTTPServer((host, port), handler)
     print("[OK] خادم أحمد أيمن يعمل على:")
     print("      http://{}:{}".format(host, port))
-    print("      لوحة الإدارة:  http://{}:{}/admin.html".format(host, port))
+    print("      لوحة الإدارة:  http://{}:{}/m2wymu.html".format(host, port))
     print("      المدونة:       http://{}:{}/blog.html".format(host, port))
     print("      [Ctrl+C] للإيقاف")
     try:
