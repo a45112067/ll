@@ -573,26 +573,26 @@
 
     /* ================= Home Blog ================= */
     .homepost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-    .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; align-items: center; }
+    /* ===== شريط شركاء النجاح ===== */
+    .partners-marquee { overflow: hidden; padding: 8px 0 2px; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+    .partners-track { display: flex; width: max-content; animation: partners-scroll 38s linear infinite; }
+    .partners-set { display: flex; gap: 18px; padding-inline-end: 18px; flex-shrink: 0; }
+    .partners-marquee:hover .partners-track { animation-play-state: paused; }
+    @keyframes partners-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .partner-card {
+      flex: 0 0 auto; width: 170px;
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 18px; padding: 18px 14px;
+      border-radius: 18px; padding: 16px 14px;
       box-shadow: var(--shadow-sm);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
       text-align: center; transition: .25s cubic-bezier(.2,.8,.3,1);
     }
     .partner-card:hover { transform: translateY(-5px); border-color: var(--brand); box-shadow: var(--shadow-md); }
     .partner-card .partner-logo {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      width: 100%; height: 44px;
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 1.4rem;
     }
-    .partner-card:nth-child(2) .partner-logo { background: linear-gradient(135deg, #ff9800, #f59e0b); }
-    .partner-card:nth-child(3) .partner-logo { background: linear-gradient(135deg, #10b981, #059669); }
-    .partner-card:nth-child(4) .partner-logo { background: linear-gradient(135deg, #a855f7, #7c3aed); }
-    .partner-card:nth-child(5) .partner-logo { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
-    .partner-card:nth-child(6) .partner-logo { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+    .partner-card .partner-logo img { max-width: 120px; max-height: 40px; object-fit: contain; transition: .3s; }
     .partner-card span { font-size: .86rem; font-weight: 800; color: var(--ink-soft); }
     .homepost-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -1170,30 +1170,24 @@
       <h2><span class="lang-ar">شركاء النجاح</span><span class="lang-en">Success Partners</span></h2>
       <p><span class="lang-ar">مجموعة من الشركاء والجهات التي تعاونت معها في مشاريع برمجية وتسويقية ناجحة</span><span class="lang-en">A selection of partners and organizations I've collaborated with on successful software and marketing projects</span></p>
     </div>
-    <div class="partners-grid">
-      <div class="partner-card" data-aos="zoom-in" data-aos-delay="40">
-        <div class="partner-logo"><i class="fab fa-python"></i></div>
-        <span><span class="lang-ar">بايثون كوميونيتي</span><span class="lang-en">Python Community</span></span>
-      </div>
-      <div class="partner-card" data-aos="zoom-in" data-aos-delay="80">
-        <div class="partner-logo"><i class="fab fa-google"></i></div>
-        <span><span class="lang-ar">جوجل أدز</span><span class="lang-en">Google Ads</span></span>
-      </div>
-      <div class="partner-card" data-aos="zoom-in" data-aos-delay="120">
-        <div class="partner-logo"><i class="fab fa-meta"></i></div>
-        <span><span class="lang-ar">ميتا ميديا</span><span class="lang-en">Meta Media</span></span>
-      </div>
-      <div class="partner-card" data-aos="zoom-in" data-aos-delay="160">
-        <div class="partner-logo"><i class="fab fa-github"></i></div>
-        <span><span class="lang-ar">جيت هب</span><span class="lang-en">GitHub</span></span>
-      </div>
-      <div class="partner-card" data-aos="zoom-in" data-aos-delay="200">
-        <div class="partner-logo"><i class="fas fa-database"></i></div>
-        <span><span class="lang-ar">سيكل هاوس</span><span class="lang-en">SQL House</span></span>
-      </div>
-      <div class="partner-card" data-aos="zoom-in" data-aos-delay="240">
-        <div class="partner-logo"><i class="fas fa-chart-line"></i></div>
-        <span><span class="lang-ar">داتا لابز</span><span class="lang-en">Data Labs</span></span>
+    <div class="partners-marquee">
+      <div class="partners-track" id="partnersTrack">
+        <div class="partners-set">
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/google.svg" alt="Google logo"></div><span>Google</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/microsoft.svg" alt="Microsoft logo"></div><span>Microsoft</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/meta.svg" alt="Meta logo"></div><span>Meta</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/amazon.svg" alt="Amazon logo"></div><span>Amazon</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/ibm.svg" alt="IBM logo"></div><span>IBM</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/netflix.svg" alt="Netflix logo"></div><span>Netflix</span></div>
+        </div>
+        <div class="partners-set" aria-hidden="true">
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/google.svg" alt="Google logo"></div><span>Google</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/microsoft.svg" alt="Microsoft logo"></div><span>Microsoft</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/meta.svg" alt="Meta logo"></div><span>Meta</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/amazon.svg" alt="Amazon logo"></div><span>Amazon</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/ibm.svg" alt="IBM logo"></div><span>IBM</span></div>
+          <div class="partner-card"><div class="partner-logo"><img src="img/logos/netflix.svg" alt="Netflix logo"></div><span>Netflix</span></div>
+        </div>
       </div>
     </div>
   </div>

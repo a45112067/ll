@@ -160,6 +160,10 @@ body.dark .exp-date { color: var(--accent); }
 body.dark .timeline-company,
 body.dark .exp-company { color: var(--brand); }
 
+/* ===== شريط الشركاء ===== */
+body.dark .partner-card .partner-logo { background: #ffffff; border-radius: 12px; padding: 4px 8px; }
+body.dark .partner-card .partner-logo img { filter: none; }
+
 /* ===== المدونة ===== */
 body.dark .post-icon { background: var(--surface-2) !important; color: var(--brand) !important; }
 body.dark .tag {
