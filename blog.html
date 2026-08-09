@@ -206,7 +206,7 @@
     </div>
   </header>
 
-  <main id="listView">
+  <div id="listView">
     <div class="toolbar" data-aos="fade-up">
       <input id="searchInput" class="lang-ar" placeholder="ابحث في المقالات...">
       <input id="searchInputEn" class="lang-en" placeholder="Search articles...">
@@ -219,18 +219,20 @@
     <div class="view-all">
       <a class="btn btn-primary" href="contact.html"><i class="fas fa-envelope"></i><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></a>
     </div>
-  </main>
+  </div>
 
-  <main id="readView">
+  <div id="readView">
     <a class="back-link" id="backToList" href="#"><i class="fas fa-arrow-right"></i><span class="lang-ar">رجوع إلى المدونة</span><span class="lang-en">Back to Blog</span></a>
     <article class="article" id="articleContent"></article>
-  </main></div>
+  </div>
+</div>
 
 <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="firebase-init.js"></script>`n<script src="security.js"></script>
+<script src="firebase-init.js"></script>
+  <script src="security.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({ duration:700, once:true, offset:60 });
@@ -247,6 +249,7 @@
     currentLang = currentLang === 'ar' ? 'en' : 'ar';
     localStorage.setItem('lang', currentLang);
     applyLang(); render();
+    if (openArticleId) openPost(openArticleId);
   }
   document.getElementById('langSwitchFixed').addEventListener('click', switchLang);
   document.getElementById('mobileLangBtn').addEventListener('click', () => { switchLang(); sidebar.classList.remove('open'); });
@@ -275,7 +278,7 @@
     app = firebase.initializeApp(window.FIREBASE_CONFIG, 'blogApp');
     db = firebase.firestore(app);
   } catch (e) { app = null; db = null; }
-  let allPosts = [], currentFilter = 'all', searchTerm = '';
+  let allPosts = [], currentFilter = 'all', searchTerm = '', openArticleId = null;
 
   async function loadPosts() {
     // نعرض المحلي فوراً (لا انتظار للشبكة)، ثم في الخلفية نجلب Firestore ونستبدل إن وُجد.
@@ -291,7 +294,14 @@
     try {
       const snap = await db.collection('posts').where('status', '==', 'published').get();
       const fb = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      if (fb.length) { allPosts = fb; render(); }
+      if (fb.length) {
+        // دمج: كل ID من Firestore يحل محل نفس الـ id من المحلي، ولا نفقد مقالات الملف المحلي غير الموجودة في Firestore.
+        const byId = new Map();
+        allPosts.forEach(p => byId.set(p.id, p));
+        fb.forEach(p => byId.set(p.id, p));
+        allPosts = Array.from(byId.values());
+        render();
+      }
     } catch (e) {}
   }
 
@@ -346,16 +356,22 @@
   function renderMarkdown(md){
     if(!md) return '';
     const lines = md.split('\n');
-    let html = '', inList = false;
-    const closeList = () => { if(inList){ html += '</ul>'; inList=false; } };
+    let html = '', listType = null;
+    const closeList = () => { if(listType){ html += listType === 'ol' ? '</ol>' : '</ul>'; listType = null; } };
     for(const raw of lines){
       const line = raw.trim();
       if(!line){ closeList(); continue; }
       let m;
       if((m = line.match(/^###\s+(.+)$/))){ closeList(); html += '<h3>'+esc(m[1])+'</h3>'; }
       else if((m = line.match(/^##\s+(.+)$/))){ closeList(); html += '<h2>'+esc(m[1])+'</h2>'; }
-      else if(/^[-•]\s+/.test(line)){ if(!inList){ html += '<ul>'; inList=true; } html += '<li>'+esc(line.replace(/^[-•]\s+/,''))+'</li>'; }
-      else if(/^\d+\.\s+/.test(line)){ closeList(); html += '<p>'+esc(line.replace(/^\d+\.\s+/,''))+'</p>'; }
+      else if((m = line.match(/^\d+\.\s+(.+)$/))) {
+        if(listType !== 'ol'){ closeList(); html += '<ol>'; listType = 'ol'; }
+        html += '<li>'+esc(m[1])+'</li>';
+      }
+      else if(/^[-•]\s+/.test(line)){
+        if(listType !== 'ul'){ closeList(); html += '<ul>'; listType = 'ul'; }
+        html += '<li>'+esc(line.replace(/^[-•]\s+/,''))+'</li>';
+      }
       else { closeList(); html += '<p>'+esc(line)+'</p>'; }
     }
     closeList();
@@ -364,6 +380,7 @@
 
   function openPost(id){
     const p = allPosts.find(x=>x.id===id); if(!p) return;
+    openArticleId = id;
     const content = currentLang === 'en' && p.content_en ? p.content_en : (p.content_ar || p.content_en || '');
     const title = currentLang === 'en' && p.title_en ? p.title_en : (p.title_ar || p.title_en);
     document.getElementById('articleContent').innerHTML = `
@@ -377,7 +394,7 @@
     window.scrollTo(0,0);
   }
   document.getElementById('backToList').addEventListener('click', e => { e.preventDefault(); showList(); });
-  function showList(){ document.getElementById('readView').style.display='none'; document.getElementById('listView').style.display='block'; }
+  function showList(){ openArticleId = null; document.getElementById('readView').style.display='none'; document.getElementById('listView').style.display='block'; }
 
   document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
