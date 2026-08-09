@@ -98,7 +98,15 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; overflow-x: clip; }
+    html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 90px; }
+
+    :focus-visible {
+      outline: 3px solid rgba(37,99,235,0.45);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    a, button, input, textarea, select { transition: color .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease, opacity .2s ease; }
 
     body {
       font-family: 'Cairo', sans-serif;
@@ -945,7 +953,7 @@
       <div class="hero-visual" data-aos="fade-up" data-aos-delay="120">
         <div class="ring-spin"></div>
         <div class="ring-spin-2"></div>
-        <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="أحمد أيمن يحيى مهندس برمجيات" class="hero-avatar" width="300" height="300" fetchpriority="high" onerror="this.src='https://placehold.co/300x300/f0f4fa/2563eb?text=AA'">
+        <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="أحمد أيمن يحيى مهندس برمجيات" class="hero-avatar" width="300" height="300" fetchpriority="high" decoding="async" onerror="this.src='https://placehold.co/300x300/f0f4fa/2563eb?text=AA'">
       </div>
     </div>
 
@@ -1183,12 +1191,12 @@
     <div class="partners-marquee">
       <div class="partners-track" id="partnersTrack" dir="ltr">
         <div class="partners-set">
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/google.svg" alt="Google logo"></div><span>Google</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/microsoft.svg" alt="Microsoft logo"></div><span>Microsoft</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/meta.svg" alt="Meta logo"></div><span>Meta</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/amazon.svg" alt="Amazon logo"></div><span>Amazon</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/ibm.svg" alt="IBM logo"></div><span>IBM</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/netflix.svg" alt="Netflix logo"></div><span>Netflix</span></div>
+          <div class="partner-card"><div class="partner-logo"><img loading="lazy" decoding="async" src="img/logos/google.svg" alt="Google logo"></div><span>Google</span></div>
+          <div class="partner-card"><div class="partner-logo"><img loading="lazy" decoding="async" src="img/logos/microsoft.svg" alt="Microsoft logo"></div><span>Microsoft</span></div>
+          <div class="partner-card"><div class="partner-logo"><img loading="lazy" decoding="async" src="img/logos/meta.svg" alt="Meta logo"></div><span>Meta</span></div>
+          <div class="partner-card"><div class="partner-logo"><img loading="lazy" decoding="async" src="img/logos/amazon.svg" alt="Amazon logo"></div><span>Amazon</span></div>
+          <div class="partner-card"><div class="partner-logo"><img loading="lazy" decoding="async" src="img/logos/ibm.svg" alt="IBM logo"></div><span>IBM</span></div>
+          <div class="partner-card"><div class="partner-logo"><img loading="lazy" decoding="async" src="img/logos/netflix.svg" alt="Netflix logo"></div><span>Netflix</span></div>
         </div>
       </div>
     </div>
