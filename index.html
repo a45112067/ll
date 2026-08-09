@@ -11,9 +11,9 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="geo.region" content="EG">
   <meta name="geo.placename" content="Cairo, Egypt">
-  <link rel="canonical" href="https://ahmedayman.website">
-  <link rel="alternate" hreflang="en" href="https://ahmedayman.website/?lang=en">
-  <link rel="alternate" hreflang="x-default" href="https://ahmedayman.website">
+  <link rel="canonical" href="https://www.ahmedayman.website">
+  <link rel="alternate" hreflang="en" href="https://www.ahmedayman.website/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://www.ahmedayman.website">
   <meta name="theme-color" content="#2563eb">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -28,7 +28,7 @@
   <meta property="og:title" content="أحمد أيمن يحيى | مهندس برمجيات وتسويق رقمي">
   <meta property="og:description" content="طالب هندسة برمجيات في جامعة السويدي للتكنولوجيا (SUTech Elsewedy University). متخصص في البرمجة، تطوير الويب، تحليل البيانات، وتحسين محركات البحث SEO. تصفح ملفي الشخصي ومشاريعي وشهاداتي.">
   <meta property="og:image" content="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png">
-  <meta property="og:url" content="https://ahmedayman.website">
+  <meta property="og:url" content="https://www.ahmedayman.website">
   <meta property="og:site_name" content="Ahmed Ayman Yahya Portfolio">
   <meta property="og:locale" content="ar_EG">
   <meta property="og:locale:alternate" content="en_US">
@@ -58,7 +58,7 @@
       "credentialCategory": "degree",
       "name": "Bachelor's Degree in Computer Science Technology"
     },
-    "url": "https://ahmedayman.website",
+    "url": "https://www.ahmedayman.website",
     "image": "https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png",
     "nationality": "Egyptian",
     "address": { "@type": "PostalAddress", "addressLocality": "Cairo", "addressCountry": "EG" },
@@ -574,11 +574,21 @@
     /* ================= Home Blog ================= */
     .homepost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
     /* ===== شريط شركاء النجاح ===== */
-    .partners-marquee { overflow: hidden; padding: 8px 0 2px; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
-    .partners-track { display: flex; width: max-content; animation: partners-scroll 38s linear infinite; }
+    .partners-marquee { overflow: hidden; padding: 8px 0 2px; direction: ltr; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+    .partners-track {
+      display: flex;
+      width: max-content;
+      min-width: 100%;
+      will-change: transform;
+      animation: partners-scroll var(--scroll-duration, 38s) linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .partners-track { animation: none; flex-wrap: wrap; justify-content: center; gap: 10px; }
+      .partners-marquee { -webkit-mask-image: none; mask-image: none; }
+    }
     .partners-set { display: flex; gap: 18px; padding-inline-end: 18px; flex-shrink: 0; }
-    .partners-marquee:hover .partners-track { animation-play-state: paused; }
-    @keyframes partners-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .partners-marquee:active .partners-track { animation-play-state: paused; }
+    @keyframes partners-scroll { from { transform: translateX(0); } to { transform: translateX(var(--shift, -50%)); } }
     .partner-card {
       flex: 0 0 auto; width: 170px;
       background: var(--surface); border: 1px solid var(--border);
@@ -1171,16 +1181,8 @@
       <p><span class="lang-ar">مجموعة من الشركاء والجهات التي تعاونت معها في مشاريع برمجية وتسويقية ناجحة</span><span class="lang-en">A selection of partners and organizations I've collaborated with on successful software and marketing projects</span></p>
     </div>
     <div class="partners-marquee">
-      <div class="partners-track" id="partnersTrack">
+      <div class="partners-track" id="partnersTrack" dir="ltr">
         <div class="partners-set">
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/google.svg" alt="Google logo"></div><span>Google</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/microsoft.svg" alt="Microsoft logo"></div><span>Microsoft</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/meta.svg" alt="Meta logo"></div><span>Meta</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/amazon.svg" alt="Amazon logo"></div><span>Amazon</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/ibm.svg" alt="IBM logo"></div><span>IBM</span></div>
-          <div class="partner-card"><div class="partner-logo"><img src="img/logos/netflix.svg" alt="Netflix logo"></div><span>Netflix</span></div>
-        </div>
-        <div class="partners-set" aria-hidden="true">
           <div class="partner-card"><div class="partner-logo"><img src="img/logos/google.svg" alt="Google logo"></div><span>Google</span></div>
           <div class="partner-card"><div class="partner-logo"><img src="img/logos/microsoft.svg" alt="Microsoft logo"></div><span>Microsoft</span></div>
           <div class="partner-card"><div class="partner-logo"><img src="img/logos/meta.svg" alt="Meta logo"></div><span>Meta</span></div>
@@ -1427,6 +1429,44 @@ applyLang();
       var ic=document.getElementById('themeIcon');
       if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
     }); }
+  })();
+
+
+  // ===== شريط شركاء النجاح (بدأ من اللوجو الأول بلا قفزات) =====
+  (function(){
+    var marquee = document.querySelector('.partners-marquee');
+    var track = document.getElementById('partnersTrack');
+    if (!marquee || !track) return;
+    var original = track.children[0];
+    if (!original) return;
+    var clones = [];
+    function build(){
+      clones.forEach(function(c){ c.parentNode.removeChild(c); });
+      clones = [];
+      var width = original.offsetWidth || 1;
+      var view = marquee.offsetWidth || 1;
+      var need = Math.ceil(view / width) + 1;
+      for (var i = 0; i < need; i++){
+        var c = original.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        track.appendChild(c);
+        clones.push(c);
+      }
+      var one = width;
+      track.style.setProperty('--shift', '-' + one + 'px');
+      track.style.setProperty('--scroll-duration', Math.max(18, Math.round(one * 0.14) / 10) + 's');
+    }
+    var t;
+    function schedule(){
+      if (t) clearTimeout(t);
+      t = setTimeout(build, 120);
+    }
+    window.addEventListener('resize', schedule);
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(schedule);
+      ro.observe(marquee);
+    }
+    build();
   })();
 
 

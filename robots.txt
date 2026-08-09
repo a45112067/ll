@@ -1,6 +1,9 @@
 User-agent: *
 Disallow: /m2wymu.html
+Disallow: /cvgcshv.html
 Disallow: /data/
 Disallow: /server.py
 Disallow: /config
 Disallow: /img/logos/
+
+Sitemap: https://www.ahmedayman.website/sitemap.xml
