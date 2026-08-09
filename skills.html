@@ -49,7 +49,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://cdn.simpleicons.org">
   <link rel="preconnect" href="https://unpkg.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -59,32 +59,30 @@
       --muted:#94a3b8;--brand:#2563eb;--brand-dark:#1d4ed8;--accent:#ff9800;
       --border:#e2e8f0;--radius:20px;--shadow-md:0 12px 34px rgba(15,23,42,0.10);
     }
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',sans-serif; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'IBM Plex Sans Arabic','Alexandria',sans-serif; }
     body { min-height:100vh; background:var(--bg); color:var(--ink); overflow-x:hidden; }
     a { color:inherit; text-decoration:none; }
     .page-wrapper { max-width:1120px; margin:0 auto; padding:28px 24px 40px; }
     .topbar { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:18px; margin-bottom:32px; }
-    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:16px; background:linear-gradient(135deg,var(--brand),#4f46e5); color:#fff; font-size:1.35rem; margin-bottom:16px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
+    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:16px; background:var(--brand); color:#fff; font-size:1.35rem; margin-bottom:16px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
     .topbar h1 { font-size:2.2rem; font-weight:900; color:var(--ink); position:relative; display:inline-block; }
-    .topbar h1::after { content:''; position:absolute; bottom:-10px; right:0; width:56px; height:4px; border-radius:4px; background:linear-gradient(90deg,var(--brand),var(--accent)); }
+    .topbar h1::after { content:''; position:absolute; bottom:-10px; right:0; width:56px; height:4px; border-radius:4px; background:var(--brand); }
     .topbar p { max-width:720px; color:var(--ink-soft); line-height:1.85; margin-top:24px; }
         .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.96rem; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; border:none; cursor:pointer; }
-    .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
-    .btn:hover::before { left:100%; }
     .btn i { transition:transform .25s; }
-    .btn:hover i { transform:translateY(2px) scale(1.15); }
+    .btn:hover i { transform:translateY(2px); }
     .btn-secondary { background:var(--surface); border:1.5px solid var(--border); color:var(--ink-soft); box-shadow:none; }
-    .btn-secondary:hover { border-color:var(--brand); color:var(--brand); transform:translateY(-4px); box-shadow:0 14px 30px rgba(37,99,235,.15); }
-    .btn-primary { background:linear-gradient(120deg,var(--brand),var(--brand-dark)); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
+    .btn-secondary:hover { border-color:var(--brand); color:var(--brand); transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.15); }
+    .btn-primary { background:var(--brand); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
     .btn-primary:active { transform:translateY(-1px) scale(.99); }
-    .btn-primary:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 18px 40px rgba(37,99,235,.40); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 18px 40px rgba(37,99,235,.40); }
 
     /* ===== تبويبات التصنيف ===== */
     .cat-tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px; }
     .cat-tab { padding:10px 18px; border-radius:999px; border:1.5px solid var(--border); background:var(--surface); color:var(--ink-soft); font-weight:800; font-size:.88rem; cursor:pointer; transition:.25s; display:inline-flex; align-items:center; gap:8px; }
     .cat-tab i { color:var(--brand); }
     .cat-tab:hover { border-color:var(--brand); transform:translateY(-2px); }
-    .cat-tab.active { background:linear-gradient(120deg,var(--brand),var(--brand-dark)); border-color:transparent; color:#fff; box-shadow:0 10px 24px rgba(37,99,235,.25); transform:translateY(-2px); }
+    .cat-tab.active { background:var(--brand); border-color:transparent; color:#fff; box-shadow:0 10px 24px rgba(37,99,235,.25); transform:translateY(-2px); }
     .cat-tab.active i { color:#fff; }
     .cat-tab .count { font-size:.66rem; font-weight:900; background:rgba(37,99,235,.12); color:var(--brand); padding:2px 8px; border-radius:999px; }
     .cat-tab.active .count { background:rgba(255,255,255,.22); color:#fff; }
@@ -100,17 +98,12 @@
     .skill-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow-md); transition:transform .3s cubic-bezier(.2,.8,.3,1), border-color .3s, box-shadow .3s; position:relative; overflow:hidden; }
     .skill-box::before { content:''; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--brand),#4f46e5 55%,var(--accent)); opacity:0; transition:.3s; }
     .skill-box:hover::before { opacity:1; }
-    .skill-box:hover { transform:translateY(-6px); border-color:var(--brand); box-shadow:0 22px 44px rgba(15,23,42,.12); }
+    .skill-box:hover { border-color:var(--brand); box-shadow:0 14px 30px rgba(15,23,42,.10); }
     .skill-head { display:flex; align-items:center; gap:14px; margin-bottom:12px; }
-    .skill-icon { font-size:1.6rem; width:58px; height:58px; display:flex; align-items:center; justify-content:center; border-radius:15px; background:rgba(37,99,235,0.10); color:var(--brand); flex-shrink:0; transition:transform .25s; overflow:hidden; box-shadow:none; border:none; }
+    .skill-icon { width:58px; height:58px; display:flex; align-items:center; justify-content:center; border-radius:14px; background:var(--surface); color:var(--brand); flex-shrink:0; transition:transform .25s; overflow:hidden; box-shadow: inset 0 0 0 1px var(--border); border:none; }
     .skill-icon img.brand-logo { width:30px; height:30px; object-fit:contain; }
-    .skill-icon.ic-orange { background:rgba(255,152,0,0.12); color:#ff9800; }
-    .skill-icon.ic-indigo { background:rgba(79,70,229,0.10); color:#4f46e5; }
-    .skill-icon.ic-teal { background:rgba(16,185,129,0.12); color:#0d9488; }
-    .skill-icon.ic-purple { background:rgba(168,85,247,0.12); color:#a855f7; }
-    .skill-icon.ic-rose { background:rgba(244,63,94,0.12); color:#e11d48; }
-    .skill-head h2 { font-size:1.15rem; color:var(--ink); }
-    .skill-box:hover .skill-icon { transform:rotate(-6deg) scale(1.08); }
+    .skill-icon img { width:30px; height:30px; }
+    .skill-box:hover .skill-icon { transform: scale(1.06); }
     .skill-head .level { font-size:.72rem; color:var(--accent); font-weight:800; display:block; }
     .skill-box p { line-height:1.75; color:var(--ink-soft); font-size:.93rem; }
     .usage { list-style:none; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); display:flex; flex-direction:column; gap:9px; }
@@ -205,7 +198,7 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon"><i class="fab fa-python"></i></div>
+            <div class="skill-icon"><img src="img/icons/python.svg" alt="Python" width="30" height="30" loading="lazy" decoding="async"></div>
             <div>
               <h2>Python</h2>
               <span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span>
@@ -220,7 +213,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="90">
           <div class="skill-head">
-            <div class="skill-icon ic-orange"><i class="fab fa-java"></i></div>
+            <div class="skill-icon"><img src="img/icons/java.svg" alt="Java" width="30" height="30" loading="lazy" decoding="async"></div>
             <div>
               <h2>Java</h2>
               <span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span>
@@ -235,7 +228,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="140">
           <div class="skill-head">
-            <div class="skill-icon ic-indigo"><i class="fab fa-cuttlefish"></i></div>
+            <div class="skill-icon"><img src="img/icons/cplusplus.svg" alt="C++" width="30" height="30" loading="lazy" decoding="async"></div>
             <div>
               <h2>C++</h2>
               <span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span>
@@ -249,7 +242,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="190">
           <div class="skill-head">
-            <div class="skill-icon ic-teal"><i class="fas fa-database"></i></div>
+            <div class="skill-icon"><img src="img/icons/mysql.svg" alt="SQL & Databases" width="30" height="30" loading="lazy" decoding="async"></div>
             <div>
               <h2><span class="lang-ar">SQL & قواعد البيانات</span><span class="lang-en">SQL & Databases</span></h2>
               <span class="level lang-ar">قواعد بيانات</span><span class="level lang-en">Databases</span>
@@ -264,7 +257,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="240">
           <div class="skill-head">
-            <div class="skill-icon ic-rose"><i class="fas fa-chart-pie"></i></div>
+            <div class="skill-icon"><img src="img/icons/excel.svg" alt="Data Analysis" width="30" height="30" loading="lazy" decoding="async"></div>
             <div>
               <h2><span class="lang-ar">تحليل البيانات</span><span class="lang-en">Data Analysis</span></h2>
               <span class="level lang-ar">تحليل البيانات</span><span class="level lang-en">Data Analysis</span>
@@ -279,7 +272,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="290">
           <div class="skill-head">
-            <div class="skill-icon ic-purple"><i class="fas fa-chart-line"></i></div>
+            <div class="skill-icon"><img src="img/logos/meta.svg" alt="Digital Marketing" width="30" height="30" loading="lazy" decoding="async"></div>
             <div>
               <h2><span class="lang-ar">التسويق الرقمي</span><span class="lang-en">Digital Marketing</span></h2>
               <span class="level lang-ar">تسويق</span><span class="level lang-en">Marketing</span>
@@ -299,7 +292,7 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon"><i class="fab fa-python"></i></div>
+            <div class="skill-icon"><img src="img/icons/python.svg" alt="Python" width="30" height="30" loading="lazy" decoding="async"></div>
             <div><h2>Python</h2><span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span></div>
           </div>
           <ul class="usage">
@@ -311,7 +304,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
-            <div class="skill-icon ic-orange"><i class="fab fa-java"></i></div>
+            <div class="skill-icon"><img src="img/icons/java.svg" alt="Java" width="30" height="30" loading="lazy" decoding="async"></div>
             <div><h2>Java</h2><span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span></div>
           </div>
           <ul class="usage">
@@ -323,7 +316,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="120">
           <div class="skill-head">
-            <div class="skill-icon ic-indigo"><i class="fab fa-cuttlefish"></i></div>
+            <div class="skill-icon"><img src="img/icons/cplusplus.svg" alt="C++" width="30" height="30" loading="lazy" decoding="async"></div>
             <div><h2>C++</h2><span class="level lang-ar">لغة برمجة</span><span class="level lang-en">Programming Language</span></div>
           </div>
           <ul class="usage">
@@ -339,7 +332,7 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon ic-teal"><i class="fas fa-database"></i></div>
+            <div class="skill-icon"><img src="img/icons/mysql.svg" alt="SQL & Databases" width="30" height="30" loading="lazy" decoding="async"></div>
             <div><h2><span class="lang-ar">SQL & قواعد البيانات</span><span class="lang-en">SQL & Databases</span></h2><span class="level lang-ar">قواعد بيانات</span><span class="level lang-en">Databases</span></div>
           </div>
           <ul class="usage">
@@ -351,7 +344,7 @@
         </article>
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="80">
           <div class="skill-head">
-            <div class="skill-icon ic-rose"><i class="fas fa-chart-pie"></i></div>
+            <div class="skill-icon"><img src="img/icons/excel.svg" alt="Data Analysis" width="30" height="30" loading="lazy" decoding="async"></div>
             <div><h2><span class="lang-ar">تحليل البيانات</span><span class="lang-en">Data Analysis</span></h2><span class="level lang-ar">تحليل البيانات</span><span class="level lang-en">Data Analysis</span></div>
           </div>
           <ul class="usage">
@@ -368,7 +361,7 @@
       <div class="skill-grid">
         <article class="skill-box" data-aos="zoom-in" data-aos-delay="40">
           <div class="skill-head">
-            <div class="skill-icon ic-purple"><i class="fas fa-chart-line"></i></div>
+            <div class="skill-icon"><img src="img/logos/meta.svg" alt="Digital Marketing" width="30" height="30" loading="lazy" decoding="async"></div>
             <div><h2><span class="lang-ar">التسويق الرقمي</span><span class="lang-en">Digital Marketing</span></h2><span class="level lang-ar">تسويق</span><span class="level lang-en">Marketing</span></div>
           </div>
           <ul class="usage">

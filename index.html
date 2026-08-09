@@ -71,7 +71,7 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -109,7 +109,7 @@
     a, button, input, textarea, select { transition: color .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease, opacity .2s ease; }
 
     body {
-      font-family: 'Cairo', sans-serif;
+      font-family: 'IBM Plex Sans Arabic','Alexandria', sans-serif;
       background: var(--bg);
       color: var(--ink);
       line-height: 1.7;
@@ -267,23 +267,32 @@
       box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
     }
     .hero h1 {
-      font-family: 'Cairo', 'Tajawal', sans-serif;
+      font-family: 'Alexandria','IBM Plex Sans Arabic','Tajawal', sans-serif;
       font-size: clamp(2.5rem, 5vw, 3.6rem);
       font-weight: 900; line-height: 1.18; color: var(--ink);
       margin-bottom: 14px;
       letter-spacing: -.5px;
     }
     .hero h1.riwaya {
-      font-family: '29LT Riwaya', 'Cairo', 'Tajawal', sans-serif;
+      font-family: '29LT Riwaya','Alexandria','IBM Plex Sans Arabic','Tajawal', sans-serif;
       font-weight: 400;
       font-size: clamp(2.7rem, 5.4vw, 3.9rem);
       line-height: 1.22;
       letter-spacing: 0;
     }
     .hero h1 .grad {
-      background: linear-gradient(120deg, var(--brand), #4f46e5 55%, var(--accent-2));
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent;
+      color: var(--brand);
+      position: relative;
+      white-space: nowrap;
+    }
+    .hero h1 .grad::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 6px;
+      height: 8px;
+      background: rgba(37,99,235,0.16);
+      border-radius: 4px;
+      z-index: -1;
     }
     .hero-subtitle {
       font-size: clamp(1.05rem, 1.9vw, 1.25rem);
@@ -308,65 +317,55 @@
     .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
     .btn {
       display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 30px; border-radius: 16px;
+      padding: 14px 30px; border-radius: 12px;
       font-weight: 800; font-size: .98rem; cursor: pointer;
-      border: none; transition: .25s cubic-bezier(.2,.8,.3,1);
-      position: relative; overflow: hidden;
+      border: none; transition: .2s ease;
     }
-    .btn::before {
-      content: '';
-      position: absolute; top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent);
-      transition: left .55s ease;
-    }
-    .btn:hover::before { left: 100%; }
     .btn-primary {
-      background: linear-gradient(120deg, var(--brand), var(--brand-dark));
+      background: var(--brand);
       color: #fff;
-      box-shadow: 0 14px 32px rgba(37,99,235,0.30);
+      box-shadow: 0 6px 16px rgba(37,99,235,0.22);
     }
     .btn-primary:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 22px 48px rgba(37,99,235,0.40);
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(37,99,235,0.28);
     }
     .btn-primary:active { transform: translateY(-1px) scale(.99); }
     .btn-outline {
       background: var(--surface); color: var(--ink);
       border: 1.5px solid var(--border);
     }
-    .btn-outline:hover { border-color: var(--brand); color: var(--brand); transform: translateY(-4px); box-shadow: 0 14px 30px rgba(37,99,235,0.12); }
+    .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
     .btn-outline:active { transform: translateY(-1px) scale(.99); }
-    .btn i { transition: transform .25s; }
-    .btn:hover i { transform: translateY(2px) scale(1.15); }
+    .btn i { transition: transform .2s; }
+    .btn:hover i { transform: translateY(1px); }
 
-    .hero-socials { display: flex; gap: 12px; margin-top: 30px; }
+    .hero-socials { display: flex; gap: 10px; margin-top: 30px; }
     .hero-socials a {
-      width: 46px; height: 46px; border-radius: 14px;
+      width: 46px; height: 46px; border-radius: 12px;
       display: inline-flex; align-items: center; justify-content: center;
       background: var(--surface); border: 1px solid var(--border);
-      color: var(--ink-soft); font-size: 1.15rem;
-      transition: .22s;
+      transition: .2s;
     }
-    .hero-socials a:hover { background: var(--brand); border-color: var(--brand); color: #fff; transform: translateY(-4px); }
+    .hero-socials a img { width: 20px; height: 20px; }
+    .hero-socials a:hover { border-color: var(--border); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 
-    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
     .hero-avatar {
-      width: 300px; height: 300px; border-radius: 50%;
+      width: 300px; height: 300px; border-radius: 28px;
       object-fit: cover;
-      border: 8px solid var(--surface);
-      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
       position: relative; z-index: 2;
     }
-    .hero-avatar::after { content: ''; }
-    .ring-spin {
-      position: absolute; inset: -18px; border-radius: 50%;
-      border: 2px dashed rgba(37,99,235,0.28);
-      animation: spin 18s linear infinite;
-    }
-    .ring-spin-2 {
-      position: absolute; inset: 26px; border-radius: 50%;
-      border: 2px solid rgba(255,152,0,0.22);
+    .hero-visual::before {
+      content: '';
+      position: absolute; inset: 14px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(37,99,235,0.10), rgba(255,152,0,0.10));
+      transform: rotate(-2.5deg);
+      z-index: 1;
     }
 
     .hero-stats {
@@ -382,7 +381,7 @@
       box-shadow: var(--shadow-sm);
       transition: .25s;
     }
-    .stat:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .stat:hover { box-shadow: var(--shadow-md); }
     .stat b { font-size: 1.9rem; font-weight: 900; color: var(--brand); display: block; line-height: 1.1; }
     .stat span { font-size: .85rem; color: var(--ink-soft); font-weight: 700; }
 
@@ -433,16 +432,15 @@
       box-shadow: var(--shadow-sm);
       transition: .25s;
     }
-    .skill:hover { transform: translateY(-4px); border-color: var(--brand); box-shadow: var(--shadow-md); }
+    .skill:hover { border-color: var(--brand); box-shadow: var(--shadow-md); }
     .skill-icon {
-      width: 48px; height: 48px; border-radius: 14px;
+      width: 48px; height: 48px; border-radius: 12px;
       margin: 0 auto 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; color: var(--brand);
-      background: rgba(37,99,235,0.10);
+      background: var(--surface);
+      box-shadow: inset 0 0 0 1px var(--border);
     }
-    .skill:nth-child(2) .skill-icon, .skill:nth-child(4) .skill-icon { background: rgba(255,152,0,0.12); color: var(--accent-2); }
-    .skill:nth-child(3) .skill-icon { background: rgba(79,70,229,0.10); color: #4f46e5; }
+    .skill-icon img { width: 26px; height: 26px; }
     .skill h3 { font-size: .95rem; font-weight: 800; margin-bottom: 3px; }
     .skill small { color: var(--muted); font-weight: 600; font-size: .78rem; }
 
@@ -474,7 +472,7 @@
       box-shadow: var(--shadow-sm);
       transition: .25s;
     }
-    .timeline-content:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .timeline-content:hover { box-shadow: var(--shadow-md); }
     .tl-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
     .timeline-content h3 { font-size: 1.05rem; font-weight: 800; color: var(--ink); }
     .timeline-company { color: var(--brand); font-weight: 700; font-size: .85rem; display: block; margin-top: 2px; }
@@ -504,8 +502,8 @@
       display: flex; gap: 24px; align-items: flex-start;
     }
     .edu-icon {
-      flex-shrink: 0; width: 66px; height: 66px; border-radius: 20px;
-      background: linear-gradient(135deg, var(--brand), #4f46e5);
+      flex-shrink: 0; width: 66px; height: 66px; border-radius: 18px;
+      background: var(--brand);
       color: #fff; font-size: 1.6rem;
       display: flex; align-items: center; justify-content: center;
     }
@@ -525,7 +523,7 @@
       box-shadow: var(--shadow-sm);
       transition: .3s;
     }
-    .cert-item-img:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--brand); }
+    .cert-item-img:hover { box-shadow: var(--shadow-md); border-color: var(--brand); }
     .cert-item-img img { width: 100%; height: 100%; object-fit: contain; padding: 8px; transition: .3s; }
     .cert-item-img::after {
       content: '\f00e'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
@@ -546,12 +544,12 @@
       border-radius: var(--radius-lg); overflow: hidden;
       box-shadow: var(--shadow-sm);
       display: grid; grid-template-columns: 1.15fr 1fr;
-      transition: transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s, border-color .3s;
+      transition: box-shadow .3s, border-color .3s;
     }
-    .featured-project:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--brand); }
+    .featured-project:hover { box-shadow: var(--shadow-lg); border-color: var(--brand); }
     .fp-media { position: relative; overflow: hidden; min-height: 260px; background: var(--surface-2); }
     .fp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .featured-project:hover .fp-media img { transform: scale(1.07); }
+    .featured-project:hover .fp-media img { transform: scale(1.03); }
     .project-tag {
       position: absolute; top: 14px; right: 14px; z-index: 2;
       background: rgba(37,99,235,0.92); color: #fff;
@@ -574,7 +572,7 @@
       display: flex; align-items: center; gap: 12px;
       transition: .25s;
     }
-    .lang-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+    .lang-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
     .lang-card i { font-size: 1.25rem; color: var(--accent-2); }
     .lang-card h3 { font-size: .98rem; font-weight: 800; margin: 0; }
     .lang-card small { color: var(--muted); font-weight: 700; font-size: .78rem; display: block; }
@@ -605,7 +603,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
       text-align: center; transition: .25s cubic-bezier(.2,.8,.3,1);
     }
-    .partner-card:hover { transform: translateY(-5px); border-color: var(--brand); box-shadow: var(--shadow-md); }
+    .partner-card:hover { border-color: var(--brand); box-shadow: var(--shadow-md); }
     .partner-card .partner-logo {
       width: 100%; height: 44px;
       display: flex; align-items: center; justify-content: center;
@@ -619,7 +617,7 @@
       display: flex; flex-direction: column; gap: 10px;
       transition: .25s cubic-bezier(.2,.8,.3,1);
     }
-    .homepost-card:hover { transform: translateY(-5px); border-color: var(--brand); box-shadow: var(--shadow-md); }
+    .homepost-card:hover { border-color: var(--brand); box-shadow: var(--shadow-md); }
     .homepost-card .tag { align-self: flex-start; background: rgba(37,99,235,0.09); color: var(--brand); padding: 4px 12px; border-radius: 999px; font-size: .72rem; font-weight: 800; }
     .homepost-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--ink); line-height: 1.5; }
     .homepost-card .meta { font-size: .76rem; color: var(--muted); font-weight: 700; display: flex; gap: 12px; }
@@ -628,12 +626,12 @@
     /* ================= Contact ================= */
     .contact-wrap { max-width: 720px; margin: 0 auto; }
     .contact-box {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 55%, #153a8f 100%);
+      background: var(--brand-dark);
       border-radius: var(--radius-lg);
       padding: 40px;
       color: #fff;
       display: grid; grid-template-columns: 1fr; gap: 24px; text-align: center;
-      box-shadow: 0 22px 50px rgba(37,99,235,0.35);
+      box-shadow: 0 22px 50px rgba(37,99,235,0.3);
       position: relative; overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
     }
@@ -664,7 +662,7 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.10);
       transition: .22s;
     }
-    .contact-item:hover i { background: var(--accent); color: var(--ink); transform: scale(1.06); }
+    .contact-item:hover i { background: var(--accent); color: var(--ink); transform: scale(1.05); }
     .contact-item b { display: block; font-size: .8rem; font-weight: 700; color: rgba(255,255,255,0.7); }
     .contact-item span { font-weight: 800; font-size: 1.05rem; direction: ltr; text-align: left; color: #fff; }
     .contact-box .contact-item { justify-content: center; }
@@ -677,7 +675,7 @@
       transition: .22s;
       box-shadow: 0 6px 14px rgba(0,0,0,0.12);
     }
-    .contact-social a:hover { background: var(--accent); color: var(--ink); transform: translateY(-5px) scale(1.05); box-shadow: 0 14px 26px rgba(0,0,0,0.2); }
+    .contact-social a:hover { background: var(--accent); color: var(--ink); transform: translateY(-2px); box-shadow: 0 14px 26px rgba(0,0,0,0.2); }
 
     .contact-form { display: grid; gap: 14px; margin-top: 26px; }
     .contact-form .field { display: flex; flex-direction: column; gap: 6px; }
@@ -715,11 +713,6 @@
     }
 
     /* ================= Hover animations for cards ================= */
-    @keyframes floatY {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .hero-avatar:hover { animation: floatY 2.4s ease-in-out infinite; }
     .stat, .skill, .card, .timeline-content, .lang-card, .edu-card, .about-card {
       will-change: transform;
     }
@@ -767,7 +760,7 @@
       cursor: pointer; box-shadow: var(--shadow-md);
       opacity: 0; visibility: hidden; transition: .25s;
     }
-    .back-to-top:hover { background: var(--brand-dark); transform: translateY(-4px); }
+    .back-to-top:hover { background: var(--brand-dark); transform: translateY(-2px); }
 
     /* ================= Scroll progress bar ================= */
     .scroll-progress {
@@ -943,16 +936,15 @@
           </a>
         </div>
         <div class="hero-socials">
-          <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="img/icons/linkedin.svg" alt="LinkedIn" width="20" height="20" decoding="async"></a>
+          <a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="img/icons/facebook.svg" alt="Facebook" width="20" height="20" decoding="async"></a>
+          <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="img/icons/instagram.svg" alt="Instagram" width="20" height="20" decoding="async"></a>
+          <a href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="img/icons/whatsapp.svg" alt="WhatsApp" width="20" height="20" decoding="async"></a>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="img/icons/github.svg" alt="GitHub" width="20" height="20" decoding="async"></a>
         </div>
       </div>
 
       <div class="hero-visual" data-aos="fade-up" data-aos-delay="120">
-        <div class="ring-spin"></div>
-        <div class="ring-spin-2"></div>
         <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="أحمد أيمن يحيى مهندس برمجيات" class="hero-avatar" width="300" height="300" fetchpriority="high" decoding="async" onerror="this.src='https://placehold.co/300x300/f0f4fa/2563eb?text=AA'">
       </div>
     </div>
@@ -988,32 +980,32 @@
     </div>
     <div class="skills-grid">
       <div class="skill" data-aos="zoom-in" data-aos-delay="40">
-        <div class="skill-icon"><i class="fab fa-python"></i></div>
+        <div class="skill-icon"><img src="img/icons/python.svg" alt="Python" width="26" height="26" loading="lazy" decoding="async"></div>
         <h3>Python</h3>
         <small><span class="lang-ar">برمجة وتطوير</span><span class="lang-en">Development</span></small>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="90">
-        <div class="skill-icon"><i class="fab fa-cuttlefish"></i></div>
+        <div class="skill-icon"><img src="img/icons/cplusplus.svg" alt="C++" width="26" height="26" loading="lazy" decoding="async"></div>
         <h3>C++</h3>
         <small><span class="lang-ar">برمجة عالية الأداء</span><span class="lang-en">High-performance</span></small>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="140">
-        <div class="skill-icon"><i class="fas fa-database"></i></div>
+        <div class="skill-icon"><img src="img/icons/mysql.svg" alt="SQL" width="26" height="26" loading="lazy" decoding="async"></div>
         <h3>SQL</h3>
         <small><span class="lang-ar">قواعد بيانات</span><span class="lang-en">Databases</span></small>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="190">
-        <div class="skill-icon"><i class="fab fa-java"></i></div>
+        <div class="skill-icon"><img src="img/icons/java.svg" alt="Java" width="26" height="26" loading="lazy" decoding="async"></div>
         <h3>Java</h3>
         <small><span class="lang-ar">برمجة ونظم</span><span class="lang-en">Systems</span></small>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="240">
-        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="skill-icon"><img src="img/logos/meta.svg" alt="Digital Marketing" width="26" height="26" loading="lazy" decoding="async"></div>
         <h3><span class="lang-ar">التسويق الرقمي</span><span class="lang-en">Marketing</span></h3>
         <small><span class="lang-ar">إعلانات وتحليل أداء</span><span class="lang-en">Ads & Analytics</span></small>
       </div>
       <div class="skill" data-aos="zoom-in" data-aos-delay="290">
-        <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+        <div class="skill-icon"><img src="img/icons/excel.svg" alt="Data Analysis" width="26" height="26" loading="lazy" decoding="async"></div>
         <h3><span class="lang-ar">تحليل البيانات</span><span class="lang-en">Data Analysis</span></h3>
         <small><span class="lang-ar">تحليل وتقارير</span><span class="lang-en">Analytics</span></small>
       </div>

@@ -43,43 +43,42 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://unpkg.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',sans-serif; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'IBM Plex Sans Arabic','Alexandria',sans-serif; }
     body { min-height:100vh; background:#f5f7fb; color:#0f172a; overflow-x:hidden; }
     a { color:inherit; text-decoration:none; }
     .page-wrapper { max-width:1040px; margin:0 auto; padding:28px 24px 40px; }
     .topbar { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:18px; margin-bottom:28px; }
-    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; font-size:1.3rem; margin-bottom:16px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
+    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px; border-radius:16px; background:#2563eb; color:#fff; font-size:1.3rem; margin-bottom:16px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
     .topbar h1 { font-size:2rem; font-weight:900; color:#0f172a; position:relative; display:inline-block; }
-    .topbar h1::after { content:''; position:absolute; bottom:-10px; right:0; left:0; height:4px; border-radius:4px; margin:0 auto; background:linear-gradient(90deg,#2563eb,#ff9800); width:70px; }
+    .topbar h1::after { content:''; position:absolute; bottom:-10px; right:0; left:0; height:4px; border-radius:4px; margin:0 auto; background:#2563eb; width:70px; }
     .topbar p { max-width:720px; margin-top:24px; color:#475569; line-height:1.85; }
     .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:14px; padding:13px 28px; font-weight:800; font-size:.96rem; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; border:none; cursor:pointer; box-shadow:0 6px 16px rgba(37,99,235,.10); }
-    .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent); transition:left .55s ease; }
-    .btn:hover::before { left:100%; }
-    .btn:hover i { transform:translateY(2px) scale(1.15); }
+    .btn:hover i { transform:translateY(2px); }
     .btn i { transition:transform .25s; }
     .btn-secondary { background:#ffffff; border:1.5px solid #e2e8f0; color:#475569; box-shadow:none; }
-    .btn-secondary:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-4px); box-shadow:0 14px 30px rgba(37,99,235,.15); }
-    .btn-primary { background:linear-gradient(120deg,#2563eb,#1d4ed8); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
+    .btn-secondary:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.15); }
+    .btn-primary { background:#2563eb; color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
     .btn-primary:active { transform:translateY(-1px) scale(.99); }
-    .btn-primary:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 18px 40px rgba(37,99,235,.40); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 18px 40px rgba(37,99,235,.40); }
     .contact-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:28px; padding:34px; box-shadow:0 12px 34px rgba(15,23,42,.07); transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s; }
-    .contact-card:hover { transform:translateY(-6px); box-shadow:0 26px 50px rgba(15,23,42,.12); }
+    .contact-card:hover { transform:translateY(-2px); box-shadow:0 26px 50px rgba(15,23,42,.12); }
     .contact-card h2 { margin-bottom:18px; color:#2563eb; font-size:1.6rem; }
     .contact-list { display:grid; gap:16px; margin-top:24px; }
 .contact-item { display:flex; align-items:flex-start; gap:16px; background:#f5f7fb; border:1px solid #e2e8f0; border-radius:18px; padding:20px; transition:transform .3s, border-color .3s, box-shadow .3s; }
-    .contact-item:hover { transform:translateY(-4px); border-color:#2563eb; box-shadow:0 14px 30px rgba(15,23,42,.08); }
-    .contact-item > .ico { font-size:1.3rem; color:#fff; width:54px; height:54px; display:flex; align-items:center; justify-content:center; border-radius:16px; background:linear-gradient(135deg,#2563eb,#4f46e5); box-shadow:0 10px 22px rgba(37,99,235,.28); flex-shrink:0; margin-top:0; }
-    .contact-item > .ico.wa { background:linear-gradient(135deg,#25d366,#128c7e); box-shadow:0 10px 22px rgba(37,211,102,.30); }
+    .contact-item:hover { transform:translateY(-2px); border-color:#2563eb; box-shadow:0 14px 30px rgba(15,23,42,.08); }
+    .contact-item > .ico { font-size:1.3rem; color:#fff; width:54px; height:54px; display:flex; align-items:center; justify-content:center; border-radius:14px; background:#2563eb; box-shadow:0 10px 22px rgba(37,99,235,.28); flex-shrink:0; margin-top:0; }
+    .contact-item > .ico.wa { background:#1ebf60; box-shadow:0 10px 22px rgba(37,211,102,.30); }
     .contact-meta h3 { font-size:1.05rem; margin-bottom:6px; color:#0f172a; }
     .contact-meta p { line-height:1.7; color:#475569; }
     .social-links { margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
-    .social-links a { width:52px; height:52px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:#f5f7fb; border:1px solid #e2e8f0; color:#475569; font-size:1.25rem; transition:.25s cubic-bezier(.2,.8,.3,1); }
-    .social-links a:hover { background:#2563eb; border-color:#2563eb; color:#fff; transform:translateY(-5px); box-shadow:0 14px 28px rgba(37,99,235,.25); }
+    .social-links a { width:52px; height:52px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:#f5f7fb; border:1px solid #e2e8f0; transition:.2s ease; }
+    .social-links a img { width:22px; height:22px; }
+    .social-links a:hover { border-color:#cbd5e1; transform:translateY(-2px); box-shadow:0 10px 22px rgba(15,23,42,.08); }
     .availability { display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:rgba(34,197,94,.10); color:#16a34a; font-weight:700; font-size:.86rem; padding:8px 16px; border-radius:999px; }
     .availability .dot { width:9px; height:9px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 0 rgba(34,197,94,.5); animation:pulse 1.6s infinite; }
     @keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(34,197,94,.5);} 70%{ box-shadow:0 0 0 9px rgba(34,197,94,0);} 100%{ box-shadow:0 0 0 0 rgba(34,197,94,0);} }
@@ -90,8 +89,8 @@
     .contact-form input, .contact-form textarea { width:100%; padding:13px 15px; border:1.5px solid #e2e8f0; border-radius:14px; font-family:inherit; font-size:.93rem; outline:none; background:#f8fafc; transition:.2s; color:#0f172a; }
     .contact-form input:focus, .contact-form textarea:focus { border-color:#2563eb; background:#fff; box-shadow:0 0 0 4px rgba(37,99,235,.12); }
     .contact-form textarea { min-height:130px; resize:vertical; line-height:1.7; }
-    .contact-form .send-btn { justify-self:end; padding:14px 34px; border:none; border-radius:14px; cursor:pointer; background:linear-gradient(120deg,#2563eb,#1d4ed8); color:#fff; font-weight:800; font-size:1rem; font-family:inherit; transition:.25s; box-shadow:0 12px 28px rgba(37,99,235,.28); display:inline-flex; align-items:center; gap:10px; }
-    .contact-form .send-btn:hover { transform:translateY(-3px); box-shadow:0 18px 40px rgba(37,99,235,.4); }
+    .contact-form .send-btn { justify-self:end; padding:14px 34px; border:none; border-radius:14px; cursor:pointer; background:#2563eb; color:#fff; font-weight:800; font-size:1rem; font-family:inherit; transition:.25s; box-shadow:0 12px 28px rgba(37,99,235,.28); display:inline-flex; align-items:center; gap:10px; }
+    .contact-form .send-btn:hover { transform:translateY(-2px); box-shadow:0 18px 40px rgba(37,99,235,.4); }
     .contact-form .send-btn:active { transform:translateY(-1px) scale(.99); }
     .form-status { text-align:center; font-weight:800; font-size:.9rem; min-height:22px; }
     .form-status.ok { color:#16a34a; } .form-status.err { color:#dc2626; }
@@ -161,7 +160,7 @@
             <h3><span class="lang-ar">هاتف واتساب</span><span class="lang-en">WhatsApp</span></h3>
             <p id="cntPhone" dir="ltr" style="font-size:1.1rem; font-weight:700; color:#ff9800;">01028701351</p>
             <p class="lang-ar">رقم مباشر للتواصل السريع والدعم الفني.</p><p class="lang-en">Direct line for fast contact and support.</p>
-            <a class="contact-btn wa" id="cntWa" href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span class="lang-ar">بدء محادثة</span><span class="lang-en">Start Chat</span></a>
+            <a class="contact-btn wa" id="cntWa" href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer"><img src="img/icons/whatsapp.svg" alt="WhatsApp" width="20" height="20" decoding="async"><span class="lang-ar">بدء محادثة</span><span class="lang-en">Start Chat</span></a>
           </div>
         </div>
         <div class="contact-item">
@@ -183,9 +182,9 @@
       </div>
 
       <div class="social-links" id="socialLinks">
-        <a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer"><img src="img/icons/facebook.svg" alt="Facebook" width="22" height="22" loading="lazy" decoding="async"></a>
+        <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer"><img src="img/icons/instagram.svg" alt="Instagram" width="22" height="22" loading="lazy" decoding="async"></a>
+        <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer"><img src="img/icons/linkedin.svg" alt="LinkedIn" width="22" height="22" loading="lazy" decoding="async"></a>
       </div>
 
       <form class="contact-form" id="contactForm" novalidate>
@@ -276,9 +275,9 @@
         }
         const safeUrl = u => { const s = (u||'').trim().toLowerCase(); return /^(https?:|mailto:|tel:|#|\.\.|\/)/.test(s) ? u : '#'; };
         $x('socialLinks').innerHTML = `
-          ${p.facebook ? `<a href="${escS(safeUrl(p.facebook))}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>` : ''}
-          ${p.instagram ? `<a href="${escS(safeUrl(p.instagram))}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>` : ''}
-          ${p.linkedin ? `<a href="${escS(safeUrl(p.linkedin))}" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>` : ''}`;
+          ${p.facebook ? `<a href="${escS(safeUrl(p.facebook))}" target="_blank" rel="noopener noreferrer"><img src="img/icons/facebook.svg" alt="Facebook" width="22" height="22"></a>` : ''}
+          ${p.instagram ? `<a href="${escS(safeUrl(p.instagram))}" target="_blank" rel="noopener noreferrer"><img src="img/icons/instagram.svg" alt="Instagram" width="22" height="22"></a>` : ''}
+          ${p.linkedin ? `<a href="${escS(safeUrl(p.linkedin))}" target="_blank" rel="noopener noreferrer"><img src="img/icons/linkedin.svg" alt="LinkedIn" width="22" height="22"></a>` : ''}`;
       } catch (e) { /* يبقى المحتوى الثابت */ }
     })();
     function $x(id) { return document.getElementById(id); }
