@@ -207,6 +207,25 @@ body.dark .social-links a:hover { border-color: var(--brand); color: var(--brand
 body.dark .footer-links a { background: var(--surface-2); border-color: var(--border); color: var(--ink-soft); }
 body.dark .footer-links a:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
 
+/* ===== صفحات الصدقة الجارية ===== */
+body.dark .topbar .tb-frame { border-color: rgba(212,175,55,.4); }
+body.dark .topbar .tb-frame::before { border-color: rgba(212,175,55,.2); }
+body.dark .topbar .tb-orn { opacity:.25; }
+body.dark .quick-nav { background: rgba(21,28,46,.94); border-color: var(--border); }
+body.dark .quick-nav button { background: var(--surface); border-color: var(--border); color: var(--ink-soft); }
+body.dark .surah-more { background: linear-gradient(140deg,#166534,#125a32); color:#ffe9a8; }
+body.dark .khatma-progress { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .surah-card { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .surah-card h4 { color: var(--ink); }
+body.dark .surah-card small { color: var(--muted); }
+body.dark .dhikr, body.dark .dua { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .card { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .card h3 { color: var(--ink); }
+body.dark .card p { color: var(--ink-soft); }
+body.dark .sec-divider span { color: #d4af37; }
+body.dark .daily-actions .copy-btn { background: var(--surface-2); color: var(--ink); border-color: var(--border); }
+body.dark .tasbih-phrases button, body.dark .adhkar-tabs button, body.dark .mini-btn { background: var(--surface); border-color: var(--border); color: var(--ink-soft); }
+
 /* ===== النوافذ المنبثقة ===== */
 body.dark .modal-box { background: var(--surface) !important; }
 body.dark .modal-box h3 { color: var(--ink); }
