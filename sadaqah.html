@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://unpkg.com">
-  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -89,35 +89,49 @@
     .surah-card h4 { font-size:1rem; font-weight:800; margin:0; }
     .surah-card small { color:#94a3b8; font-size:.76rem; }
     .surah-card .done-badge { margin-inline-start:auto; color:#22c55e; font-size:1.05rem; }
-    .reader { position:fixed; inset:0; z-index:9500; background:rgba(15,23,42,.86); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:20px; }
+    .reader { position:fixed; inset:0; z-index:9500; background:rgba(3,17,12,.88); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:20px; }
     .reader.open { display:flex; }
-    .reader-card { position:relative; background:#fff; border-radius:22px; max-width:860px; width:100%; max-height:92vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 40px 90px rgba(15,23,42,.45); animation:rmIn .35s cubic-bezier(.2,.8,.3,1); }
+    .reader-card { position:relative; background:#166534; border-radius:20px; max-width:860px; width:100%; max-height:92vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 40px 90px rgba(0,0,0,.55); animation:rmIn .35s cubic-bezier(.2,.8,.3,1); }
     @keyframes rmIn { from { transform:translateY(30px) scale(.96); opacity:0; } to { transform:none; opacity:1; } }
-    .reader-top { position:relative; flex-shrink:0; display:flex; align-items:center; gap:16px; padding:22px 24px; background:linear-gradient(140deg,#1e3a8a,#2563eb 60%,#1d4ed8); color:#fff; overflow:hidden; }
-    .reader-top .rt-orbit { position:absolute; width:220px; height:220px; border-radius:50%; border:26px solid rgba(255,255,255,.08); top:-90px; left:-70px; }
-    .reader-top .rt-orbit::after { content:''; position:absolute; width:120px; height:120px; border-radius:50%; border:14px solid rgba(255,255,255,.07); top:44px; left:44px; }
-    .reader-top .rt-icon { flex-shrink:0; width:52px; height:52px; border-radius:15px; background:rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center; font-size:1.25rem; backdrop-filter:blur(4px); box-shadow:0 8px 18px rgba(15,23,42,.18); position:relative; z-index:1; }
-    .reader-top .rt-titles { position:relative; z-index:1; }
-    .reader-top h3 { font-size:1.35rem; font-weight:900; margin:0; text-shadow:0 2px 8px rgba(15,23,42,.35); }
-    .reader-top .rt-sub { display:block; margin-top:4px; font-size:.85rem; color:rgba(255,255,255,.82); font-weight:700; }
-    .reader-top .close-btn { margin-inline-start:auto; position:relative; z-index:1; }
-    .close-btn { border:0; cursor:pointer; background:rgba(255,255,255,.2); color:#fff; width:38px; height:38px; border-radius:12px; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:.2s; backdrop-filter:blur(4px); }
-    .close-btn:hover { background:#ff9800; transform:rotate(90deg); }
-    .reader-body { overflow-y:auto; padding:22px 26px; }
-    .ayah-line { margin-bottom:18px; border-radius:14px; padding:8px 12px; transition:background .3s; }
-    .ayah-line.playing { background:linear-gradient(140deg,rgba(37,99,235,.12),rgba(37,99,235,.04)); box-shadow:inset 4px 0 0 #2563eb; }
-    .ayah-line .ay-text { font-size:1.35rem; line-height:2.3; font-weight:700; color:#0f172a; }
-    .ayah-num { display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 6px; border-radius:50%; border:2px solid #2563eb; color:#1d4ed8; font-size:.78rem; font-weight:900; margin-inline-end:10px; vertical-align:middle; font-family:inherit; }
-    .ayah-line:first-child { font-size:1.25rem; }
-    .rm-player { flex-shrink:0; border-top:1px solid #e2e8f0; background:#f8fafc; padding:14px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .mushaf-top { position:relative; flex-shrink:0; display:flex; align-items:center; gap:16px; padding:20px 24px; background:linear-gradient(150deg,#0b3d2e 0%,#14532d 45%,#166534 100%); color:#fff; overflow:hidden; }
+    .mushaf-top::after { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(212,175,55,.14) 1px, transparent 1px); background-size:14px 14px; opacity:.5; }
+    .mt-corner { position:absolute; width:46px; height:46px; border:2px solid rgba(212,175,55,.7); z-index:2; pointer-events:none; }
+    .mt-corner.tl { top:8px; left:8px; border-right:none; border-bottom:none; border-top-left-radius:14px; }
+    .mt-corner.tr { top:8px; right:8px; border-left:none; border-bottom:none; border-top-right-radius:14px; }
+    .mt-flourish { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:200px; height:26px; opacity:.35; z-index:1; pointer-events:none; background:radial-gradient(ellipse at center,#d4af37 0%,rgba(212,175,55,0) 72%); }
+    .mt-body { position:relative; z-index:2; flex:1; display:flex; align-items:center; gap:14px; justify-content:center; }
+    .mt-icon { flex-shrink:0; color:#d4af37; font-size:1.15rem; filter:drop-shadow(0 0 6px rgba(212,175,55,.5)); }
+    .mt-titles { text-align:center; }
+    .mushaf-top h3 { font-size:1.4rem; font-weight:900; margin:0; font-family:'Amiri','Noto Naskh Arabic',serif; text-shadow:0 2px 8px rgba(0,0,0,.35); }
+    .mushaf-top .mt-sub { display:block; margin-top:3px; font-size:.83rem; color:rgba(255,255,255,.85); font-weight:700; }
+    .mushaf-top .close-btn { margin-inline-start:auto; position:relative; z-index:3; }
+    .close-btn { border:0; cursor:pointer; background:rgba(255,255,255,.16); color:#fff; width:38px; height:38px; border-radius:12px; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:.2s; backdrop-filter:blur(4px); }
+    .close-btn:hover { background:#d4af37; color:#0b3d2e; transform:rotate(90deg); }
+    .mushaf-frame { flex:1; min-height:0; display:flex; padding:18px 22px 22px; background:linear-gradient(160deg,#0b3d2e 0%,#14532d 30%,#166534 60%,#0b3d2e 100%); }
+    .mf-inner { position:relative; flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:radial-gradient(ellipse at 50% 0%, #fdf6e3 0%, #f9efd4 55%, #f3e6c2 100%); box-shadow:inset 0 0 0 6px #d4af37, inset 0 0 0 9px #8b6f2f, inset 0 0 60px rgba(139,111,47,.25); border-radius:4px; }
+    .mf-inner::before { content:''; position:absolute; inset:14px; border:1px solid rgba(139,111,47,.5); pointer-events:none; z-index:2; }
+    .mf-inner::after { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(139,111,47,.06) 1px, transparent 1px); background-size:22px 22px; pointer-events:none; z-index:1; }
+    .mf-corner { position:absolute; width:34px; height:34px; border:2px solid #8b6f2f; z-index:3; pointer-events:none; }
+    .mf-corner.tl { top:10px; left:10px; border-right:none; border-bottom:none; border-top-left-radius:12px; }
+    .mf-corner.tr { top:10px; right:10px; border-left:none; border-bottom:none; border-top-right-radius:12px; }
+    .mf-corner.bl { bottom:10px; left:10px; border-right:none; border-top:none; border-bottom-left-radius:12px; }
+    .mf-corner.br { bottom:10px; right:10px; border-left:none; border-top:none; border-bottom-right-radius:12px; }
+    .basmala { position:relative; z-index:2; flex-shrink:0; padding:24px 20px 8px; font-family:'Amiri','Noto Naskh Arabic',serif; font-weight:700; font-size:1.75rem; line-height:2; text-align:center; color:#3a2d0b; }
+    .reader-body { overflow-y:auto; padding:6px 30px 22px; position:relative; z-index:2; }
+    .ayah-line { margin-bottom:18px; border-radius:10px; padding:6px 10px; transition:background .3s; }
+    .ayah-line.playing { background:rgba(212,175,55,.18); box-shadow:inset 4px 0 0 #d4af37; }
+    .ayah-line .ay-text { font-size:1.5rem; line-height:2.4; font-weight:400; color:#2b2208; font-family:'Amiri','Noto Naskh Arabic','Scheherazade New',serif; }
+    .ayah-mark { color:#8b6f2f; font-size:1.15rem; margin-inline:6px; vertical-align:middle; line-height:1; }
+    .ayah-num { display:inline-flex; align-items:center; justify-content:center; min-width:36px; height:36px; padding:0 4px; border-radius:50%; border:2px solid #8b6f2f; color:#6b4e15; font-size:.8rem; font-weight:700; margin-inline-start:4px; vertical-align:middle; background:radial-gradient(circle at 50% 35%, #fff8e8, #e8d9a8); box-shadow:0 1px 4px rgba(107,78,21,.35); font-family:'Amiri',serif; }
+    .rm-player { flex-shrink:0; border-top:1px solid #1f7a4d; background:linear-gradient(150deg,#0b3d2e,#166534); padding:12px 20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .rm-reciters { display:flex; gap:8px; flex-wrap:wrap; }
-    .rm-reciters button { border:1.5px solid #e2e8f0; background:#fff; color:#475569; font-weight:800; font-size:.8rem; padding:8px 14px; border-radius:11px; cursor:pointer; font-family:inherit; transition:.2s; }
-    .rm-reciters button.active { border-color:#2563eb; background:#eff6ff; color:#1d4ed8; }
-    .rm-play { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; background:linear-gradient(140deg,#2563eb,#1d4ed8); color:#fff; font-weight:900; padding:11px 22px; border-radius:12px; font-family:inherit; font-size:.88rem; transition:.2s; box-shadow:0 10px 22px rgba(37,99,235,.3); margin-inline-start:auto; }
+    .rm-reciters button { border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); color:#d1fae5; font-weight:800; font-size:.78rem; padding:8px 13px; border-radius:11px; cursor:pointer; font-family:inherit; transition:.2s; }
+    .rm-reciters button.active { border-color:#d4af37; background:rgba(212,175,55,.18); color:#ffe9a8; }
+    .rm-play { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; background:linear-gradient(140deg,#d4af37,#b8860b); color:#0b3d2e; font-weight:900; padding:11px 22px; border-radius:12px; font-family:inherit; font-size:.88rem; transition:.2s; box-shadow:0 10px 22px rgba(0,0,0,.3); margin-inline-start:auto; }
     .rm-play:hover { transform:translateY(-2px); }
-    .rm-play.playing { background:linear-gradient(140deg,#ff9800,#f97316); box-shadow:0 10px 22px rgba(255,152,0,.35); }
+    .rm-play.playing { background:linear-gradient(140deg,#fbbf24,#f59e0b); box-shadow:0 10px 22px rgba(212,175,55,.4); }
     .rm-nav { display:flex; gap:8px; }
-    .rm-nav .mini-btn { padding:8px 14px; font-size:.8rem; }
+    .rm-nav .mini-btn { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#d1fae5; padding:8px 14px; font-size:.8rem; }
     .ada-label { background:rgba(37,99,235,.1); color:#1d4ed8; font-size:.95rem; font-weight:800; border-radius:8px; padding:2px 10px; margin-left:6px; vertical-align:middle; }
     .adhkar-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
     .adhkar-tabs button { border:0; cursor:pointer; padding:9px 18px; border-radius:12px; background:#fff; border:1px solid #e2e8f0; color:#475569; font-weight:800; font-size:.9rem; font-family:inherit; transition:.2s; }
@@ -245,12 +259,16 @@
       .page-wrapper { padding:16px 14px 40px; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .tasbih-num { font-size:4.5rem; }
       .reader { padding:10px; }
       .reader-card { max-height:96vh; border-radius:18px; }
-      .reader-top { padding:16px 16px; gap:12px; }
-      .reader-top h3 { font-size:1.1rem; }
-      .reader-top .rt-icon { width:44px; height:44px; font-size:1.05rem; }
-      .reader-body { padding:16px 14px; }
-      .ayah-line .ay-text { font-size:1.15rem; line-height:2.1; }
-      .ayah-line { margin-bottom:14px; padding:6px 8px; }
+      .mushaf-top { padding:14px 14px; gap:10px; }
+      .mushaf-top h3 { font-size:1.15rem; }
+      .mushaf-top .mt-icon { font-size:.95rem; }
+      .mt-corner { width:34px; height:34px; }
+      .mushaf-frame { padding:12px 10px 14px; }
+      .basmala { font-size:1.35rem; padding:18px 10px 6px; }
+      .reader-body { padding:4px 14px 16px; }
+      .ayah-line .ay-text { font-size:1.15rem; line-height:2.2; }
+      .ayah-line { margin-bottom:14px; padding:4px 6px; }
+      .ayah-num { min-width:28px; height:28px; font-size:.68rem; }
       .rm-player { padding:12px 14px; gap:10px; }
       .rm-play { padding:10px 16px; font-size:.82rem; width:100%; justify-content:center; margin-inline-start:0; order:3; }
       .rm-reciters { order:1; width:100%; justify-content:center; }
@@ -395,18 +413,26 @@
     <div class="quran-list" id="surahList"></div>
     <div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="قراءة سورة">
       <div class="reader-card">
-        <div class="reader-top">
-          <div class="rt-orbit"></div>
-          <div class="rt-body">
-            <span class="rt-icon"><i class="fas fa-book-open"></i></span>
-            <div class="rt-titles">
+        <div class="mushaf-top">
+          <div class="mt-corner tl"></div><div class="mt-corner tr"></div>
+          <div class="mt-flourish"></div>
+          <div class="mt-body">
+            <span class="mt-icon"><i class="fas fa-star-and-crescent"></i></span>
+            <div class="mt-titles">
               <h3 id="readerTitle"></h3>
-              <span class="rt-sub" id="readerSub"></span>
+              <span class="mt-sub" id="readerSub"></span>
             </div>
+            <span class="mt-icon"><i class="fas fa-star-and-crescent"></i></span>
           </div>
           <button class="close-btn" onclick="closeReader()" aria-label="إغلاق"><i class="fas fa-times"></i></button>
         </div>
-        <div class="reader-body" id="readerBody"></div>
+        <div class="mushaf-frame">
+          <div class="mf-inner">
+            <div class="mf-corner tl"></div><div class="mf-corner tr"></div><div class="mf-corner bl"></div><div class="mf-corner br"></div>
+            <div class="basmala" id="readerBasmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="reader-body" id="readerBody"></div>
+          </div>
+        </div>
         <div class="rm-player">
           <div class="rm-reciters" id="rmReciters"></div>
           <button class="rm-play" id="rmPlay"><i class="fas fa-play" id="rmPlayIcon"></i> <span id="rmPlayLabel"><span class="lang-ar">استماع للتلاوة</span><span class="lang-en">Listen</span></span></button>
@@ -736,6 +762,8 @@
     document.getElementById('readerTitle').innerHTML = '<span class="lang-ar">سورة ' + s[0] + '</span><span class="lang-en">Surah ' + s[0] + '</span>';
     document.getElementById('readerSub').innerHTML = '<span class="lang-ar">' + s[1] + ' آية</span><span class="lang-en">' + s[1] + ' verses</span>';
     var body = document.getElementById('readerBody');
+    var basmala = document.getElementById('readerBasmala');
+    if (basmala) basmala.style.display = (num === 1 || num === 9) ? 'none' : 'block';
     body.innerHTML = '<div class="ayah-line"><span class="ay-text">جاري تحميل السورة...</span></div>';
     document.getElementById('reader').classList.add('open');
     document.body.classList.add('side-open');
@@ -760,8 +788,7 @@
       var a = ayahs[i];
       var text = typeof a === 'string' ? a : a.text;
       var num = typeof a === 'string' ? (i + 1) : a.numberInSurah;
-      var bismi = (i === 0 && currentSurah !== 1 && currentSurah !== 9) ? 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ' : '';
-      html += '<div class="ayah-line" id="ayah-' + (i + 1) + '"><span class="ay-text">' + bismi + text + ' <span class="ayah-num">' + num + '</span></span></div>';
+      html += '<div class="ayah-line" id="ayah-' + (i + 1) + '"><span class="ay-text">' + text + ' <span class="ayah-mark">۝</span><span class="ayah-num">' + num + '</span></span></div>';
     }
     body.innerHTML = html;
     updateReaderNav();
