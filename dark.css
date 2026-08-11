@@ -6,9 +6,9 @@ body.dark {
   --ink: #e8edf7;
   --ink-soft: #b6c0d6;
   --muted: #7c88a3;
-  --brand: #3b82f6;
-  --brand-dark: #2563eb;
-  --accent: #ff9800;
+  --brand: #34a26b;
+  --brand-dark: #166534;
+  --accent: #d4af37;
   --border: #2a3550;
   --shadow-sm: 0 2px 10px rgba(0,0,0,.4);
   --shadow-md: 0 12px 34px rgba(0,0,0,.4);
@@ -115,7 +115,7 @@ body.dark .btn-ghost:hover,
 body.dark .filter-btn:hover {
   border-color: var(--brand) !important;
   color: var(--brand) !important;
-  box-shadow: 0 10px 22px rgba(37,99,235,.25);
+  box-shadow: 0 10px 22px rgba(22,101,52,.25);
 }
 
 /* ===== الحقول ===== */
@@ -128,7 +128,7 @@ body.dark select {
 }
 body.dark input:focus,
 body.dark textarea:focus,
-body.dark select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(37,99,235,.18); }
+body.dark select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(22,101,52,.18); }
 body.dark input::placeholder,
 body.dark textarea::placeholder { color: var(--muted); }
 
@@ -183,8 +183,8 @@ body.dark .hero,
 body.dark .hero-visual,
 body.dark .about-grid { background: transparent; }
 body.dark .grad { color: var(--brand); background: none; -webkit-background-clip: initial; background-clip: initial; }
-body.dark .hero h1 .grad::after { background: rgba(96,165,250,0.20); }
-body.dark .hero .hero-visual::before { background: linear-gradient(160deg, rgba(59,130,246,0.14), rgba(255,152,0,0.12)); }
+body.dark .hero h1 .grad::after { background: rgba(52,162,107,0.20); }
+body.dark .hero .hero-visual::before { background: linear-gradient(160deg, rgba(52,162,107,0.14), rgba(212,175,55,0.12)); }
 body.dark .hero-avatar { box-shadow: var(--shadow-md); }
 body.dark .featured-project,
 body.dark .homepost-card,
