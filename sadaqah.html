@@ -83,6 +83,12 @@
     .copy-btn { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; background:#fff; color:#0d9488; font-weight:800; padding:10px 18px; border-radius:12px; border:1px solid #e2e8f0; font-family:inherit; font-size:.86rem; transition:.2s; box-shadow:0 8px 18px rgba(15,23,42,.12); }
     .copy-btn:hover { border-color:#0d9488; transform:translateY(-2px); box-shadow:0 12px 24px rgba(13,148,136,.2); }
     .quran-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+    .khatma-progress { margin:14px 0 18px; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:16px 18px; box-shadow:0 6px 18px rgba(15,23,42,.05); }
+    .kp-head { display:flex; align-items:center; justify-content:space-between; font-weight:800; font-size:.92rem; color:#0f172a; margin-bottom:10px; }
+    .kp-head b { color:#1d4ed8; font-size:1.05rem; }
+    .kp-bar { height:12px; border-radius:999px; background:#e2e8f0; overflow:hidden; }
+    .kp-bar span { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,#2563eb,#10b981); transition:width .6s cubic-bezier(.2,.8,.3,1); }
+    .khatma-progress small { display:block; margin-top:8px; color:#94a3b8; font-size:.8rem; font-weight:600; }
     .surah-card { cursor:pointer; display:flex; align-items:center; gap:12px; padding:14px; border-radius:16px; background:#fff; border:1px solid #e2e8f0; box-shadow:0 6px 18px rgba(15,23,42,.06); transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s, border-color .3s; }
     .surah-card:hover { border-color:#2563eb; box-shadow:0 18px 38px rgba(37,99,235,.16); transform:translateY(-4px); }
     .surah-card .num { width:40px; height:40px; border-radius:12px; background:rgba(37,99,235,.1); color:#1d4ed8; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; }
@@ -358,9 +364,12 @@
         <p class="text" id="ayahText"></p>
         <span class="ref" id="ayahRef"></span>
         <div class="daily-actions">
+          <button class="copy-btn" onclick="playAyahAudio()"><i class="fas fa-play" id="ayahPlayIcon"></i> <span class="lang-ar">استماع</span><span class="lang-en">Listen</span></button>
           <button class="copy-btn" onclick="copyDaily('ayah')"><i class="fas fa-copy"></i> <span class="lang-ar">نسخ الآية</span><span class="lang-en">Copy</span></button>
           <button class="copy-btn" onclick="newAyah()"><i class="fas fa-dice"></i> <span class="lang-ar">آية أخرى</span><span class="lang-en">Another</span></button>
+          <button class="copy-btn" onclick="shareDaily('ayah')"><i class="fas fa-share-nodes"></i> <span class="lang-ar">مشاركة</span><span class="lang-en">Share</span></button>
         </div>
+        <audio id="ayahAudio" preload="none"></audio>
       </div>
       <div class="daily-box daily-hadith">
         <span class="label"><i class="fas fa-comment-dots"></i> <span class="lang-ar">حديث اليوم</span><span class="lang-en">Hadith of the Day</span></span>
@@ -369,6 +378,7 @@
         <div class="daily-actions">
           <button class="copy-btn" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25);" onclick="copyDaily('hadith')"><i class="fas fa-copy"></i> <span class="lang-ar">نسخ الحديث</span><span class="lang-en">Copy</span></button>
           <button class="copy-btn" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25);" onclick="newHadith()"><i class="fas fa-dice"></i> <span class="lang-ar">حديث آخر</span><span class="lang-en">Another</span></button>
+          <button class="copy-btn" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25);" onclick="shareDaily('hadith')"><i class="fas fa-share-nodes"></i> <span class="lang-ar">مشاركة</span><span class="lang-en">Share</span></button>
         </div>
       </div>
     </div>
@@ -409,6 +419,14 @@
     <div class="quran-meta">
       <span class="pill" id="quranCount"></span>
       <span class="pill" id="quranJuz"></span>
+    </div>
+    <div class="khatma-progress">
+      <div class="kp-head">
+        <span class="lang-ar">تقدمك في الختمة</span><span class="lang-en">Khatma Progress</span>
+        <b id="khatmaPct">0%</b>
+      </div>
+      <div class="kp-bar"><span id="khatmaFill"></span></div>
+      <small id="khatmaInfo" class="lang-ar">اقرأ السور ليتقدم شريطك</small>
     </div>
     <div class="quran-list" id="surahList"></div>
     <div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="قراءة سورة">
@@ -626,14 +644,14 @@
   }
 
   var AYAT = [
-    { text: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا', ref: 'الشرح 6' },
-    { text: 'وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ', ref: 'الطلاق 3' },
-    { text: 'وَقُلْ رَبِّ زِدْنِي عِلْمًا', ref: 'طه 114' },
-    { text: 'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', ref: 'البقرة 153' },
-    { text: 'فَاذْكُرُونِي أَذْكُرْكُمْ', ref: 'البقرة 152' },
-    { text: 'رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي', ref: 'طه 25-26' },
-    { text: 'وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ', ref: 'هود 88' },
-    { text: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ', ref: 'البقرة 201' }
+    { text: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا', ref: 'الشرح 6', surah: 94, ayah: 6 },
+    { text: 'وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ', ref: 'الطلاق 3', surah: 65, ayah: 3 },
+    { text: 'وَقُلْ رَبِّ زِدْنِي عِلْمًا', ref: 'طه 114', surah: 20, ayah: 114 },
+    { text: 'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', ref: 'البقرة 153', surah: 2, ayah: 153 },
+    { text: 'فَاذْكُرُونِي أَذْكُرْكُمْ', ref: 'البقرة 152', surah: 2, ayah: 152 },
+    { text: 'رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي', ref: 'طه 25-26', surah: 20, ayah: 25 },
+    { text: 'وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ', ref: 'هود 88', surah: 11, ayah: 88 },
+    { text: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ', ref: 'البقرة 201', surah: 2, ayah: 201 }
   ];
   var HADITHS = [
     { text: '«مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ»', ref: 'مسلم' },
@@ -662,6 +680,35 @@
   function copyDaily(which) {
     var t = which === 'ayah' ? AYAT[ayahIdx].text + ' ﴾' + AYAT[ayahIdx].ref + '﴿' : HADITHS[hadithIdx].text + ' — ' + HADITHS[hadithIdx].ref;
     copyText(t);
+  }
+  var ayahAudio = document.getElementById('ayahAudio');
+  var ayahAudioUrl = '';
+  function playAyahAudio() {
+    var item = AYAT[ayahIdx];
+    var icon = document.getElementById('ayahPlayIcon');
+    if (ayahAudio && !ayahAudio.paused) { ayahAudio.pause(); ayahAudio.removeAttribute('src'); if (icon) icon.className = 'fas fa-play'; return; }
+    if (!item.surah) { toast('لا تلاوة متاحة لهذه الآية'); return; }
+    if (icon) icon.className = 'fas fa-circle-notch fa-spin';
+    var key = item.surah + ':' + item.ayah;
+    if (ayahAudioUrl === key) { ayahAudio.play().catch(function(){}); if (icon) icon.className = 'fas fa-pause'; return; }
+    var url = 'https://cdn.islamic.network/quran/audio/128/ar.mahermuaiqly/' + item.surah + '.mp3';
+    ayahAudioUrl = key;
+    ayahAudio.src = url;
+    ayahAudio.currentTime = 0;
+    ayahAudio.play().then(function() { if (icon) icon.className = 'fas fa-pause'; }).catch(function() { if (icon) icon.className = 'fas fa-play'; toast('تعذر تشغيل التلاوة'); });
+  }
+  if (ayahAudio) {
+    ayahAudio.addEventListener('ended', function() {
+      var icon = document.getElementById('ayahPlayIcon');
+      if (icon) icon.className = 'fas fa-play';
+    });
+  }
+  function shareDaily(which) {
+    var t = which === 'ayah' ? 'آية اليوم: ' + AYAT[ayahIdx].text + ' ﴾' + AYAT[ayahIdx].ref + '﴿' : 'حديث اليوم: ' + HADITHS[hadithIdx].text + ' — ' + HADITHS[hadithIdx].ref;
+    var text = encodeURIComponent(t);
+    var url = encodeURIComponent(location.href);
+    var href = 'https://wa.me/?text=' + text + '%20' + url;
+    window.open(href, '_blank', 'noopener,width=650,height=500');
   }
 
   var SURAHS = [
@@ -740,6 +787,21 @@
       list.appendChild(btn);
     });
     document.getElementById('quranCount').innerHTML = (f ? 'نتائج البحث: ' : 'عدد السور: ') + count + ' من ' + SURAHS.length;
+    renderKhatma();
+  }
+  function renderKhatma() {
+    var read = getReadSurahs();
+    var done = read.length;
+    var pct = Math.round((done / SURAHS.length) * 100);
+    var fill = document.getElementById('khatmaFill');
+    var pctEl = document.getElementById('khatmaPct');
+    if (fill) fill.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+    var info = document.getElementById('khatmaInfo');
+    if (info) {
+      info.classList.add('lang-ar');
+      info.textContent = done >= 114 ? '🎉 الحمد لله أتممت الختمة كاملة!' : 'قرأت ' + done + ' من ' + SURAHS.length + ' سورة' + (done ? ' — أكمل وأجرك عند الله' : ' — افتح أي سورة لتتقدم');
+    }
   }
   function fillJump() {
     var sel = document.getElementById('surahJump');
