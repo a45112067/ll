@@ -378,6 +378,67 @@
       .rm-play { order:3; flex:1 1 auto; padding:10px 14px; font-size:.84rem; margin-inline-start:0; }
       .rm-nav { order:4; }
     }
+    .notif-wrap { position:fixed; top:84px; left:16px; z-index:8500; }
+    .notif-bell { position:relative; width:44px; height:44px; border-radius:14px; border:1px solid #e2e8f0; background:#ffffff; color:#1d4ed8; font-size:1.05rem; cursor:pointer; box-shadow:0 10px 24px rgba(22,101,52,.18); display:flex; align-items:center; justify-content:center; transition:transform .2s, box-shadow .2s; }
+    .notif-bell:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(22,101,52,.26); }
+    .notif-bell.ring { animation:notifRing .6s ease; }
+    @keyframes notifRing { 0%,100% { transform:rotate(0); } 20% { transform:rotate(-14deg); } 40% { transform:rotate(12deg); } 60% { transform:rotate(-8deg); } 80% { transform:rotate(6deg); } }
+    .notif-badge { position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 5px; border-radius:999px; background:#ef4444; color:#fff; font-size:.68rem; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(239,68,68,.4); }
+    .notif-panel { position:absolute; top:54px; left:0; width:340px; max-width:calc(100vw - 32px); background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; box-shadow:0 30px 70px rgba(22,101,52,.25); padding:12px; display:none; flex-direction:column; max-height:520px; }
+    .notif-panel.open { display:flex; animation:npIn .25s cubic-bezier(.2,.8,.3,1); transform-origin:top left; }
+    @keyframes npIn { from { opacity:0; transform:translateY(-10px) scale(.97); } to { opacity:1; transform:none; } }
+    .np-head { display:flex; align-items:center; gap:6px; padding:4px 6px 10px; border-bottom:1px solid #e2e8f0; margin-bottom:8px; }
+    .np-head b { font-size:.9rem; color:#0f172a; display:inline-flex; align-items:center; gap:8px; }
+    .np-head b i { color:#1d4ed8; }
+    .np-hbtn { border:0; background:transparent; cursor:pointer; color:#1d4ed8; font-size:.76rem; font-weight:800; font-family:inherit; padding:6px 10px; border-radius:8px; transition:.15s; }
+    .np-hbtn:hover { background:#eef2f7; }
+    .np-head .np-clear { color:#64748b; margin-inline-start:auto; }
+    .np-list { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:6px; min-height:70px; max-height:300px; padding-right:2px; }
+    .npi { display:flex; gap:10px; align-items:flex-start; background:#f8fafc; border:1px solid #eef2f7; border-radius:12px; padding:10px 12px; cursor:pointer; transition:.15s; }
+    .npi:hover { background:#eef2f7; }
+    .npi.unread { background:#fffbeb; border-color:#fde68a; }
+    .npi .n-ico { width:34px; height:34px; border-radius:10px; background:linear-gradient(140deg,#2563eb,#1d4ed8); color:#fff; font-size:.85rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .npi .n-ico.adhkar { background:linear-gradient(140deg,#f59e0b,#d97706); }
+    .npi .n-ico.progress { background:linear-gradient(140deg,#22c55e,#15803d); }
+    .npi .n-t { flex:1; min-width:0; }
+    .npi .n-t b { display:block; font-size:.82rem; color:#0f172a; }
+    .npi .n-t p { margin:2px 0 0; font-size:.76rem; color:#475569; line-height:1.6; }
+    .npi .n-time { font-size:.68rem; color:#94a3b8; margin-top:3px; display:block; }
+    .npi .n-dot { width:8px; height:8px; border-radius:50%; background:#ef4444; flex-shrink:0; margin-top:4px; }
+    .npi.read .n-dot { background:#cbd5e1; }
+    .np-empty { text-align:center; color:#94a3b8; font-size:.82rem; padding:24px 8px; font-weight:700; }
+    .np-settings { margin-top:8px; border-top:1px solid #e2e8f0; padding:10px 6px 2px; display:flex; flex-direction:column; gap:8px; }
+    .np-settings label { display:flex; align-items:center; gap:8px; font-size:.78rem; font-weight:700; color:#475569; cursor:pointer; }
+    .np-settings label i { color:#1d4ed8; width:16px; text-align:center; }
+    .np-settings input { width:16px; height:16px; accent-color:#1d4ed8; cursor:pointer; }
+    @media (max-width:768px) {
+      .notif-wrap { top:78px; left:12px; }
+      .notif-panel { width:min(340px, calc(100vw - 24px)); max-height:70vh; }
+      .np-list { max-height:42vh; }
+    }
+    .friday-banner { position:relative; overflow:hidden; border-radius:24px; padding:26px 24px; color:#fff; background:linear-gradient(150deg,#0f5132 0%,#166534 50%,#14532d 100%); box-shadow:0 20px 46px rgba(22,101,52,.3), inset 0 1px 0 rgba(255,255,255,.16); }
+    .friday-banner::before { content:''; position:absolute; top:-80px; left:-70px; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle, rgba(212,175,55,.22), transparent 65%); pointer-events:none; }
+    .friday-banner::after { content:'۞'; position:absolute; bottom:-34px; right:-6px; font-size:10rem; line-height:1; color:rgba(255,255,255,.05); transform:rotate(-12deg); pointer-events:none; }
+    .friday-banner > * { position:relative; z-index:1; }
+    .fb-head { text-align:center; margin-bottom:18px; }
+    .fb-badge { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(140deg,#d4af37,#b8860b); color:#3d2d00; font-weight:900; font-size:.8rem; padding:7px 18px; border-radius:999px; box-shadow:0 8px 18px rgba(212,175,55,.4); }
+    .fb-head h3 { font-size:1.25rem; font-weight:900; margin:12px 0 6px; font-family:'Amiri','Noto Naskh Arabic',serif; text-shadow:0 2px 8px rgba(0,0,0,.3); }
+    .fb-head p { font-size:.9rem; color:rgba(255,255,255,.88); font-weight:600; max-width:660px; margin:0 auto; line-height:1.9; }
+    .fb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .fb-item { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:18px; padding:20px 18px; text-align:center; display:flex; flex-direction:column; gap:10px; transition:transform .25s, background .25s; }
+    .fb-item:hover { transform:translateY(-4px); background:rgba(255,255,255,.18); }
+    .fb-ico { width:48px; height:48px; margin:0 auto; border-radius:14px; background:linear-gradient(140deg,#d4af37,#b8860b); color:#3d2d00; font-size:1.15rem; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(0,0,0,.22); }
+    .fb-item h4 { font-size:.98rem; font-weight:900; margin:0; color:#ffe9a8; }
+    .fb-item p { font-size:.84rem; color:rgba(255,255,255,.9); line-height:1.8; margin:0; font-weight:600; }
+    .fb-count { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:4px; }
+    .fb-cbtn { border:0; cursor:pointer; width:38px; height:38px; border-radius:12px; background:#fff; color:#166534; font-size:1rem; font-weight:900; font-family:inherit; transition:.15s; }
+    .fb-cbtn:active { transform:scale(.88); }
+    .fb-cbtn.fb-reset { background:rgba(255,255,255,.18); color:#ffe9a8; }
+    .fb-count span { min-width:52px; font-size:1.5rem; font-weight:900; color:#fff; text-align:center; }
+    .fb-item small { font-size:.72rem; color:rgba(255,255,255,.72); font-weight:700; }
+    .fb-btn { border:0; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; background:linear-gradient(140deg,#d4af37,#b8860b); color:#3d2d00; font-weight:900; padding:11px 16px; border-radius:12px; font-family:inherit; font-size:.84rem; margin-top:auto; transition:.2s; box-shadow:0 10px 20px rgba(0,0,0,.2); }
+    .fb-btn:hover { transform:translateY(-2px); }
+    @media (max-width:900px) { .fb-grid { grid-template-columns:1fr; } }
   </style>
   <link rel="stylesheet" href="dark.css">
 </head>
@@ -479,6 +540,46 @@
           <span class="q-mark q-close" aria-hidden="true">❞</span>
         </div>
         <span class="ref" id="hadithRef"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block" id="friday" data-aos="fade-up" style="display:none">
+    <div class="sec-divider"><span class="lang-ar">﴿﴾</span></div>
+    <h2 class="sec-title"><span class="sec-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3 5.6"/><path d="M12 12l3-5"/><path d="M9 3l-2 4M6 5l-3 4"/></svg></span> <span class="lang-ar">يوم الجمعة — أعمال مستحبة</span><span class="lang-en">Friday — Recommended Deeds</span></h2>
+    <div class="friday-banner">
+      <div class="fb-head">
+        <span class="fb-badge"><i class="fas fa-star-and-crescent"></i> <span class="lang-ar">يوم الجمعة</span><span class="lang-en">Friday</span></span>
+        <h3><span class="lang-ar">اللهم صلِّ وسلِّم على نبينا محمد ﷺ</span><span class="lang-en">O Allah, send peace and blessings upon our Prophet Muhammad ﷺ</span></h3>
+        <p><span class="lang-ar">«أفضلُ الأيام عند الله يومُ الجمعة، أَكْثِرُوا عليَّ مِنَ الصلاةِ فيه»</span><span class="lang-en">"The best of days with Allah is Friday — increase your prayers upon me on it."</span></p>
+      </div>
+      <div class="fb-grid">
+        <div class="fb-item fb-salawat">
+          <div class="fb-ico"><i class="fas fa-hands-praying"></i></div>
+          <h4><span class="lang-ar">الصلاة على النبي ﷺ</span><span class="lang-en">Salat upon the Prophet</span></h4>
+          <p class="lang-ar">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ</p>
+          <p class="lang-en">O Allah, send blessings and peace upon our Prophet Muhammad</p>
+          <div class="fb-count">
+            <button class="fb-cbtn" onclick="salawatAdd()" title="عد / Count"><i class="fas fa-plus"></i></button>
+            <span id="salawatNum">0</span>
+            <button class="fb-cbtn fb-reset" onclick="salawatReset()" title="تصفير / Reset"><i class="fas fa-rotate-left"></i></button>
+          </div>
+          <small><span class="lang-ar">من أكثَر الصلاة على النبي كُتبت له عشر حسنات</span><span class="lang-en">Each prayer on the Prophet earns ten rewards</span></small>
+        </div>
+        <div class="fb-item fb-kahf">
+          <div class="fb-ico"><i class="fas fa-book-quran"></i></div>
+          <h4><span class="lang-ar">سورة الكهف</span><span class="lang-en">Surah Al-Kahf</span></h4>
+          <p class="lang-ar">مَن قرأ سورةَ الكهف يومَ الجمعة أضاءَ له من النور ما بين الجُمُعَتَين.</p>
+          <p class="lang-en">Whoever recites Surah Al-Kahf on Friday will have light shining until the next Friday.</p>
+          <button class="fb-btn" onclick="openSurah(18)"><i class="fas fa-book-open"></i> <span class="lang-ar">افتح سورة الكهف</span><span class="lang-en">Open Surah Al-Kahf</span></button>
+        </div>
+        <div class="fb-item fb-adhkar">
+          <div class="fb-ico"><i class="fas fa-sun"></i></div>
+          <h4><span class="lang-ar">أذكار الصباح والمساء</span><span class="lang-en">Morning &amp; Evening Adhkar</span></h4>
+          <p class="lang-ar">أذكار اليوم من أعظم ما يحفظ العبد بإذن الله.</p>
+          <p class="lang-en">Daily adhkar are among the greatest protection for a servant.</p>
+          <button class="fb-btn" onclick="var el=document.querySelector('#adhkar'); if(el) el.scrollIntoView({behavior:'smooth'});"><i class="fas fa-arrow-down"></i> <span class="lang-ar">الذهاب للأذكار</span><span class="lang-en">Go to Adhkar</span></button>
+        </div>
       </div>
     </div>
   </section>
@@ -679,6 +780,23 @@
 
 <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
 <div class="toast" id="toast"></div>
+
+<div class="notif-wrap" id="notifWrap">
+  <button class="notif-bell" id="notifBell" aria-label="الإشعارات / Notifications"><i class="fas fa-bell"></i><span class="notif-badge" id="notifBadge" style="display:none">0</span></button>
+  <div class="notif-panel" id="notifPanel">
+    <div class="np-head">
+      <b><i class="fas fa-bell"></i> <span class="lang-ar">الإشعارات</span><span class="lang-en">Notifications</span></b>
+      <button class="np-hbtn" id="notifMarkAll"><span class="lang-ar">الكل مقروء</span><span class="lang-en">Read all</span></button>
+      <button class="np-hbtn np-clear" id="notifClear"><i class="fas fa-trash"></i> <span class="lang-ar">مسح</span><span class="lang-en">Clear</span></button>
+    </div>
+    <div class="np-list" id="notifList"></div>
+    <div class="np-settings">
+      <label><input type="checkbox" id="optPrayer"> <i class="fas fa-mosque"></i> <span class="lang-ar">تنبيه مواقيت الصلاة</span><span class="lang-en">Prayer times</span></label>
+      <label><input type="checkbox" id="optAdhkar"> <i class="fas fa-book-open"></i> <span class="lang-ar">تذكير الأذكار</span><span class="lang-en">Adhkar reminders</span></label>
+      <label><input type="checkbox" id="optProgress"> <i class="fas fa-circle-check"></i> <span class="lang-ar">الختمة والتسبيح</span><span class="lang-en">Khatma &amp; Tasbih</span></label>
+    </div>
+  </div>
+</div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -967,7 +1085,13 @@
     var taf = document.getElementById('tafsirPanel');
     if (taf) taf.classList.remove('open');
     try { localStorage.setItem('sadaqah_lastSurah', String(num)); } catch (e) {}
+    var readArr = getReadSurahs();
+    var isNewSurah = readArr.indexOf(num) === -1;
     markRead(num);
+    if (isNewSurah && typeof notifNow === 'function' && notifPrefs && notifPrefs.progress) {
+      var newCnt = readArr.length + 1;
+      notifNow('progress', 'أتممت سورة ' + s[0], 'تقدمك في الختمة: ' + Math.round(newCnt / 114 * 100) + '% — ' + newCnt + ' من 114 سورة.', 'fa-circle-check');
+    }
     renderSurahs(document.getElementById('surahSearch').value);
     stopAudio();
     if (quranCache[num]) { renderAyahs(quranCache[num]); return; }
@@ -1163,6 +1287,7 @@
     resumeIdx = -1;
     if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
     if (quranAudio) { quranAudio.pause(); quranAudio.removeAttribute('src'); }
+    clearPreloader();
     clearHighlight();
     if (rmPlay) {
       rmPlay.classList.remove('playing');
@@ -1182,6 +1307,39 @@
     rmPlayLabel.innerHTML = '<span class="lang-ar">استماع للتلاوة</span><span class="lang-en">Listen</span>';
   }
 
+  var preloader = document.createElement('audio');
+  preloader.preload = 'auto';
+  var primedUrl = null;
+  function clearPreloader() {
+    primedUrl = null;
+    preloader.removeAttribute('src');
+    preloader.load();
+  }
+  function primeBuf() {
+    if (audioMode !== 'listen') return;
+    var ni = audioIdx + 1;
+    if (ni < 0 || ni >= audioQueue.length) return;
+    var url = audioQueue[ni];
+    if (primedUrl === url) return;
+    primedUrl = url;
+    preloader.src = url;
+    preloader.load();
+  }
+  function seekNext() {
+    var ni = audioIdx + 1;
+    if (ni >= audioQueue.length) { stopAudio(); return; }
+    if (primedUrl === audioQueue[ni] && preloader.readyState >= 2) {
+      var nsrc = preloader.currentSrc || preloader.src;
+      clearPreloader();
+      audioIdx = ni;
+      quranAudio.src = nsrc;
+      quranAudio.play().catch(function() { playAt(ni); });
+      primeBuf();
+    } else {
+      playAt(ni);
+    }
+  }
+
   function playAt(i) {
     if (!audioPlaying || i >= audioQueue.length) { stopAudio(); return; }
     audioIdx = i;
@@ -1195,6 +1353,7 @@
     }
     quranAudio.src = audioQueue[i];
     quranAudio.play().catch(function() { playAt(i + 1); });
+    primeBuf();
   }
 
   function playSingle(url) {
@@ -1266,7 +1425,7 @@
       }, 2000);
       return;
     }
-    playNext();
+    seekNext();
   });
   quranAudio.addEventListener('error', function() {
     if (audioPlaying && audioQueue.length > 1) {
@@ -1592,6 +1751,9 @@
       tasbihCounts[tasbihIdx] = 0;
       if (navigator.vibrate) navigator.vibrate(120);
       toast('أتممت ' + tasbihTarget + ' — تقبل الله');
+      if (typeof notifNow === 'function' && notifPrefs && notifPrefs.progress) {
+        notifNow('progress', 'أتممت ' + tasbihTarget + ' سبحة', 'تقبّل الله منك — واصل الذكر والطاعة.', 'fa-hands-praying');
+      }
     }
     saveTasbihCounts();
     renderTasbih();
@@ -1609,6 +1771,186 @@
     window.open(href, '_blank', 'noopener,width=650,height=500');
   }
   function copyLink() { copyText(location.href, 'تم نسخ الرابط'); }
+
+  /* ============ نظام الإشعارات ============ */
+  var NOTIF_LOG_KEY = 'sadaqah_notif_log';
+  var NOTIF_PREFS_KEY = 'sadaqah_notif_prefs';
+  var notifList = [];
+  try { notifList = JSON.parse(localStorage.getItem(NOTIF_LOG_KEY) || '[]'); } catch (e) {}
+  if (!Array.isArray(notifList)) notifList = [];
+  var notifPrefs = { prayer: true, adhkar: true, progress: true };
+  try {
+    var npSaved = JSON.parse(localStorage.getItem(NOTIF_PREFS_KEY) || '{}');
+    for (var npKey in npSaved) if (npSaved.hasOwnProperty(npKey) && npKey in notifPrefs) notifPrefs[npKey] = !!npSaved[npKey];
+  } catch (e) {}
+  var notifFired = {};
+  var notifBell = document.getElementById('notifBell');
+  var notifPanel = document.getElementById('notifPanel');
+  var notifBadge = document.getElementById('notifBadge');
+  var notifListEl = document.getElementById('notifList');
+
+  function saveNotifs() { try { localStorage.setItem(NOTIF_LOG_KEY, JSON.stringify(notifList)); } catch (e) {} }
+  function saveNotifPrefs() { try { localStorage.setItem(NOTIF_PREFS_KEY, JSON.stringify(notifPrefs)); } catch (e) {} }
+  function unreadCount() { var c = 0; for (var i = 0; i < notifList.length; i++) if (!notifList[i].read) c++; return c; }
+  function renderBadge() {
+    if (!notifBadge) return;
+    var u = unreadCount();
+    if (u > 0) { notifBadge.style.display = 'flex'; notifBadge.textContent = u > 9 ? '9+' : String(u); }
+    else notifBadge.style.display = 'none';
+  }
+  function timeAgo(iso) {
+    var s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+    if (s < 60) return 'الآن';
+    var m = Math.floor(s / 60), h = Math.floor(m / 60);
+    if (m < 60) return 'قبل ' + m + ' د';
+    if (h < 24) return 'قبل ' + h + ' س';
+    return 'قبل ' + Math.floor(h / 24) + ' يوم';
+  }
+  function notifNow(type, title, body, icon) {
+    var n = { id: String(Date.now()) + '-' + Math.floor(Math.random() * 999), type: type, title: title, body: body, icon: icon || 'fa-bell', time: new Date().toISOString(), read: false };
+    notifList.unshift(n);
+    if (notifList.length > 40) notifList.length = 40;
+    saveNotifs();
+    renderBadge();
+    renderNotifList();
+    if (notifBell) {
+      notifBell.classList.remove('ring');
+      void notifBell.offsetWidth;
+      notifBell.classList.add('ring');
+    }
+    if (typeof toast === 'function') toast(title + ' — ' + body);
+  }
+  function renderNotifList() {
+    if (!notifListEl) return;
+    if (!notifList.length) {
+      notifListEl.innerHTML = '<div class="np-empty"><i class="fas fa-bell-slash" style="font-size:1.4rem;display:block;margin-bottom:8px"></i><span class="lang-ar">لا إشعارات بعد</span><span class="lang-en">No notifications yet</span></div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < notifList.length; i++) {
+      var n = notifList[i];
+      html += '<div class="npi ' + (n.read ? 'read' : 'unread') + '" data-id="' + n.id + '"><span class="n-ico ' + n.type + '"><i class="fas ' + (n.icon || 'fa-bell') + '"></i></span><span class="n-t"><b>' + n.title + '</b><p>' + n.body + '</p><span class="n-time">' + timeAgo(n.time) + '</span></span><span class="n-dot"></span></div>';
+    }
+    notifListEl.innerHTML = html;
+    notifListEl.querySelectorAll('.npi').forEach(function(el) {
+      el.addEventListener('click', function() { markNotifRead(el.getAttribute('data-id')); });
+    });
+  }
+  function markNotifRead(id) {
+    for (var i = 0; i < notifList.length; i++) if (notifList[i].id === id) { notifList[i].read = true; break; }
+    saveNotifs(); renderNotifList(); renderBadge();
+  }
+  function markAllRead() { for (var i = 0; i < notifList.length; i++) notifList[i].read = true; saveNotifs(); renderNotifList(); renderBadge(); }
+  function clearNotifs() { notifList = []; saveNotifs(); renderNotifList(); renderBadge(); }
+  if (notifBell) notifBell.addEventListener('click', function(e) {
+    e.stopPropagation();
+    notifPanel.classList.toggle('open');
+    if (notifPanel.classList.contains('open')) renderNotifList();
+  });
+  document.addEventListener('click', function(e) {
+    if (notifPanel && notifPanel.classList.contains('open') && !notifPanel.contains(e.target) && e.target !== notifBell) notifPanel.classList.remove('open');
+  });
+  var nMarkAll = document.getElementById('notifMarkAll');
+  var nClear = document.getElementById('notifClear');
+  if (nMarkAll) nMarkAll.addEventListener('click', markAllRead);
+  if (nClear) nClear.addEventListener('click', clearNotifs);
+  var optPrayer = document.getElementById('optPrayer');
+  var optAdhkar = document.getElementById('optAdhkar');
+  var optProgress = document.getElementById('optProgress');
+  function bindOpt(el, key) {
+    if (!el) return;
+    el.checked = !!notifPrefs[key];
+    el.addEventListener('change', function() { notifPrefs[key] = el.checked; saveNotifPrefs(); });
+  }
+  bindOpt(optPrayer, 'prayer');
+  bindOpt(optAdhkar, 'adhkar');
+  bindOpt(optProgress, 'progress');
+
+  function dateKey(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  function nowMins() { var d = new Date(); return d.getHours() * 60 + d.getMinutes(); }
+
+  function checkPrayerNotifs() {
+    if (!notifPrefs.prayer || !lastTimes) return;
+    var key = dateKey(new Date());
+    var nm = nowMins();
+    for (var i = 0; i < PRAYER_ORDER.length; i++) {
+      var k = PRAYER_ORDER[i];
+      if (k === 'Sunrise') continue;
+      var mins = toMinutes(lastTimes[k]);
+      if (mins === null) continue;
+      var firedKey = 'prayer:' + key + ':' + k;
+      if (notifFired[firedKey]) continue;
+      if (nm >= mins - 5 && nm <= mins + 1) {
+        notifFired[firedKey] = true;
+        notifNow('prayer', 'حان وقت صلاة ' + PRAYER_NAMES[k], 'صلاة ' + PRAYER_NAMES[k] + ' الآن — الساعة ' + lastTimes[k], PRAYER_ICONS[k] || 'fa-mosque');
+      }
+    }
+  }
+  function checkAdhkarNotifs() {
+    if (!notifPrefs.adhkar || !lastTimes) return;
+    var key = dateKey(new Date());
+    var nm = nowMins();
+    var sunrise = toMinutes(lastTimes.Sunrise);
+    var asr = toMinutes(lastTimes.Asr);
+    var isha = toMinutes(lastTimes.Isha);
+    if (sunrise !== null && nm >= sunrise && nm < sunrise + 180 && !notifFired['adhkar:morning:' + key]) {
+      notifFired['adhkar:morning:' + key] = true;
+      notifNow('adhkar', 'أذكار الصباح', 'أصبحنا وأصبح الملك لله — أذكار الصباح متاحة الآن.', 'fa-sun');
+    }
+    if (asr !== null && isha !== null && nm >= asr && nm < isha && !notifFired['adhkar:evening:' + key]) {
+      notifFired['adhkar:evening:' + key] = true;
+      notifNow('adhkar', 'أذكار المساء', 'أمسينا وأمسى الملك لله — أذكار المساء متاحة الآن.', 'fa-moon');
+    }
+  }
+  function checkNudgeNotif() {
+    if (!notifPrefs.progress) return;
+    var key = dateKey(new Date());
+    if (notifFired['nudge:' + key]) return;
+    var nm = nowMins();
+    var read = getReadSurahs();
+    if (!read.length) return;
+    if (nm >= 1140 && nm <= 1200) {
+      notifFired['nudge:' + key] = true;
+      notifNow('progress', 'تذكير بالقرآن', 'خصص وقتًا للقرآن اليوم — قرأت ' + read.length + ' من 114 سورة حتى الآن.', 'fa-book-open-reader');
+    }
+  }
+  function runNotifChecks() { checkPrayerNotifs(); checkAdhkarNotifs(); checkNudgeNotif(); }
+  runNotifChecks();
+  setInterval(runNotifChecks, 30000);
+  renderBadge();
+  renderNotifList();
+
+  /* ============ أعمال يوم الجمعة ============ */
+  var SALAWAT_KEY = 'sadaqah_salawat';
+  var salawatCount = 0;
+  try { salawatCount = parseInt(localStorage.getItem(SALAWAT_KEY), 10) || 0; } catch (e) {}
+  function renderSalawat() {
+    var el = document.getElementById('salawatNum');
+    if (el) el.textContent = salawatCount;
+  }
+  function salawatAdd() {
+    salawatCount++;
+    try { localStorage.setItem(SALAWAT_KEY, String(salawatCount)); } catch (e) {}
+    renderSalawat();
+    if (salawatCount === 100) toast('100 صلاة على النبي ﷺ — تقبّل الله منك');
+    if (salawatCount === 1000) toast('1000 صلاة على النبي ﷺ — ما أعظمها من غنيمة!');
+  }
+  function salawatReset() {
+    salawatCount = 0;
+    try { localStorage.setItem(SALAWAT_KEY, '0'); } catch (e) {}
+    renderSalawat();
+  }
+  function initFriday() {
+    var sec = document.getElementById('friday');
+    if (!sec) return;
+    if (new Date().getDay() === 5) {
+      sec.style.display = 'block';
+      renderSalawat();
+    } else {
+      sec.style.display = 'none';
+    }
+  }
+  initFriday();
 </script>
 </body>
 </html>

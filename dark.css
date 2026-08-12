@@ -278,3 +278,32 @@ body.dark .form-field textarea:focus { border-color: var(--brand); background: v
 body.dark .login-card h1, body.dark .login-card p { color: var(--ink); }
 body.dark .login-card p, body.dark .user-badge { color: var(--ink-soft); }
 body.dark .nav-title { color: var(--muted); }
+
+/* ===== نظام الإشعارات ===== */
+body.dark .notif-bell {
+  background: var(--surface-2) !important;
+  border-color: var(--border) !important;
+  color: var(--accent) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+body.dark .notif-panel {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+body.dark .np-head { border-bottom-color: var(--border); }
+body.dark .np-head b { color: var(--ink); }
+body.dark .np-hbtn { color: var(--brand); }
+body.dark .np-hbtn:hover { background: var(--surface-2); }
+body.dark .np-head .np-clear { color: var(--muted); }
+body.dark .npi { background: var(--surface-2) !important; border-color: var(--border) !important; }
+body.dark .npi:hover { background: #20294a !important; }
+body.dark .npi.unread { background: rgba(212,175,55,.08) !important; border-color: rgba(212,175,55,.35) !important; }
+body.dark .npi .n-t b { color: var(--ink); }
+body.dark .npi .n-t p { color: var(--ink-soft); }
+body.dark .npi .n-time { color: var(--muted); }
+body.dark .npi.read .n-dot { background: var(--muted); }
+body.dark .np-empty { color: var(--muted); }
+body.dark .np-settings { border-top-color: var(--border); }
+body.dark .np-settings label { color: var(--ink-soft); }
+body.dark .np-settings label i { color: var(--brand); }
