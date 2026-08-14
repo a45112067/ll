@@ -11,7 +11,8 @@
   <meta name="geo.placename" content="Cairo, Egypt">
     <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://www.ahmedayman.website/education.html">
-  <link rel="alternate" hreflang="en" href="https://www.ahmedayman.website/education.html?lang=en">
+  <link rel="alternate" hreflang="ar" href="https://www.ahmedayman.website/education.html">
+<link rel="alternate" hreflang="en" href="https://www.ahmedayman.website/en/education.html">
   <link rel="alternate" hreflang="x-default" href="https://www.ahmedayman.website/education.html">
 
   <meta name="theme-color" content="#2563eb">
@@ -86,6 +87,7 @@
     @media (max-width:480px) { .edu-card { padding:16px; } .edu-card h2 { font-size:1.25rem; } .edu-logo { width:110px; height:110px; } .edu-years { margin-top:18px; } }
   </style>
   <link rel="stylesheet" href="dark.css">
+<script>var _m=location.search.match(/[?&]lang=(ar|en)/);if(_m){var _f=(location.pathname.split('/').pop()||'index.html').toLowerCase();var _ie=document.documentElement.getAttribute('lang')==='en';if(_m[1]==='en'&&!_ie){location.replace('en/'+_f);}else if(_m[1]==='ar'&&_ie){location.replace('../'+(_f==='index.html'?'index.html':_f));}}</script>
 </head>
 <body>
   
@@ -154,7 +156,7 @@
     AOS.init({ duration:700, once:true, offset:60 });
 
     let currentLang = 'ar';
-    try { currentLang = localStorage.getItem('lang') || 'ar'; } catch (e) {}
+    try { currentLang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ar'; } catch (e) {}
     function applyLang() {
       document.body.classList.toggle('english', currentLang === 'en');
       document.body.dir = currentLang === 'en' ? 'ltr' : 'rtl';
@@ -162,10 +164,10 @@
     applyLang();
     localStorage.setItem('lang', currentLang);
     function switchLang() {
-      currentLang = currentLang === 'ar' ? 'en' : 'ar';
-      localStorage.setItem('lang', currentLang);
-      applyLang();
-    }
+    var _f = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    var _e = document.documentElement.getAttribute('lang') === 'en';
+    window.location.href = _e ? ('../' + (_f === 'index.html' ? 'index.html' : _f)) : ('en/' + _f);
+  }
     document.getElementById('langSwitchFixed').addEventListener('click', switchLang);
     document.getElementById('mobileLangBtn').addEventListener('click', () => { switchLang(); sidebar.classList.remove('open'); });
 
