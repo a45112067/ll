@@ -50,7 +50,9 @@
     }
   }
   </script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='68' font-size='52' font-family='sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -181,7 +183,7 @@
 
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div><nav class="site-navbar" aria-label="Main navigation">
   <div class="logo">
-    <img src="https://i.postimg.cc/j53BvFTf/Screenshot-2026-04-11-115422.png" alt="شعار أحمد أيمن" width="42" height="42">
+    <img src="../img/logos/ahmed-ayman-logo.png" alt="شعار أحمد أيمن" width="42" height="42">
     <strong><span class="lang-ar">أحمد أيمن</span><span class="lang-en">Ahmed Ayman</span></strong>
   </div>
   <div class="nav-links">
@@ -233,22 +235,11 @@
         <p><span class="lang-ar">المساهمة في تطوير استراتيجية تسويق رقمي شاملة لموقع <strong>Bitely</strong>، موقع توصيل طعام صحي يركّز على توفير تجربة إلكترونية مريحة وجذابة للعملاء. شمل المشروع أبحاث السوق وتحليل المنافسين، وتحديد الجمهور المستهدف وشخصيات المشتري، وإجراء تحليل SWOT لتقييم الفرص والتحديات، وتطوير استراتيجية الهوية والرسالة والتمركز.</span><span class="lang-en">Contributed to a comprehensive digital marketing strategy for <strong>Bitely</strong>, a healthy food delivery website focused on a convenient and engaging online experience. The project included market and competitor research, identifying the target audience, creating buyer personas, performing a SWOT analysis, and developing a complete branding strategy with positioning.</span></p>
 <div class="project-links">
           <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1I7cmnYvF2cOAHUOCoGI0vRjJ3OIanC_R" target="_blank" rel="noopener noreferrer"><i class="fas fa-rocket"></i><span class="lang-ar">مشاهدة المشروع</span><span class="lang-en">View Project</span></a>
-          <button type="button" class="btn btn-ghost modal-trigger" data-title="Bitely" data-tag-ar="تسويق رقمي" data-tag-en="Marketing" data-img="https://i.postimg.cc/Fz8Q0KC9/1784794731070.jpg" data-link="https://drive.google.com/drive/folders/1I7cmnYvF2cOAHUOCoGI0vRjJ3OIanC_R"><i class="fas fa-expand"></i><span class="lang-ar">التفاصيل</span><span class="lang-en">Details</span></button>
         </div>
       </div>
     </article>
   </div>
-
-  <div class="modal-overlay" id="projectModal" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true">
-      <button type="button" class="modal-close" id="projectModalClose" aria-label="إغلاق"><i class="fas fa-times"></i></button>
-      <span class="modal-tag" id="projectModalTag"></span>
-      <h3 id="projectModalTitle"></h3>
-      <img id="projectModalImg" src="" alt="">
-      <p id="projectModalDesc"></p>
-      <div class="modal-foot"><a class="btn btn-primary" id="projectModalLink" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-rocket"></i><span class="lang-ar">مشاهدة المشروع</span><span class="lang-en">View Project</span></a></div>
-    </div>
-  </div></div>
+</div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -302,7 +293,6 @@
             <p>${p.desc_ar ? `<span class="lang-ar">${esc(p.desc_ar)}</span>` : ''}${p.desc_en ? `<span class="lang-en">${esc(p.desc_en)}</span>` : ''}</p>
             <div class="project-links">
               <a class="btn btn-primary" href="${esc(safeUrl(p.link))}" target="_blank" rel="noopener noreferrer"><i class="fas fa-rocket"></i><span class="lang-ar">مشاهدة المشروع</span><span class="lang-en">View Project</span></a>
-              <button type="button" class="btn btn-ghost modal-trigger" data-title="${esc(p.name||'')}" data-tag-ar="${esc(p.tag_ar||'')}" data-tag-en="${esc(p.tag_en||'')}" data-img="${esc(p.image||'')}" data-desc="${esc((p.desc_ar||'')+'\n\n'+(p.desc_en||''))}" data-link="${esc(p.link||'')}"><i class="fas fa-expand"></i><span class="lang-ar">التفاصيل</span><span class="lang-en">Details</span></button>
             </div>
           </div>
         </article>`;
@@ -328,40 +318,6 @@
       var max = document.documentElement.scrollHeight - window.innerHeight;
       _sp.style.width = (max > 0 ? (window.scrollY/max)*100 : 0) + '%';
     }, { passive: true });
-  // ===== نافذة التفاصيل المنبثقة للمشاريع =====
-  const modalEsc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const projectModal = document.getElementById('projectModal');
-  const openProjectModal = (btn) => {
-    if (!projectModal || !btn) return;
-    const tagAr = btn.getAttribute('data-tag-ar') || '';
-    const tagEn = btn.getAttribute('data-tag-en') || '';
-    const img = btn.getAttribute('data-img') || '';
-    const desc = btn.getAttribute('data-desc') || '';
-    const link = btn.getAttribute('data-link') || '#';
-    document.getElementById('projectModalTag').innerHTML = (tagAr ? '<span class="lang-ar">' + modalEsc(tagAr) + '</span>' : '') + (tagEn ? '<span class="lang-en">' + modalEsc(tagEn) + '</span>' : '');
-    document.getElementById('projectModalTitle').textContent = btn.getAttribute('data-title') || '';
-    const imgEl = document.getElementById('projectModalImg');
-    if (img) { imgEl.src = img; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
-    document.getElementById('projectModalDesc').innerHTML = desc ? modalEsc(desc).replace(/\n/g, '<br>') : '';
-    const linkEl = document.getElementById('projectModalLink');
-    if (link && link !== '#') { linkEl.href = safeUrl(link); linkEl.style.display = 'inline-flex'; } else { linkEl.style.display = 'none'; }
-    projectModal.classList.add('open');
-    projectModal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('side-open');
-  };
-  const closeProjectModal = () => {
-    if (!projectModal) return;
-    projectModal.classList.remove('open');
-    projectModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('side-open');
-  };
-  document.addEventListener('click', (e) => {
-    const trig = e.target.closest('.modal-trigger');
-    if (trig) { openProjectModal(trig); return; }
-    if (e.target === projectModal || e.target.id === 'projectModalClose') closeProjectModal();
-  });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
-
   // ===== الوضع الليلي/النهاري =====
   (function(){
     var KEY='site-theme';
