@@ -26,19 +26,32 @@
       radial-gradient(480px 360px at 70% 110%, rgba(79,70,229,0.08), transparent 60%); }
 
     .err-shell { display:flex; flex-direction:column; min-height:100vh; }
-    .err-main { flex:1; display:flex; align-items:center; justify-content:center; padding:48px 24px 60px; }
+    .err-main { flex:1; display:flex; align-items:center; justify-content:center; padding:48px 24px 40px; }
 
     .wrap { text-align:center; max-width:640px; width:100%; }
-    .code { font-size:clamp(5.5rem, 22vw, 10rem); font-weight:900; line-height:1;
-      color:#2563eb; position:relative; display:inline-block;
-      -webkit-text-stroke:2px rgba(37,99,235,.12); }
 
-    .code::after { content:'404'; position:absolute; left:50%; top:24%; transform:translateX(-50%);
-      -webkit-text-stroke:2px rgba(37,99,235,.18); color:transparent; font-size:.5em; z-index:-1; }
+    /* ===== مجسم 404 ===== */
+    .err-404 { display:flex; align-items:center; justify-content:center; gap:clamp(4px, 2vw, 14px); margin-bottom:8px; }
+    .err-404 .big { font-size:clamp(6rem, 22vw, 11rem); font-weight:900; line-height:1; display:inline-block;
+      background:linear-gradient(135deg,#2563eb 0%,#7c3aed 55%,#ff9800 110%);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      animation:errFloat 4.5s ease-in-out infinite; filter:drop-shadow(0 12px 26px rgba(37,99,235,.3)); }
+    .err-404 .zero { width:clamp(5.6rem, 19vw, 9.6rem); height:clamp(5.6rem, 19vw, 9.6rem); border-radius:50%;
+      display:flex; align-items:center; justify-content:center; font-size:clamp(2rem, 7vw, 3.4rem);
+      color:#2563eb; border:3px solid rgba(37,99,235,.2);
+      background:linear-gradient(145deg,#ffffff,#eef2fb);
+      box-shadow:0 20px 42px rgba(37,99,235,.2), inset 0 0 0 10px rgba(37,99,235,.05);
+      animation:errSpin 7s linear infinite; }
+    .err-404 .zero i { animation:none; text-shadow:0 6px 14px rgba(37,99,235,.25); }
 
-    .title { font-size:clamp(1.4rem, 4vw, 2rem); font-weight:900; margin:10px 0 8px; }
+    /* ===== وصف ===== */
+    .badge { display:inline-flex; align-items:center; gap:8px; margin-bottom:12px;
+      padding:6px 16px; border-radius:999px; background:rgba(37,99,235,.09);
+      color:#2563eb; font-weight:800; font-size:.78rem; letter-spacing:.4px; }
+    .title { font-size:clamp(1.5rem, 4vw, 2.1rem); font-weight:900; margin:0 0 8px; }
     .desc { color:#475569; line-height:1.9; margin-bottom:26px; }
 
+    /* ===== أزرار ===== */
     .actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
     .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.95rem; text-decoration:none; transition:.25s cubic-bezier(.2,.8,.3,1); }
     .btn-primary { background:#2563eb; color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
@@ -46,12 +59,15 @@
     .btn-outline { background:#fff; border:1.5px solid #e2e8f0; color:#475569; }
     .btn-outline:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-2px); }
 
-    .search { margin-top:26px; display:flex; gap:8px; max-width:440px; margin-left:auto; margin-right:auto; }
-    .search input { flex:1; padding:13px 16px; border:1.5px solid #e2e8f0; border-radius:13px; font-family:inherit; font-size:.93rem; outline:none; background:#fff; transition:.2s; }
+    /* ===== بحث ===== */
+    .search { position:relative; margin-top:28px; max-width:440px; margin-left:auto; margin-right:auto; }
+    .search-box { display:flex; gap:8px; }
+    .search input { flex:1; padding:14px 16px; border:1.5px solid #e2e8f0; border-radius:14px; font-family:inherit; font-size:.93rem; outline:none; background:#fff; transition:.2s; }
     .search input:focus { border-color:#2563eb; box-shadow:0 0 0 4px rgba(37,99,235,.12); }
-    .search button { padding:13px 18px; border:none; border-radius:13px; background:#2563eb; color:#fff; cursor:pointer; font-size:1rem; transition:.2s; }
+    .search button { padding:13px 20px; border:none; border-radius:14px; background:#2563eb; color:#fff; cursor:pointer; font-size:1rem; transition:.2s; }
     .search button:hover { background:#1d4ed8; }
 
+    /* ===== روابط سريعة ===== */
     .quick { margin-top:34px; padding-top:26px; border-top:1px solid #e2e8f0; }
     .quick-links { display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; margin-top:16px; }
     .quick-links a { display:flex; align-items:center; gap:10px; padding:13px 15px; border-radius:14px;
@@ -61,8 +77,16 @@
       border-radius:9px; background:#f0f4fa; color:#2563eb; font-size:.95rem; }
     .quick-links a:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-2px); box-shadow:0 10px 22px rgba(37,99,235,.12); }
 
-    @media (max-width:480px){ .actions{ flex-direction:column; } .btn{ width:100%; } .quick-links{ grid-template-columns:1fr 1fr; } }
+    /* ===== فوتر الصفحة ===== */
+    .err-footer { padding:26px 16px 28px; border-top:1px solid #e2e8f0; }
+
+    @keyframes errFloat { 0%,100%{ transform:translateY(0) rotate(-2deg);} 50%{ transform:translateY(-14px) rotate(2deg);} }
+    @keyframes errSpin { to { transform:rotate(360deg); } }
+
+    @media (max-width:480px){ .actions{ flex-direction:column; } .btn{ width:100%; } .quick-links{ grid-template-columns:1fr 1fr; } .err-404{ gap:2px; } }
+    @media (prefers-reduced-motion: reduce){ .err-404 .big,.err-404 .zero{ animation:none; } }
   </style>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="dark.css">
   <link rel="stylesheet" href="share.css">
   <script>
@@ -112,22 +136,30 @@
 <div class="err-shell">
   <div class="err-main">
     <div class="wrap">
-      <div class="code" aria-hidden="true">404</div>
-      <h1 class="title"><span class="lang-ar">عذراً، الصفحة غير موجودة</span><span class="lang-en">Oops, Page Not Found</span></h1>
-      <p class="desc"><span class="lang-ar">يبدو أن الصفحة التي تبحث عنها قد أُزيلت أو أن الرابط غير صحيح. لا تقلق، يمكنك العودة للرئيسية أو البحث عن محتوى آخر.</span><span class="lang-en">The page you're looking for may have been moved or the link is incorrect. Don't worry, you can go back home or search for something else.</span></p>
+      <div class="err-404" aria-hidden="true">
+        <span class="big">4</span>
+        <span class="zero"><i class="fas fa-satellite-dish"></i></span>
+        <span class="big">4</span>
+      </div>
 
-      <div class="actions">
+      <span class="badge"><i class="fas fa-triangle-exclamation"></i><span class="lang-ar">خطأ 404</span><span class="lang-en">Error 404</span></span>
+      <h1 class="title" data-aos="fade-up"><span class="lang-ar">عذراً، الصفحة غير موجودة</span><span class="lang-en">Oops, Page Not Found</span></h1>
+      <p class="desc" data-aos="fade-up" data-aos-delay="100"><span class="lang-ar">يبدو أن الصفحة التي تبحث عنها قد أُزيلت أو أن الرابط غير صحيح. لا تقلق، يمكنك العودة للرئيسية أو البحث عن محتوى آخر.</span><span class="lang-en">The page you're looking for may have been moved or the link is incorrect. Don't worry, you can go back home or search for something else.</span></p>
+
+      <div class="actions" data-aos="fade-up" data-aos-delay="150">
         <a class="btn btn-primary" href="index.html"><i class="fas fa-home"></i><span class="lang-ar">العودة للرئيسية</span><span class="lang-en">Back to Home</span></a>
         <a class="btn btn-outline" href="javascript:history.back()"><i class="fas fa-arrow-left"></i><span class="lang-ar">الصفحة السابقة</span><span class="lang-en">Go Back</span></a>
         <a class="btn btn-outline" href="contact.html"><i class="fas fa-envelope"></i><span class="lang-ar">تواصل معي</span><span class="lang-en">Contact Me</span></a>
       </div>
 
-      <div class="search">
-        <input type="text" id="searchInput" placeholder="ما الذي تبحث عنه؟">
-        <button onclick="goSearch()" aria-label="بحث"><i class="fas fa-search"></i></button>
+      <div class="search" data-aos="fade-up" data-aos-delay="200">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="ما الذي تبحث عنه؟">
+          <button onclick="goSearch()" aria-label="بحث"><i class="fas fa-search"></i></button>
+        </div>
       </div>
 
-      <div class="quick">
+      <div class="quick" data-aos="fade-up" data-aos-delay="250">
         <div class="footer-note" style="font-weight:800;font-size:.9rem;color:#64748b;"><span class="lang-ar">روابط سريعة</span><span class="lang-en">Quick Links</span></div>
         <div class="quick-links">
           <a href="projects.html"><i class="fas fa-rocket"></i><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
@@ -135,8 +167,24 @@
           <a href="certificates.html"><i class="fas fa-award"></i><span class="lang-ar">الشهادات</span><span class="lang-en">Certificates</span></a>
           <a href="blog.html"><i class="fas fa-scroll"></i><span class="lang-ar">المدونة</span><span class="lang-en">Blog</span></a>
         </div>
-      </div></div>
-  </div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="err-footer">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/ahmedaymanyahya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.facebook.com/share/1AdfpPUsWX/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/a752007" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/a45112067" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://wa.me/201028701351" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer">
+      <span class="lang-ar">© 2026 أحمد أيمن يحيى. جميع الحقوق محفوظة.</span>
+      <span class="lang-en">© 2026 Ahmed Ayman Yahya. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
 
 <script>
   // ===== اللغة =====
@@ -206,7 +254,10 @@
       if(ic){ ic.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
     }); }
   })();
+  // ===== حركات الظهور =====
+  AOS.init({ duration: 700, once: true, offset: 40 });
 </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="security.js"></script>
 <script src="share.js"></script>
 </body>

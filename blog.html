@@ -137,6 +137,10 @@
     .posts-empty { text-align:center; color:#94a3b8; padding:3.5rem 0; }
     .back-link { display:inline-flex; align-items:center; gap:8px; color:#2563eb; font-weight:800; font-size:.9rem; margin-bottom:20px; }
     .back-link:hover { gap:12px; }
+    .article-actions { display:flex; align-items:center; gap:10px; margin-top:26px; padding-top:20px; border-top:1px solid #e2e8f0; }
+    .copy-link-btn { display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:12px; background:#f0f4fa; border:1px solid #e2e8f0; color:#475569; font-weight:800; font-size:.88rem; cursor:pointer; transition:.22s; font-family:inherit; }
+    .copy-link-btn:hover { border-color:#2563eb; color:#2563eb; }
+    .copy-toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%); z-index:3000; background:#0f172a; color:#fff; padding:10px 20px; border-radius:12px; font-size:.85rem; font-weight:700; opacity:0; transition:.25s; pointer-events:none; }
     .footer { margin-top:40px; text-align:center; color:#94a3b8; font-size:.9rem; }
 
     @media (max-width:768px) {
@@ -232,6 +236,9 @@
   <div id="readView">
     <a class="back-link" id="backToList" href="#"><i class="fas fa-arrow-right"></i><span class="lang-ar">رجوع إلى المدونة</span><span class="lang-en">Back to Blog</span></a>
     <article class="article" id="articleContent"></article>
+    <div class="article-actions">
+      <button class="copy-link-btn" id="copyArticleLink" onclick="copyArticleLink()"><i class="fas fa-link"></i><span class="lang-ar">نسخ رابط المقال</span><span class="lang-en">Copy article link</span></button>
+    </div>
   </div>
 </div>
 
@@ -399,9 +406,24 @@
     document.getElementById('listView').style.display='none';
     document.getElementById('readView').style.display='block';
     window.scrollTo(0,0);
+    try { history.replaceState(null, '', '#post-' + encodeURIComponent(id)); } catch(e) {}
+  }
+  function copyArticleLink(){
+    const id = openArticleId;
+    if (!id) return;
+    const url = window.location.origin + window.location.pathname + '#post-' + encodeURIComponent(id);
+    const done = () => {
+      const t = document.createElement('div'); t.className='copy-toast';
+      t.textContent = currentLang === 'en' ? 'Link copied!' : 'تم نسخ الرابط!';
+      document.body.appendChild(t);
+      requestAnimationFrame(()=>{ t.style.opacity='1'; });
+      setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 1800);
+    };
+    try { navigator.clipboard.writeText(url).then(done).catch(()=>{ prompt((currentLang==='en'?'Copy link:':'انسخ الرابط:'), url); done(); }); }
+    catch(e){ prompt((currentLang==='en'?'Copy link:':'انسخ الرابط:'), url); done(); }
   }
   document.getElementById('backToList').addEventListener('click', e => { e.preventDefault(); showList(); });
-  function showList(){ openArticleId = null; document.getElementById('readView').style.display='none'; document.getElementById('listView').style.display='block'; }
+  function showList(){ openArticleId = null; document.getElementById('readView').style.display='none'; document.getElementById('listView').style.display='block'; try { history.replaceState(null, '', location.pathname); } catch(e) {} }
 
   document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
@@ -410,6 +432,21 @@
   document.querySelectorAll('#searchInput, #searchInputEn').forEach(i=>i.addEventListener('input', e=>{ searchTerm=e.target.value; render(); }));
 
   loadPosts();
+
+  // فتح مقال محدد عند تحميل الصفحة برابط hash (#post-id)
+  (function(){
+    var h = (location.hash||'').trim();
+    var m = h.match(/^#post-(.+)$/);
+    if (m) {
+      var targetId = decodeURIComponent(m[1]);
+      var tries = 0, timerId = setInterval(function(){
+        tries++;
+        var p = allPosts.find(function(x){ return x.id === targetId; });
+        if (p) { clearInterval(timerId); openPost(targetId); }
+        else if (tries > 30) { clearInterval(timerId); }
+      }, 200);
+    }
+  })();
 
   // فتح المقال بنظام Event delegation (أكثر متانة من onclick المضمّن)
   (function(){
