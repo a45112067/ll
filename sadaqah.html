@@ -12,7 +12,6 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://www.ahmedayman.website/sadaqah.html">
   <link rel="alternate" hreflang="ar" href="https://www.ahmedayman.website/sadaqah.html">
-<link rel="alternate" hreflang="en" href="https://www.ahmedayman.website/en/sadaqah.html">
   <link rel="alternate" hreflang="x-default" href="https://www.ahmedayman.website/sadaqah.html">
   <meta name="theme-color" content="#2563eb">
   <meta property="og:type" content="website">
@@ -444,7 +443,7 @@
     @media (max-width:900px) { .fb-grid { grid-template-columns:1fr; } }
   </style>
   <link rel="stylesheet" href="dark.css">
-<script>var _m=location.search.match(/[?&]lang=(ar|en)/);if(_m){var _f=(location.pathname.split('/').pop()||'index.html').toLowerCase();var _ie=document.documentElement.getAttribute('lang')==='en';if(_m[1]==='en'&&!_ie){location.replace('en/'+_f);}else if(_m[1]==='ar'&&_ie){location.replace('../'+(_f==='index.html'?'index.html':_f));}}</script>
+  <link rel="stylesheet" href="share.css">
 </head>
 <body>
 
@@ -465,7 +464,6 @@
     <a href="contact.html"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a>
   </div>
   <div class="nav-actions">
-    <button class="lang-switch" id="langSwitchFixed" aria-label="تغيير اللغة"><span class="lang-ar">English</span><span class="lang-en">العربية</span></button>
     <button class="lang-switch theme-btn" id="themeBtn" aria-label="الوضع الليلي"><i class="fas fa-moon" id="themeIcon"></i></button>
     <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة"><i class="fas fa-bars"></i></button>
   </div>
@@ -484,7 +482,6 @@
     <a href="languages.html" class="lang-ar">اللغات</a><a href="languages.html" class="lang-en">Languages</a>
     <a href="sadaqah.html" class="lang-ar">صدقة جارية</a><a href="sadaqah.html" class="lang-en">Sadaqah Jariyah</a>
     <a href="contact.html" class="lang-ar">تواصل معي</a><a href="contact.html" class="lang-en">Contact Me</a>
-    <div class="mobile-lang" id="mobileLangBtn"><span class="lang-ar">English</span><span class="lang-en">العربية</span></div>
   </div>
 </div>
 
@@ -822,18 +819,9 @@
     l.addEventListener('click', function() { sidebar.classList.remove('open'); });
   });
 
-  function switchLang() {
-    var _f = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    var _e = document.documentElement.getAttribute('lang') === 'en';
-    window.location.href = _e ? ('../' + (_f === 'index.html' ? 'index.html' : _f)) : ('en/' + _f);
-  }
-  var savedLang = null;
+var savedLang = null;
   try { savedLang = null; } catch (e) {}
   if (document.documentElement.getAttribute('lang') === 'en') { document.body.classList.add('english'); document.body.dir = 'ltr'; }
-  if (document.getElementById('langSwitchFixed')) document.getElementById('langSwitchFixed').addEventListener('click', switchLang);
-  if (document.getElementById('mobileLangBtn')) {
-    document.getElementById('mobileLangBtn').addEventListener('click', function() { switchLang(); sidebar.classList.remove('open'); });
-  }
 
   (function() {
     var KEY = 'site-theme';
@@ -1956,5 +1944,6 @@
   }
   initFriday();
 </script>
+<script src="share.js"></script>
 </body>
 </html>

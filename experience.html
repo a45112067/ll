@@ -89,44 +89,55 @@
     body { min-height:100vh; background:#f5f7fb; color:#0f172a; overflow-x:hidden; }
     a { color:inherit; text-decoration:none; }
     .page-wrapper { max-width:1080px; margin:0 auto; padding:28px 24px 40px; }
-    .topbar { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:18px; margin-bottom:28px; }
-    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px; border-radius:16px; background:#2563eb; color:#fff; font-size:1.3rem; margin-bottom:16px; box-shadow:0 10px 22px rgba(37,99,235,.30); }
-    .topbar h1 { font-size:2rem; font-weight:900; color:#0f172a; position:relative; display:inline-block; }
-    .topbar h1::after { content:''; position:absolute; bottom:-10px; right:0; left:0; height:4px; border-radius:4px; margin:0 auto; background:#2563eb; width:70px; }
-    .topbar p { max-width:720px; margin-top:24px; color:#475569; line-height:1.85; }
-        .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:13px 28px; border-radius:14px; font-weight:800; font-size:.96rem; transition:.25s cubic-bezier(.2,.8,.3,1); position:relative; overflow:hidden; border:none; cursor:pointer; box-shadow:0 6px 16px rgba(37,99,235,.10); }
-    .btn i { transition:transform .25s; }
-    .btn:hover i { transform:translateY(2px); }
-    .btn-secondary { background:#ffffff; border:1.5px solid #e2e8f0; color:#475569; box-shadow:none; }
-    .btn-secondary:hover { border-color:#2563eb; color:#2563eb; transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.15); }
-    .btn-primary { background:#2563eb; color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.28); }
-    .btn-primary:active { transform:translateY(-1px) scale(.99); }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 18px 40px rgba(37,99,235,.40); }
-    .experience-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
-    .exp-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:16px 18px; box-shadow:0 8px 20px rgba(15,23,42,.06); transition:transform .3s cubic-bezier(.2,.8,.3,1), border-color .3s, box-shadow .3s; position:relative; overflow:hidden; }
-    .exp-card::before { content:''; position:absolute; top:0; right:0; width:5px; height:100%; background:linear-gradient(180deg,#2563eb,#4f46e5 55%,#ff9800); opacity:.9; }
-    .exp-card:hover { transform:translateY(-2px); border-color:#2563eb; box-shadow:0 18px 34px rgba(15,23,42,.12); }
-    .exp-head { display:flex; align-items:flex-start; gap:11px; }
-    .exp-icon { width:42px; height:42px; flex-shrink:0; display:flex; align-items:center; justify-content:center; border-radius:12px; background:#2563eb; color:#fff; font-size:1rem; box-shadow:0 6px 14px rgba(37,99,235,.28); transition:transform .25s; }
-    .exp-card:hover .exp-icon { transform: scale(1.06); }
-    .exp-title-wrap { min-width:0; flex:1; }
-    .exp-title { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; align-items:center; }
-    .exp-title h2 { font-size:1.02rem; color:#0f172a; margin:0; line-height:1.35; }
-    .exp-company { font-size:.74rem; color:#2563eb; font-weight:700; background:rgba(37,99,235,.08); padding:3px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
-    .exp-company::before { content:'\f0f7'; font-family:'Font Awesome 6 Free'; font-weight:900; font-size:.66rem; }
-    .exp-date { margin-top:8px; display:inline-flex; gap:8px; flex-wrap:wrap; font-size:.76rem; color:#ff9800; font-weight:800; background:rgba(255,152,0,.10); padding:4px 11px; border-radius:999px; }
-    .exp-list { margin-top:12px; list-style:none; padding-left:0; display:flex; flex-direction:column; gap:7px; }
-    .exp-list li { position:relative; padding-right:20px; line-height:1.6; color:#475569; font-size:.86rem; }
-    .exp-list li::before { content:'\f00c'; font-family:'Font Awesome 6 Free'; font-weight:900; position:absolute; right:0; color:#22c55e; font-size:.7rem; top:4px; }
-    .stats-strip { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
-    .stat { display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:8px 14px; box-shadow:0 6px 16px rgba(15,23,42,.05); }
-    .stat b { font-size:1.25rem; color:#2563eb; }
-    .stat span { font-size:.78rem; font-weight:700; color:#475569; }
+    .topbar { text-align:center; margin-bottom:6px; }
+    .page-pill { display:inline-flex; align-items:center; justify-content:center; width:60px; height:60px; border-radius:18px; background:#2563eb; color:#fff; font-size:1.5rem; margin-bottom:16px; box-shadow:0 12px 26px rgba(37,99,235,.32); }
+    .topbar h1 { font-size:2.05rem; font-weight:900; color:#0f172a; position:relative; display:inline-block; }
+    .topbar h1::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); height:4px; width:74px; border-radius:4px; background:#2563eb; }
+    .topbar p { max-width:720px; margin:24px auto 0; color:#475569; line-height:1.9; }
+    .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin:34px 0 4px; }
+    .stat-card { background:linear-gradient(160deg,#ffffff,#f8fafc); border:1px solid #e2e8f0; border-radius:16px; padding:18px 14px; text-align:center; box-shadow:0 10px 22px rgba(15,23,42,.07); transition:transform .3s, box-shadow .3s, border-color .3s; position:relative; overflow:hidden; }
+    .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#2563eb,#4f46e5 55%,#ff9800); }
+    .stat-card:hover { transform:translateY(-3px); box-shadow:0 16px 32px rgba(15,23,42,.12); border-color:#2563eb; }
+    .stat-card b { display:block; font-size:1.7rem; font-weight:900; color:#2563eb; line-height:1.2; }
+    .stat-card span { font-size:.82rem; font-weight:700; color:#64748b; }
+    .stat-card i { display:block; font-size:1.05rem; color:#94a3b8; margin-bottom:6px; }
+    .timeline { position:relative; margin-top:34px; list-style:none; }
+    .timeline::before { content:''; position:absolute; top:8px; bottom:8px; right:27px; width:3px; border-radius:3px; background:linear-gradient(180deg,#2563eb,#4f46e5 45%,#ff9800); opacity:.32; }
+    body.english .timeline::before { right:auto; left:27px; }
+    .tl-item { position:relative; padding:0 66px 28px 0; }
+    body.english .tl-item { padding:0 0 28px 66px; }
+    .tl-item:last-child { padding-bottom:6px; }
+    .tl-dot { position:absolute; top:6px; right:12px; width:34px; height:34px; border-radius:50%; background:#fff; border:3px solid #2563eb; display:flex; align-items:center; justify-content:center; color:#2563eb; font-size:.9rem; box-shadow:0 6px 14px rgba(37,99,235,.28); z-index:1; }
+    body.english .tl-dot { right:auto; left:12px; }
+    .tl-dot.current { background:#2563eb; border-color:#2563eb; color:#fff; box-shadow:0 0 0 6px rgba(37,99,235,.14), 0 8px 18px rgba(37,99,235,.35); }
+    .tl-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; padding:20px 22px; box-shadow:0 10px 24px rgba(15,23,42,.07); transition:transform .3s cubic-bezier(.2,.8,.3,1), border-color .3s, box-shadow .3s; position:relative; overflow:hidden; }
+    .tl-card::before { content:''; position:absolute; top:0; right:0; width:5px; height:100%; background:linear-gradient(180deg,#2563eb,#4f46e5 55%,#ff9800); border-radius:18px 0 0 18px; }
+    body.english .tl-card::before { right:auto; left:0; border-radius:0 18px 18px 0; }
+    .tl-card:hover { transform:translateY(-3px); border-color:#2563eb; box-shadow:0 22px 44px rgba(15,23,42,.14); }
+    .tl-top { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .tl-role h3 { font-size:1.15rem; font-weight:800; color:#0f172a; margin:0; padding-left:4px; }
+    .tl-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .tl-badge { display:inline-flex; align-items:center; gap:6px; font-size:.72rem; font-weight:800; padding:4px 12px; border-radius:999px; background:rgba(37,99,235,.1); color:#2563eb; white-space:nowrap; }
+    .tl-badge.green { background:rgba(34,197,94,.12); color:#16a34a; }
+    .tl-badge.orange { background:rgba(255,152,0,.12); color:#ea580c; }
+    .tl-badge.pulse { animation:tlPulse 2.2s infinite; }
+    @keyframes tlPulse { 0%,100%{ box-shadow:0 0 0 0 rgba(34,197,94,.35);} 50%{ box-shadow:0 0 0 6px rgba(34,197,94,0);} }
+    .tl-head { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:12px; font-size:.8rem; }
+    .tl-chip { display:inline-flex; align-items:center; gap:7px; font-weight:800; color:#64748b; background:#f1f5f9; padding:5px 12px; border-radius:999px; }
+    .tl-chip i { color:#2563eb; }
+    .tl-date { display:inline-flex; align-items:center; gap:7px; font-weight:800; color:#ea580c; background:rgba(255,152,0,.1); padding:5px 12px; border-radius:999px; }
+    .tl-date i { color:#ff9800; }
+    .tl-list { list-style:none; padding:0; margin:14px 0 0; display:flex; flex-direction:column; gap:8px; }
+    .tl-list li { position:relative; padding-right:24px; line-height:1.75; color:#475569; font-size:.92rem; }
+    body.english .tl-list li { padding-right:0; padding-left:24px; }
+    .tl-list li::before { content:'\f00c'; font-family:'Font Awesome 6 Free'; font-weight:900; position:absolute; right:0; top:3px; color:#22c55e; font-size:.78rem; }
+    body.english .tl-list li::before { right:auto; left:0; }
     .footer { margin-top:36px; text-align:center; color:#94a3b8; font-size:.9rem; }
-    @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar { flex-direction:column; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .exp-card { padding:16px; } .experience-list { grid-template-columns:1fr; gap:14px; }  }
-    @media (max-width:480px) { .exp-card { padding:14px; } .exp-title h2 { font-size:.98rem; } .exp-list li { font-size:.84rem; } }
+    @media (max-width:768px) { .page-wrapper { padding:16px 14px 40px; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .stats-row { grid-template-columns:repeat(2,1fr); gap:12px; } .tl-item { padding-right:58px; } body.english .tl-item { padding-left:58px; } .tl-dot { right:8px; width:30px; height:30px; } body.english .tl-dot { left:8px; } .timeline::before { right:23px; } body.english .timeline::before { left:23px; } .tl-card { padding:16px 14px; } }
+    @media (max-width:480px) { .stat-card { padding:15px 10px; } .stat-card b { font-size:1.45rem; } .tl-role h3 { font-size:1.05rem; } .tl-list li { font-size:.88rem; } }
   </style>
   <link rel="stylesheet" href="dark.css">
+  <link rel="stylesheet" href="share.css">
 <script>var _m=location.search.match(/[?&]lang=(ar|en)/);if(_m){var _f=(location.pathname.split('/').pop()||'index.html').toLowerCase();var _ie=document.documentElement.getAttribute('lang')==='en';if(_m[1]==='en'&&!_ie){location.replace('en/'+_f);}else if(_m[1]==='ar'&&_ie){location.replace('../'+(_f==='index.html'?'index.html':_f));}}</script>
 </head>
 <body>
@@ -175,84 +186,101 @@
       <div>
         <span class="page-pill"><i class="fas fa-briefcase"></i></span>
         <h1><span class="lang-ar">الخبرة العملية</span><span class="lang-en">Experience</span></h1>
-        <p><span class="lang-ar">عرض احترافي لكل دور وظيفي ومسؤولية، مع نتائج فعلية توضح مستوى الإحترافية والعمل الفعلي.</span><span class="lang-en">A professional overview of each role and responsibility, with tangible results that reflect professionalism and hands-on work.</span></p>
-        <div class="stats-strip">
-          <div class="stat"><b>4+</b><span class="lang-ar">سنوات خبرة</span><span class="lang-en">Years Experience</span></div>
-          <div class="stat"><b>4</b><span class="lang-ar">أدوار وظيفية</span><span class="lang-en">Job Roles</span></div>
-          <div class="stat"><b>2</b><span class="lang-ar">شركات</span><span class="lang-en">Companies</span></div>
-        </div>
+        <p><span class="lang-ar">مسار مهني متدرج من العمل الميداني إلى قيادة المبيعات والتسويق الرقمي، مع نتائج ملموسة ومسؤوليات عملية مدعومة بأداء حقيقي.</span><span class="lang-en">A progressive career path from hands-on operations to leading sales and digital marketing, delivering measurable results and hands-on responsibilities.</span></p>
       </div>
     </header>
 
-    <section class="experience-list" id="experienceList" data-aos="fade-up">
-      <article class="exp-card" data-aos="zoom-in" data-aos-delay="50">
-        <div class="exp-head">
-          <div class="exp-icon"><i class="fas fa-chart-line"></i></div>
-          <div class="exp-title-wrap">
-            <div class="exp-title">
-              <h2>Sales & Marketing Specialist</h2>
-              <span class="exp-company">Milano F16</span>
+    <div class="stats-row" data-aos="fade-up" data-aos-delay="100">
+      <div class="stat-card"><i class="fas fa-clock"></i><b>4+</b><span class="lang-ar">سنوات خبرة</span><span class="lang-en">Years Experience</span></div>
+      <div class="stat-card"><i class="fas fa-briefcase"></i><b>4</b><span class="lang-ar">أدوار وظيفية</span><span class="lang-en">Job Roles</span></div>
+      <div class="stat-card"><i class="fas fa-building"></i><b>2</b><span class="lang-ar">شركات</span><span class="lang-en">Companies</span></div>
+      <div class="stat-card"><i class="fas fa-arrows-rotate"></i><b>2</b><span class="lang-ar">بيئات عمل متنوعة</span><span class="lang-en">Work Environments</span></div>
+    </div>
+
+    <section class="timeline" id="experienceList" data-aos="fade-up">
+      <div class="tl-item" data-aos="zoom-in" data-aos-delay="50">
+        <div class="tl-dot current"><i class="fas fa-chart-line"></i></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role"><h3>Sales &amp; Marketing Specialist</h3></div>
+            <div class="tl-tags">
+              <span class="tl-badge"><i class="fas fa-building"></i> Milano F16</span>
+              <span class="tl-badge green pulse"><span class="lang-ar">المنصب الحالي</span><span class="lang-en">Current Role</span></span>
             </div>
-            <div class="exp-date"><i class="fas fa-calendar-alt"></i> <span class="lang-ar">مارس 2025 - حتى الآن (عن بُعد)</span><span class="lang-en">Mar 2025 - Present (Remote)</span></div>
           </div>
+          <div class="tl-head">
+            <span class="tl-date"><i class="fas fa-calendar-alt"></i><span class="lang-ar">مارس 2025 - حتى الآن · عن بُعد</span><span class="lang-en">Mar 2025 - Present · Remote</span></span>
+          </div>
+          <ul class="tl-list">
+            <li><span class="lang-ar">قيادة جهود المبيعات الرقمية واستهداف العملاء بعروض ذات قيمة حقيقية.</span><span class="lang-en">Leading digital sales efforts and targeting customers with real-value offers.</span></li>
+            <li><span class="lang-ar">وضع استراتيجيات تسويقية تحسّن معدل التحويل وتزيد الإيرادات.</span><span class="lang-en">Designing marketing strategies that improve conversion rates and grow revenue.</span></li>
+            <li><span class="lang-ar">تنفيذ حملات بيع مدفوعة الأداء وتحليل نتائجها دورياً لتحسين الأداء.</span><span class="lang-en">Running performance-driven campaigns and analyzing results to optimize performance.</span></li>
+          </ul>
         </div>
-        <ul class="exp-list">
-          <li>قيادة جهود المبيعات الرقمية واستهداف العملاء بعروض ذات قيمة حقيقية.</li>
-          <li>وضع استراتيجيات تسويقية تحسن من معدل التحويل وتزيد الإيرادات.</li>
-          <li>تنفيذ حملات بيع مدفوعة الأداء وتحليل نتائجها بشكل دوري لتحسين الأداء.</li>
-        </ul>
-      </article>
-      <article class="exp-card" data-aos="zoom-in" data-aos-delay="100">
-        <div class="exp-head">
-          <div class="exp-icon"><i class="fas fa-folder-open"></i></div>
-          <div class="exp-title-wrap">
-            <div class="exp-title">
-              <h2>Administrative Assistant</h2>
-              <span class="exp-company">Milano F16</span>
+      </div>
+
+      <div class="tl-item" data-aos="zoom-in" data-aos-delay="100">
+        <div class="tl-dot"><i class="fas fa-folder-open"></i></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role"><h3>Administrative Assistant</h3></div>
+            <div class="tl-tags">
+              <span class="tl-badge"><i class="fas fa-building"></i> Milano F16</span>
+              <span class="tl-badge orange"><span class="lang-ar">سابقاً</span><span class="lang-en">Previous</span></span>
             </div>
-            <div class="exp-date"><i class="far fa-calendar-alt"></i> <span class="lang-ar">مارس 2024 - مارس 2025 (من مقر الشركة)</span><span class="lang-en">Mar 2024 - Mar 2025 (On-site)</span></div>
           </div>
+          <div class="tl-head">
+            <span class="tl-date"><i class="fas fa-calendar-alt"></i><span class="lang-ar">مارس 2024 - مارس 2025 · من مقر الشركة</span><span class="lang-en">Mar 2024 - Mar 2025 · On-site</span></span>
+          </div>
+          <ul class="tl-list">
+            <li><span class="lang-ar">تنسيق العمل الإداري اليومي لضمان سير العمليات بشكل منظم وفعال.</span><span class="lang-en">Coordinating daily administrative workflows to keep operations organized and efficient.</span></li>
+            <li><span class="lang-ar">إدارة الملفات والتقارير والمراسلات بدقة واحترافية.</span><span class="lang-en">Managing files, reports, and correspondence with accuracy and professionalism.</span></li>
+            <li><span class="lang-ar">دعم فرق العمل في إعداد المستندات وحفظ السجلات بأمان.</span><span class="lang-en">Supporting teams with document preparation and secure record-keeping.</span></li>
+          </ul>
         </div>
-        <ul class="exp-list">
-          <li>تنسيق العمل الإداري اليومي لضمان سير العمليات بشكل منظم وفعال.</li>
-          <li>إدارة الملفات والتقارير والمراسلات بدقة واحترافية.</li>
-          <li>دعم فرق العمل في إعداد المستندات وحفظ السجلات بأمان.</li>
-        </ul>
-      </article>
-      <article class="exp-card" data-aos="zoom-in" data-aos-delay="150">
-        <div class="exp-head">
-          <div class="exp-icon"><i class="fas fa-user-tie"></i></div>
-          <div class="exp-title-wrap">
-            <div class="exp-title">
-              <h2>Assistant Manager</h2>
-              <span class="exp-company">Milano F16</span>
+      </div>
+
+      <div class="tl-item" data-aos="zoom-in" data-aos-delay="150">
+        <div class="tl-dot"><i class="fas fa-user-tie"></i></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role"><h3>Assistant Manager</h3></div>
+            <div class="tl-tags">
+              <span class="tl-badge"><i class="fas fa-building"></i> Milano F16</span>
+              <span class="tl-badge orange"><span class="lang-ar">سابقاً</span><span class="lang-en">Previous</span></span>
             </div>
-            <div class="exp-date"><i class="far fa-calendar-alt"></i> <span class="lang-ar">مارس 2023 - مارس 2024 (من مقر الشركة)</span><span class="lang-en">Mar 2023 - Mar 2024 (On-site)</span></div>
           </div>
+          <div class="tl-head">
+            <span class="tl-date"><i class="fas fa-calendar-alt"></i><span class="lang-ar">مارس 2023 - مارس 2024 · من مقر الشركة</span><span class="lang-en">Mar 2023 - Mar 2024 · On-site</span></span>
+          </div>
+          <ul class="tl-list">
+            <li><span class="lang-ar">متابعة تنفيذ الأهداف التشغيلية وتنسيق فرق العمل داخلياً.</span><span class="lang-en">Following up on operational goals and coordinating internal teams.</span></li>
+            <li><span class="lang-ar">تقديم تقارير دورية عن الأداء وتحسين إجراءات العمل.</span><span class="lang-en">Providing periodic performance reports and improving workflows.</span></li>
+            <li><span class="lang-ar">التأكد من التزام العمليات بمعايير الجودة والكفاءة.</span><span class="lang-en">Ensuring processes comply with quality and efficiency standards.</span></li>
+          </ul>
         </div>
-        <ul class="exp-list">
-          <li>متابعة تنفيذ الأهداف التشغيلية وتنسيق فرق العمل داخلياً.</li>
-          <li>تقديم تقارير دورية عن الأداء وتحسين إجراءات العمل.</li>
-          <li>التأكد من التزام العمليات بمعايير الجودة والكفاءة.</li>
-        </ul>
-      </article>
-      <article class="exp-card" data-aos="zoom-in" data-aos-delay="200">
-        <div class="exp-head">
-          <div class="exp-icon"><i class="fas fa-industry"></i></div>
-          <div class="exp-title-wrap">
-            <div class="exp-title">
-              <h2>Assistant Specialist</h2>
-              <span class="exp-company">مصنع الوالد | Family Factory</span>
+      </div>
+
+      <div class="tl-item" data-aos="zoom-in" data-aos-delay="200">
+        <div class="tl-dot"><i class="fas fa-industry"></i></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role"><h3>Assistant Specialist</h3></div>
+            <div class="tl-tags">
+              <span class="tl-badge"><i class="fas fa-building"></i> <span class="lang-ar">مصنع الوالد</span><span class="lang-en">Family Factory</span></span>
+              <span class="tl-badge orange"><span class="lang-ar">سابقاً</span><span class="lang-en">Previous</span></span>
             </div>
-            <div class="exp-date"><i class="far fa-calendar-alt"></i> <span class="lang-ar">يناير 2021 - مارس 2023 (من مقر المصنع)</span><span class="lang-en">Jan 2021 - Mar 2023 (On-site)</span></div>
           </div>
+          <div class="tl-head">
+            <span class="tl-date"><i class="fas fa-calendar-alt"></i><span class="lang-ar">يناير 2021 - مارس 2023 · من مقر المصنع</span><span class="lang-en">Jan 2021 - Mar 2023 · On-site</span></span>
+          </div>
+          <ul class="tl-list">
+            <li><span class="lang-ar">العمل الميداني داخل خطوط الإنتاج لاكتساب الخبرة العملية والدعم التشغيلي.</span><span class="lang-en">Hands-on work on production lines to build practical experience and operational support.</span></li>
+            <li><span class="lang-ar">تنسيق المهام اللوجستية والإدارية لضمان استقرار دورة الإنتاج.</span><span class="lang-en">Coordinating logistics and administrative tasks to keep the production cycle stable.</span></li>
+            <li><span class="lang-ar">مراقبة جودة العمل والمساهمة في الإجراءات التحسينية اليومية.</span><span class="lang-en">Monitoring work quality and contributing to daily improvement processes.</span></li>
+          </ul>
         </div>
-        <ul class="exp-list">
-          <li>العمل الميداني داخل خطوط الإنتاج لاكتساب الخبرة العملية والدعم التشغيلي.</li>
-          <li>تنسيق المهام اللوجستية والإدارية لضمان استقرار دورة الإنتاج.</li>
-          <li>مراقبة جودة العمل والمساهمة في الإجراءات التحسينية اليومية.</li>
-        </ul>
-      </article>
+      </div>
     </section></div>
 
   <button class="back-to-top" id="backToTop" title="رجوع للأعلى"><i class="fas fa-chevron-up"></i></button>
@@ -316,16 +344,17 @@
           const date = (currentLang === 'en' ? (p.date_en || p.date_ar) : (p.date_ar || p.date_en)) || '';
           const bullets = (currentLang === 'en' ? (p.bullets_en || p.bullets_ar) : (p.bullets_ar || p.bullets_en)) || [];
           const ico = p.icon || 'fa-briefcase';
-          return `<article class="exp-card" data-aos="zoom-in" data-aos-delay="${40 + i*50}">
-            <div class="exp-head">
-              <div class="exp-icon"><i class="fas ${esc(ico)}"></i></div>
-              <div class="exp-title-wrap">
-                <div class="exp-title"><h2>${esc(role)}</h2><span class="exp-company">${esc(co)}</span></div>
-                <div class="exp-date"><i class="fas fa-calendar-alt"></i> ${esc(date)}</div>
+          return `<div class="tl-item" data-aos="zoom-in" data-aos-delay="${40 + i*50}">
+            <div class="tl-dot"><i class="fas ${esc(ico)}"></i></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <div class="tl-role"><h3>${esc(role)}</h3></div>
+                <div class="tl-tags"><span class="tl-badge"><i class="fas fa-building"></i> ${esc(co)}</span></div>
               </div>
+              <div class="tl-head"><span class="tl-date"><i class="fas fa-calendar-alt"></i> ${esc(date)}</span></div>
+              <ul class="tl-list">${(bullets||[]).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
             </div>
-            <ul class="exp-list">${(bullets||[]).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
-          </article>`;
+          </div>`;
         }).join('');
       } catch (e) { /* يبقى المحتوى الثابت كخيار احتياطي */ }
     })();
@@ -365,5 +394,6 @@
   })();
 
 </script>
+<script src="share.js"></script>
 </body>
 </html>
