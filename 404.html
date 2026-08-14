@@ -62,7 +62,7 @@
   </style>
   <link rel="stylesheet" href="dark.css">
   <script>
-    if (document.documentElement.getAttribute('lang') === 'en') { document.documentElement.dir = 'ltr'; }
+    if (document.documentElement.getAttribute('lang') === 'en' || location.pathname.indexOf('/en/') === 0) { document.documentElement.dir = 'ltr'; }
   </script>
 <script>var _m=location.search.match(/[?&]lang=(ar|en)/);if(_m){var _f=(location.pathname.split('/').pop()||'index.html').toLowerCase();var _ie=document.documentElement.getAttribute('lang')==='en';if(_m[1]==='en'&&!_ie){location.replace('en/'+_f);}else if(_m[1]==='ar'&&_ie){location.replace('../'+(_f==='index.html'?'index.html':_f));}}</script>
 </head>
@@ -138,6 +138,7 @@
   // ===== اللغة =====
   let curLang = 'ar';
   try { curLang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ar'; } catch (e) {}
+  if (location.pathname.indexOf('/en/') === 0) { curLang = 'en'; }
   function applyLang() {
     document.body.classList.toggle('english', curLang === 'en');
     document.body.dir = curLang === 'en' ? 'ltr' : 'rtl';
