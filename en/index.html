@@ -581,6 +581,31 @@
     .lang-card h3 { font-size: .98rem; font-weight: 800; margin: 0; }
     .lang-card small { color: var(--muted); font-weight: 700; font-size: .78rem; display: block; }
 
+    /* ================= Gallery Slider ================= */
+    .gallery-slider { position: relative; max-width: 860px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+    .gs-track { display: flex; transition: transform .55s cubic-bezier(.25,.8,.35,1); }
+    .gs-slide { position: relative; flex: 0 0 100%; aspect-ratio: 16/9; display: block; overflow: hidden; background: var(--surface); }
+    .gs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+    .gs-slide:hover img { transform: scale(1.05); }
+    .gs-overlay {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 34px 20px 16px;
+      background: linear-gradient(to top, rgba(2,6,23,.82), transparent);
+      color: #fff; font-weight: 800; font-size: 1.05rem; text-align: center;
+    }
+    .gs-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+      width: 44px; height: 44px; border: none; border-radius: 50%; cursor: pointer;
+      background: rgba(255,255,255,.92); color: #0f172a; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-sm); transition: .25s;
+    }
+    .gs-arrow:hover { background: var(--brand); color: #fff; }
+    .gs-prev { left: 14px; }
+    .gs-next { right: 14px; }
+    .gs-dots { position: absolute; bottom: 14px; left: 0; right: 0; z-index: 5; display: flex; justify-content: center; gap: 8px; }
+    .gs-dots button { width: 10px; height: 10px; border-radius: 999px; border: none; cursor: pointer; background: rgba(255,255,255,.55); transition: .25s; padding: 0; }
+    .gs-dots button.active { width: 26px; background: #fff; }
+
     /* ================= Home Blog ================= */
     .homepost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
     /* ===== شريط شركاء النجاح ===== */
@@ -1242,7 +1267,74 @@
       </div>
     </div>
   </div>
-</section><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</section>
+
+    <!-- ===== Gallery Slider ===== -->
+    <section class="section" id="gallery" data-aos="fade-up" style="background: var(--surface-2);">
+      <div class="container">
+        <div class="section-head">
+          <span class="pill"><span class="lang-ar">ألبوم الصور</span><span class="lang-en">Gallery</span></span>
+          <h2><span class="lang-ar">لحظاتي</span><span class="lang-en">My Moments</span></h2>
+          <p><span class="lang-ar">بعض صوري وأنشطتي وفعالياتي — اضغط على أي صورة للانتقال</span><span class="lang-en">A look into my photos, activities and events — click any slide to open it</span></p>
+        </div>
+        <div class="gallery-slider" id="gallerySlider" dir="ltr">
+          <div class="gs-track" id="gsTrack"><!-- slides injected by script --></div>
+          <button class="gs-arrow gs-prev" id="gsPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+          <button class="gs-arrow gs-next" id="gsNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+          <div class="gs-dots" id="gsDots"></div>
+        </div>
+      </div>
+    </section>
+    <script>
+      // ===== Gallery slider: add your images, titles & links here =====
+      const gallerySlides = [
+        { img: '../img/logos/ahmed-ayman-logo.png', ar: 'صورة ١', en: 'Photo 1', href: '#' },
+        { img: '../img/logos/ahmed-ayman-logo.png', ar: 'صورة ٢', en: 'Photo 2', href: '#' },
+        { img: '../img/logos/ahmed-ayman-logo.png', ar: 'صورة ٣', en: 'Photo 3', href: '#' },
+        { img: '../img/logos/ahmed-ayman-logo.png', ar: 'صورة ٤', en: 'Photo 4', href: '#' }
+      ];
+      (function () {
+        const track = document.getElementById('gsTrack');
+        const dotsWrap = document.getElementById('gsDots');
+        if (!track || !dotsWrap || !gallerySlides.length) return;
+        const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const isDark = document.body.classList.contains('dark');
+        let idx = 0, timer, startX = null;
+        gallerySlides.forEach((s, i) => {
+          const a = document.createElement('a');
+          a.className = 'gs-slide';
+          a.href = s.href || '#';
+          a.innerHTML = '<img src="' + esc(s.img) + '" alt="' + esc(s.en || s.ar) + '" loading="lazy">' +
+            '<span class="gs-overlay"><span class="lang-ar">' + esc(s.ar) + '</span><span class="lang-en">' + esc(s.en || s.ar) + '</span></span>';
+          track.appendChild(a);
+          const d = document.createElement('button');
+          d.setAttribute('aria-label', 'Slide ' + (i + 1));
+          d.addEventListener('click', () => go(i, true));
+          dotsWrap.appendChild(d);
+        });
+        const dots = dotsWrap.children;
+        function go(i, manual) {
+          idx = (i + gallerySlides.length) % gallerySlides.length;
+          track.style.transform = 'translateX(-' + idx * 100 + '%)';
+          Array.prototype.forEach.call(dots, (d, k) => d.classList.toggle('active', k === idx));
+          if (manual) restart();
+        }
+        function next() { go(idx + 1); }
+        function restart() { clearInterval(timer); timer = setInterval(next, 4500); }
+        document.getElementById('gsPrev').addEventListener('click', () => { go(idx - 1, true); });
+        document.getElementById('gsNext').addEventListener('click', () => { go(idx + 1, true); });
+        const slider = document.getElementById('gallerySlider');
+        slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        slider.addEventListener('touchend', e => {
+          if (startX == null) return;
+          const dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1, true);
+          startX = null;
+        }, { passive: true });
+        go(0);
+      })();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="../firebase-init.js"></script>
