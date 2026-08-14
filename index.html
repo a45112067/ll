@@ -587,26 +587,6 @@
     .gs-slide { position: relative; flex: 0 0 100%; aspect-ratio: 16/9; display: block; overflow: hidden; background: var(--surface); }
     .gs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
     .gs-slide:hover img { transform: scale(1.07); }
-    .gs-overlay {
-      position: absolute; inset: 0; display: flex; align-items: flex-end;
-      padding: 64px 30px 52px;
-      background: linear-gradient(to top, rgba(2,6,23,.88) 0%, rgba(2,6,23,.38) 42%, rgba(2,6,23,0) 72%);
-    }
-    .gs-caption { width: 100%; transform: translateY(16px); opacity: 0; transition: transform .6s ease, opacity .6s ease; }
-    .gs-slide.active .gs-caption { transform: translateY(0); opacity: 1; }
-    .gs-tag {
-      display: inline-block; padding: 5px 14px; border-radius: 999px;
-      background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3);
-      color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: .5px; margin-bottom: 10px;
-    }
-    .gs-title { display: block; color: #fff; font-size: clamp(1.15rem, 2.6vw, 1.6rem); font-weight: 900; line-height: 1.35; text-shadow: 0 2px 12px rgba(0,0,0,.4); }
-    .gs-counter {
-      position: absolute; top: 18px; left: 18px; z-index: 6;
-      background: rgba(2,6,23,.5); backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,.22);
-      color: #fff; font-size: .78rem; font-weight: 800; letter-spacing: 1px;
-      padding: 5px 12px; border-radius: 999px;
-    }
     .gs-arrow {
       position: absolute; top: 50%; transform: translateY(-50%); z-index: 7;
       width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.25);
@@ -624,8 +604,6 @@
     }
     .gs-dots button { width: 8px; height: 8px; border-radius: 999px; border: none; cursor: pointer; background: rgba(255,255,255,.45); transition: .35s; padding: 0; }
     .gs-dots button.active { width: 30px; background: #fff; box-shadow: 0 0 10px rgba(255,255,255,.6); }
-    .gs-progress { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; height: 4px; background: rgba(255,255,255,.18); }
-    .gs-progress span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand), #7c3aed); transition: width .1s linear; }
 
     /* ================= Home Blog ================= */
     .homepost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
@@ -1300,94 +1278,56 @@
         </div>
         <div class="gallery-slider" id="gallerySlider" dir="ltr">
           <div class="gs-track" id="gsTrack"><!-- slides injected by script --></div>
-          <div class="gs-counter" id="gsCounter">01 / 04</div>
           <button class="gs-arrow gs-prev" id="gsPrev" aria-label="السابق"><i class="fas fa-chevron-left"></i></button>
           <button class="gs-arrow gs-next" id="gsNext" aria-label="التالي"><i class="fas fa-chevron-right"></i></button>
           <div class="gs-dots" id="gsDots"></div>
-          <div class="gs-progress" id="gsProgress"><span id="gsProgressBar"></span></div>
         </div>
       </div>
     </section>
     <script>
       // ===== Gallery slider: add your images, titles & links here =====
       const gallerySlides = [
+        { img: 'img/gallery-whatsapp.jpg', ar: 'لحظة جديدة', en: 'New Moment', href: '#' },
         { img: 'img/logos/ahmed-ayman-logo.png', ar: 'صورة ١', en: 'Photo 1', href: '#' },
         { img: 'img/logos/ahmed-ayman-logo.png', ar: 'صورة ٢', en: 'Photo 2', href: '#' },
-        { img: 'img/logos/ahmed-ayman-logo.png', ar: 'صورة ٣', en: 'Photo 3', href: '#' },
-        { img: 'img/logos/ahmed-ayman-logo.png', ar: 'صورة ٤', en: 'Photo 4', href: '#' }
+        { img: 'img/logos/ahmed-ayman-logo.png', ar: 'صورة ٣', en: 'Photo 3', href: '#' }
       ];
       (function () {
         const track = document.getElementById('gsTrack');
         const dotsWrap = document.getElementById('gsDots');
-        const counter = document.getElementById('gsCounter');
-        const progressBar = document.getElementById('gsProgressBar');
+        const left = document.getElementById('gsPrev');
+        const right = document.getElementById('gsNext');
         const slider = document.getElementById('gallerySlider');
-        if (!track || !dotsWrap || !gallerySlides.length) return;
+        if (!track || !dotsWrap || !gallerySlides.length || !left || !right) return;
         const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-        const pad = n => String(n).padStart(2, '0');
         const DURATION = 5000;
-        let idx = 0, timer, progressTimer, startX = null, hover = false;
+        let idx = 0, timer, startX = null;
         gallerySlides.forEach((s, i) => {
           const a = document.createElement('a');
           a.className = 'gs-slide';
           a.href = s.href || '#';
-          a.innerHTML = '<img src="' + esc(s.img) + '" alt="' + esc(s.ar) + '" loading="lazy">' +
-            '<span class="gs-overlay"><span class="gs-caption">' +
-            '<span class="gs-tag"><span class="lang-ar">لحظة</span><span class="lang-en">Moment</span></span>' +
-            '<span class="gs-title lang-ar">' + esc(s.ar) + '</span>' +
-            '<span class="gs-title lang-en">' + esc(s.en || s.ar) + '</span>' +
-            '</span></span>';
+          const img = document.createElement('img');
+          img.src = s.img;
+          img.alt = esc(s.ar);
+          img.loading = 'lazy';
+          a.appendChild(img);
           track.appendChild(a);
           const d = document.createElement('button');
           d.setAttribute('aria-label', 'شريحة ' + (i + 1));
           d.addEventListener('click', () => go(i, true));
           dotsWrap.appendChild(d);
         });
-        const slides = track.children;
         const dots = dotsWrap.children;
-        function drawProgress() {
-          if (!progressBar) return;
-          progressBar.style.transition = 'none';
-          progressBar.style.width = '0%';
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              progressBar.style.transition = 'width ' + DURATION + 'ms linear';
-              progressBar.style.width = '100%';
-            });
-          });
-        }
-        function resetProgress() {
-          if (!progressBar) return;
-          progressBar.style.transition = 'none';
-          progressBar.style.width = '0%';
-        }
         function go(i, manual) {
           idx = (i + gallerySlides.length) % gallerySlides.length;
           track.style.transform = 'translateX(-' + idx * 100 + '%)';
-          Array.prototype.forEach.call(slides, (s, k) => s.classList.toggle('active', k === idx));
           Array.prototype.forEach.call(dots, (d, k) => d.classList.toggle('active', k === idx));
-          if (counter) counter.textContent = pad(idx + 1) + ' / ' + pad(gallerySlides.length);
           if (manual) restart();
         }
         function next() { go(idx + 1); }
-        function restart() {
-          clearInterval(timer);
-          clearInterval(progressTimer);
-          drawProgress();
-          timer = setInterval(() => { if (!hover) next(); }, DURATION);
-          let p = 0;
-          progressTimer = setInterval(() => { p += 100 / (DURATION / 100); }, 100);
-        }
-        document.getElementById('gsPrev').addEventListener('click', () => go(idx - 1, true));
-        document.getElementById('gsNext').addEventListener('click', () => go(idx + 1, true));
-        slider.addEventListener('mouseenter', () => { hover = true; });
-        slider.addEventListener('mouseleave', () => { hover = false; });
-        document.addEventListener('keydown', e => {
-          if (['gallerySlider', 'gsTrack'].includes(e.target.id)) {
-            if (e.key === 'ArrowLeft') go(idx - 1, true);
-            if (e.key === 'ArrowRight') go(idx + 1, true);
-          }
-        });
+        function restart() { clearInterval(timer); timer = setInterval(next, DURATION); }
+        left.addEventListener('click', () => go(idx - 1, true));
+        right.addEventListener('click', () => go(idx + 1, true));
         slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
         slider.addEventListener('touchend', e => {
           if (startX == null) return;
