@@ -316,6 +316,11 @@
     .surah-num-badge { display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:30px; padding:0 8px; border-radius:10px; background:rgba(22,101,52,.12); color:#1d4ed8; font-weight:800; font-size:.8rem; }
     .reader-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
     .reader-actions .mini-btn { color:#1d4ed8; }
+    .hijri-strip { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; background:linear-gradient(135deg,#166534,#14532d); color:#fff; border-radius:16px; padding:12px 18px; margin-bottom:16px; box-shadow:0 10px 24px rgba(22,101,52,.25); position:relative; overflow:hidden; }
+    .hijri-strip::after { content:'۞'; position:absolute; right:12px; top:50%; transform:translateY(-50%); font-size:2.2rem; color:rgba(255,199,44,.18); pointer-events:none; }
+    .hijri-strip .hs-ico { width:38px; height:38px; border-radius:12px; background:rgba(255,255,255,.14); display:inline-flex; align-items:center; justify-content:center; font-size:1.05rem; color:#ffd66b; flex-shrink:0; }
+    .hijri-strip .hs-date { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.25rem; font-weight:700; line-height:1.5; text-align:center; }
+    .hijri-strip .hs-greg { font-size:.82rem; color:rgba(255,255,255,.8); font-weight:700; background:rgba(255,255,255,.1); padding:4px 12px; border-radius:999px; border:1px dashed rgba(255,199,44,.4); }
     .topbar { position:relative; overflow:hidden; background:linear-gradient(135deg,#ffffff 0%,#f8fafc 55%,#eef2f7 100%); border:1px solid #e2e8f0; border-radius:24px; padding:32px 30px; box-shadow:0 14px 40px rgba(22,101,52,.12); }
     .topbar::before { content:''; position:absolute; top:-70px; left:-70px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(22,101,52,.14),transparent 70%); }
     .topbar::after { content:''; position:absolute; bottom:-80px; right:-60px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(184,134,11,.12),transparent 70%); }
@@ -473,6 +478,8 @@
       .pt-item { padding:12px 8px; }
       .mr-map { height:280px; }
       .share-row button { flex:1 1 auto; justify-content:center; }
+      .hijri-strip { padding:10px 12px; gap:8px; }
+      .hijri-strip .hs-date { font-size:1.05rem; }
     }
     .notif-wrap { position:fixed; top:84px; left:16px; z-index:8500; }
     .notif-bell { position:relative; width:52px; height:52px; border-radius:16px; border:0; cursor:pointer; background:linear-gradient(150deg,#2563eb,#1e40af); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.42), inset 0 1px 0 rgba(255,255,255,.28); display:flex; align-items:center; justify-content:center; transition:transform .2s, box-shadow .2s, background .2s; overflow:visible; }
@@ -601,6 +608,12 @@
 </div>
 
 <div class="page-wrapper">
+
+  <div class="hijri-strip" id="hijriStrip">
+    <span class="hs-ico"><i class="fas fa-calendar"></i></span>
+    <span class="hs-date" id="hijriDate"><span class="lang-ar">... جارٍ تحميل التاريخ</span><span class="lang-en">Loading date...</span></span>
+    <span class="hs-greg" id="gregDate"></span>
+  </div>
 
   <header class="topbar" data-aos="fade-down">
     <span class="tb-frame"></span>
@@ -2010,6 +2023,32 @@ var savedLang = null;
       ptGrid.innerHTML = '<div class="pt-item">تعذر جلب المواقيت، تأكد من الاتصال.</div>';
     }
   }
+  function loadHijriDate() {
+    var now = new Date();
+    var dd = String(now.getDate()).padStart(2, '0');
+    var mm = String(now.getMonth() + 1).padStart(2, '0');
+    var yyyy = now.getFullYear();
+    fetch('https://api.aladhan.com/v1/gToH/' + dd + '-' + mm + '-' + yyyy)
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d && d.data) {
+          var h = d.data.hijri;
+          var hijriEl = document.getElementById('hijriDate');
+          var gregEl = document.getElementById('gregDate');
+          var arDay = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][now.getDay()];
+          if (hijriEl) hijriEl.innerHTML = arDay + ' — ' + h.day + ' ' + h.month.ar + ' ' + h.year + ' هـ';
+          if (gregEl) gregEl.textContent = d.data.gregorian.weekday.ar + ' ' + d.data.gregorian.day + ' ' + d.data.gregorian.month.en + ' ' + d.data.gregorian.year;
+        }
+      })
+      .catch(function() {
+        try {
+          var fmt = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', { day: 'numeric', month: 'long', year: 'numeric' });
+          var hijriEl = document.getElementById('hijriDate');
+          if (hijriEl) hijriEl.textContent = fmt.format(now);
+        } catch (e) {}
+      });
+  }
+  loadHijriDate();
   function setLocStatus(msg) {
     var st = document.getElementById('locStatus');
     st.style.display = msg ? 'inline-flex' : 'none';

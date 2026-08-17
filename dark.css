@@ -294,6 +294,11 @@ body.dark .login-card h1, body.dark .login-card p { color: var(--ink); }
 body.dark .login-card p, body.dark .user-badge { color: var(--ink-soft); }
 body.dark .nav-title { color: var(--muted); }
 
+/* ===== شريط التاريخ الهجري ===== */
+body.dark .hijri-strip { background: linear-gradient(135deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border); box-shadow: var(--shadow-md); }
+body.dark .hijri-strip .hs-date { color: var(--ink); }
+body.dark .hijri-strip .hs-greg { color: var(--muted); background: rgba(255,255,255,.06); border-color: rgba(255,199,44,.35); }
+
 /* ===== خريطة المساجد القريبة ===== */
 body.dark .mosque-result { background: var(--surface-2); border-color: var(--border); }
 body.dark .mr-title { color: var(--ink); }
