@@ -295,8 +295,6 @@ body.dark .login-card p, body.dark .user-badge { color: var(--ink-soft); }
 body.dark .nav-title { color: var(--muted); }
 
 /* ===== نظام الإشعارات ===== */
-body.dark .mr-card { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
-body.dark .mr-open { background: var(--surface-2); color: var(--brand); }
 body.dark .notif-bell {
   background: var(--surface-2) !important;
   border-color: var(--border) !important;
