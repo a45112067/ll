@@ -214,9 +214,23 @@
     .rm-play.playing { background:linear-gradient(140deg,#d4af37,#b8860b); color:#0b3d2e; box-shadow:0 10px 22px rgba(212,175,55,.4); }
     .ada-label { background:rgba(22,101,52,.1); color:#125a32; font-size:.95rem; font-weight:800; border-radius:8px; padding:2px 10px; margin-left:6px; vertical-align:middle; }
     .adhkar-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
-    .adhkar-tabs button { border:0; cursor:pointer; padding:9px 18px; border-radius:12px; background:#fff; border:1px solid #e5dcc2; color:#6b5a3e; font-weight:800; font-size:.9rem; font-family:inherit; transition:.2s; }
-    .adhkar-tabs button.active { background:#166534; border-color:#166534; color:#fff; box-shadow:0 8px 18px rgba(22,101,52,.24); }
-    .dhikr { background:#fdfbf5; border:1px solid #e5dcc2; border-radius:16px 12px 16px 12px; padding:18px; margin-bottom:12px; display:flex; flex-direction:column; gap:12px; box-shadow:0 4px 12px rgba(90,65,20,.05); }
+    .adhkar-tabs button { border:0; cursor:pointer; padding:10px 20px; border-radius:12px; background:#fff; border:1px solid #e5dcc2; color:#6b5a3e; font-weight:800; font-size:.9rem; font-family:inherit; transition:.2s; display:inline-flex; align-items:center; gap:8px; }
+    .adhkar-tabs button i { font-size:.85rem; opacity:.7; }
+    .adhkar-tabs button:hover { border-color:#166534; color:#125a32; transform:translateY(-2px); }
+    .adhkar-tabs button.active { background:linear-gradient(140deg,#166534,#125a32); border-color:#166534; color:#fff; box-shadow:0 8px 18px rgba(22,101,52,.28); }
+    .adhkar-progress { background:#fff; border:1px solid #e5dcc2; border-radius:16px; padding:14px 18px; margin-bottom:14px; box-shadow:0 6px 18px rgba(90,65,20,.05); }
+    .ap-head { display:flex; align-items:center; justify-content:space-between; gap:10px; font-weight:800; font-size:.88rem; color:#0f172a; margin-bottom:10px; }
+    .ap-head i { color:#1d4ed8; }
+    .ap-head b { color:#1d4ed8; font-size:1rem; }
+    .ap-bar { height:10px; border-radius:999px; background:#eef2f7; overflow:hidden; }
+    .ap-bar span { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,#2563eb,#22c55e); transition:width .5s cubic-bezier(.2,.8,.3,1); }
+    .adhkar-progress small { display:block; margin-top:7px; color:#94a3b8; font-size:.78rem; font-weight:600; }
+    .dhikr { background:#fdfbf5; border:1px solid #e5dcc2; border-radius:16px 12px 16px 12px; padding:18px; margin-bottom:12px; display:flex; flex-direction:column; gap:12px; box-shadow:0 4px 12px rgba(90,65,20,.05); transition:transform .25s cubic-bezier(.2,.8,.3,1), border-color .25s, box-shadow .25s; animation:dhikrIn .4s cubic-bezier(.2,.8,.3,1) both; animation-delay:calc(var(--i, 0) * 60ms); }
+    @keyframes dhikrIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+    .dhikr:hover { border-color:#2563eb; box-shadow:0 12px 26px rgba(90,65,20,.09); }
+    .dhikr.complete { background:linear-gradient(150deg,#e9f7ef,#d6efe2); border-color:#7cc79b; box-shadow:0 8px 20px rgba(34,197,94,.14); }
+    .dhikr.complete p { color:#14532d; }
+    .dhikr.complete .dhikr-foot .count { background:#22c55e; color:#fff; }
     .dhikr p { color:#2b2416; font-size:1.06rem; line-height:2.1; font-weight:600; }
     .dhikr-foot { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
     .dhikr-foot .count { background:rgba(22,101,52,.1); color:#125a32; padding:8px 18px; border-radius:999px; font-weight:900; font-size:1.02rem; }
@@ -250,20 +264,23 @@
     .tasbih-phrases button .p-count { min-width:24px; height:24px; padding:0 7px; border-radius:999px; background:#ffe9c4; color:#6b5a3e; font-size:.74rem; font-weight:900; display:inline-flex; align-items:center; justify-content:center; }
     .tasbih-phrases button.active { background:#166534; color:#fff; border-color:#166534; box-shadow:0 8px 18px rgba(22,101,52,.24); }
     .tasbih-phrases button.active .p-count { background:#fff; color:#166534; }
-    .tasbih-num { font-size:3.2rem; font-weight:900; color:#125a32; line-height:1; margin:4px 0 6px; transition:transform .15s; }
-    .tasbih-ring-wrap { position:relative; width:190px; height:190px; margin:10px auto 0; }
+    .tasbih-ring-wrap { position:relative; width:220px; height:220px; margin:10px auto 0; }
     .tasbih-ring { position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
     .tasbih-ring .tr-track { fill:none; stroke:#f0e6c8; stroke-width:10; }
     .tasbih-ring .tr-fill { fill:none; stroke:#166534; stroke-width:10; stroke-linecap:round; stroke-dasharray:414.69; stroke-dashoffset:414.69; transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.3,1); }
     .tasbih-ring-wrap.done .tr-fill { stroke:#d4af37; }
     .tasbih-num-wrap { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    .tasbih-num-wrap .tasbih-btn { margin:8px auto 0; }
-    .tasbih-target-wrap { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(140deg,#fdf3d7,#ffe9c4); border:1.5px solid #e2c987; border-radius:999px; padding:4px 12px; box-shadow:0 4px 10px rgba(184,134,11,.16); }
+    .tasbih-beads { position:absolute; inset:14px; }
+    .tasbih-beads .bead { position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#f0e6c8; border:1px solid #d9c89a; box-shadow:inset 0 1px 2px rgba(255,255,255,.6); transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))); transition:background .18s, box-shadow .18s, border-color .18s, transform .3s cubic-bezier(.2,.8,.3,1); }
+    .tasbih-beads .bead.on { background:linear-gradient(140deg,#1d8a4c,#14532d); border-color:#166534; box-shadow:0 0 0 3px rgba(22,101,52,.15), 0 2px 6px rgba(22,101,52,.4); }
+    .tasbih-beads .bead.pulse { animation:beadPulse .35s cubic-bezier(.2,.8,.3,1); }
+    @keyframes beadPulse { 0% { transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))) scale(1); } 45% { transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))) scale(1.6); } 100% { transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))) scale(1); } }
+    .tasbih-num-wrap .tasbih-btn { margin:0 auto; }
+    .tasbih-target-wrap { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(140deg,#fdf3d7,#ffe9c4); border:1.5px solid #e2c987; border-radius:999px; padding:5px 14px; box-shadow:0 4px 10px rgba(184,134,11,.16); position:relative; z-index:2; }
     .tasbih-target-wrap .tasbih-target-label { color:#b8860b; font-size:.72rem; display:inline-flex; }
-    .tasbih-target { color:#6b4e15; font-weight:900; font-size:.82rem; font-family:'Amiri','Noto Naskh Arabic',serif; direction:ltr; }
+    .tasbih-target { color:#6b4e15; font-weight:900; font-size:.85rem; font-family:'Amiri','Noto Naskh Arabic',serif; direction:ltr; }
     .tasbih-ring-wrap.done .tasbih-target-wrap { background:linear-gradient(140deg,#ffe9b8,#ffd66b); border-color:#b8860b; box-shadow:0 4px 14px rgba(212,175,55,.4); }
     .tasbih-ring-wrap.done .tasbih-target { color:#5c3a00; }
-    .tasbih-num.pop { animation:tasbihPop .3s cubic-bezier(.2,.8,.3,1); }
     .tasbih-btn.pop { animation:btnPop .3s cubic-bezier(.2,.8,.3,1); }
     @keyframes tasbihPop { 0% { transform:scale(1); } 40% { transform:scale(1.18); } 100% { transform:scale(1); } }
     @keyframes btnPop { 0% { transform:scale(1); } 40% { transform:scale(.86); } 100% { transform:scale(1); } }
@@ -664,7 +681,7 @@
           <circle class="tr-fill" id="tasbihRing" cx="75" cy="75" r="66" />
         </svg>
         <div class="tasbih-num-wrap">
-          <div class="tasbih-num" id="tasbihNum">0</div>
+          <div class="tasbih-beads" id="tasbihBeads" aria-hidden="true"></div>
           <div class="tasbih-target-wrap">
             <span class="tasbih-target-label"><i class="fas fa-bullseye"></i></span>
             <span class="tasbih-target" id="tasbihTarget"></span>
@@ -781,6 +798,16 @@
     <div class="sec-divider"><span class="lang-ar">﴿﴾</span></div>
     <h2 class="sec-title"><span class="sec-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1-3 0-6 1.3-6 5.5C11 15.8 14 18 17 18c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1-1.3 0-2-.7-2-2s.7-2 2-2z"/><path d="M7 10c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1-3 0-6 1.3-6 5.5C1 15.8 4 18 7 18c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1-1.3 0-2-.7-2-2s.7-2 2-2z"/></svg></span> <span class="lang-ar">الأذكار</span><span class="lang-en">Adhkar</span></h2>
     <div class="adhkar-tabs" id="adhkarTabs"></div>
+    <div class="adhkar-progress">
+      <div class="ap-head">
+        <span class="lang-ar"><i class="fas fa-circle-check"></i> تقدمك في الأذكار</span>
+        <span class="lang-en"><i class="fas fa-circle-check"></i> Adhkar Progress</span>
+        <b id="adhkarPct">0%</b>
+      </div>
+      <div class="ap-bar"><span id="adhkarFill"></span></div>
+      <small class="lang-ar" id="adhkarInfo">أتمّ كل ذكر لإكمال القسم</small>
+      <small class="lang-en" id="adhkarInfoEn" style="display:none">Complete each dhikr to finish the section</small>
+    </div>
     <div id="adhkarList"></div>
   </section>
 
@@ -1986,6 +2013,20 @@ var savedLang = null;
     } catch (e) {}
   }
   var TASBIH_CIRC = 414.69;
+  var TASBIH_BEADS = 33;
+  var beadsBuilt = false;
+  function buildBeads() {
+    var box = document.getElementById('tasbihBeads');
+    if (!box) return;
+    box.innerHTML = '';
+    for (var i = 0; i < TASBIH_BEADS; i++) {
+      var b = document.createElement('span');
+      b.className = 'bead';
+      b.style.setProperty('--a', (i * (360 / TASBIH_BEADS)) + 'deg');
+      box.appendChild(b);
+    }
+    beadsBuilt = true;
+  }
   function updateTasbihRing() {
     var ring = document.getElementById('tasbihRing');
     if (!ring) return;
@@ -1994,6 +2035,20 @@ var savedLang = null;
     ring.style.strokeDashoffset = TASBIH_CIRC * (1 - pct);
     var wrap = document.getElementById('tasbihRingWrap');
     if (wrap) wrap.classList.toggle('done', cur >= tasbihTarget);
+    var beads = document.getElementById('tasbihBeads');
+    if (beads && beadsBuilt) {
+      var lit = Math.round(pct * TASBIH_BEADS);
+      var kids = beads.children;
+      for (var i = 0; i < kids.length; i++) {
+        var isLit = i < lit;
+        if (isLit !== kids[i].classList.contains('on')) {
+          kids[i].classList.toggle('on', isLit);
+          if (isLit && i === lit - 1) {
+            kids[i].classList.remove('pulse'); void kids[i].offsetWidth; kids[i].classList.add('pulse');
+          }
+        }
+      }
+    }
   }
   function renderTasbihTargets() {
     document.querySelectorAll('.tb-target').forEach(function(b) {
@@ -2010,17 +2065,16 @@ var savedLang = null;
       b.addEventListener('click', function() { tasbihIdx = i; saveTasbihCounts(); renderTasbih(); });
       wrap.appendChild(b);
     });
-    document.getElementById('tasbihNum').textContent = tasbihCounts[tasbihIdx];
-    document.getElementById('tasbihTarget').textContent = tasbihCounts[tasbihIdx] + ' / ' + tasbihTarget;
+    document.getElementById('tasbihTarget').textContent = tasbihTarget;
     renderTasbihTargets();
     updateTasbihRing();
   }
-  var tasbihNumEl = document.getElementById('tasbihNum');
+  buildBeads();
   var tasbihBtnEl = document.getElementById('tasbihBtn');
   function tasbihStep() {
     tasbihCounts[tasbihIdx]++;
     tasbihTotal++;
-    tasbihNumEl.classList.remove('pop'); void tasbihNumEl.offsetWidth; tasbihNumEl.classList.add('pop');
+    tasbihBtnEl.classList.remove('pop'); void tasbihBtnEl.offsetWidth; tasbihBtnEl.classList.add('pop');
     if (navigator.vibrate && navigator.vibrate(10)) {}
     if (tasbihCounts[tasbihIdx] >= tasbihTarget) {
       tasbihCounts[tasbihIdx] = 0;
