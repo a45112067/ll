@@ -377,6 +377,10 @@
     .mr-title i { color:#ff9800; }
     .mr-full { display:inline-flex; align-items:center; gap:7px; color:#ffd66b; font-weight:800; font-size:.8rem; text-decoration:none; transition:.2s; }
     .mr-full:hover { color:#ff9800; }
+    .mr-pin { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.12); border:1px solid rgba(255,199,44,.5); border-radius:14px; padding:10px 14px; margin-bottom:10px; backdrop-filter:blur(4px); }
+    .mr-pin-ico { flex-shrink:0; width:38px; height:38px; border-radius:12px; background:linear-gradient(140deg,#ef4444,#b91c1c); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1rem; box-shadow:0 6px 14px rgba(185,28,28,.35); }
+    .mr-pin-name { flex:1; color:#fff; font-weight:900; font-size:.95rem; min-width:0; overflow-wrap:anywhere; }
+    .mr-pin-dist { flex-shrink:0; color:#ffd66b; font-weight:800; font-size:.8rem; background:rgba(255,255,255,.1); padding:5px 12px; border-radius:999px; border:1px dashed rgba(255,199,44,.45); }
     .mr-map { width:100%; height:340px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.2); }
     .mr-map iframe { width:100%; height:100%; border:0; display:block; }
     .resume-bar { display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:linear-gradient(90deg,#fffbeb,#ffffff 60%); border:1px solid #fde68a; border-right:6px solid #ff9800; border-radius:14px; padding:13px 16px; margin-bottom:14px; font-weight:800; font-size:.9rem; color:#0f172a; }
@@ -861,6 +865,11 @@
         <div class="mr-head">
           <span class="mr-title"><i class="fas fa-mosque"></i> <span class="lang-ar">المساجد القريبة منك</span><span class="lang-en">Nearby mosques</span></span>
           <a class="mr-full" id="mosqueOpen" href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> <span class="lang-ar">فتح في خرائط جوجل</span><span class="lang-en">Open in Google Maps</span></a>
+        </div>
+        <div class="mr-pin" id="mosquePin" style="display:none;">
+          <span class="mr-pin-ico"><i class="fas fa-map-pin"></i></span>
+          <span class="mr-pin-name" id="mosquePinName"></span>
+          <span class="mr-pin-dist" id="mosquePinDist"></span>
         </div>
         <div class="mr-map" id="mosqueMap"></div>
       </div>
@@ -1991,8 +2000,9 @@ var savedLang = null;
     var box = document.getElementById('mosqueResult');
     if (btn) {
       btn.classList.add('mosque-btn-loading');
-      btn.innerHTML = '<span class="spinner"></span> <span class="lang-ar">جارٍ تحديد موقعك...</span><span class="lang-en">Locating...</span>';
+      btn.innerHTML = '<span class="spinner"></span> <span class="lang-ar">جارٍ البحث عن أقرب مسجد...</span><span class="lang-en">Finding nearest mosque...</span>';
     }
+    if (box) box.style.display = 'none';
     if (!navigator.geolocation) {
       if (btn) {
         btn.classList.remove('mosque-btn-loading');
@@ -2002,15 +2012,60 @@ var savedLang = null;
       return;
     }
     navigator.geolocation.getCurrentPosition(
-      function(pos) {
+      async function(pos) {
         var lat = pos.coords.latitude, lon = pos.coords.longitude;
-        var embedSrc = 'https://maps.google.com/maps?q=mosque%20near%20me&ll=' + lat + ',' + lon + '&z=14&output=embed&hl=ar';
-        var box = document.getElementById('mosqueResult');
+        var distM = pos.coords.accuracy || 50;
+        var radius = Math.min(5000, Math.max(800, distM * 6));
+        var q = '[out:json][timeout:15];(node["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');way["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + '););out center tags;';
+        var qEnc = encodeURIComponent(q);
+        var servers = [
+          'https://overpass-api.de/api/interpreter',
+          'https://overpass.kumi.systems/api/interpreter',
+          'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
+        ];
+        var nearest = null;
+        for (var si = 0; si < servers.length; si++) {
+          try {
+            var ctrl = new AbortController();
+            var tmr = setTimeout(function() { try { ctrl.abort(); } catch (e) {} }, 12000);
+            var fres = await fetch(servers[si] + '?data=' + qEnc, { headers: { 'Accept': 'application/json' }, signal: ctrl.signal });
+            clearTimeout(tmr);
+            if (!fres.ok) continue;
+            var jd = await fres.json();
+            if (!jd || !jd.elements || !jd.elements.length) continue;
+            var best = null, bestD = Infinity;
+            jd.elements.forEach(function(el) {
+              var elat = el.type === 'node' ? (el.lat || 0) : (el.center ? el.center.lat : 0);
+              var elon = el.type === 'node' ? (el.lon || 0) : (el.center ? el.center.lon : 0);
+              if (!elat || !elon) return;
+              var dd = calcDist(lat, lon, elat, elon);
+              if (dd < bestD) { bestD = dd; best = { el: el, lat: elat, lon: elon, dist: dd }; }
+            });
+            if (best) { nearest = best; break; }
+          } catch (e) {}
+        }
+        var boxEl = document.getElementById('mosqueResult');
         var mapEl = document.getElementById('mosqueMap');
+        var pinEl = document.getElementById('mosquePin');
         var openEl = document.getElementById('mosqueOpen');
-        if (mapEl) mapEl.innerHTML = '<iframe src="' + embedSrc + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Nearby mosques"></iframe>';
-        if (openEl) openEl.href = 'https://www.google.com/maps/search/mosque/@' + lat + ',' + lon + ',14z?hl=ar';
-        if (box) box.style.display = 'block';
+        if (nearest) {
+          var nm = (nearest.el.tags && (nearest.el.tags.name || nearest.el.tags['name:ar'] || nearest.el.tags['name:en'])) || '<span class="lang-ar">مسجد</span><span class="lang-en">Mosque</span>';
+          var km = nearest.dist >= 1000 ? (nearest.dist / 1000).toFixed(2) + ' كم' : Math.round(nearest.dist) + ' م';
+          var embedSrc = 'https://maps.google.com/maps?q=' + nearest.lat + ',' + nearest.lon + '&z=16&output=embed&hl=ar';
+          if (mapEl) mapEl.innerHTML = '<iframe src="' + embedSrc + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Nearest mosque"></iframe>';
+          if (pinEl) {
+            pinEl.style.display = 'flex';
+            document.getElementById('mosquePinName').innerHTML = nm;
+            document.getElementById('mosquePinDist').innerHTML = '<span class="lang-ar">بعدك</span><span class="lang-en">Distance</span> ' + km;
+          }
+          if (openEl) openEl.href = 'https://www.google.com/maps/search/' + encodeURIComponent(nm) + '/@' + nearest.lat + ',' + nearest.lon + ',16z?hl=ar';
+        } else {
+          var embedSrc2 = 'https://maps.google.com/maps?q=mosque%20near%20me&ll=' + lat + ',' + lon + '&z=14&output=embed&hl=ar';
+          if (mapEl) mapEl.innerHTML = '<iframe src="' + embedSrc2 + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Nearby mosques"></iframe>';
+          if (pinEl) pinEl.style.display = 'none';
+          if (openEl) openEl.href = 'https://www.google.com/maps/search/mosque/@' + lat + ',' + lon + ',14z?hl=ar';
+        }
+        if (boxEl) boxEl.style.display = 'block';
         if (btn) {
           btn.classList.remove('mosque-btn-loading');
           btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
@@ -2032,6 +2087,15 @@ var savedLang = null;
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
     );
+  }
+  function calcDist(lat1, lon1, lat2, lon2) {
+    var R = 6371000;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
   function autoLocate() {
     setLocStatus('<span class="spinner"></span> <span class="lang-ar">جارٍ تحديد موقعك...</span><span class="lang-en">Locating...</span>');

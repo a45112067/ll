@@ -298,6 +298,8 @@ body.dark .nav-title { color: var(--muted); }
 body.dark .mosque-result { background: var(--surface-2); border-color: var(--border); }
 body.dark .mr-title { color: var(--ink); }
 body.dark .mr-map { border-color: var(--border); }
+body.dark .mr-pin { background: var(--surface-3, rgba(255,255,255,.08)); border-color: rgba(255,199,44,.4); }
+body.dark .mr-pin-name { color: var(--ink); }
 
 /* ===== نظام الإشعارات ===== */
 body.dark .notif-bell {
