@@ -353,12 +353,10 @@
     .name-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:16px 16px 18px 18px; padding:18px 14px; text-align:center; box-shadow:0 4px 12px rgba(90,65,20,.06); transition:transform .3s cubic-bezier(.2,.8,.3,1), border-color .3s, box-shadow .3s; }
     .name-card:hover { border-color:#ff9800; transform:translateY(-4px); box-shadow:0 16px 34px rgba(184,134,11,.16); }
     .name-card .nc-num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:rgba(22,101,52,.1); color:#1d4ed8; font-weight:900; font-size:.78rem; margin-bottom:12px; }
-    .name-card .nc-ar { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.65rem; font-weight:700; color:#0f172a; line-height:1.6; }
-    .name-card .nc-tr { display:block; margin-top:8px; font-size:.8rem; font-weight:700; color:#2563eb; direction:ltr; }
-    .name-card .nc-en { display:block; margin-top:4px; font-size:.76rem; font-weight:600; color:#64748b; line-height:1.5; }
+    .name-card .nc-ar { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.75rem; font-weight:700; color:#0f172a; line-height:1.6; }
     .names-more { display:none; align-items:center; justify-content:center; gap:9px; width:100%; margin-top:16px; padding:12px 18px; border-radius:12px; background:linear-gradient(140deg,#2563eb,#1d4ed8); color:#fff3e0; font-weight:900; font-size:.92rem; font-family:inherit; cursor:pointer; border:0; transition:.2s; box-shadow:0 10px 22px rgba(22,101,52,.28); }
     .names-more:hover { transform:translateY(-2px); box-shadow:0 14px 26px rgba(22,101,52,.34); }
-    @media (max-width:480px) { .names-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } .name-card .nc-ar { font-size:1.4rem; } }
+    @media (max-width:480px) { .names-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } .name-card .nc-ar { font-size:1.5rem; } }
     .surah-card .done-badge { margin-inline-start:auto; color:#f59e0b; font-size:1rem; }
     @media (max-width:900px) { .quick-nav { justify-content:center; } .daily-wrap { grid-template-columns:1fr; } }
     @media (max-width:768px) {
@@ -1630,7 +1628,7 @@ var savedLang = null;
       count++;
       var card = document.createElement('div');
       card.className = 'name-card';
-      card.innerHTML = '<span class="nc-num">' + (i + 1) + '</span><div class="nc-ar">' + n[0] + '</div><span class="nc-tr">' + n[1] + '</span><span class="nc-en">' + n[2] + '</span>';
+      card.innerHTML = '<span class="nc-num">' + (i + 1) + '</span><div class="nc-ar">' + n[0] + '</div>';
       grid.appendChild(card);
     });
     var total = document.getElementById('namesTotal');
