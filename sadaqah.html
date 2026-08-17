@@ -278,22 +278,13 @@
     .tasbih-phrases button.active { background:#166534; color:#fff; border-color:#166534; box-shadow:0 8px 18px rgba(22,101,52,.24); }
     .tasbih-phrases button.active .p-count { background:#fff; color:#166534; }
     .tasbih-ring-wrap { position:relative; width:220px; height:220px; margin:10px auto 0; }
-    .tasbih-ring { position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
-    .tasbih-ring .tr-track { fill:none; stroke:#f0e6c8; stroke-width:10; }
-    .tasbih-ring .tr-fill { fill:none; stroke:#166534; stroke-width:10; stroke-linecap:round; stroke-dasharray:414.69; stroke-dashoffset:414.69; transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.3,1); }
-    .tasbih-ring-wrap.done .tr-fill { stroke:#d4af37; }
     .tasbih-num-wrap { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    .tasbih-beads { position:absolute; inset:14px; }
-    .tasbih-beads .bead { position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#f0e6c8; border:1px solid #d9c89a; box-shadow:inset 0 1px 2px rgba(255,255,255,.6); transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))); transition:background .18s, box-shadow .18s, border-color .18s, transform .3s cubic-bezier(.2,.8,.3,1); }
+    .tasbih-beads { position:absolute; inset:14px; pointer-events:none; }
+    .tasbih-beads .bead { position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#f0e6c8; border:1px solid #d9c89a; box-shadow:inset 0 1px 2px rgba(255,255,255,.6); transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))); transition:background .18s, box-shadow .18s, border-color .18s, transform .3s cubic-bezier(.2,.8,.3,1); pointer-events:none; }
     .tasbih-beads .bead.on { background:linear-gradient(140deg,#1d8a4c,#14532d); border-color:#166534; box-shadow:0 0 0 3px rgba(22,101,52,.15), 0 2px 6px rgba(22,101,52,.4); }
     .tasbih-beads .bead.pulse { animation:beadPulse .35s cubic-bezier(.2,.8,.3,1); }
     @keyframes beadPulse { 0% { transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))) scale(1); } 45% { transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))) scale(1.6); } 100% { transform:rotate(var(--a)) translateY(-72px) rotate(calc(-1 * var(--a))) scale(1); } }
-    .tasbih-num-wrap .tasbih-btn { margin:0 auto; }
-    .tasbih-target-wrap { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(140deg,#fdf3d7,#ffe9c4); border:1.5px solid #e2c987; border-radius:999px; padding:5px 14px; box-shadow:0 4px 10px rgba(184,134,11,.16); position:relative; z-index:2; }
-    .tasbih-target-wrap .tasbih-target-label { color:#b8860b; font-size:.72rem; display:inline-flex; }
-    .tasbih-target { color:#6b4e15; font-weight:900; font-size:.85rem; font-family:'Amiri','Noto Naskh Arabic',serif; direction:ltr; }
-    .tasbih-ring-wrap.done .tasbih-target-wrap { background:linear-gradient(140deg,#ffe9b8,#ffd66b); border-color:#b8860b; box-shadow:0 4px 14px rgba(212,175,55,.4); }
-    .tasbih-ring-wrap.done .tasbih-target { color:#5c3a00; }
+    .tasbih-num-wrap .tasbih-btn { margin:0 auto; position:relative; z-index:3; }
     .tasbih-btn.pop { animation:btnPop .3s cubic-bezier(.2,.8,.3,1); }
     @keyframes tasbihPop { 0% { transform:scale(1); } 40% { transform:scale(1.18); } 100% { transform:scale(1); } }
     @keyframes btnPop { 0% { transform:scale(1); } 40% { transform:scale(.86); } 100% { transform:scale(1); } }
@@ -699,16 +690,8 @@
     <div class="card tasbih-wrap">
       <div class="tasbih-phrases" id="tasbihPhrases"></div>
       <div class="tasbih-ring-wrap" id="tasbihRingWrap">
-        <svg class="tasbih-ring" viewBox="0 0 150 150" aria-hidden="true">
-          <circle class="tr-track" cx="75" cy="75" r="66" />
-          <circle class="tr-fill" id="tasbihRing" cx="75" cy="75" r="66" />
-        </svg>
         <div class="tasbih-num-wrap">
           <div class="tasbih-beads" id="tasbihBeads" aria-hidden="true"></div>
-          <div class="tasbih-target-wrap">
-            <span class="tasbih-target-label"><i class="fas fa-bullseye"></i></span>
-            <span class="tasbih-target" id="tasbihTarget"></span>
-          </div>
           <button class="tasbih-btn" id="tasbihBtn" aria-label="عد"><i class="fas fa-circle-notch"></i></button>
         </div>
       </div>
@@ -876,14 +859,11 @@
         <span class="loc-status" id="locStatus" style="display:none;"></span>
       </div>
       <div class="mosque-result" id="mosqueResult" style="display:none;">
-        <div class="mr-card">
-          <div class="mr-ico"><i class="fas fa-mosque"></i></div>
-          <div class="mr-body">
-            <b class="mr-name" id="mosqueName"><span class="lang-ar">أقرب مسجد إليك</span><span class="lang-en">Nearest mosque</span></b>
-            <small id="mosqueDist"></small>
-            <a class="mr-open" id="mosqueOpen" href="#" target="_blank" rel="noopener"><i class="fas fa-map-location-dot"></i> <span class="lang-ar">افتح في الخرائط</span><span class="lang-en">Open in maps</span></a>
-          </div>
+        <div class="mr-head">
+          <span class="mr-title"><i class="fas fa-mosque"></i> <span class="lang-ar">أقرب المساجد إليك</span><span class="lang-en">Nearest mosques</span></span>
+          <span class="mr-status" id="mosqueStatus" style="display:none;"></span>
         </div>
+        <div class="mr-list" id="mosqueList"></div>
       </div>
       <div class="next-prayer" id="nextPrayer">
         <span class="np-name"><i class="fas fa-bell"></i> <span class="lang-ar">الصلاة القادمة</span><span class="lang-en">Next Prayer</span></span>
@@ -2189,7 +2169,6 @@ var savedLang = null;
       localStorage.setItem('sadaqah_tasbih_total', String(tasbihTotal));
     } catch (e) {}
   }
-  var TASBIH_CIRC = 414.69;
   var TASBIH_BEADS = 33;
   var beadsBuilt = false;
   function buildBeads() {
@@ -2205,11 +2184,8 @@ var savedLang = null;
     beadsBuilt = true;
   }
   function updateTasbihRing() {
-    var ring = document.getElementById('tasbihRing');
-    if (!ring) return;
     var cur = tasbihCounts[tasbihIdx];
     var pct = tasbihTarget > 0 ? Math.min(cur / tasbihTarget, 1) : 0;
-    ring.style.strokeDashoffset = TASBIH_CIRC * (1 - pct);
     var wrap = document.getElementById('tasbihRingWrap');
     if (wrap) wrap.classList.toggle('done', cur >= tasbihTarget);
     var beads = document.getElementById('tasbihBeads');
@@ -2242,7 +2218,6 @@ var savedLang = null;
       b.addEventListener('click', function() { tasbihIdx = i; saveTasbihCounts(); renderTasbih(); });
       wrap.appendChild(b);
     });
-    document.getElementById('tasbihTarget').textContent = tasbihTarget;
     renderTasbihTargets();
     updateTasbihRing();
   }

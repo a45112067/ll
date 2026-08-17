@@ -237,18 +237,8 @@ body.dark .daily-actions .copy-btn { background: var(--surface-2); color: var(--
 body.dark .daily-box { background: var(--surface) !important; }
 body.dark .daily-ayah .text, body.dark .daily-hadith .text { color: var(--ink) !important; }
 body.dark .tasbih-phrases button, body.dark .adhkar-tabs button, body.dark .mini-btn { background: var(--surface); border-color: var(--border); color: var(--ink-soft); }
-body.dark .tasbih-ring .tr-track { stroke: var(--surface-2); }
 body.dark .tasbih-beads .bead { background: var(--surface-2); border-color: var(--border); box-shadow: none; }
 body.dark .tasbih-beads .bead.on { background: linear-gradient(140deg,#1d8a4c,#14532d); border-color: #166534; }
-body.dark .tasbih-ring .tr-fill { stroke: var(--brand); }
-body.dark .tasbih-ring-wrap.done .tr-fill { stroke: #d4af37; }
-body.dark .tasbih-num { color: var(--ink); }
-body.dark .tasbih-num-wrap .tasbih-target { color: var(--ink-soft); }
-body.dark .tasbih-target-wrap { background: linear-gradient(140deg,#2a2633,#332d22); border-color: #5a4a22; }
-body.dark .tasbih-target-wrap .tasbih-target-label { color: #d4af37; }
-body.dark .tasbih-target-wrap .tasbih-target { color: #ffe9a8; }
-body.dark .tasbih-ring-wrap.done .tasbih-target-wrap { background: linear-gradient(140deg,#4a3a10,#5c4a12); border-color: #b8860b; }
-body.dark .tasbih-ring-wrap.done .tasbih-target { color: #ffd66b; }
 body.dark .mini-btn.tb-target.active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
 /* ===== النوافذ المنبثقة ===== */
