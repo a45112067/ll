@@ -237,6 +237,11 @@ body.dark .daily-actions .copy-btn { background: var(--surface-2); color: var(--
 body.dark .daily-box { background: var(--surface) !important; }
 body.dark .daily-ayah .text, body.dark .daily-hadith .text { color: var(--ink) !important; }
 body.dark .tasbih-phrases button, body.dark .adhkar-tabs button, body.dark .mini-btn { background: var(--surface); border-color: var(--border); color: var(--ink-soft); }
+body.dark .tasbih-ring .tr-track { stroke: var(--surface-2); }
+body.dark .tasbih-ring .tr-fill { stroke: var(--brand); }
+body.dark .tasbih-ring-wrap.done .tr-fill { stroke: #d4af37; }
+body.dark .tasbih-num { color: var(--ink); }
+body.dark .tasbih-num-wrap .tasbih-target { color: var(--ink-soft); }
 
 /* ===== النوافذ المنبثقة ===== */
 body.dark .modal-box { background: var(--surface) !important; }
