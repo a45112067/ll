@@ -264,6 +264,13 @@
     .tasbih-controls { margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
     .mini-btn { border:0; cursor:pointer; background:#fff; border:1px solid #e5dcc2; color:#6b5a3e; padding:10px 20px; border-radius:12px; font-weight:800; font-family:inherit; font-size:.86rem; transition:.2s; }
     .mini-btn:hover { border-color:#166534; color:#125a32; }
+    .mini-btn.tb-target.active { background:#166534; border-color:#166534; color:#fff; box-shadow:0 8px 18px rgba(22,101,52,.24); }
+    .tasbih-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
+    .tstat { background:#fdfbf5; border:1px solid #e5dcc2; border-radius:14px; padding:12px 8px; display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .tstat .ts-ico { width:34px; height:34px; border-radius:10px; background:rgba(22,101,52,.1); color:#125a32; display:flex; align-items:center; justify-content:center; font-size:.9rem; }
+    .tstat b { font-size:1.15rem; font-weight:900; color:#125a32; }
+    .tstat small { font-size:.72rem; color:#a69570; font-weight:700; text-align:center; }
+    @media (max-width:520px) { .tasbih-stats { grid-template-columns:1fr; } }
     .share-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
     .share-row button { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:12px; font-weight:800; font-family:inherit; font-size:.92rem; transition:.2s; }
     .share-row .wa { background:#25d366; color:#fff; } .share-row .wa:hover { box-shadow:0 12px 24px rgba(37,211,102,.4); transform:translateY(-2px); }
@@ -642,9 +649,14 @@
       </div>
       <div class="tasbih-controls">
         <button class="mini-btn" onclick="tasbihReset()"><i class="fas fa-rotate-left"></i> <span class="lang-ar">تصفير</span><span class="lang-en">Reset</span></button>
-        <button class="mini-btn" onclick="setTarget(33)">33</button>
-        <button class="mini-btn" onclick="setTarget(99)">99</button>
-        <button class="mini-btn" onclick="setTarget(1000)">1000</button>
+        <button class="mini-btn tb-target" data-t="33" onclick="setTarget(33)">33</button>
+        <button class="mini-btn tb-target" data-t="99" onclick="setTarget(99)">99</button>
+        <button class="mini-btn tb-target" data-t="1000" onclick="setTarget(1000)">1000</button>
+      </div>
+      <div class="tasbih-stats">
+        <div class="tstat"><span class="ts-ico"><i class="fas fa-rotate-right"></i></span><b id="tasbihRounds">0</b><small><span class="lang-ar">دورات مكتملة</span><span class="lang-en">Completed rounds</span></small></div>
+        <div class="tstat"><span class="ts-ico"><i class="fas fa-fire"></i></span><b id="tasbihDay">0</b><small><span class="lang-ar">إجمالي اليوم</span><span class="lang-en">Today total</span></small></div>
+        <div class="tstat"><span class="ts-ico"><i class="fas fa-bolt"></i></span><b id="tasbihTotal">0</b><small><span class="lang-ar">الإجمالي الكلي</span><span class="lang-en">All-time total</span></small></div>
       </div>
     </div>
   </section>
@@ -1916,8 +1928,25 @@ var savedLang = null;
   var tasbihCounts = [];
   try { var savedC = JSON.parse(localStorage.getItem('sadaqah_tasbih_counts') || '[]'); if (savedC.length === tasbihPhrases.length) tasbihCounts = savedC; } catch (e) {}
   if (tasbihCounts.length !== tasbihPhrases.length) tasbihCounts = tasbihPhrases.map(function() { return 0; });
-  var tasbihTarget = 33, tasbihIdx = 0;
-  function saveTasbihCounts() { try { localStorage.setItem('sadaqah_tasbih_counts', JSON.stringify(tasbihCounts)); } catch (e) {} }
+  var tasbihTarget = parseInt(localStorage.getItem('sadaqah_tasbih_target'), 10) || 33;
+  var tasbihIdx = parseInt(localStorage.getItem('sadaqah_tasbih_idx'), 10) || 0;
+  if (tasbihIdx >= tasbihPhrases.length) tasbihIdx = 0;
+  var tasbihRounds = parseInt(localStorage.getItem('sadaqah_tasbih_rounds'), 10) || 0;
+  var tasbihDay = parseInt(localStorage.getItem('sadaqah_tasbih_day'), 10) || 0;
+  var tasbihTotal = parseInt(localStorage.getItem('sadaqah_tasbih_total'), 10) || 0;
+  var tasbihDayKey = localStorage.getItem('sadaqah_tasbih_daykey') || '';
+  var todayKey = new Date().toISOString().slice(0, 10);
+  if (tasbihDayKey !== todayKey) { tasbihDayKey = todayKey; tasbihDay = 0; localStorage.setItem('sadaqah_tasbih_daykey', todayKey); }
+  function saveTasbihCounts() {
+    try {
+      localStorage.setItem('sadaqah_tasbih_counts', JSON.stringify(tasbihCounts));
+      localStorage.setItem('sadaqah_tasbih_target', String(tasbihTarget));
+      localStorage.setItem('sadaqah_tasbih_idx', String(tasbihIdx));
+      localStorage.setItem('sadaqah_tasbih_rounds', String(tasbihRounds));
+      localStorage.setItem('sadaqah_tasbih_day', String(tasbihDay));
+      localStorage.setItem('sadaqah_tasbih_total', String(tasbihTotal));
+    } catch (e) {}
+  }
   var TASBIH_CIRC = 414.69;
   function updateTasbihRing() {
     var ring = document.getElementById('tasbihRing');
@@ -1928,6 +1957,16 @@ var savedLang = null;
     var wrap = document.getElementById('tasbihRingWrap');
     if (wrap) wrap.classList.toggle('done', cur >= tasbihTarget);
   }
+  function renderTasbihTargets() {
+    document.querySelectorAll('.tb-target').forEach(function(b) {
+      b.classList.toggle('active', parseInt(b.getAttribute('data-t'), 10) === tasbihTarget);
+    });
+  }
+  function renderTasbihStats() {
+    document.getElementById('tasbihRounds').textContent = tasbihRounds;
+    document.getElementById('tasbihDay').textContent = tasbihDay;
+    document.getElementById('tasbihTotal').textContent = tasbihTotal;
+  }
   function renderTasbih() {
     var wrap = document.getElementById('tasbihPhrases');
     wrap.innerHTML = '';
@@ -1935,21 +1974,27 @@ var savedLang = null;
       var b = document.createElement('button');
       b.className = i === tasbihIdx ? 'active' : '';
       b.innerHTML = '<span class="p-text">' + p + '</span><span class="p-count">' + tasbihCounts[i] + '</span>';
-      b.addEventListener('click', function() { tasbihIdx = i; renderTasbih(); });
+      b.addEventListener('click', function() { tasbihIdx = i; saveTasbihCounts(); renderTasbih(); });
       wrap.appendChild(b);
     });
     document.getElementById('tasbihNum').textContent = tasbihCounts[tasbihIdx];
     document.getElementById('tasbihTarget').textContent = 'الهدف: ' + tasbihTarget;
+    renderTasbihTargets();
+    renderTasbihStats();
     updateTasbihRing();
   }
   var tasbihNumEl = document.getElementById('tasbihNum');
   var tasbihBtnEl = document.getElementById('tasbihBtn');
-  document.getElementById('tasbihBtn').addEventListener('click', function() {
+  function tasbihStep() {
     tasbihCounts[tasbihIdx]++;
+    tasbihDay++;
+    tasbihTotal++;
     tasbihNumEl.classList.remove('pop'); void tasbihNumEl.offsetWidth; tasbihNumEl.classList.add('pop');
+    if (navigator.vibrate && navigator.vibrate(10)) {}
     if (tasbihCounts[tasbihIdx] >= tasbihTarget) {
       tasbihCounts[tasbihIdx] = 0;
-      if (navigator.vibrate) navigator.vibrate(120);
+      tasbihRounds++;
+      if (navigator.vibrate) navigator.vibrate([40, 50, 40]);
       toast('أتممت ' + tasbihTarget + ' — تقبل الله');
       tasbihBtnEl.classList.remove('celebrate'); void tasbihBtnEl.offsetWidth; tasbihBtnEl.classList.add('celebrate');
       if (typeof notifNow === 'function' && notifPrefs && notifPrefs.progress) {
@@ -1958,9 +2003,40 @@ var savedLang = null;
     }
     saveTasbihCounts();
     renderTasbih();
+  }
+  document.getElementById('tasbihBtn').addEventListener('click', tasbihStep);
+  var tasbihHoldTimer = null, tasbihHoldInt = null;
+  function tasbihHoldStart(e) {
+    if (e && e.type === 'touchstart' && e.cancelable) e.preventDefault();
+    tasbihHoldTimer = setTimeout(function() {
+      tasbihHoldInt = setInterval(tasbihStep, 110);
+    }, 450);
+  }
+  function tasbihHoldEnd() {
+    clearTimeout(tasbihHoldTimer); clearInterval(tasbihHoldInt);
+    tasbihHoldTimer = null; tasbihHoldInt = null;
+  }
+  tasbihBtnEl.addEventListener('mousedown', tasbihHoldStart);
+  tasbihBtnEl.addEventListener('touchstart', tasbihHoldStart, { passive: false });
+  ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(function(ev) {
+    tasbihBtnEl.addEventListener(ev, tasbihHoldEnd);
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.code !== 'Space') return;
+    var tag = (document.activeElement && document.activeElement.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    var target = document.activeElement && document.activeElement.closest ? document.activeElement.closest('.tasbih-btn') : null;
+    if (target) return;
+    e.preventDefault();
+    tasbihStep();
   });
   function tasbihReset() { tasbihCounts[tasbihIdx] = 0; saveTasbihCounts(); renderTasbih(); }
-  function setTarget(n) { tasbihTarget = n; tasbihCounts = tasbihPhrases.map(function() { return 0; }); saveTasbihCounts(); renderTasbih(); }
+  function setTarget(n) {
+    tasbihTarget = n;
+    tasbihCounts = tasbihPhrases.map(function() { return 0; });
+    saveTasbihCounts();
+    renderTasbih();
+  }
   renderTasbih();
 
   function share(which) {
