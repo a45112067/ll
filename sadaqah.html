@@ -2010,12 +2010,16 @@ var savedLang = null;
   function findNearestMosque() {
     var btn = document.getElementById('mosqueBtn');
     var box = document.getElementById('mosqueResult');
-    btn.classList.add('mosque-btn-loading');
-    btn.innerHTML = '<span class="spinner"></span> <span class="lang-ar">جارٍ البحث...</span><span class="lang-en">Searching...</span>';
+    if (btn) {
+      btn.classList.add('mosque-btn-loading');
+      btn.innerHTML = '<span class="spinner"></span> <span class="lang-ar">جارٍ البحث...</span><span class="lang-en">Searching...</span>';
+    }
     if (box) box.style.display = 'none';
     if (!navigator.geolocation) {
-      btn.classList.remove('mosque-btn-loading');
-      btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+      if (btn) {
+        btn.classList.remove('mosque-btn-loading');
+        btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+      }
       toast('المتصفح لا يدعم تحديد الموقع');
       return;
     }
@@ -2026,8 +2030,14 @@ var savedLang = null;
         var radius = Math.min(5000, Math.max(500, distM * 6));
         var q = '[out:json][timeout:15];(node["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');way["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + '););out center tags;';
         try {
-          var res = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', body: 'data=' + encodeURIComponent(q) });
-          var d = await res.json();
+          var d = null;
+          try {
+            var res = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(q), { headers: { 'Accept': 'application/json' } });
+            d = await res.json();
+          } catch (e) {
+            var res2 = await fetch('https://overpass.kumi.systems/api/interpreter?data=' + encodeURIComponent(q), { headers: { 'Accept': 'application/json' } });
+            d = await res2.json();
+          }
           var best = null, bestDist = Infinity;
           (d.elements || []).forEach(function(el) {
             var elat = el.type === 'node' ? (el.lat || 0) : (el.center ? el.center.lat : 0);
@@ -2043,27 +2053,31 @@ var savedLang = null;
             t.innerHTML = '<span class="lang-ar">لم يُعثر على مسجد قريب</span><span class="lang-en">No mosque found nearby</span>';
             distEl.textContent = '';
             openEl.href = '#';
+            box.style.display = 'block';
           } else {
             var nm = (best.tags && (best.tags.name || best.tags['name:ar'] || best.tags['name:en'])) || '';
             t.innerHTML = nm ? nm : '<span class="lang-ar">مسجد</span><span class="lang-en">Mosque</span>';
             var km = bestDist >= 1000 ? (bestDist / 1000).toFixed(2) + ' كم' : Math.round(bestDist) + ' م';
-            distEl.textContent = (nm ? '' : '') + 'بعدك ' + km;
+            distEl.textContent = 'بعدك ' + km;
             openEl.href = 'https://www.google.com/maps/dir/?api=1&destination=' + elCenterLat(best) + ',' + elCenterLon(best);
             box.style.display = 'block';
           }
-          toast('تم العثور على أقرب مسجد');
         } catch (e) {
           toast('تعذر البحث عن المساجد — تحقق من الاتصال');
         }
-        btn.classList.remove('mosque-btn-loading');
-        btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+        if (btn) {
+          btn.classList.remove('mosque-btn-loading');
+          btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+        }
       },
       function() {
-        btn.classList.remove('mosque-btn-loading');
-        btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+        if (btn) {
+          btn.classList.remove('mosque-btn-loading');
+          btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+        }
         toast('لم يُسمح بالوصول للموقع');
       },
-      { enableHighAccuracy: true, timeout: 12000 }
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 300000 }
     );
   }
   function elCenterLat(el) {
@@ -2142,11 +2156,14 @@ var savedLang = null;
           } catch (e) {}
           ptCity.textContent = city || (lat.toFixed(2) + '°, ' + lon.toFixed(2) + '°');
           setLocStatus('');
+          if (typeof findNearestMosque === 'function') setTimeout(findNearestMosque, 300);
         },
         function() { setLocStatus(''); },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
       );
     }, 800);
+  } else {
+    setTimeout(function() { if (typeof findNearestMosque === 'function') findNearestMosque(); }, 1200);
   }
 
   var tasbihPhrases = [
