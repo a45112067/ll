@@ -225,15 +225,28 @@
     .ap-bar { height:10px; border-radius:999px; background:#eef2f7; overflow:hidden; }
     .ap-bar span { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,#2563eb,#22c55e); transition:width .5s cubic-bezier(.2,.8,.3,1); }
     .adhkar-progress small { display:block; margin-top:7px; color:#94a3b8; font-size:.78rem; font-weight:600; }
-    .dhikr { background:#fdfbf5; border:1px solid #e5dcc2; border-radius:16px 12px 16px 12px; padding:18px; margin-bottom:12px; display:flex; flex-direction:column; gap:12px; box-shadow:0 4px 12px rgba(90,65,20,.05); transition:transform .25s cubic-bezier(.2,.8,.3,1), border-color .25s, box-shadow .25s; animation:dhikrIn .4s cubic-bezier(.2,.8,.3,1) both; animation-delay:calc(var(--i, 0) * 60ms); }
+    .adhkar-nav { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:14px; }
+    .adhkar-nav .mini-btn { width:42px; height:42px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; padding:0; font-size:.95rem; }
+    .adhkar-nav .mini-btn:disabled { opacity:.35; cursor:not-allowed; transform:none; }
+    .adhkar-step { min-width:70px; text-align:center; font-weight:900; font-size:.95rem; color:#125a32; background:#fff; border:1px solid #e5dcc2; border-radius:999px; padding:7px 14px; }
+    .dhikr { position:relative; background:#fff; border:1px solid #e5dcc2; border-radius:18px; padding:18px 18px 18px 54px; margin-bottom:12px; box-shadow:0 4px 14px rgba(90,65,20,.05); transition:transform .25s cubic-bezier(.2,.8,.3,1), border-color .25s, box-shadow .25s; animation:dhikrIn .4s cubic-bezier(.2,.8,.3,1) both; animation-delay:calc(var(--i, 0) * 60ms); cursor:pointer; overflow:hidden; }
     @keyframes dhikrIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-    .dhikr:hover { border-color:#2563eb; box-shadow:0 12px 26px rgba(90,65,20,.09); }
-    .dhikr.complete { background:linear-gradient(150deg,#e9f7ef,#d6efe2); border-color:#7cc79b; box-shadow:0 8px 20px rgba(34,197,94,.14); }
+    .dhikr:hover { border-color:#2563eb; box-shadow:0 12px 26px rgba(90,65,20,.09); transform:translateY(-2px); }
+    .dhikr.current { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.14), 0 12px 26px rgba(37,99,235,.12); }
+    .dhikr.current::before { content:''; position:absolute; inset:0 auto 0 0; width:5px; background:linear-gradient(180deg,#2563eb,#22c55e); }
+    .dhikr .dhikr-no { position:absolute; top:16px; left:16px; width:30px; height:30px; border-radius:50%; background:#eef2f7; color:#475569; font-size:.82rem; font-weight:900; display:inline-flex; align-items:center; justify-content:center; }
+    .dhikr.current .dhikr-no { background:#2563eb; color:#fff; box-shadow:0 6px 12px rgba(37,99,235,.3); }
+    .dhikr.complete { background:linear-gradient(150deg,#e9f7ef,#d6efe2); border-color:#7cc79b; box-shadow:0 8px 20px rgba(34,197,94,.12); }
     .dhikr.complete p { color:#14532d; }
-    .dhikr.complete .dhikr-foot .count { background:#22c55e; color:#fff; }
-    .dhikr p { color:#2b2416; font-size:1.06rem; line-height:2.1; font-weight:600; }
-    .dhikr-foot { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-    .dhikr-foot .count { background:rgba(22,101,52,.1); color:#125a32; padding:8px 18px; border-radius:999px; font-weight:900; font-size:1.02rem; }
+    .dhikr.complete .dhikr-no { background:#22c55e; color:#fff; }
+    .dhikr.complete .dhikr-check { display:inline-flex; }
+    .dhikr p { color:#2b2416; font-size:1.05rem; line-height:2.1; font-weight:600; margin:0; }
+    .dhikr-foot { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px; flex-wrap:wrap; }
+    .dhikr-foot small { color:#a69570; font-size:.8rem; font-weight:700; background:#faf6ea; border:1px solid #efe6cf; padding:4px 12px; border-radius:999px; }
+    .dhikr-foot .done-btn { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; background:#166534; color:#fff; font-weight:800; font-family:inherit; font-size:.86rem; padding:10px 18px; border-radius:12px; transition:.2s; box-shadow:0 8px 16px rgba(22,101,52,.24); }
+    .dhikr-foot .done-btn:hover { transform:translateY(-2px); box-shadow:0 12px 22px rgba(22,101,52,.3); }
+    .dhikr.complete .done-btn { background:#22c55e; }
+    .dhikr-check { position:absolute; bottom:16px; left:16px; width:30px; height:30px; border-radius:50%; background:#22c55e; color:#fff; font-size:.95rem; align-items:center; justify-content:center; display:none; box-shadow:0 6px 12px rgba(34,197,94,.3); }
     .dua { background:#fdfbf5; border:1px solid #e5dcc2; border-radius:12px 16px 12px 16px; padding:18px; margin-bottom:12px; display:flex; flex-direction:column; gap:10px; box-shadow:0 4px 12px rgba(90,65,20,.05); }
     .dua h4 { color:#125a32; font-size:.92rem; font-weight:800; display:flex; align-items:center; gap:8px; }
     .dua p { color:#2b2416; font-size:1.12rem; line-height:2.1; font-weight:700; }
@@ -364,6 +377,16 @@
     .loc-btn { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; background:#ff9800; color:#fff; font-weight:900; padding:11px 20px; border-radius:12px; font-family:inherit; font-size:.88rem; transition:.2s; box-shadow:0 10px 22px rgba(184,134,11,.3); }
     .loc-btn:hover { background:#e67e00; transform:translateY(-2px); }
     .loc-status { color:rgba(255,255,255,.85); font-size:.82rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; }
+    .mosque-btn-loading { opacity:.7; pointer-events:none; }
+    .mosque-result { margin-top:12px; }
+    .mr-card { display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:16px; padding:14px 16px; backdrop-filter:blur(4px); animation:mrIn .4s cubic-bezier(.2,.8,.3,1); }
+    @keyframes mrIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+    .mr-ico { flex-shrink:0; width:46px; height:46px; border-radius:14px; background:linear-gradient(140deg,#ff9800,#e67e00); color:#fff; font-size:1.2rem; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(184,134,11,.35); }
+    .mr-body { flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .mr-body b { color:#fff; font-size:.98rem; font-weight:900; }
+    .mr-body small { color:rgba(255,255,255,.82); font-size:.8rem; font-weight:700; }
+    .mr-open { align-self:center; flex-shrink:0; display:inline-flex; align-items:center; gap:7px; background:#fff; color:#125a32; font-weight:900; font-size:.8rem; padding:8px 14px; border-radius:11px; text-decoration:none; transition:.2s; }
+    .mr-open:hover { transform:translateY(-2px); box-shadow:0 8px 16px rgba(0,0,0,.2); }
     .spinner { width:14px; height:14px; border:2.5px solid rgba(255,255,255,.35); border-top-color:#fff; border-radius:50%; display:inline-block; animation:spin .7s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
     .resume-bar { display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:linear-gradient(90deg,#fffbeb,#ffffff 60%); border:1px solid #fde68a; border-right:6px solid #ff9800; border-radius:14px; padding:13px 16px; margin-bottom:14px; font-weight:800; font-size:.9rem; color:#0f172a; }
@@ -808,6 +831,11 @@
       <small class="lang-ar" id="adhkarInfo">أتمّ كل ذكر لإكمال القسم</small>
       <small class="lang-en" id="adhkarInfoEn" style="display:none">Complete each dhikr to finish the section</small>
     </div>
+    <div class="adhkar-nav">
+      <button class="mini-btn" id="adhkarPrev" aria-label="السابق"><i class="fas fa-chevron-up"></i></button>
+      <span class="adhkar-step" id="adhkarStep">1 / 1</span>
+      <button class="mini-btn" id="adhkarNext" aria-label="التالي"><i class="fas fa-chevron-down"></i></button>
+    </div>
     <div id="adhkarList"></div>
   </section>
 
@@ -844,7 +872,18 @@
       </div>
       <div class="loc-row">
         <button class="loc-btn" id="locBtn" onclick="autoLocate()"><i class="fas fa-location-crosshairs"></i> <span class="lang-ar">تحديد مدينتي تلقائيًا</span><span class="lang-en">Auto-detect my city</span></button>
+        <button class="loc-btn" id="mosqueBtn" onclick="findNearestMosque()"><i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span></button>
         <span class="loc-status" id="locStatus" style="display:none;"></span>
+      </div>
+      <div class="mosque-result" id="mosqueResult" style="display:none;">
+        <div class="mr-card">
+          <div class="mr-ico"><i class="fas fa-mosque"></i></div>
+          <div class="mr-body">
+            <b class="mr-name" id="mosqueName"><span class="lang-ar">أقرب مسجد إليك</span><span class="lang-en">Nearest mosque</span></b>
+            <small id="mosqueDist"></small>
+            <a class="mr-open" id="mosqueOpen" href="#" target="_blank" rel="noopener"><i class="fas fa-map-location-dot"></i> <span class="lang-ar">افتح في الخرائط</span><span class="lang-en">Open in maps</span></a>
+          </div>
+        </div>
       </div>
       <div class="next-prayer" id="nextPrayer">
         <span class="np-name"><i class="fas fa-bell"></i> <span class="lang-ar">الصلاة القادمة</span><span class="lang-en">Next Prayer</span></span>
@@ -1800,35 +1839,82 @@ var savedLang = null;
   function saveAdhkarProgress(p) {
     try { localStorage.setItem(adhkarKey, JSON.stringify(p)); } catch (e) {}
   }
+  var adhkarIdx = 0;
+  function firstIncomplete(prog) {
+    for (var i = 0; i < ADHKAR[adhkarCat].length; i++) {
+      if (!(prog[adhkarCat + '_' + i] || 0)) return i;
+    }
+    return 0;
+  }
+  function updateAdhkarProgress() {
+    var items = ADHKAR[adhkarCat];
+    var prog = getAdhkarProgress();
+    var done = 0;
+    items.forEach(function(it, idx) { if (prog[adhkarCat + '_' + idx]) done++; });
+    var pct = items.length ? Math.round((done / items.length) * 100) : 0;
+    document.getElementById('adhkarPct').textContent = pct + '%';
+    document.getElementById('adhkarFill').style.width = pct + '%';
+    document.getElementById('adhkarInfo').textContent = done < items.length
+      ? 'أتممت ' + done + ' من ' + items.length + ' — تابع الذكر التالي'
+      : 'أتممت كل أذكار هذا القسم — أحسن الله إليك';
+    document.getElementById('adhkarInfoEn').textContent = done < items.length
+      ? 'Done ' + done + ' of ' + items.length + ' — continue with the next'
+      : 'You completed all adhkar of this section';
+  }
   function renderAdhkar() {
     var list = document.getElementById('adhkarList');
     list.innerHTML = '';
     var prog = getAdhkarProgress();
+    if (!prog[adhkarCat + '_' + adhkarIdx]) adhkarIdx = firstIncomplete(prog);
+    if (adhkarIdx >= ADHKAR[adhkarCat].length) adhkarIdx = ADHKAR[adhkarCat].length - 1;
     ADHKAR[adhkarCat].forEach(function(item, idx) {
       var key = adhkarCat + '_' + idx;
-      var done = prog[key] || 0;
-      var target = item.count || 1;
+      var done = !!(prog[key]);
       var div = document.createElement('div');
-      div.className = 'dhikr';
-      var counterHtml = '<div class="dhikr-count"><button class="c-btn" data-key="' + key + '" data-target="' + target + '"><i class="fas fa-plus"></i></button><span class="c-num" data-num="' + key + '">' + done + '/' + target + '</span>' + (done >= target ? '<span class="c-done"><i class="fas fa-check"></i></span>' : '') + '</div>';
-      div.innerHTML = '<p>' + item.text + '</p><div class="dhikr-foot"><span class="count">' + target + '</span><small>' + item.ref + '</small>' + counterHtml + '</div>';
+      div.className = 'dhikr' + (done ? ' complete' : '') + (idx === adhkarIdx ? ' current' : '');
+      div.style.setProperty('--i', idx);
+      div.innerHTML = '<span class="dhikr-no">' + (idx + 1) + '</span>'
+        + '<p>' + item.text + '</p>'
+        + '<div class="dhikr-foot"><small><i class="fas fa-book"></i> ' + item.ref + '</small>'
+        + '<button class="done-btn" data-key="' + key + '">'
+        + (done ? '<i class="fas fa-check"></i> ' : '<i class="fas fa-hands-praying"></i> ') + (done ? '' : 'أتممت هذا الذكر')
+        + '</button></div>'
+        + '<span class="dhikr-check"><i class="fas fa-check"></i></span>';
+      div.addEventListener('click', function() {
+        adhkarIdx = idx;
+        renderAdhkar();
+      });
       list.appendChild(div);
     });
-    list.querySelectorAll('.c-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+    list.querySelectorAll('.done-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
         var prog2 = getAdhkarProgress();
         var k = btn.getAttribute('data-key');
-        var t = parseInt(btn.getAttribute('data-target'), 10);
-        var cur = prog2[k] || 0;
-        if (cur < t) {
-          prog2[k] = cur + 1;
-          saveAdhkarProgress(prog2);
+        prog2[k] = 1;
+        saveAdhkarProgress(prog2);
+        if (k === adhkarCat + '_' + adhkarIdx) {
+          var next = firstIncomplete(prog2);
+          adhkarIdx = next;
         }
         renderAdhkar();
-        if (prog2[k] >= t) toast('تقبل الله، أتممت هذا الذكر');
+        updateAdhkarProgress();
+        if (prog2[k]) toast('تقبل الله، أتممت هذا الذكر');
       });
     });
+    var total = ADHKAR[adhkarCat].length;
+    document.getElementById('adhkarStep').textContent = (adhkarIdx + 1) + ' / ' + total;
+    document.getElementById('adhkarPrev').disabled = adhkarIdx === 0;
+    document.getElementById('adhkarNext').disabled = adhkarIdx >= total - 1;
+    updateAdhkarProgress();
   }
+  function adhkarNav(dir) {
+    var max = ADHKAR[adhkarCat].length - 1;
+    adhkarIdx = Math.max(0, Math.min(max, adhkarIdx + dir));
+    renderAdhkar();
+  }
+  document.getElementById('adhkarPrev').addEventListener('click', function() { adhkarNav(-1); });
+  document.getElementById('adhkarNext').addEventListener('click', function() { adhkarNav(1); });
   renderAdhkarTabs();
   renderAdhkar();
 
@@ -1920,6 +2006,80 @@ var savedLang = null;
     var st = document.getElementById('locStatus');
     st.style.display = msg ? 'inline-flex' : 'none';
     st.innerHTML = msg || '';
+  }
+  function findNearestMosque() {
+    var btn = document.getElementById('mosqueBtn');
+    var box = document.getElementById('mosqueResult');
+    btn.classList.add('mosque-btn-loading');
+    btn.innerHTML = '<span class="spinner"></span> <span class="lang-ar">جارٍ البحث...</span><span class="lang-en">Searching...</span>';
+    if (box) box.style.display = 'none';
+    if (!navigator.geolocation) {
+      btn.classList.remove('mosque-btn-loading');
+      btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+      toast('المتصفح لا يدعم تحديد الموقع');
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      async function(pos) {
+        var lat = pos.coords.latitude, lon = pos.coords.longitude;
+        var distM = pos.coords.accuracy || 50;
+        var radius = Math.min(5000, Math.max(500, distM * 6));
+        var q = '[out:json][timeout:15];(node["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');way["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + '););out center tags;';
+        try {
+          var res = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', body: 'data=' + encodeURIComponent(q) });
+          var d = await res.json();
+          var best = null, bestDist = Infinity;
+          (d.elements || []).forEach(function(el) {
+            var elat = el.type === 'node' ? (el.lat || 0) : (el.center ? el.center.lat : 0);
+            var elon = el.type === 'node' ? (el.lon || 0) : (el.center ? el.center.lon : 0);
+            if (!elat || !elon) return;
+            var dist = calcDist(lat, lon, elat, elon);
+            if (dist < bestDist) { bestDist = dist; best = el; }
+          });
+          var t = document.getElementById('mosqueName');
+          var distEl = document.getElementById('mosqueDist');
+          var openEl = document.getElementById('mosqueOpen');
+          if (!best) {
+            t.innerHTML = '<span class="lang-ar">لم يُعثر على مسجد قريب</span><span class="lang-en">No mosque found nearby</span>';
+            distEl.textContent = '';
+            openEl.href = '#';
+          } else {
+            var nm = (best.tags && (best.tags.name || best.tags['name:ar'] || best.tags['name:en'])) || '';
+            t.innerHTML = nm ? nm : '<span class="lang-ar">مسجد</span><span class="lang-en">Mosque</span>';
+            var km = bestDist >= 1000 ? (bestDist / 1000).toFixed(2) + ' كم' : Math.round(bestDist) + ' م';
+            distEl.textContent = (nm ? '' : '') + 'بعدك ' + km;
+            openEl.href = 'https://www.google.com/maps/dir/?api=1&destination=' + elCenterLat(best) + ',' + elCenterLon(best);
+            box.style.display = 'block';
+          }
+          toast('تم العثور على أقرب مسجد');
+        } catch (e) {
+          toast('تعذر البحث عن المساجد — تحقق من الاتصال');
+        }
+        btn.classList.remove('mosque-btn-loading');
+        btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+      },
+      function() {
+        btn.classList.remove('mosque-btn-loading');
+        btn.innerHTML = '<i class="fas fa-mosque"></i> <span class="lang-ar">أقرب مسجد</span><span class="lang-en">Nearest Mosque</span>';
+        toast('لم يُسمح بالوصول للموقع');
+      },
+      { enableHighAccuracy: true, timeout: 12000 }
+    );
+  }
+  function elCenterLat(el) {
+    return el.type === 'node' ? el.lat : (el.center ? el.center.lat : 0);
+  }
+  function elCenterLon(el) {
+    return el.type === 'node' ? el.lon : (el.center ? el.center.lon : 0);
+  }
+  function calcDist(lat1, lon1, lat2, lon2) {
+    var R = 6371000;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
   function autoLocate() {
     setLocStatus('<span class="spinner"></span> <span class="lang-ar">جارٍ تحديد موقعك...</span><span class="lang-en">Locating...</span>');
