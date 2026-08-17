@@ -242,6 +242,11 @@ body.dark .tasbih-ring .tr-fill { stroke: var(--brand); }
 body.dark .tasbih-ring-wrap.done .tr-fill { stroke: #d4af37; }
 body.dark .tasbih-num { color: var(--ink); }
 body.dark .tasbih-num-wrap .tasbih-target { color: var(--ink-soft); }
+body.dark .tasbih-target-wrap { background: linear-gradient(140deg,#2a2633,#332d22); border-color: #5a4a22; }
+body.dark .tasbih-target-wrap .tasbih-target-label { color: #d4af37; }
+body.dark .tasbih-target-wrap .tasbih-target { color: #ffe9a8; }
+body.dark .tasbih-ring-wrap.done .tasbih-target-wrap { background: linear-gradient(140deg,#4a3a10,#5c4a12); border-color: #b8860b; }
+body.dark .tasbih-ring-wrap.done .tasbih-target { color: #ffd66b; }
 body.dark .mini-btn.tb-target.active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
 /* ===== النوافذ المنبثقة ===== */

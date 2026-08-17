@@ -250,15 +250,19 @@
     .tasbih-phrases button .p-count { min-width:24px; height:24px; padding:0 7px; border-radius:999px; background:#ffe9c4; color:#6b5a3e; font-size:.74rem; font-weight:900; display:inline-flex; align-items:center; justify-content:center; }
     .tasbih-phrases button.active { background:#166534; color:#fff; border-color:#166534; box-shadow:0 8px 18px rgba(22,101,52,.24); }
     .tasbih-phrases button.active .p-count { background:#fff; color:#166534; }
-    .tasbih-num { font-size:3.2rem; font-weight:900; color:#125a32; line-height:1; margin:6px 0 2px; transition:transform .15s; }
+    .tasbih-num { font-size:3.2rem; font-weight:900; color:#125a32; line-height:1; margin:4px 0 6px; transition:transform .15s; }
     .tasbih-ring-wrap { position:relative; width:190px; height:190px; margin:10px auto 0; }
     .tasbih-ring { position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
     .tasbih-ring .tr-track { fill:none; stroke:#f0e6c8; stroke-width:10; }
     .tasbih-ring .tr-fill { fill:none; stroke:#166534; stroke-width:10; stroke-linecap:round; stroke-dasharray:414.69; stroke-dashoffset:414.69; transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.3,1); }
     .tasbih-ring-wrap.done .tr-fill { stroke:#d4af37; }
     .tasbih-num-wrap { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    .tasbih-num-wrap .tasbih-target { margin-bottom:6px; font-size:.85rem; }
     .tasbih-num-wrap .tasbih-btn { margin:8px auto 0; }
+    .tasbih-target-wrap { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(140deg,#fdf3d7,#ffe9c4); border:1.5px solid #e2c987; border-radius:999px; padding:4px 12px; box-shadow:0 4px 10px rgba(184,134,11,.16); }
+    .tasbih-target-wrap .tasbih-target-label { color:#b8860b; font-size:.72rem; display:inline-flex; }
+    .tasbih-target { color:#6b4e15; font-weight:900; font-size:.82rem; font-family:'Amiri','Noto Naskh Arabic',serif; direction:ltr; }
+    .tasbih-ring-wrap.done .tasbih-target-wrap { background:linear-gradient(140deg,#ffe9b8,#ffd66b); border-color:#b8860b; box-shadow:0 4px 14px rgba(212,175,55,.4); }
+    .tasbih-ring-wrap.done .tasbih-target { color:#5c3a00; }
     .tasbih-num.pop { animation:tasbihPop .3s cubic-bezier(.2,.8,.3,1); }
     .tasbih-btn.pop { animation:btnPop .3s cubic-bezier(.2,.8,.3,1); }
     @keyframes tasbihPop { 0% { transform:scale(1); } 40% { transform:scale(1.18); } 100% { transform:scale(1); } }
@@ -661,7 +665,10 @@
         </svg>
         <div class="tasbih-num-wrap">
           <div class="tasbih-num" id="tasbihNum">0</div>
-          <div class="tasbih-target" id="tasbihTarget"></div>
+          <div class="tasbih-target-wrap">
+            <span class="tasbih-target-label"><i class="fas fa-bullseye"></i></span>
+            <span class="tasbih-target" id="tasbihTarget"></span>
+          </div>
           <button class="tasbih-btn" id="tasbihBtn" aria-label="عد"><i class="fas fa-circle-notch"></i></button>
         </div>
       </div>
@@ -2004,7 +2011,7 @@ var savedLang = null;
       wrap.appendChild(b);
     });
     document.getElementById('tasbihNum').textContent = tasbihCounts[tasbihIdx];
-    document.getElementById('tasbihTarget').textContent = 'الهدف: ' + tasbihTarget;
+    document.getElementById('tasbihTarget').textContent = tasbihCounts[tasbihIdx] + ' / ' + tasbihTarget;
     renderTasbihTargets();
     updateTasbihRing();
   }
