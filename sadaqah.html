@@ -370,6 +370,11 @@
     .loc-status { color:rgba(255,255,255,.85); font-size:.82rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; }
     .mosque-btn-loading { opacity:.7; pointer-events:none; }
     .mosque-result { margin-top:12px; }
+    .mr-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+    .mr-title { color:#fff; font-weight:900; font-size:.9rem; display:inline-flex; align-items:center; gap:8px; }
+    .mr-title i { color:#ff9800; }
+    .mr-status { color:#ffd66b; font-size:.8rem; font-weight:800; }
+    .mr-list { display:flex; flex-direction:column; gap:8px; }
     .mr-card { display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:16px; padding:14px 16px; backdrop-filter:blur(4px); animation:mrIn .4s cubic-bezier(.2,.8,.3,1); }
     @keyframes mrIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
     .mr-ico { flex-shrink:0; width:46px; height:46px; border-radius:14px; background:linear-gradient(140deg,#ff9800,#e67e00); color:#fff; font-size:1.2rem; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(184,134,11,.35); }
@@ -2009,38 +2014,57 @@ var savedLang = null;
         var distM = pos.coords.accuracy || 50;
         var radius = Math.min(5000, Math.max(500, distM * 6));
         var q = '[out:json][timeout:15];(node["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');way["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + '););out center tags;';
+        var qEnc = encodeURIComponent(q);
+        var servers = [
+          'https://overpass-api.de/api/interpreter',
+          'https://overpass.kumi.systems/api/interpreter',
+          'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
+        ];
+        var d = null;
         try {
-          var d = null;
+        for (var si = 0; si < servers.length; si++) {
           try {
-            var res = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(q), { headers: { 'Accept': 'application/json' } });
-            d = await res.json();
-          } catch (e) {
-            var res2 = await fetch('https://overpass.kumi.systems/api/interpreter?data=' + encodeURIComponent(q), { headers: { 'Accept': 'application/json' } });
-            d = await res2.json();
-          }
-          var best = null, bestDist = Infinity;
+            var ctrl = new AbortController();
+            var tmr = setTimeout(function() { try { ctrl.abort(); } catch (e) {} }, 12000);
+            var fres = await fetch(servers[si] + '?data=' + qEnc, { headers: { 'Accept': 'application/json' }, signal: ctrl.signal });
+            clearTimeout(tmr);
+            if (!fres.ok) continue;
+            var jd = await fres.json();
+            if (jd && jd.elements) { d = jd; break; }
+          } catch (e) {}
+        }
+        if (!d) throw new Error('no data');
+          var listEl = document.getElementById('mosqueList');
+          var statusEl = document.getElementById('mosqueStatus');
+          var items = [];
           (d.elements || []).forEach(function(el) {
             var elat = el.type === 'node' ? (el.lat || 0) : (el.center ? el.center.lat : 0);
             var elon = el.type === 'node' ? (el.lon || 0) : (el.center ? el.center.lon : 0);
             if (!elat || !elon) return;
             var dist = calcDist(lat, lon, elat, elon);
-            if (dist < bestDist) { bestDist = dist; best = el; }
+            items.push({ el: el, dist: dist, lat: elat, lon: elon });
           });
-          var t = document.getElementById('mosqueName');
-          var distEl = document.getElementById('mosqueDist');
-          var openEl = document.getElementById('mosqueOpen');
-          if (!best) {
-            t.innerHTML = '<span class="lang-ar">لم يُعثر على مسجد قريب</span><span class="lang-en">No mosque found nearby</span>';
-            distEl.textContent = '';
-            openEl.href = '#';
-            box.style.display = 'block';
+          items.sort(function(a, b) { return a.dist - b.dist; });
+          items = items.slice(0, 5);
+          if (!items.length) {
+            if (statusEl) { statusEl.style.display = 'inline-flex'; statusEl.innerHTML = '<span class="lang-ar">لم يُعثر على مسجد قريب</span><span class="lang-en">No mosque found nearby</span>'; }
+            if (listEl) listEl.innerHTML = '';
+            if (box) box.style.display = 'block';
           } else {
-            var nm = (best.tags && (best.tags.name || best.tags['name:ar'] || best.tags['name:en'])) || '';
-            t.innerHTML = nm ? nm : '<span class="lang-ar">مسجد</span><span class="lang-en">Mosque</span>';
-            var km = bestDist >= 1000 ? (bestDist / 1000).toFixed(2) + ' كم' : Math.round(bestDist) + ' م';
-            distEl.textContent = 'بعدك ' + km;
-            openEl.href = 'https://www.google.com/maps/dir/?api=1&destination=' + elCenterLat(best) + ',' + elCenterLon(best);
-            box.style.display = 'block';
+            if (statusEl) statusEl.style.display = 'none';
+            listEl.innerHTML = '';
+            items.forEach(function(it) {
+              var nm = (it.el.tags && (it.el.tags.name || it.el.tags['name:ar'] || it.el.tags['name:en'])) || '';
+              var nameHtml = nm ? nm : '<span class="lang-ar">مسجد</span><span class="lang-en">Mosque</span>';
+              var km = it.dist >= 1000 ? (it.dist / 1000).toFixed(2) + ' كم' : Math.round(it.dist) + ' م';
+              var card = document.createElement('div');
+              card.className = 'mr-card';
+              card.innerHTML = '<div class="mr-ico"><i class="fas fa-mosque"></i></div>'
+                + '<div class="mr-body"><b class="mr-name">' + nameHtml + '</b><small>بعدك ' + km + '</small></div>'
+                + '<a class="mr-open" href="https://www.google.com/maps/dir/?api=1&destination=' + it.lat + ',' + it.lon + '" target="_blank" rel="noopener"><i class="fas fa-map-location-dot"></i> <span class="lang-ar">الخرائط</span><span class="lang-en">Maps</span></a>';
+              listEl.appendChild(card);
+            });
+            if (box) box.style.display = 'block';
           }
         } catch (e) {
           toast('تعذر البحث عن المساجد — تحقق من الاتصال');
@@ -2059,12 +2083,6 @@ var savedLang = null;
       },
       { enableHighAccuracy: true, timeout: 12000, maximumAge: 300000 }
     );
-  }
-  function elCenterLat(el) {
-    return el.type === 'node' ? el.lat : (el.center ? el.center.lat : 0);
-  }
-  function elCenterLon(el) {
-    return el.type === 'node' ? el.lon : (el.center ? el.center.lon : 0);
   }
   function calcDist(lat1, lon1, lat2, lon2) {
     var R = 6371000;
