@@ -343,6 +343,20 @@
     .dhikr-count .c-btn:hover { transform:scale(1.08); }
     .dhikr-count .c-num { min-width:34px; text-align:center; font-weight:900; color:#1d4ed8; font-size:1rem; }
     .dhikr-count .c-done { background:#22c55e; border-radius:999px; padding:3px 12px; color:#fff; font-weight:900; font-size:.76rem; }
+    .names-intro { background:linear-gradient(140deg,#2563eb,#1e40af 92%); border-radius:18px; padding:20px 22px; margin-bottom:16px; color:#fff; box-shadow:0 14px 30px rgba(37,99,235,.25); }
+    .names-intro p { color:rgba(255,255,255,.95); line-height:2; font-size:.95rem; font-weight:600; }
+    .names-search { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+    .names-search input { flex:1; min-width:220px; padding:13px 18px; border-radius:12px; border:1px solid #e2e8f0; background:#fff; font-family:inherit; font-size:.92rem; font-weight:600; color:#0f172a; outline:none; transition:.2s; }
+    .names-search input:focus { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.15); }
+    .names-total { background:rgba(22,101,52,.1); color:#1d4ed8; padding:8px 16px; border-radius:999px; font-weight:900; font-size:.85rem; }
+    .names-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:12px; }
+    .name-card { background:#ffffff; border:1px solid #e2e8f0; border-radius:16px 16px 18px 18px; padding:18px 14px; text-align:center; box-shadow:0 4px 12px rgba(90,65,20,.06); transition:transform .3s cubic-bezier(.2,.8,.3,1), border-color .3s, box-shadow .3s; }
+    .name-card:hover { border-color:#ff9800; transform:translateY(-4px); box-shadow:0 16px 34px rgba(184,134,11,.16); }
+    .name-card .nc-num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:rgba(22,101,52,.1); color:#1d4ed8; font-weight:900; font-size:.78rem; margin-bottom:12px; }
+    .name-card .nc-ar { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.65rem; font-weight:700; color:#0f172a; line-height:1.6; }
+    .name-card .nc-tr { display:block; margin-top:8px; font-size:.8rem; font-weight:700; color:#2563eb; direction:ltr; }
+    .name-card .nc-en { display:block; margin-top:4px; font-size:.76rem; font-weight:600; color:#64748b; line-height:1.5; }
+    @media (max-width:480px) { .names-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } .name-card .nc-ar { font-size:1.4rem; } }
     .surah-card .done-badge { margin-inline-start:auto; color:#f59e0b; font-size:1rem; }
     @media (max-width:900px) { .quick-nav { justify-content:center; } .daily-wrap { grid-template-columns:1fr; } }
     @media (max-width:768px) {
@@ -511,6 +525,7 @@
       <button data-target="#tasbih"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/></svg> <span class="lang-ar">التسبيح</span><span class="lang-en">Tasbih</span></button>
       <button data-target="#quran"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> <span class="lang-ar">القرآن كاملاً</span><span class="lang-en">Quran</span></button>
       <button data-target="#adhkar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1-3 0-6 1.3-6 5.5C11 15.8 14 18 17 18c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1-1.3 0-2-.7-2-2s.7-2 2-2z"/></svg> <span class="lang-ar">الأذكار</span><span class="lang-en">Adhkar</span></button>
+      <button data-target="#names"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15c-2-2-3-4-3-6h6c0 2-1 4-3 6z"/><path d="M12 21v-2"/><path d="M8 3l1 4h6l1-4"/><path d="M9 12v.01M15 12v.01"/></svg> <span class="lang-ar">أسماء الله الحسنى</span><span class="lang-en">99 Names of Allah</span></button>
       <button data-target="#duas"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5z"/><path d="M18 11v4M16 13h4"/></svg> <span class="lang-ar">الأدعية</span><span class="lang-en">Duas</span></button>
       <button data-target="#prayer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V6a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><circle cx="6" cy="12" r="1.5"/><circle cx="10" cy="12" r="1.5"/><circle cx="14" cy="12" r="1.5"/></svg> <span class="lang-ar">الصلاة</span><span class="lang-en">Prayer</span></button>
       <button data-target="#charity"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-2 2-3.8 2-5.5A5.5 5.5 0 0 0 15.5 3c-1.8 0-3.4.9-4.4 2.3A5.5 5.5 0 0 0 3 8.5C3 12.5 6 15 12 21c6-6 7-8.5 7-7z"/></svg> <span class="lang-ar">الصدقة</span><span class="lang-en">Charity</span></button>
@@ -704,6 +719,19 @@
     <h2 class="sec-title"><span class="sec-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1-3 0-6 1.3-6 5.5C11 15.8 14 18 17 18c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1-1.3 0-2-.7-2-2s.7-2 2-2z"/><path d="M7 10c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1-3 0-6 1.3-6 5.5C1 15.8 4 18 7 18c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1-1.3 0-2-.7-2-2s.7-2 2-2z"/></svg></span> <span class="lang-ar">الأذكار</span><span class="lang-en">Adhkar</span></h2>
     <div class="adhkar-tabs" id="adhkarTabs"></div>
     <div id="adhkarList"></div>
+  </section>
+
+  <section class="section-block" id="names" data-aos="fade-up">
+    <div class="sec-divider"><span class="lang-ar">﴿﴾</span></div>
+    <h2 class="sec-title"><span class="sec-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15c-2-2-3-4-3-6h6c0 2-1 4-3 6z"/><path d="M12 21v-2"/><path d="M8 3l1 4h6l1-4"/><path d="M9 12v.01M15 12v.01"/></svg></span> <span class="lang-ar">أسماء الله الحسنى</span><span class="lang-en">The 99 Names of Allah</span></h2>
+    <div class="names-intro">
+      <p><span class="lang-ar">قال ﷺ: «إنَّ لله تسعةً وتسعين اسماً، مَن حَفِظها دخلَ الجنة». أسماء الله الحسنى من أعظم أبواب معرفة الله — تأمَّلها وادعُ بها.</span><span class="lang-en">The Prophet ﷺ said: "Allah has ninety-nine names; whoever preserves them will enter Paradise." Pondering the Names of Allah is a great path to knowing Him — reflect on them and call upon Him by them.</span></p>
+    </div>
+    <div class="names-search">
+      <input type="search" id="namesSearch" placeholder="ابحث عن اسم... / Search a name..." aria-label="البحث في أسماء الله الحسنى">
+      <span class="names-total" id="namesTotal"></span>
+    </div>
+    <div class="names-grid" id="namesGrid"></div>
   </section>
 
   <section class="section-block" id="duas" data-aos="fade-up">
@@ -1482,6 +1510,128 @@ var savedLang = null;
   renderSurahs('');
   fillJump();
   document.getElementById('quranJuz').innerHTML = '30 جزءًا — 114 سورة';
+
+  var NAMES_OF_ALLAH = [
+    ['الرَّحْمَن', 'Ar-Rahman', 'The Most Gracious'],
+    ['الرَّحِيم', 'Ar-Rahim', 'The Most Merciful'],
+    ['المَلِك', 'Al-Malik', 'The King, The Sovereign'],
+    ['القُدُّوس', 'Al-Quddus', 'The Most Holy'],
+    ['السَّلَام', 'As-Salam', 'The Source of Peace'],
+    ['المُؤْمِن', 'Al-Mu\'min', 'The Giver of Faith'],
+    ['المُهَيْمِن', 'Al-Muhaymin', 'The Guardian'],
+    ['العَزِيز', 'Al-\'Aziz', 'The Almighty'],
+    ['الجَبَّار', 'Al-Jabbar', 'The Compeller'],
+    ['المُتَكَبِّر', 'Al-Mutakabbir', 'The Supreme'],
+    ['الخَالِق', 'Al-Khaliq', 'The Creator'],
+    ['البَارِئ', 'Al-Bari\'', 'The Evolver'],
+    ['المُصَوِّر', 'Al-Musawwir', 'The Fashioner'],
+    ['الغَفَّار', 'Al-Ghaffar', 'The Great Forgiver'],
+    ['القَهَّار', 'Al-Qahhar', 'The Subduer'],
+    ['الوَهَّاب', 'Al-Wahhab', 'The Bestower'],
+    ['الرَّزَّاق', 'Ar-Razzaq', 'The Provider'],
+    ['الفَتَّاح', 'Al-Fattah', 'The Opener'],
+    ['العَلِيم', 'Al-\'Alim', 'The All-Knowing'],
+    ['القَابِض', 'Al-Qabid', 'The Withholder'],
+    ['البَاسِط', 'Al-Basit', 'The Extender'],
+    ['الخَافِض', 'Al-Khafid', 'The Abaser'],
+    ['الرَّافِع', 'Ar-Rafi\'', 'The Exalter'],
+    ['المُعِزّ', 'Al-Mu\'izz', 'The Honor-Giver'],
+    ['المُذِلّ', 'Al-Mudhill', 'The Humiliator'],
+    ['السَّمِيع', 'As-Sami\'', 'The All-Hearing'],
+    ['البَصِير', 'Al-Basir', 'The All-Seeing'],
+    ['الحَكَم', 'Al-Hakam', 'The Judge'],
+    ['العَدْل', 'Al-\'Adl', 'The Just'],
+    ['اللَّطِيف', 'Al-Latif', 'The Subtle'],
+    ['الخَبِير', 'Al-Khabir', 'The All-Aware'],
+    ['الحَلِيم', 'Al-Halim', 'The Forbearing'],
+    ['العَظِيم', 'Al-\'Azim', 'The Magnificent'],
+    ['الغَفُور', 'Al-Ghafur', 'The Forgiving'],
+    ['الشَّكُور', 'Ash-Shakur', 'The Appreciative'],
+    ['العَلِيّ', 'Al-\'Aliyy', 'The Most High'],
+    ['الكَبِير', 'Al-Kabir', 'The Most Great'],
+    ['الحَفِيظ', 'Al-Hafiz', 'The Preserver'],
+    ['المُقِيت', 'Al-Muqit', 'The Sustainer'],
+    ['الحَسِيب', 'Al-Hasib', 'The Reckoner'],
+    ['الجَلِيل', 'Al-Jalil', 'The Majestic'],
+    ['الكَرِيم', 'Al-Karim', 'The Generous'],
+    ['الرَّقِيب', 'Ar-Raqib', 'The Watchful'],
+    ['المُجِيب', 'Al-Mujib', 'The Responsive'],
+    ['الوَاسِع', 'Al-Wasi\'', 'The All-Encompassing'],
+    ['الحَكِيم', 'Al-Hakim', 'The Wise'],
+    ['الوَدُود', 'Al-Wadud', 'The Loving'],
+    ['المَجِيد', 'Al-Majid', 'The Glorious'],
+    ['البَاعِث', 'Al-Ba\'ith', 'The Resurrector'],
+    ['الشَّهِيد', 'Ash-Shahid', 'The Witness'],
+    ['الحَقّ', 'Al-Haqq', 'The Truth'],
+    ['الوَكِيل', 'Al-Wakil', 'The Trustee'],
+    ['القَوِيّ', 'Al-Qawiyy', 'The Strong'],
+    ['المَتِين', 'Al-Matin', 'The Firm'],
+    ['الوَلِيّ', 'Al-Waliyy', 'The Protecting Friend'],
+    ['الحَمِيد', 'Al-Hamid', 'The Praiseworthy'],
+    ['المُحْصِي', 'Al-Muhsi', 'The Accounter'],
+    ['المُبْدِئ', 'Al-Mubdi\'', 'The Originator'],
+    ['المُعِيد', 'Al-Mu\'id', 'The Restorer'],
+    ['المُحْيِي', 'Al-Muhyi', 'The Giver of Life'],
+    ['المُمِيت', 'Al-Mumit', 'The Taker of Life'],
+    ['الحَيّ', 'Al-Hayy', 'The Ever-Living'],
+    ['القَيُّوم', 'Al-Qayyum', 'The Self-Sustaining'],
+    ['الوَاجِد', 'Al-Wajid', 'The Finder'],
+    ['المَاجِد', 'Al-Majid', 'The Noble'],
+    ['الوَاحِد', 'Al-Wahid', 'The One'],
+    ['الأَحَد', 'Al-Ahad', 'The Unique'],
+    ['الصَّمَد', 'As-Samad', 'The Eternal Refuge'],
+    ['القَادِر', 'Al-Qadir', 'The Able'],
+    ['المُقْتَدِر', 'Al-Muqtadir', 'The All-Powerful'],
+    ['المُقَدِّم', 'Al-Muqaddim', 'The Expediter'],
+    ['المُؤَخِّر', 'Al-Mu\'akhkhir', 'The Delayer'],
+    ['الأَوَّل', 'Al-Awwal', 'The First'],
+    ['الآخِر', 'Al-Akhir', 'The Last'],
+    ['الظَّاهِر', 'Az-Zahir', 'The Manifest'],
+    ['البَاطِن', 'Al-Batin', 'The Hidden'],
+    ['الوَالِي', 'Al-Wali', 'The Governor'],
+    ['المُتَعَالِي', 'Al-Muta\'ali', 'The Exalted'],
+    ['البَرّ', 'Al-Barr', 'The Source of Goodness'],
+    ['التَّوَّاب', 'At-Tawwab', 'The Acceptor of Repentance'],
+    ['المُنْتَقِم', 'Al-Muntaqim', 'The Avenger'],
+    ['العَفُوّ', 'Al-\'Afuww', 'The Pardoner'],
+    ['الرَّءُوف', 'Ar-Ra\'uf', 'The Most Kind'],
+    ['مَالِكُ الْمُلْك', 'Malik al-Mulk', 'The Owner of Sovereignty'],
+    ['ذُو الْجَلَالِ وَالْإِكْرَام', 'Dhul-Jalali wal-Ikram', 'The Lord of Majesty & Honor'],
+    ['المُقْسِط', 'Al-Muqsit', 'The Equitable'],
+    ['الجَامِع', 'Al-Jami\'', 'The Gatherer'],
+    ['الغَنِيّ', 'Al-Ghaniyy', 'The Self-Sufficient'],
+    ['المُغْنِي', 'Al-Mughni', 'The Enricher'],
+    ['المَانِع', 'Al-Mani\'', 'The Preventer'],
+    ['الضَّارّ', 'Ad-Darr', 'The Distresser'],
+    ['النَّافِع', 'An-Nafi\'', 'The Benefactor'],
+    ['النُّور', 'An-Nur', 'The Light'],
+    ['الهَادِي', 'Al-Hadi', 'The Guide'],
+    ['البَدِيع', 'Al-Badi\'', 'The Incomparable'],
+    ['البَاقِي', 'Al-Baqi', 'The Everlasting'],
+    ['الوَارِث', 'Al-Warith', 'The Inheritor'],
+    ['الرَّشِيد', 'Ar-Rashid', 'The Guide to the Right Path'],
+    ['الصَّبُور', 'As-Sabur', 'The Patient']
+  ];
+  function renderNames(filter) {
+    var grid = document.getElementById('namesGrid');
+    if (!grid) return;
+    var f = (filter || '').trim().toLowerCase();
+    grid.innerHTML = '';
+    var count = 0;
+    NAMES_OF_ALLAH.forEach(function(n, i) {
+      if (f && n[0].toLowerCase().indexOf(f) === -1 && n[1].toLowerCase().indexOf(f) === -1 && n[2].toLowerCase().indexOf(f) === -1) return;
+      count++;
+      var card = document.createElement('div');
+      card.className = 'name-card';
+      card.innerHTML = '<span class="nc-num">' + (i + 1) + '</span><div class="nc-ar">' + n[0] + '</div><span class="nc-tr">' + n[1] + '</span><span class="nc-en">' + n[2] + '</span>';
+      grid.appendChild(card);
+    });
+    var total = document.getElementById('namesTotal');
+    if (total) total.textContent = count + ' / 99';
+  }
+  var namesSearch = document.getElementById('namesSearch');
+  if (namesSearch) namesSearch.addEventListener('input', function() { renderNames(namesSearch.value); });
+  renderNames('');
 
   var ADHKAR = {
     morning: [

@@ -219,6 +219,15 @@ body.dark .surah-card { background: var(--surface) !important; border-color: var
 body.dark .surah-card h4 { color: var(--ink); }
 body.dark .surah-card small { color: var(--muted); }
 body.dark .dhikr, body.dark .dua { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .names-intro { background: linear-gradient(140deg,#1e3a8a,#172554 92%); box-shadow: 0 14px 30px rgba(30,58,138,.35); }
+body.dark .names-search input { background: var(--surface) !important; border-color: var(--border) !important; color: var(--ink) !important; }
+body.dark .names-total { background: var(--surface-2); color: var(--brand); }
+body.dark .name-card { background: var(--surface) !important; border-color: var(--border) !important; }
+body.dark .name-card .nc-ar { color: var(--ink); }
+body.dark .name-card .nc-tr { color: var(--brand); }
+body.dark .name-card .nc-en { color: var(--ink-soft); }
+body.dark .name-card .nc-num { background: var(--surface-2); color: var(--brand); }
+body.dark .name-card:hover { border-color: #d4af37 !important; }
 body.dark .card { background: var(--surface) !important; border-color: var(--border) !important; }
 body.dark .card h3 { color: var(--ink); }
 body.dark .card p { color: var(--ink-soft); }
