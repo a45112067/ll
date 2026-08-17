@@ -85,21 +85,27 @@
     .daily-hadith::before { width:160px; height:160px; top:-70px; left:-70px; background:radial-gradient(circle,rgba(255,199,44,.28),transparent 65%); }
     .daily-hadith::after { width:110px; height:110px; bottom:-55px; right:-55px; border:2px solid rgba(255,199,44,.25); }
     .daily-box .label { display:inline-flex; align-items:center; gap:7px; font-weight:800; font-size:.78rem; padding:6px 14px; border-radius:999px; margin-bottom:12px; background:rgba(255,255,255,.16); color:#fff; backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.3); position:relative; z-index:1; align-self:flex-start; }
-    .daily-ayah .text { font-size:1.4rem; line-height:2.2; font-weight:400; position:relative; z-index:1; font-family:'Amiri','Noto Naskh Arabic',serif; text-shadow:0 2px 10px rgba(0,0,0,.25); }
-    .daily-hadith .text { font-size:1.1rem; line-height:2.05; position:relative; z-index:1; font-family:'Amiri','Noto Naskh Arabic',serif; }
+    .daily-ayah .text { font-size:1.5rem; line-height:2.25; font-weight:400; position:relative; z-index:1; font-family:'Amiri','Noto Naskh Arabic',serif; text-shadow:0 2px 12px rgba(0,0,0,.3); background:linear-gradient(180deg,#ffffff 0%,#ffe9b8 55%,#ffd66b 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .daily-hadith .text { font-size:1.15rem; line-height:2.1; position:relative; z-index:1; font-family:'Amiri','Noto Naskh Arabic',serif; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.3); }
     .daily-box .ref { display:inline-block; margin-top:10px; font-size:.82rem; font-weight:700; position:relative; z-index:1; background:rgba(255,255,255,.14); padding:5px 12px; border-radius:999px; border:1px dashed rgba(255,255,255,.45); align-self:center; }
     .daily-ayah .ref { color:#fed7aa; }
     .daily-hadith .ref { color:#fde68a; }
     .ayah-frame { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:16px; padding:24px 20px 20px; margin-top:12px; backdrop-filter:blur(3px); box-shadow:inset 0 1px 0 rgba(255,255,255,.12); }
-    .ayah-frame .text { margin:0; padding:0 10px; }
+    .ayah-frame .text, .hadith-frame .text { margin:0; padding:0 10px; transition:opacity .3s, transform .3s; }
+    .text.fade-swap { opacity:0; transform:translateY(-8px); }
+    .ayah-frame .orn, .hadith-frame .orn { position:absolute; font-size:.9rem; color:rgba(255,199,44,.7); z-index:1; pointer-events:none; text-shadow:0 2px 6px rgba(0,0,0,.25); }
+    .orn-tr { top:8px; right:12px; }
+    .orn-bl { bottom:8px; left:12px; }
+    .orn-br { bottom:8px; right:12px; }
+    .ayah-num-badge { position:absolute; bottom:8px; top:auto; font-size:.72rem; font-weight:800; color:#fff; background:rgba(212,175,55,.28); border:1px solid rgba(255,199,44,.55); border-radius:999px; padding:3px 11px; z-index:1; text-shadow:0 1px 4px rgba(0,0,0,.3); }
+    .ayah-num-badge[hidden] { display:none; }
     .ayah-frame .q-mark { position:absolute; font-family:'Amiri',serif; font-weight:700; font-size:2.1rem; color:#ffc72c; line-height:1; text-shadow:0 2px 8px rgba(0,0,0,.2); }
     .ayah-frame .q-open { top:10px; left:14px; }
     .ayah-frame .q-close { bottom:-2px; right:14px; }
     .hadith-frame { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:16px; padding:24px 20px 20px; margin-top:12px; backdrop-filter:blur(3px); box-shadow:inset 0 1px 0 rgba(255,255,255,.12); }
-    .hadith-frame .text { margin:0; padding:0 10px; }
-    .hadith-frame .q-mark { position:absolute; font-family:'Amiri',serif; font-weight:700; font-size:2.1rem; color:#ffc72c; line-height:1; text-shadow:0 2px 8px rgba(0,0,0,.2); }
     .hadith-frame .q-open { top:10px; left:14px; }
     .hadith-frame .q-close { bottom:-2px; right:14px; }
+    .hadith-frame .q-mark { position:absolute; font-family:'Amiri',serif; font-weight:700; font-size:2.1rem; color:#ffc72c; line-height:1; text-shadow:0 2px 8px rgba(0,0,0,.2); }
     .daily-swap { position:absolute; top:14px; left:14px; z-index:2; width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(255,255,255,.4); background:rgba(255,255,255,.16); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px); box-shadow:0 6px 16px rgba(0,0,0,.18); transition:transform .35s ease, background .25s, box-shadow .25s, border-color .25s; }
     .daily-swap:hover { background:rgba(255,255,255,.32); border-color:rgba(255,255,255,.75); box-shadow:0 12px 24px rgba(0,0,0,.28); transform:rotate(180deg); }
     .daily-swap:active { transform:scale(.9) rotate(180deg); }
@@ -576,8 +582,12 @@
         <span class="label"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 2.6 3.8-.6 1.2 3.7 3.5 1.5-.8 3.7 2.4 3-2.8 2.5.7 3.8-3.7.6-1.8 3.3-3.4-1.8-3.4 1.8-1.8-3.3-3.7-.6.7-3.8-2.8-2.5 2.4-3-.8-3.7 3.5-1.5 1.2-3.7 3.8.6L12 2z"/><circle cx="12" cy="13" r="4"/></svg> <span class="lang-ar">آية اليوم</span><span class="lang-en">Ayah of the Day</span></span>
         <div class="ayah-frame">
           <span class="q-mark q-open" aria-hidden="true">﴿</span>
+          <span class="orn orn-tr" aria-hidden="true">۞</span>
+          <span class="orn orn-bl" aria-hidden="true">۞</span>
+          <span class="orn orn-br" aria-hidden="true">۞</span>
           <p class="text" id="ayahText"></p>
           <span class="q-mark q-close" aria-hidden="true">﴾</span>
+          <span class="ayah-num-badge" id="ayahNumBadge" hidden></span>
         </div>
         <span class="ref" id="ayahRef"></span>
         <div class="daily-actions">
@@ -590,6 +600,9 @@
         <span class="label"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3H7a2 2 0 0 0-2 2v14l2.5-1.5L10 19l2.5-1.5L15 19l2.5-1.5L20 19V5a2 2 0 0 0-2-2z"/><path d="M12 7v6M9 10h6"/></svg> <span class="lang-ar">حديث اليوم</span><span class="lang-en">Hadith of the Day</span></span>
         <div class="hadith-frame">
           <span class="q-mark q-open" aria-hidden="true">❝</span>
+          <span class="orn orn-tr" aria-hidden="true">۞</span>
+          <span class="orn orn-bl" aria-hidden="true">۞</span>
+          <span class="orn orn-br" aria-hidden="true">۞</span>
           <p class="text" id="hadithText"></p>
           <span class="q-mark q-close" aria-hidden="true">❞</span>
         </div>
@@ -1003,11 +1016,26 @@ var savedLang = null;
     var d = new Date();
     return (d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate()) % arr.length;
   }
+  function swapText(el, newText) {
+    el.classList.add('fade-swap');
+    setTimeout(function() {
+      el.textContent = newText;
+      el.classList.remove('fade-swap');
+    }, 220);
+  }
   function renderDaily() {
-    document.getElementById('ayahText').textContent = AYAT[ayahIdx].text;
+    var at = document.getElementById('ayahText');
+    var ht = document.getElementById('hadithText');
+    swapText(at, AYAT[ayahIdx].text);
+    swapText(ht, HADITHS[hadithIdx].text);
     document.getElementById('ayahRef').textContent = '﴾ ' + AYAT[ayahIdx].ref + ' ﴿';
-    document.getElementById('hadithText').textContent = HADITHS[hadithIdx].text;
     document.getElementById('hadithRef').textContent = '— ' + HADITHS[hadithIdx].ref;
+    var badge = document.getElementById('ayahNumBadge');
+    if (badge) {
+      var isAyah = AYAT[ayahIdx].ayah;
+      badge.hidden = !isAyah;
+      if (isAyah) badge.textContent = 'الآية ' + AYAT[ayahIdx].ayah + ' — ' + AYAT[ayahIdx].ref;
+    }
   }
   ayahIdx = pickDaily(AYAT);
   hadithIdx = pickDaily(HADITHS);
