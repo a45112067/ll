@@ -418,11 +418,22 @@
       .rm-nav { order:4; }
     }
     .notif-wrap { position:fixed; top:84px; left:16px; z-index:8500; }
-    .notif-bell { position:relative; width:44px; height:44px; border-radius:14px; border:1px solid #e2e8f0; background:#ffffff; color:#1d4ed8; font-size:1.05rem; cursor:pointer; box-shadow:0 10px 24px rgba(22,101,52,.18); display:flex; align-items:center; justify-content:center; transition:transform .2s, box-shadow .2s; }
-    .notif-bell:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(22,101,52,.26); }
-    .notif-bell.ring { animation:notifRing .6s ease; }
-    @keyframes notifRing { 0%,100% { transform:rotate(0); } 20% { transform:rotate(-14deg); } 40% { transform:rotate(12deg); } 60% { transform:rotate(-8deg); } 80% { transform:rotate(6deg); } }
-    .notif-badge { position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 5px; border-radius:999px; background:#ef4444; color:#fff; font-size:.68rem; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(239,68,68,.4); }
+    .notif-bell { position:relative; width:52px; height:52px; border-radius:16px; border:0; cursor:pointer; background:linear-gradient(150deg,#2563eb,#1e40af); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.42), inset 0 1px 0 rgba(255,255,255,.28); display:flex; align-items:center; justify-content:center; transition:transform .2s, box-shadow .2s, background .2s; overflow:visible; }
+    .notif-bell::before { content:''; position:absolute; inset:0; border-radius:16px; border:1px solid rgba(255,255,255,.35); }
+    .notif-bell::after { content:''; position:absolute; inset:6px; border-radius:12px; border:1px dashed rgba(255,255,255,.28); pointer-events:none; }
+    .notif-bell:hover { transform:translateY(-3px) scale(1.04); box-shadow:0 18px 38px rgba(37,99,235,.5), inset 0 1px 0 rgba(255,255,255,.3); }
+    .notif-bell:active { transform:scale(.94); }
+    .notif-bell .nb-halo { position:absolute; inset:-7px; border-radius:20px; background:radial-gradient(circle,rgba(37,99,235,.38),transparent 68%); opacity:0; transition:opacity .3s; }
+    .notif-bell:hover .nb-halo { opacity:1; }
+    .notif-bell .nb-icon { position:relative; z-index:1; font-size:1.15rem; filter:drop-shadow(0 3px 6px rgba(0,0,0,.28)); animation:bellIdle 3.5s ease-in-out infinite; transform-origin:50% 10%; }
+    .notif-bell .nb-dot { position:absolute; top:9px; right:10px; width:8px; height:8px; border-radius:50%; background:#ffd66b; border:2px solid #1e40af; z-index:2; display:none; }
+    .notif-bell.has-unread .nb-dot { display:block; animation:dotPulse 1.6s ease-in-out infinite; }
+    @keyframes dotPulse { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.5); opacity:.75; } }
+    @keyframes bellIdle { 0%,100% { transform:rotate(0); } 4% { transform:rotate(10deg); } 8% { transform:rotate(-10deg); } 12% { transform:rotate(6deg); } 16% { transform:rotate(0); } }
+    .notif-bell.ring .nb-icon { animation:notifRing .6s ease; }
+    @keyframes notifRing { 0%,100% { transform:rotate(0); } 20% { transform:rotate(-16deg); } 40% { transform:rotate(14deg); } 60% { transform:rotate(-9deg); } 80% { transform:rotate(7deg); } }
+    .notif-badge { position:absolute; top:-8px; right:-8px; min-width:22px; height:22px; padding:0 6px; border-radius:999px; background:linear-gradient(140deg,#f87171,#dc2626); color:#fff; font-size:.7rem; font-weight:900; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(220,38,38,.5), 0 0 0 3px #fff; z-index:3; animation:badgeIn .3s cubic-bezier(.2,.8,.3,1); }
+    @keyframes badgeIn { from { transform:scale(0); } to { transform:scale(1); } }
     .notif-panel { position:absolute; top:54px; left:0; width:340px; max-width:calc(100vw - 32px); background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; box-shadow:0 30px 70px rgba(22,101,52,.25); padding:12px; display:none; flex-direction:column; max-height:520px; }
     .notif-panel.open { display:flex; animation:npIn .25s cubic-bezier(.2,.8,.3,1); transform-origin:top left; }
     @keyframes npIn { from { opacity:0; transform:translateY(-10px) scale(.97); } to { opacity:1; transform:none; } }
@@ -856,7 +867,12 @@
 <div class="toast" id="toast"></div>
 
 <div class="notif-wrap" id="notifWrap">
-  <button class="notif-bell" id="notifBell" aria-label="الإشعارات / Notifications"><i class="fas fa-bell"></i><span class="notif-badge" id="notifBadge" style="display:none">0</span></button>
+  <button class="notif-bell" id="notifBell" aria-label="الإشعارات / Notifications">
+    <span class="nb-halo" aria-hidden="true"></span>
+    <span class="nb-icon"><i class="fas fa-bell"></i></span>
+    <span class="nb-dot" id="notifDot" aria-hidden="true"></span>
+    <span class="notif-badge" id="notifBadge" style="display:none">0</span>
+  </button>
   <div class="notif-panel" id="notifPanel">
     <div class="np-head">
       <b><i class="fas fa-bell"></i> <span class="lang-ar">الإشعارات</span><span class="lang-en">Notifications</span></b>
@@ -2074,6 +2090,8 @@ var savedLang = null;
     var u = unreadCount();
     if (u > 0) { notifBadge.style.display = 'flex'; notifBadge.textContent = u > 9 ? '9+' : String(u); }
     else notifBadge.style.display = 'none';
+    var bell = document.getElementById('notifBell');
+    if (bell) bell.classList.toggle('has-unread', u > 0);
   }
   function timeAgo(iso) {
     var s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
