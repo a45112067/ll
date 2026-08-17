@@ -294,6 +294,11 @@ body.dark .login-card h1, body.dark .login-card p { color: var(--ink); }
 body.dark .login-card p, body.dark .user-badge { color: var(--ink-soft); }
 body.dark .nav-title { color: var(--muted); }
 
+/* ===== خريطة المساجد القريبة ===== */
+body.dark .mosque-result { background: var(--surface-2); border-color: var(--border); }
+body.dark .mr-title { color: var(--ink); }
+body.dark .mr-map { border-color: var(--border); }
+
 /* ===== نظام الإشعارات ===== */
 body.dark .notif-bell {
   background: var(--surface-2) !important;
