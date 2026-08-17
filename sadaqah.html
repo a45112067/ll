@@ -418,9 +418,14 @@
     .names-more:hover { transform:translateY(-2px); box-shadow:0 14px 26px rgba(22,101,52,.34); }
     @media (max-width:480px) { .names-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } .name-card .nc-ar { font-size:1.5rem; } }
     .surah-card .done-badge { margin-inline-start:auto; color:#f59e0b; font-size:1rem; }
-    @media (max-width:900px) { .quick-nav { justify-content:center; } .daily-wrap { grid-template-columns:1fr; } }
+    @media (max-width:900px) { .quick-nav { justify-content:flex-start; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px; scrollbar-width:none; } .quick-nav::-webkit-scrollbar { display:none; } .quick-nav button { flex-shrink:0; } .daily-wrap { grid-template-columns:1fr; } }
     @media (max-width:768px) {
       .page-wrapper { padding:16px 14px 40px; } .topbar h1 { font-size:1.6rem; } .topbar p { font-size:.95rem; } .tasbih-num { font-size:2.6rem; }
+      .topbar { padding:22px 18px; border-radius:20px; }
+      .topbar h1 { font-size:1.45rem; }
+      .quick-nav button { padding:10px 14px; font-size:.8rem; }
+      .sec-title { font-size:1.2rem; margin:26px 0 14px; }
+      .sec-ico { width:42px; height:42px; }
       .daily-box { padding:18px 16px; border-radius:16px; }
       .daily-ayah .text { font-size:1.6rem; line-height:2.2; }
       .daily-hadith .text { font-size:1.25rem; line-height:2.05; }
@@ -454,6 +459,20 @@
       .rm-mode .mode-btn .mm-txt b { font-size:.8rem; }
       .rm-play { order:3; flex:1 1 auto; padding:10px 14px; font-size:.84rem; margin-inline-start:0; }
       .rm-nav { order:4; }
+    }
+    @media (max-width:480px) {
+      .tasbih-ring-wrap { width:180px; height:180px; }
+      .tasbih-beads .bead { transform:rotate(var(--a)) translateY(-58px) rotate(calc(-1 * var(--a))); }
+      @keyframes beadPulse { 0% { transform:rotate(var(--a)) translateY(-58px) rotate(calc(-1 * var(--a))) scale(1); } 45% { transform:rotate(var(--a)) translateY(-58px) rotate(calc(-1 * var(--a))) scale(1.6); } 100% { transform:rotate(var(--a)) translateY(-58px) rotate(calc(-1 * var(--a))) scale(1); } }
+      .tasbih-btn { width:96px; height:96px; font-size:1.6rem; }
+      .tasbih-controls .mini-btn { flex:1 1 33%; justify-content:center; padding:11px 8px; }
+      .mini-btn { font-size:.8rem; }
+      .quran-toolbar select { flex:1; }
+      .loc-btn { flex:1 1 auto; justify-content:center; padding:12px 14px; font-size:.82rem; }
+      .pt-grid { grid-template-columns:repeat(3,1fr); }
+      .pt-item { padding:12px 8px; }
+      .mr-map { height:280px; }
+      .share-row button { flex:1 1 auto; justify-content:center; }
     }
     .notif-wrap { position:fixed; top:84px; left:16px; z-index:8500; }
     .notif-bell { position:relative; width:52px; height:52px; border-radius:16px; border:0; cursor:pointer; background:linear-gradient(150deg,#2563eb,#1e40af); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.42), inset 0 1px 0 rgba(255,255,255,.28); display:flex; align-items:center; justify-content:center; transition:transform .2s, box-shadow .2s, background .2s; overflow:visible; }
@@ -1137,12 +1156,13 @@ var savedLang = null;
     if (arr.indexOf(num) === -1) arr.push(num);
     try { localStorage.setItem(readKey, JSON.stringify(arr)); } catch (e) {}
   }
-  var currentReciter = 'maher';
+  var currentReciter = 'qatami';
   var RECITERS = [
-    { id: 'maher', name: 'ماهر المعيقلي', en: 'Maher Al-Muaiqly', edition: 'ar.mahermuaiqly' },
     { id: 'qatami', name: 'ناصر القطامي', en: 'Nasser Al-Qatami', edition: 'ar.nasseralqatami' },
-    { id: 'abdulbasit', name: 'عبد الباسط عبد الصمد', en: 'Abdul Basit', edition: 'ar.abdulbasitmurattal' },
-    { id: 'minshawi', name: 'محمد صديق المنشاوي', en: 'Muhammad Siddiq Al-Minshawi', edition: 'ar.minshawi' }
+    { id: 'abdulbasit', name: 'عبد الباسط عبد الصمد', en: 'Abdul Basit Abdul Samad', edition: 'ar.abdulbasitmurattal' },
+    { id: 'minshawi', name: 'محمد صديق المنشاوي', en: 'Muhammad Siddiq Al-Minshawi', edition: 'ar.minshawi' },
+    { id: 'maher', name: 'ماهر المعيقلي', en: 'Maher Al-Muaiqly', edition: 'ar.mahermuaiqly' },
+    { id: 'sudais', name: 'عبد الرحمن السديس', en: 'Abdul Rahman Al-Sudais', edition: 'ar.sudais' }
   ];
 
   function renderReciters() {
