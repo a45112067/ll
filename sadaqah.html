@@ -356,6 +356,8 @@
     .name-card .nc-ar { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.65rem; font-weight:700; color:#0f172a; line-height:1.6; }
     .name-card .nc-tr { display:block; margin-top:8px; font-size:.8rem; font-weight:700; color:#2563eb; direction:ltr; }
     .name-card .nc-en { display:block; margin-top:4px; font-size:.76rem; font-weight:600; color:#64748b; line-height:1.5; }
+    .names-more { display:none; align-items:center; justify-content:center; gap:9px; width:100%; margin-top:16px; padding:12px 18px; border-radius:12px; background:linear-gradient(140deg,#2563eb,#1d4ed8); color:#fff3e0; font-weight:900; font-size:.92rem; font-family:inherit; cursor:pointer; border:0; transition:.2s; box-shadow:0 10px 22px rgba(22,101,52,.28); }
+    .names-more:hover { transform:translateY(-2px); box-shadow:0 14px 26px rgba(22,101,52,.34); }
     @media (max-width:480px) { .names-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } .name-card .nc-ar { font-size:1.4rem; } }
     .surah-card .done-badge { margin-inline-start:auto; color:#f59e0b; font-size:1rem; }
     @media (max-width:900px) { .quick-nav { justify-content:center; } .daily-wrap { grid-template-columns:1fr; } }
@@ -732,6 +734,7 @@
       <span class="names-total" id="namesTotal"></span>
     </div>
     <div class="names-grid" id="namesGrid"></div>
+    <button class="names-more" id="namesMore" onclick="showMoreNames()"><i class="fas fa-chevron-down"></i> <span class="lang-ar">عرض المزيد من الأسماء</span><span class="lang-en">Show more names</span></button>
   </section>
 
   <section class="section-block" id="duas" data-aos="fade-up">
@@ -1612,14 +1615,18 @@ var savedLang = null;
     ['الرَّشِيد', 'Ar-Rashid', 'The Guide to the Right Path'],
     ['الصَّبُور', 'As-Sabur', 'The Patient']
   ];
+  var NAMES_PAGE = 5;
   function renderNames(filter) {
     var grid = document.getElementById('namesGrid');
     if (!grid) return;
     var f = (filter || '').trim().toLowerCase();
+    var searching = f.length > 0;
+    var limit = searching ? Infinity : NAMES_PAGE;
     grid.innerHTML = '';
     var count = 0;
     NAMES_OF_ALLAH.forEach(function(n, i) {
       if (f && n[0].toLowerCase().indexOf(f) === -1 && n[1].toLowerCase().indexOf(f) === -1 && n[2].toLowerCase().indexOf(f) === -1) return;
+      if (count >= limit) return;
       count++;
       var card = document.createElement('div');
       card.className = 'name-card';
@@ -1628,6 +1635,12 @@ var savedLang = null;
     });
     var total = document.getElementById('namesTotal');
     if (total) total.textContent = count + ' / 99';
+    var more = document.getElementById('namesMore');
+    if (more) more.style.display = (!searching && count === NAMES_PAGE && NAMES_PAGE < 99) ? 'flex' : 'none';
+  }
+  function showMoreNames() {
+    NAMES_PAGE += 5;
+    renderNames('');
   }
   var namesSearch = document.getElementById('namesSearch');
   if (namesSearch) namesSearch.addEventListener('input', function() { renderNames(namesSearch.value); });

@@ -228,6 +228,7 @@ body.dark .name-card .nc-tr { color: var(--brand); }
 body.dark .name-card .nc-en { color: var(--ink-soft); }
 body.dark .name-card .nc-num { background: var(--surface-2); color: var(--brand); }
 body.dark .name-card:hover { border-color: #d4af37 !important; }
+body.dark .names-more { background: linear-gradient(140deg,#1e40af,#1e3a8a); color:#ffe9a8; }
 body.dark .card { background: var(--surface) !important; border-color: var(--border) !important; }
 body.dark .card h3 { color: var(--ink); }
 body.dark .card p { color: var(--ink-soft); }
