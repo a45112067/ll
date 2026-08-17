@@ -316,14 +316,13 @@
     .surah-num-badge { display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:30px; padding:0 8px; border-radius:10px; background:rgba(22,101,52,.12); color:#1d4ed8; font-weight:800; font-size:.8rem; }
     .reader-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
     .reader-actions .mini-btn { color:#1d4ed8; }
-    .hijri-strip { display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:nowrap; background:linear-gradient(135deg,#14532d 0%,#166534 45%,#1d8a4c 100%); color:#fff; border-radius:18px; padding:14px 22px; margin-bottom:18px; box-shadow:0 12px 28px rgba(22,101,52,.28), inset 0 1px 0 rgba(255,255,255,.18); position:relative; overflow:hidden; border:1px solid rgba(255,199,44,.28); }
-    .hijri-strip::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 85% 20%, rgba(255,199,44,.16), transparent 55%); pointer-events:none; }
-    .hijri-strip::after { content:'۞'; position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:2.4rem; color:rgba(255,199,44,.2); pointer-events:none; }
-    .hijri-strip .hs-star { color:#ffd66b; font-size:1rem; text-shadow:0 0 10px rgba(255,199,44,.6); flex-shrink:0; }
-    .hijri-strip .hs-ico { width:44px; height:44px; border-radius:14px; background:linear-gradient(140deg,#ffd66b,#f59e0b); color:#3d2d00; display:inline-flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; box-shadow:0 8px 18px rgba(212,175,55,.4); border:1px solid rgba(255,255,255,.3); }
-    .hijri-strip .hs-mid { display:flex; flex-direction:column; align-items:center; gap:2px; min-width:0; }
-    .hijri-strip .hs-date { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.4rem; font-weight:700; line-height:1.5; text-align:center; text-shadow:0 2px 8px rgba(0,0,0,.3); white-space:nowrap; }
-    .hijri-strip .hs-greg { font-size:.8rem; color:#ffd66b; font-weight:700; background:rgba(255,255,255,.1); padding:3px 14px; border-radius:999px; border:1px dashed rgba(255,199,44,.45); letter-spacing:.2px; }
+    .hijri-strip { display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:nowrap; background:linear-gradient(135deg,#ffffff 0%,#fdf8ec 50%,#fff 100%); color:#14532d; border-radius:20px; padding:16px 26px; margin-bottom:18px; box-shadow:0 14px 34px rgba(22,101,52,.16), inset 0 0 0 1px rgba(139,111,47,.18); position:relative; overflow:hidden; border:2px solid transparent; background-clip:padding-box; }
+    .hijri-strip::before { content:''; position:absolute; inset:0; border-radius:inherit; padding:2px; background:linear-gradient(140deg,#b8860b, #ffd66b 30%, #8b6f2f 65%, #d4af37); -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+    .hijri-strip::after { content:''; position:absolute; inset:0; border-radius:inherit; background:radial-gradient(circle at 12% 0%, rgba(212,175,55,.14), transparent 45%); pointer-events:none; }
+    .hijri-strip .hs-star { color:#b8860b; font-size:1.05rem; text-shadow:0 0 12px rgba(184,134,11,.45); flex-shrink:0; }
+    .hijri-strip .hs-mid { display:flex; flex-direction:column; align-items:center; gap:3px; min-width:0; }
+    .hijri-strip .hs-date { font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.55rem; font-weight:700; line-height:1.5; text-align:center; color:#14532d; }
+    .hijri-strip .hs-greg { font-size:.82rem; color:#8b6f2f; font-weight:700; background:linear-gradient(135deg,#fffbeb,#fdf3d7); padding:3px 16px; border-radius:999px; border:1px solid #e5dcc2; letter-spacing:.2px; box-shadow:inset 0 1px 0 #fff; }
     .topbar { position:relative; overflow:hidden; background:linear-gradient(135deg,#ffffff 0%,#f8fafc 55%,#eef2f7 100%); border:1px solid #e2e8f0; border-radius:24px; padding:32px 30px; box-shadow:0 14px 40px rgba(22,101,52,.12); }
     .topbar::before { content:''; position:absolute; top:-70px; left:-70px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(22,101,52,.14),transparent 70%); }
     .topbar::after { content:''; position:absolute; bottom:-80px; right:-60px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(184,134,11,.12),transparent 70%); }
@@ -481,9 +480,8 @@
       .pt-item { padding:12px 8px; }
       .mr-map { height:280px; }
       .share-row button { flex:1 1 auto; justify-content:center; }
-      .hijri-strip { padding:10px 12px; gap:10px; }
-      .hijri-strip .hs-date { font-size:1.1rem; }
-      .hijri-strip .hs-ico { width:38px; height:38px; font-size:1rem; }
+      .hijri-strip { padding:12px 16px; gap:14px; }
+      .hijri-strip .hs-date { font-size:1.2rem; }
     }
     .notif-wrap { position:fixed; top:84px; left:16px; z-index:8500; }
     .notif-bell { position:relative; width:52px; height:52px; border-radius:16px; border:0; cursor:pointer; background:linear-gradient(150deg,#2563eb,#1e40af); color:#fff; box-shadow:0 12px 28px rgba(37,99,235,.42), inset 0 1px 0 rgba(255,255,255,.28); display:flex; align-items:center; justify-content:center; transition:transform .2s, box-shadow .2s, background .2s; overflow:visible; }
@@ -615,7 +613,6 @@
 
   <div class="hijri-strip" id="hijriStrip">
     <span class="hs-star" aria-hidden="true">★</span>
-    <span class="hs-ico"><i class="fas fa-moon"></i></span>
     <div class="hs-mid">
       <span class="hs-date" id="hijriDate"><span class="lang-ar">جارٍ تحميل التاريخ...</span><span class="lang-en">Loading date...</span></span>
       <span class="hs-greg" id="gregDate"></span>

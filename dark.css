@@ -295,11 +295,10 @@ body.dark .login-card p, body.dark .user-badge { color: var(--ink-soft); }
 body.dark .nav-title { color: var(--muted); }
 
 /* ===== شريط التاريخ الهجري ===== */
-body.dark .hijri-strip { background: linear-gradient(135deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border); box-shadow: var(--shadow-md); }
-body.dark .hijri-strip .hs-date { color: var(--ink); text-shadow: none; }
-body.dark .hijri-strip .hs-greg { color: var(--accent); background: rgba(255,255,255,.06); border-color: rgba(255,199,44,.35); }
-body.dark .hijri-strip .hs-star { color: var(--accent); }
-body.dark .hijri-strip .hs-ico { background: linear-gradient(140deg, #b8860b, #8b6f2f); color: #fff; }
+body.dark .hijri-strip { background: linear-gradient(135deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border); box-shadow: var(--shadow-md); color: var(--ink); }
+body.dark .hijri-strip .hs-date { color: var(--ink); }
+body.dark .hijri-strip .hs-greg { color: var(--accent); background: rgba(255,255,255,.06); border-color: var(--border); box-shadow: none; }
+body.dark .hijri-strip .hs-star { color: var(--accent); text-shadow: none; }
 
 /* ===== خريطة المساجد القريبة ===== */
 body.dark .mosque-result { background: var(--surface-2); border-color: var(--border); }
