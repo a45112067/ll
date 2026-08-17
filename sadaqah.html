@@ -271,11 +271,6 @@
     .mini-btn { border:0; cursor:pointer; background:#fff; border:1px solid #e5dcc2; color:#6b5a3e; padding:10px 20px; border-radius:12px; font-weight:800; font-family:inherit; font-size:.86rem; transition:.2s; }
     .mini-btn:hover { border-color:#166534; color:#125a32; }
     .mini-btn.tb-target.active { background:#166534; border-color:#166534; color:#fff; box-shadow:0 8px 18px rgba(22,101,52,.24); }
-    .tasbih-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
-    .tstat { background:#fdfbf5; border:1px solid #e5dcc2; border-radius:14px; padding:12px 8px; display:flex; flex-direction:column; align-items:center; gap:4px; }
-    .tstat .ts-ico { width:34px; height:34px; border-radius:10px; background:rgba(22,101,52,.1); color:#125a32; display:flex; align-items:center; justify-content:center; font-size:.9rem; }
-    .tstat b { font-size:1.15rem; font-weight:900; color:#125a32; }
-    .tstat small { font-size:.72rem; color:#a69570; font-weight:700; text-align:center; }
     @media (max-width:520px) { .tasbih-stats { grid-template-columns:1fr; } }
     .share-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
     .share-row button { border:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:12px; font-weight:800; font-family:inherit; font-size:.92rem; transition:.2s; }
@@ -676,11 +671,6 @@
         <button class="mini-btn tb-target" data-t="33" onclick="setTarget(33)">33</button>
         <button class="mini-btn tb-target" data-t="99" onclick="setTarget(99)">99</button>
         <button class="mini-btn tb-target" data-t="1000" onclick="setTarget(1000)">1000</button>
-      </div>
-      <div class="tasbih-stats">
-        <div class="tstat"><span class="ts-ico"><i class="fas fa-rotate-right"></i></span><b id="tasbihRounds">0</b><small><span class="lang-ar">دورات مكتملة</span><span class="lang-en">Completed rounds</span></small></div>
-        <div class="tstat"><span class="ts-ico"><i class="fas fa-fire"></i></span><b id="tasbihDay">0</b><small><span class="lang-ar">إجمالي اليوم</span><span class="lang-en">Today total</span></small></div>
-        <div class="tstat"><span class="ts-ico"><i class="fas fa-bolt"></i></span><b id="tasbihTotal">0</b><small><span class="lang-ar">الإجمالي الكلي</span><span class="lang-en">All-time total</span></small></div>
       </div>
     </div>
   </section>
@@ -1976,18 +1966,16 @@ var savedLang = null;
   var tasbihIdx = parseInt(localStorage.getItem('sadaqah_tasbih_idx'), 10) || 0;
   if (tasbihIdx >= tasbihPhrases.length) tasbihIdx = 0;
   var tasbihRounds = parseInt(localStorage.getItem('sadaqah_tasbih_rounds'), 10) || 0;
-  var tasbihDay = parseInt(localStorage.getItem('sadaqah_tasbih_day'), 10) || 0;
   var tasbihTotal = parseInt(localStorage.getItem('sadaqah_tasbih_total'), 10) || 0;
   var tasbihDayKey = localStorage.getItem('sadaqah_tasbih_daykey') || '';
   var todayKey = new Date().toISOString().slice(0, 10);
-  if (tasbihDayKey !== todayKey) { tasbihDayKey = todayKey; tasbihDay = 0; localStorage.setItem('sadaqah_tasbih_daykey', todayKey); }
+  if (tasbihDayKey !== todayKey) { tasbihDayKey = todayKey; localStorage.setItem('sadaqah_tasbih_daykey', todayKey); }
   function saveTasbihCounts() {
     try {
       localStorage.setItem('sadaqah_tasbih_counts', JSON.stringify(tasbihCounts));
       localStorage.setItem('sadaqah_tasbih_target', String(tasbihTarget));
       localStorage.setItem('sadaqah_tasbih_idx', String(tasbihIdx));
       localStorage.setItem('sadaqah_tasbih_rounds', String(tasbihRounds));
-      localStorage.setItem('sadaqah_tasbih_day', String(tasbihDay));
       localStorage.setItem('sadaqah_tasbih_total', String(tasbihTotal));
     } catch (e) {}
   }
@@ -2006,11 +1994,6 @@ var savedLang = null;
       b.classList.toggle('active', parseInt(b.getAttribute('data-t'), 10) === tasbihTarget);
     });
   }
-  function renderTasbihStats() {
-    document.getElementById('tasbihRounds').textContent = tasbihRounds;
-    document.getElementById('tasbihDay').textContent = tasbihDay;
-    document.getElementById('tasbihTotal').textContent = tasbihTotal;
-  }
   function renderTasbih() {
     var wrap = document.getElementById('tasbihPhrases');
     wrap.innerHTML = '';
@@ -2024,14 +2007,12 @@ var savedLang = null;
     document.getElementById('tasbihNum').textContent = tasbihCounts[tasbihIdx];
     document.getElementById('tasbihTarget').textContent = 'الهدف: ' + tasbihTarget;
     renderTasbihTargets();
-    renderTasbihStats();
     updateTasbihRing();
   }
   var tasbihNumEl = document.getElementById('tasbihNum');
   var tasbihBtnEl = document.getElementById('tasbihBtn');
   function tasbihStep() {
     tasbihCounts[tasbihIdx]++;
-    tasbihDay++;
     tasbihTotal++;
     tasbihNumEl.classList.remove('pop'); void tasbihNumEl.offsetWidth; tasbihNumEl.classList.add('pop');
     if (navigator.vibrate && navigator.vibrate(10)) {}
